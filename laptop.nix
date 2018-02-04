@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
   hardware.bluetooth.enable = true;
 
   boot =
@@ -18,6 +22,7 @@
 
   environment.systemPackages = with pkgs;
     [ mkpasswd
+      pwgen
       git
       git-lfs
       gitAndTools.hub
@@ -31,6 +36,15 @@
       tree
       most
       ripgrep
+      units
+      fd
+      fzf
+      fzy
+      lastpass-cli
+      tmux
+      tldr
+      ponymix
+      surfraw
     ];
 
   programs =

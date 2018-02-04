@@ -1,13 +1,25 @@
 { config, lib, pkgs, ... }:
 
 {
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+  };
+
   environment.systemPackages = with pkgs;
-    [ xclip
-      rofi
+    [ rofi
+      xclip
+      maim
       firefox
+      qutebrowser
       termite
       alacritty
       hyper
+      dropbox-cli
+      arc-theme
+      arc-icon-theme
+      paper-gtk-theme
+      paper-icon-theme
     ];
 
   # Enable the X11 windowing system.
@@ -47,7 +59,9 @@
     { enableFontDir = true;
       fonts = with pkgs;
         [ unifont
+          symbola
           noto-fonts
+          noto-fonts-cjk
           noto-fonts-emoji
           fira
           fira-mono
@@ -55,6 +69,8 @@
           fantasque-sans-mono
           emojione
           emacs-all-the-icons-fonts
+          source-han-sans-simplified-chinese
+          source-han-sans-traditional-chinese
         ];
     };
 }
