@@ -23,11 +23,13 @@
       kde-gtk-config
       paper-gtk-theme
       paper-icon-theme
+      pinentry_gnome
       gnome2.gtk
       gnome3.gtk
     ];
 
     shellInit = ''
+      export QT_STYLE_OVERRIDE=GTK+
       export GTK_PATH=$GTK_PATH:${pkgs.gnome2.gtk}/lib/gtk-2.0
       export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.gnome2.gtk}/share/themes/HighContrast/gtk-2.0/gtkrc
     '';
@@ -69,9 +71,6 @@
 
   # Auto-mount
   services.udisks2.enable = true;
-
-  # PGP
-  services.gnome3.seahorse.enable = true;
 
   # Setup fonts
   fonts = {
