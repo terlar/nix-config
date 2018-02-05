@@ -55,6 +55,7 @@
   services =
     { ntp.enable = true;
       printing.enable = true;
+      emacs.enable = true;
 
       kmscon =
         { enable = true;
