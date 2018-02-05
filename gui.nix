@@ -21,14 +21,15 @@
       hyper
       dropbox-cli
       kde-gtk-config
-      numix-gtk-theme
       paper-gtk-theme
       paper-icon-theme
+      gnome2.gtk
+      gnome3.gtk
     ];
 
     shellInit = ''
-      export GTK_PATH=$GTK_PATH:${pkgs.numix-gtk-theme}/lib/gtk-2.0
-      export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.numix-gtk-theme}/share/themes/Numix/gtk-2.0/gtkrc
+      export GTK_PATH=$GTK_PATH:${pkgs.gnome2.gtk}/lib/gtk-2.0
+      export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.gnome2.gtk}/share/themes/HighContrast/gtk-2.0/gtkrc
     '';
   };
 
@@ -52,10 +53,7 @@
     };
 
     # Enable desktop environment.
-    desktopManager = {
-      gnome3.enable = true;
-      default = "gnome3";
-    };
+    displayManager.lightdm.enable = true;
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
