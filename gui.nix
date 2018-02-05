@@ -64,6 +64,15 @@
     '';
   };
 
+  # Permission escalation
+  security.polkit.enable = true;
+
+  # Auto-mount
+  services.udisks2.enable = true;
+
+  # PGP
+  services.gnome3.seahorse.enable = true;
+
   # Setup fonts
   fonts = {
     enableFontDir = true;
