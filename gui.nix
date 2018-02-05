@@ -6,9 +6,11 @@
     ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
   };
 
-  environment.systemPackages = with pkgs;
-    [ rofi
+  environment = {
+    systemPackages = with pkgs; [
+      rofi
       xclip
+      slop
       maim
       imagemagick
       feh
@@ -18,11 +20,18 @@
       alacritty
       hyper
       dropbox-cli
+      kde-gtk-config
       arc-theme
       arc-icon-theme
       paper-gtk-theme
       paper-icon-theme
     ];
+
+    shellInit = ''
+      export GTK_PATH=$GTK_PATH:${pkgs.paper-gtk-theme}/lib/gtk-2.0
+      export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.paper-gtk-theme}/share/themes/Paper/gtk-2.0/gtkrc
+    '';
+  };
 
   # Enable the X11 windowing system.
   services.xserver =
