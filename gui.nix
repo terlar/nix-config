@@ -10,6 +10,7 @@
     [ rofi
       xclip
       maim
+      feh
       firefox
       qutebrowser
       termite
