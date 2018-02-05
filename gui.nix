@@ -10,6 +10,7 @@
     [ rofi
       xclip
       maim
+      imagemagick
       feh
       firefox
       qutebrowser
