@@ -1,20 +1,20 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./yubikey-gpg.nix
-      ./laptop.nix
-      ./gui.nix
-      ./dev.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./yubikey-gpg.nix
+    ./laptop.nix
+    ./gui.nix
+    ./dev.nix
+  ];
 
-  hardware.bumblebee =
-    { enable = true;
-      pmMethod = "none";
-      connectDisplay = true;
-    };
+  hardware.bumblebee = {
+    enable = true;
+    pmMethod = "none";
+    connectDisplay = true;
+  };
 
   boot.blacklistedKernelModules = [ "nouveau" "bbswitch" ];
 

@@ -20,7 +20,6 @@
       alacritty
       hyper
       dropbox-cli
-      kde-gtk-config
       paper-gtk-theme
       paper-icon-theme
       pinentry_gnome
@@ -29,7 +28,8 @@
     ];
 
     shellInit = ''
-      export QT_STYLE_OVERRIDE=GTK+
+      export QT_STYLE_OVERRIDE=HighContrast
+      export GTK_THEME=HighContrast
       export GTK_PATH=$GTK_PATH:${pkgs.gnome2.gtk}/lib/gtk-2.0
       export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.gnome2.gtk}/share/themes/HighContrast/gtk-2.0/gtkrc
     '';
