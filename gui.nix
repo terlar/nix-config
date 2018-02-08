@@ -21,9 +21,10 @@
       dropbox-cli
       paper-gtk-theme
       paper-icon-theme
-      pinentry_gnome
       gnome2.gtk
       gnome3.gtk
+      gnome3.gcr
+      pinentry_gnome
     ];
 
     shellInit = ''
