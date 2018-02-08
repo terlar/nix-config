@@ -14,5 +14,7 @@
     awscli
     pssh
     ttyrec
+    ansible
+    salt
   ];
 }
