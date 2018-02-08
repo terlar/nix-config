@@ -16,9 +16,8 @@
       feh
       firefox
       qutebrowser
-      termite
       alacritty
-      hyper
+      kitty
       dropbox-cli
       paper-gtk-theme
       paper-icon-theme
