@@ -4,25 +4,42 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./yubikey-gpg.nix
-    ./emacs.nix
-    ./laptop.nix
+    ./hardware/dell-xps-15.nix
+    ./hardware/yubikey.nix
+    ./base.nix
+    ./keyboard.nix
+    ./editor/emacs.nix
+    ./shell/fish.nix
     ./gui.nix
     ./dev.nix
   ];
 
-  hardware.bumblebee = {
-    enable = true;
-    pmMethod = "none";
-    connectDisplay = true;
+  boot = {
+    # Use the newer but stable kernel packages.
+    kernelPackages = pkgs.linuxPackages_4_14;
+    # Use the systemd-boot EFI boot loader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
   };
 
-  boot.blacklistedKernelModules = [ "nouveau" "bbswitch" ];
-
   networking.hostName = "kong";
-  time.timeZone = "Europe/Stockholm";
+  networking.nameservers = [ "8.8.8.8" ];
 
-  nixpkgs.config.allowUnfree = true;
+  # Locale
+  time.timeZone = "Europe/Stockholm";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.consoleKeyMap = "us";
+  services.xserver.layout = "us";
+
+  users.extraUsers.terje = {
+    isNormalUser = true;
+    createHome = true;
+    uid = 1000;
+    home = "/home/terje";
+    description = "Terje Larsen";
+    extraGroups = [ "wheel" ];
+    shell = pkgs.fish;
+  };
 
   system.autoUpgrade.enable = true;
   system.stateVersion = "17.09";
