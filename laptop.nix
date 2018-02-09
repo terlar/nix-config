@@ -10,7 +10,15 @@
     enable = true;
     package = pkgs.pulseaudioFull;
   };
-  hardware.bluetooth.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    extraConfig = "
+      [general]
+      Enable=Source,Sink,Media,Socket
+    ";
+  };
+
 
   boot = {
     # Use the newer but stable kernel packages.
@@ -36,7 +44,6 @@
     stow
     curl
     wget
-    emacs
     fish
     tree
     most
@@ -60,21 +67,6 @@
   services = {
     ntp.enable = true;
     printing.enable = true;
-    emacs.enable = true;
-
-    kmscon = {
-      enable = true;
-      hwRender = true;
-      extraConfig = ''
-        palette=solarized-white
-        font-name=Fira Mono
-        font-size=20
-        xkb-variant=altgr-intl
-        xkb-options=lv3:ralt_switch,ctrl:nocaps
-        xkb-repeat-delay=200
-        xkb-repeat-rate=25
-      '';
-    };
 
     dnsmasq = {
       enable = true;

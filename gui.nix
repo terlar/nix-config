@@ -27,12 +27,12 @@
       pinentry_gnome
     ];
 
-    shellInit = ''
+    shellInit = "
       export QT_STYLE_OVERRIDE=HighContrast
       export GTK_THEME=HighContrast
       export GTK_PATH=$GTK_PATH:${pkgs.gnome2.gtk}/lib/gtk-2.0
       export GTK2_RC_FILES=$GTK2_RC_FILES:${pkgs.gnome2.gtk}/share/themes/HighContrast/gtk-2.0/gtkrc
-    '';
+    ";
   };
 
   # Enable the X11 windowing system.
@@ -61,9 +61,9 @@
       package = pkgs.i3-gaps;
     };
 
-    monitorSection = ''
-      DisplaySize 508 284
-    '';
+    monitorSection = "
+      DisplaySize 508 282
+    ";
   };
 
   # Permission escalation
