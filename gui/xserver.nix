@@ -8,6 +8,8 @@
 
   environment = {
     systemPackages = with pkgs; [
+      libnotify
+      xfce.xfce4-notifyd
       xclip
       xsel
       feh
