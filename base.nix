@@ -32,6 +32,8 @@
     surfraw
   ];
 
+  networking.useNetworkd = true;
+
   services = {
     ntp.enable = true;
     dnsmasq = {
