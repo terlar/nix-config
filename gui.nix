@@ -8,6 +8,9 @@
     ./gui/ibus.nix
   ];
 
+  # Graphical boot process
+  boot.plymouth.enable = true;
+
   environment.systemPackages = with pkgs; [
     slop maim imagemagick
     chromium firefox qutebrowser
