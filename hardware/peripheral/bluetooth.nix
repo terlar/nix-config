@@ -1,12 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-
   hardware.bluetooth = {
     enable = true;
     extraConfig = ''
-      [general]
+      [General]
       Enable=Source,Sink,Media,Socket
     '';
   };
