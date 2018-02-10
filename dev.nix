@@ -20,9 +20,12 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    nix-repl
     editorconfig-core-c
     exercism
+    clang gcc ncurses
     gdb
+    binutils
     global
     httpie
     jq
@@ -32,8 +35,6 @@
     awscli
     pssh
     ttyrec
-    ansible
-    salt
-    packer
+    ansible salt packer
   ];
 }
