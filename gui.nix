@@ -16,6 +16,8 @@
     chromium firefox qutebrowser
     alacritty kitty
     krita
+    mpv
+    spotify
   ];
 
   # Permission escalation
