@@ -14,6 +14,7 @@
     ./dev/kotlin.nix
     ./dev/lua.nix
     ./dev/python.nix
+    ./dev/racket.nix
     ./dev/ruby.nix
     ./dev/rust.nix
     ./dev/scala.nix
