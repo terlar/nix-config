@@ -8,4 +8,9 @@
       Enable=Source,Sink,Media,Socket
     '';
   };
+
+  environment.systemPackages = with pkgs; [
+    blueman
+    pavucontrol
+  ];
 }
