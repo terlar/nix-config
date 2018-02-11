@@ -22,10 +22,10 @@
   };
 
   environment.systemPackages = with pkgs; [
+    emacs
     aspell
     aspellDicts.en
     aspellDicts.sv
-    emacs
   ];
 
   services.emacs.enable = true;
