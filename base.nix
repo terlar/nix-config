@@ -30,6 +30,7 @@
     w3m
     dropbox-cli lastpass-cli
     surfraw
+    youtube-dl
   ];
 
   networking.useNetworkd = true;
