@@ -46,9 +46,9 @@
   # Original dimensions: 1016x571 millimeters
   # Divided by 2 (200% scaling)
   #
-  # dimensions:  3840x2160 pixels (508x282 millimeters)
+  # dimensions:  3840x2160 pixels (508x286 millimeters)
   # resolution:  192x192 dots per inch
   services.xserver.monitorSection = ''
-    DisplaySize 508 282
+    DisplaySize 508 286
   '';
 }
