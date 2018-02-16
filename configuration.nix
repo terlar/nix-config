@@ -16,7 +16,7 @@
 
   boot = {
     # Use the newer but stable kernel packages.
-    kernelPackages = pkgs.linuxPackages_4_14;
+    kernelPackages = pkgs.linuxPackages_latest;
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;

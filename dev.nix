@@ -20,10 +20,13 @@
     ./dev/scala.nix
   ];
 
+  boot.extraModulePackages = [ config.boot.kernelPackages.sysdig ];
+
   environment.systemPackages = with pkgs; [
     nix-repl
     editorconfig-core-c
     exercism
+    sysdig
     clang gcc ncurses
     gdb
     binutils
