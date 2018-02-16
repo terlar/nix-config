@@ -18,6 +18,7 @@
     krita
     mpv
     spotify
+    slack
   ];
 
   # Permission escalation
