@@ -8,12 +8,13 @@
 
   environment = {
     systemPackages = with pkgs; [
-      libnotify
-      xfce.xfce4-notifyd
-      xclip
-      xsel
       feh
       gnome3.gcr
+      libnotify
+      xclip
+      xfce.xfce4-notifyd
+      xorg.xhost
+      xsel
     ];
   };
 }
