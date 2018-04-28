@@ -6,6 +6,5 @@
     maven
     javaPackages.junit_4_12
     jdk
-    jdk9
   ];
 }

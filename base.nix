@@ -17,7 +17,7 @@
   environment.systemPackages = with pkgs; [
     nix-repl
     mkpasswd pwgen
-    gitFull git-lfs gitAndTools.hub gitAndTools.ghq
+    gitAndTools.gitFull git-lfs gitAndTools.hub gitAndTools.ghq
     zip unzip unrar p7zip
     curl wget
     file tree

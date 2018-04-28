@@ -25,6 +25,7 @@
   environment.systemPackages = with pkgs; [
     nix-repl
     editorconfig-core-c
+    direnv
     exercism
     sysdig
     clang gcc ncurses
