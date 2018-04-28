@@ -37,7 +37,7 @@
     uid = 1000;
     home = "/home/terje";
     description = "Terje Larsen";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
     shell = pkgs.fish;
   };
 

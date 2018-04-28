@@ -25,6 +25,8 @@
   environment.systemPackages = with pkgs; [
     nix-repl
     editorconfig-core-c
+    docker
+    docker_compose
     direnv
     exercism
     sysdig
@@ -42,4 +44,6 @@
     ttyrec
     ansible salt packer
   ];
+
+  virtualisation.docker.enable = true;
 }
