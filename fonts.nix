@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.packageOverrides = pkgs: with pkgs; {
+    iosevka = iosevka.override {
+      set = "slab";
+    };
+  };
+
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
@@ -8,7 +14,7 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = [ "Fira Mono" ];
+        monospace = [ "Iosevka Slab" ];
         sansSerif = [ "Noto Sans" ];
         serif     = [ "Noto Serif" ];
       };
@@ -20,6 +26,7 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      iosevka
       fira
       fira-mono
       fira-code
