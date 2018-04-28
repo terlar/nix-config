@@ -20,8 +20,9 @@
   };
   
   environment.systemPackages = with pkgs; [
+    dex
     i3lock-color
-    rofi
     kitty
+    rofi
   ];
 }
