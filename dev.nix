@@ -3,6 +3,7 @@
 {
   imports = [
     ./dev/bash.nix
+    ./dev/clojure.nix
     ./dev/crystal.nix
     ./dev/elixir.nix
     ./dev/elm.nix
