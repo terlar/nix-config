@@ -31,6 +31,7 @@
     dropbox-cli lastpass-cli
     surfraw
     youtube-dl
+    playerctl
   ];
 
   networking.useNetworkd = true;
