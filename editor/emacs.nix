@@ -7,7 +7,7 @@
       versionModifier = "-git";
       name = "emacs-${version}${versionModifier}";
 
-	    withGtk2 = false;
+      withGtk2 = false;
       withGtk3 = true;
       withXwidgets = true;
       imagemagick = pkgs.imagemagickBig;
