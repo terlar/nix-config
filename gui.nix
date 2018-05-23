@@ -21,6 +21,9 @@
     slack
   ];
 
+  # Start a DBus session
+  services.xserver.startDbusSession = true;
+
   # Permission escalation
   security.polkit.enable = true;
 
