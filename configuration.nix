@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     ./hardware/dell-xps-15.nix
     ./hardware/yubikey.nix
+    ./filesystem/exfat.nix
     ./base.nix
     ./keyboard.nix
     ./editor/emacs.nix
