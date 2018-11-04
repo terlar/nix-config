@@ -32,6 +32,7 @@
     surfraw
     youtube-dl
     playerctl
+    ranger
   ];
 
   networking.useNetworkd = true;
