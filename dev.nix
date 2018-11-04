@@ -24,7 +24,6 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.sysdig ];
 
   environment.systemPackages = with pkgs; [
-    nix-repl
     editorconfig-core-c
     docker
     docker_compose
