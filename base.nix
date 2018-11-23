@@ -32,6 +32,7 @@
     youtube-dl
     playerctl
     ranger
+    pass
   ];
 
   networking.useNetworkd = true;
