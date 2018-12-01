@@ -33,6 +33,7 @@
     playerctl
     ranger
     pass
+    moreutils
   ];
 
   networking.useNetworkd = true;
