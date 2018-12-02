@@ -21,9 +21,8 @@ self: pkgs:
 
       src = fetchgit {
         url = https://git.savannah.gnu.org/git/emacs.git;
-        rev = "7851ae8b443c62a41ea4f4440512aa56cc87b9b7";
-        sha256 = "05jrp3nhjrwrsipphzman7x9rwbzcf2ik17rp1h1ghq1q9ryx73x";
-        # date = 2018-11-19T07:33:53-08:00;
+        rev = "c418c85617babbe7b63730fefb71e2c87a0141af";
+        sha256 = "1m374vaq5zaylds7g049vx1j8d67hv69pmdnsrnaypmj83gqf46x";
       };
 
       postPatch = ''
@@ -43,16 +42,10 @@ self: pkgs:
 
       patches = [];
 
-      configureFlags = [ "--with-modules" ] ++
-        [ "--with-ns" "--disable-ns-self-contained"
-          "--enable-checking=yes,glyphs"
-          "--enable-check-lisp-object-type" ];
-
       src = ~/src/git.sv.gnu.org/emacs;
 
       postPatch = ''
         rm -rf .git
-        sh autogen.sh
       '';
     });
 }
