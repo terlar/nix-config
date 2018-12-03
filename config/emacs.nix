@@ -3,12 +3,28 @@ pkgs: epkgs:
 with epkgs;
 
 let
+  ## Fix font-lock issue.
   all-the-icons = melpaPackages.all-the-icons.overrideAttrs(attrs: {
     patches = [ ./emacs/all-the-icons-font-lock-fix.patch ];
   });
 
+  ## Add missing dependencies.
   kubernetes = melpaPackages.kubernetes.overrideAttrs(attrs: {
     buildInputs = attrs.buildInputs ++ [ pkgs.git ];
+  });
+
+  ## Latest version.
+  nix-mode = melpaPackages.nix-mode.overrideAttrs(attrs: {
+    version = "20181120";
+    src = pkgs.fetchFromGitHub {
+      owner  = "nixos";
+      repo   = "nix-mode";
+      rev    = "84ee98019fbb48854ebd57cc74848b7e7327a78c";
+      sha256 = "1i9vg5q1fqp2h49p5m5p6a0nv796v0wq8ljbmfg1z4kmwll69mkx";
+    };
+    recipe = pkgs.writeText "recipe" ''
+      (nix-mode :repo "nixos/nix-mode" :fetcher github)
+    '';
   });
 
   org-pretty-table = melpaBuild rec {
@@ -58,6 +74,7 @@ let
     };
   };
 
+  ## Add support for relative path
   rspec-mode = melpaPackages.rspec-mode.overrideAttrs(attrs: {
     patches = [ ./emacs/rspec-mode-relative-path.patch ];
   });
