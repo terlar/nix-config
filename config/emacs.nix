@@ -8,6 +8,11 @@ let
     patches = [ ./emacs/all-the-icons-font-lock-fix.patch ];
   });
 
+  ## Fix issue with wdired
+  all-the-icons-dired = melpaPackages.all-the-icons-dired.overrideAttrs(attrs: {
+    patches = [ ./emacs/all-the-icons-dired-wdired-fix.patch];
+  });
+
   ## Add missing dependencies.
   kubernetes = melpaPackages.kubernetes.overrideAttrs(attrs: {
     buildInputs = attrs.buildInputs ++ [ pkgs.git ];
