@@ -1,11 +1,7 @@
 self: pkgs:
 
 {
-  emacs = self.emacs26;
-
-  emacsPackagesNg = self.emacs26PackagesNg;
-  emacs26PackagesNg = (self.emacsPackagesNgGen self.emacs26);
-  emacsHEADPackagesNg = (self.emacsPackagesNgGen self.emacsHEAD);
+  emacs = self.emacsHEAD;
 
   emacs26 = with pkgs; stdenv.lib.overrideDerivation
     (pkgs.emacs26.override { srcRepo = true; }) (attrs: rec {

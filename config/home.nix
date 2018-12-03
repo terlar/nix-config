@@ -5,6 +5,7 @@ let
   nix_directory = "${home_directory}/src/github.com/terlar/nix-config";
   ca-bundle_crt = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
   lib = pkgs.stdenv.lib;
+  emacsPackages = import ./emacs.nix pkgs;
 in rec {
   nixpkgs = {
     config = {
@@ -35,6 +36,12 @@ in rec {
 
     fish = {
       enable = true;
+    };
+
+    emacs = {
+      enable = true;
+      package = pkgs.emacsHEAD;
+      extraPackages = emacsPackages;
     };
   };
 }

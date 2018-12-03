@@ -3,6 +3,14 @@ pkgs: epkgs:
 with epkgs;
 
 let
+  all-the-icons = melpaPackages.all-the-icons.overrideAttrs(attrs: {
+    patches = [ ./emacs/all-the-icons-font-lock-fix.patch ];
+  });
+
+  kubernetes = melpaPackages.kubernetes.overrideAttrs(attrs: {
+    buildInputs = attrs.buildInputs ++ [ pkgs.git ];
+  });
+
   org-pretty-table = melpaBuild rec {
     pname   = "org-pretty-table";
     version = "20131129";
@@ -25,7 +33,59 @@ let
       '';
     };
   };
-in [
+
+  rotate-text = melpaBuild rec {
+    pname   = "rotate-text";
+    version = "20090413";
+    src = pkgs.fetchFromGitHub {
+      owner  = "nschum";
+      repo   = "rotate-text.el";
+      rev    = "74c456f91bfefb19dfcd33dbb3bd8574d1f185c6";
+      sha256 = "1cgxv4aibkvv6lnssynn0438a615fz3zq8hg9sb0lhfgsr99pxln";
+    };
+    recipe = pkgs.writeText "recipe" ''
+      (rotate-text :repo "nschum/rotate-text.el" :fetcher github)
+    '';
+
+    meta = {
+      description = "Cycle through words, symbols and patterns";
+      longDescription = ''
+        rotate-text allows you cycle through commonly interchanged text with a single
+        keystroke.  For example, you can toggle between "frame-width" and
+        "frame-height", between "public", "protected" and "private" and between
+        "variable1", "variable2" through "variableN".
+      '';
+    };
+  };
+
+  rspec-mode = melpaPackages.rspec-mode.overrideAttrs(attrs: {
+    patches = [ ./emacs/rspec-mode-relative-path.patch ];
+  });
+
+  source-peek = melpaBuild rec {
+    pname   = "source-peek";
+    version = "20170424";
+    src = pkgs.fetchFromGitHub {
+      owner  = "iqbalansari";
+      repo   = "emacs-source-peek";
+      rev    = "fa94ed1def1e44f3c3999d355599d1dd9bc44dab";
+      sha256 = "14ai66c7j2k04a0vav92ybaikcc8cng5i5vy0iwpg7b2cws8a2zg";
+    };
+    recipe = pkgs.writeText "recipe" ''
+      (source-peek :repo "iqbalansari/emacs-source-peek" :fetcher github)
+    '';
+
+    meta = {
+      description = "Display function definitions inline";
+      longDescription = ''
+        This package adds the command `source-peek' which fetches the definition of
+        the function at point (using different backends) and displays them inline in
+        the current buffer.
+      '';
+    };
+  };
+in (with melpaPackages; [
+  use-package
   ace-link
   ace-window
   aggressive-indent
@@ -124,12 +184,11 @@ in [
   ivy-xref
   ivy-yasnippet
   javadoc-lookup
-  # js-lookup
   js2-mode
   js2-refactor
   kotlin-mode
-  # kubernetes
-  # kubernetes-tramp
+  kubernetes
+  kubernetes-tramp
   lua-mode
   magit
   markdown-mode
@@ -148,7 +207,6 @@ in [
   org-bullets
   org-cliplink
   org-noter
-  org-plus-contrib
   org-pretty-table
   org-preview-html
   org-radiobutton
@@ -173,7 +231,7 @@ in [
   rainbow-mode
   rake
   redtick
-  # rotate-text
+  rotate-text
   rspec-mode
   rubocopfmt
   ruby-refactor
@@ -186,7 +244,7 @@ in [
   smart-jump
   smartparens
   smex
-  # source-peek
+  source-peek
   spray
   stripe-buffer
   suggest
@@ -210,4 +268,7 @@ in [
   yasnippet-snippets
   yatemplate
   zoom-window
-  ]
+] ++ (with orgPackages; [
+  org
+  org-plus-contrib
+]))

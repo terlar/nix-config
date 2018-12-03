@@ -2,18 +2,14 @@
 
 with pkgs;
 
-let
-  emacsPackages     = import ./emacs.nix pkgs;
-  emacsWithPackages = pkgs.emacsHEADPackagesNg.emacsWithPackages;
-  emacsEnv          = emacsWithPackages emacsPackages;
-in ([
+([
   nixStable
   home-manager
   coreutils
   moreutils
   fish
+  emacs
   openssh
-  emacsEnv
 
   # git tools
   git-lfs
