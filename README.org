@@ -1,0 +1,46 @@
+#+TITLE: nix-config
+Configuration for Darwin, NixOS and user home (dotfiles).
+
+* Setup
+** NixOS
+   Install home.
+   #+BEGIN_SRC sh
+   make install-home
+   #+END_SRC
+
+** Darwin
+   Install *nix* the package manager.
+   #+BEGIN_SRC sh
+   make install-nix
+   #+END_SRC
+
+   Install system.
+   #+BEGIN_SRC sh
+   make install-darwin
+   #+END_SRC
+
+** Home management only
+   #+BEGIN_SRC sh
+   make install-home
+   #+END_SRC
+
+* Usage
+  Switch both system (Darwin/NixOS) and home.
+  #+BEGIN_SRC sh
+  make switch
+  #+END_SRC
+
+  Switch system only.
+  #+BEGIN_SRC sh
+  make switch-system
+  #+END_SRC
+
+  Switch home only.
+  #+BEGIN_SRC sh
+  make switch-home
+  #+END_SRC
+
+  Update the upstream repositories.
+  #+BEGIN_SRC sh
+  make pull
+  #+END_SRC
