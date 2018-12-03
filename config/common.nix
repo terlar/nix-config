@@ -38,6 +38,7 @@ in {
         "/usr/X11/man"
       ];
 
+      LANG        = "en_US";
       LC_CTYPE    = "en_US.UTF-8";
       LESSCHARSET = "utf-8";
       PAGER       = "less";

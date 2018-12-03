@@ -44,4 +44,12 @@ in rec {
       extraPackages = emacsPackages;
     };
   };
+
+  xdg = {
+    enable = true;
+
+    configHome = "${home_directory}/.config";
+    dataHome   = "${home_directory}/.local/share";
+    cacheHome  = "${home_directory}/.cache";
+  };
 }

@@ -2,7 +2,9 @@
 
 with pkgs;
 
-([
+let
+  aspellEnv = aspellWithDicts(ps: [ ps.en ps.sv ]);
+in ([
   nixStable
   home-manager
   coreutils
@@ -21,9 +23,7 @@ with pkgs;
   gitAndTools.tig
 
   # system tools
-  aspell
-  aspellDicts.en
-  aspellDicts.sv
+  aspellEnv
   curl
   direnv
   fd
