@@ -1,6 +1,14 @@
+UNAME               := $(shell uname)
 NIX_CONF            := $(CURDIR)
 NIX_PATH            := darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix:nixpkgs=$(NIX_CONF)/nixpkgs
 HOME_MANAGER_CONFIG := $(NIX_CONF)/config/home.nix
+
+ifeq ($(UNAME),Darwin)
+SWITCH_SYSTEM := switch-darwin
+endif
+ifeq ($(UNAME),Linux)
+SWITCH_SYSTEM := switch-nixos
+endif
 
 export NIX_PATH
 export HOME_MANAGER_CONFIG
@@ -23,13 +31,20 @@ install-darwin: ## Install darwin
 install-home: ## Install home-manager
 	nix-shell home-manager -A install --run 'home-manager switch'
 
-.PHONY: switch-home switch-darwin
-switch-darwin: ## Switch to latest darwin config
-	darwin-rebuild switch -Q
-	@echo "Darwin generation: $$(darwin-rebuild --list-generations | tail -1)"
+.PHONY: switch switch-home
+switch: switch-system switch-home ## Switch all
 switch-home: ## Switch to latest home config
 	home-manager switch
 	@echo "Home generation: $$(home-manager generations | head -1)"
+
+.PHONY: switch-system switch-nixos switch-darwin
+switch-system: ## Switch to latest system config
+switch-system: $(SWITCH_SYSTEM)
+switch-nixos: ## Switch to latest NixOS config
+	nixos-rebuild switch
+switch-darwin: ## Switch to latest Darwin config
+	darwin-rebuild switch -Q
+	@echo "Darwin generation: $$(darwin-rebuild --list-generations | tail -1)"
 
 .PHONY: pull
 pull: ## Pull latest upstream changes
