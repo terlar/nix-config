@@ -268,6 +268,7 @@ in (with melpaPackages; [
   smex
   source-peek
   spray
+  string-edit
   stripe-buffer
   suggest
   swiper
