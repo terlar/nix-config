@@ -3,6 +3,9 @@ self: pkgs:
 {
   emacs = self.emacsHEAD;
 
+  emacs26WithPackages = with pkgs; (emacsPackagesNgGen self.emacs26).emacsWithPackages;
+  emacsHEADWithPackages = with pkgs; (emacsPackagesNgGen self.emacsHEAD).emacsWithPackages;
+
   emacs26 = with pkgs; stdenv.lib.overrideDerivation
     (pkgs.emacs26.override { srcRepo = true; }) (attrs: rec {
       name = "emacs-${version}${versionModifier}";
