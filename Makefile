@@ -48,6 +48,7 @@ switch-darwin: ## Switch to latest Darwin config
 
 .PHONY: pull
 pull: ## Pull latest upstream changes
-	(cd darwin       && git pull --rebase)
-	(cd home-manager && git pull --rebase)
-	(cd nixpkgs      && git pull --rebase)
+	(cd darwin             && git pull --rebase)
+	(cd home-manager       && git pull --rebase)
+	(cd nixpkgs            && git pull --rebase)
+	(cd overlays/emacs/src && git pull --rebase)

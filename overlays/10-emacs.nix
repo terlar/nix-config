@@ -27,6 +27,12 @@ self: pkgs:
       postPatch = ''
         rm -rf .git
       '';
+
+      postInstall = ''
+        mkdir -p $out/share/emacs/site-lisp
+        cp ${./emacs/site-start.el} $out/share/emacs/site-lisp/site-start.el
+        $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
+      '';
     });
 
   emacsHEAD = with pkgs; stdenv.lib.overrideDerivation
@@ -41,10 +47,12 @@ self: pkgs:
 
       patches = [];
 
-      src = ~/src/git.sv.gnu.org/emacs;
+      src = ./emacs/src;
 
-      postPatch = ''
-        rm -rf .git
+      postInstall = ''
+        mkdir -p $out/share/emacs/site-lisp
+        cp ${./emacs/site-start.el} $out/share/emacs/site-lisp/site-start.el
+        $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
       '';
     });
 }
