@@ -13,6 +13,17 @@ let
     patches = [ ./emacs/all-the-icons-dired-wdired-fix.patch];
   });
 
+  ## Latest version.
+  eglot = melpaPackages.eglot.overrideAttrs(attrs: {
+    version = "20181204";
+    src = pkgs.fetchFromGitHub {
+      owner  = "joaotavora";
+      repo   = "eglot";
+      rev    = "53bfdb7087b9b4a7c79abc3863c90b6d06ecca1f";
+      sha256 = "0pmd2xvgdnpb3bgcv9w85h2prm4j67yw35fw5srcfym4fcd79pyq";
+    };
+  });
+
   ## Add missing dependencies.
   kubernetes = melpaPackages.kubernetes.overrideAttrs(attrs: {
     buildInputs = attrs.buildInputs ++ [ pkgs.git ];
@@ -27,11 +38,9 @@ let
       rev    = "84ee98019fbb48854ebd57cc74848b7e7327a78c";
       sha256 = "1i9vg5q1fqp2h49p5m5p6a0nv796v0wq8ljbmfg1z4kmwll69mkx";
     };
-    recipe = pkgs.writeText "recipe" ''
-      (nix-mode :repo "nixos/nix-mode" :fetcher github)
-    '';
   });
 
+  ## New package.
   org-pretty-table = melpaBuild rec {
     pname   = "org-pretty-table";
     version = "20131129";
@@ -55,6 +64,7 @@ let
     };
   };
 
+  ## New package.
   rotate-text = melpaBuild rec {
     pname   = "rotate-text";
     version = "20090413";
@@ -84,6 +94,7 @@ let
     patches = [ ./emacs/rspec-mode-relative-path.patch ];
   });
 
+  ## New package
   source-peek = melpaBuild rec {
     pname   = "source-peek";
     version = "20170424";
@@ -221,6 +232,7 @@ in (with melpaPackages; [
   nameless
   nginx-mode
   nix-mode
+  nix-update
   no-littering
   nodejs-repl
   nov
