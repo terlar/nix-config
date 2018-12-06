@@ -4,8 +4,8 @@ let
   home_directory = builtins.getEnv "HOME";
   nix_directory = "${home_directory}/src/github.com/terlar/nix-config";
   ca-bundle_crt = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-  lib = pkgs.stdenv.lib;
   emacsPackages = import ./emacs.nix pkgs;
+  emacsFull = pkgs.emacsPackagesNg.emacsWithPackages emacsPackages;
 in rec {
   nixpkgs = {
     config = {
@@ -21,7 +21,9 @@ in rec {
   };
 
   home = {
-    packages = with pkgs; [];
+    packages = with pkgs; [
+      emacsFull
+    ];
   };
 
   programs = {
@@ -36,12 +38,6 @@ in rec {
 
     fish = {
       enable = true;
-    };
-
-    emacs = {
-      enable = true;
-      package = pkgs.emacsHEAD;
-      extraPackages = emacsPackages;
     };
   };
 

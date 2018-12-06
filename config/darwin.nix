@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-  home_directory = builtins.getEnv "HOME";
-  nix_directory = "${home_directory}/src/github.com/terlar/nix-config";
-in {
+{
   imports = [ ./common.nix ];
 
   system.defaults = {
