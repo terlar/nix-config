@@ -24,14 +24,24 @@ self: pkgs:
         sha256 = "1m374vaq5zaylds7g049vx1j8d67hv69pmdnsrnaypmj83gqf46x";
       };
 
-      postPatch = ''
-        rm -rf .git
-      '';
-
       postInstall = ''
         mkdir -p $out/share/emacs/site-lisp
         cp ${./emacs/site-start.el} $out/share/emacs/site-lisp/site-start.el
         $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
+
+        rm -rf $out/var
+        rm -rf $out/share/emacs/${version}/site-lisp
+
+        for srcdir in src lisp lwlib ; do
+          dstdir=$out/share/emacs/${version}/$srcdir
+          mkdir -p $dstdir
+          find $srcdir -name "*.[chm]" -exec cp {} $dstdir \;
+          cp $srcdir/TAGS $dstdir
+          echo '((nil . ((tags-file-name . "TAGS"))))' > $dstdir/.dir-locals.el
+        done
+
+        mkdir -p $out/Applications
+        mv nextstep/Emacs.app $out/Applications
       '';
     });
 
@@ -53,6 +63,20 @@ self: pkgs:
         mkdir -p $out/share/emacs/site-lisp
         cp ${./emacs/site-start.el} $out/share/emacs/site-lisp/site-start.el
         $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
+
+        rm -rf $out/var
+        rm -rf $out/share/emacs/${version}/site-lisp
+
+        for srcdir in src lisp lwlib ; do
+          dstdir=$out/share/emacs/${version}/$srcdir
+          mkdir -p $dstdir
+          find $srcdir -name "*.[chm]" -exec cp {} $dstdir \;
+          cp $srcdir/TAGS $dstdir
+          echo '((nil . ((tags-file-name . "TAGS"))))' > $dstdir/.dir-locals.el
+        done
+
+        mkdir -p $out/Applications
+        mv nextstep/Emacs.app $out/Applications
       '';
     });
 }
