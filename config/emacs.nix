@@ -24,6 +24,17 @@ let
     };
   });
 
+  ## Latest version.
+  ivy = melpaPackages.ivy.overrideAttrs(attrs: {
+    version = "20181129";
+    src = pkgs.fetchFromGitHub {
+      owner  = "abo-abo";
+      repo   = "swiper";
+      rev    = "86635fb8268c07b9fb534357e8e0940c23edeef7";
+      sha256 = "1bx091lh9kyqpw4dpgrlars6ziyl37vvva6ycw5w65a6f2bb57ia";
+    };
+  });
+
   ## Add missing dependencies.
   kubernetes = melpaPackages.kubernetes.overrideAttrs(attrs: {
     buildInputs = attrs.buildInputs ++ [ pkgs.git ];
