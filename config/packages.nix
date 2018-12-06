@@ -6,6 +6,7 @@ let
   aspellEnv = aspellWithDicts(ps: [ ps.en ps.sv ]);
 in ([
   nixStable
+  nix-prefetch-scripts
   home-manager
   coreutils
   moreutils
