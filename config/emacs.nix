@@ -21,6 +21,7 @@ let
       repo   = "eglot";
       rev    = "53bfdb7087b9b4a7c79abc3863c90b6d06ecca1f";
       sha256 = "0pmd2xvgdnpb3bgcv9w85h2prm4j67yw35fw5srcfym4fcd79pyq";
+      # date = 2018-12-04T23:10:35+00:00;
     };
   });
 
@@ -32,6 +33,7 @@ let
       repo   = "swiper";
       rev    = "86635fb8268c07b9fb534357e8e0940c23edeef7";
       sha256 = "1bx091lh9kyqpw4dpgrlars6ziyl37vvva6ycw5w65a6f2bb57ia";
+      # date = 2018-11-29T22:05:38+01:00;
     };
   });
 
@@ -46,8 +48,9 @@ let
     src = pkgs.fetchFromGitHub {
       owner  = "nixos";
       repo   = "nix-mode";
-      rev    = "84ee98019fbb48854ebd57cc74848b7e7327a78c";
-      sha256 = "1i9vg5q1fqp2h49p5m5p6a0nv796v0wq8ljbmfg1z4kmwll69mkx";
+      rev    = "90ac0a74b205f11dc456676b6dbefc5072e7eb6c";
+      sha256 = "00v70v64icsi5iwrimdb311rvlcpazwg22hg12x7l6m87c949krf";
+      # date = 2018-11-20T16:53:03-06:00;
     };
   });
 
@@ -57,9 +60,10 @@ let
     version = "20131129";
     src = pkgs.fetchFromGitHub {
       owner  = "fuco1";
-      repo   = pname;
+      repo   = "org-pretty-table";
       rev    = "0dca6f3156dd1eb0a42f08ac2ad89259637a16b5";
       sha256 = "09avbl1mmgs3b1ya0rvv9kswq2k7d133zgr18cazl3jkpvh35lxg";
+      # date = 2013-11-29T16:10:09+01:00;
     };
     recipe = pkgs.writeText "recipe" ''
       (org-pretty-table :repo "fuco1/org-pretty-table" :fetcher github)
@@ -84,6 +88,7 @@ let
       repo   = "rotate-text.el";
       rev    = "74c456f91bfefb19dfcd33dbb3bd8574d1f185c6";
       sha256 = "1cgxv4aibkvv6lnssynn0438a615fz3zq8hg9sb0lhfgsr99pxln";
+      # date = 2009-04-13T22:36:18+02:00;
     };
     recipe = pkgs.writeText "recipe" ''
       (rotate-text :repo "nschum/rotate-text.el" :fetcher github)
@@ -114,6 +119,7 @@ let
       repo   = "emacs-source-peek";
       rev    = "fa94ed1def1e44f3c3999d355599d1dd9bc44dab";
       sha256 = "14ai66c7j2k04a0vav92ybaikcc8cng5i5vy0iwpg7b2cws8a2zg";
+      # date = 2017-04-24T03:47:10+05:30;
     };
     recipe = pkgs.writeText "recipe" ''
       (source-peek :repo "iqbalansari/emacs-source-peek" :fetcher github)
