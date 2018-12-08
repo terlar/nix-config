@@ -21,9 +21,9 @@ let
       src = pkgs.fetchFromGitHub {
         owner  = "joaotavora";
         repo   = "eglot";
-        rev    = "53bfdb7087b9b4a7c79abc3863c90b6d06ecca1f";
-        sha256 = "0pmd2xvgdnpb3bgcv9w85h2prm4j67yw35fw5srcfym4fcd79pyq";
-        # date = 2018-12-04T23:10:35+00:00;
+        rev    = "6b0b1b75948abe1f42f4f676c1379adc4372ec9b";
+        sha256 = "161g3a8f6aq4r6plwhbbq041wfbwx7prsx3khp2bsdc883c8lycw";
+        # date = 2018-12-07T23:23:28+00:00;
       };
     });
 
@@ -57,6 +57,17 @@ let
         rev    = "90ac0a74b205f11dc456676b6dbefc5072e7eb6c";
         sha256 = "00v70v64icsi5iwrimdb311rvlcpazwg22hg12x7l6m87c949krf";
         # date = 2018-11-20T16:53:03-06:00;
+      };
+    });
+
+    org-variable-pitch = super.org-variable-pitch.overrideAttrs(attrs: {
+      version = "20181206";
+      src = pkgs.fetchFromGitHub {
+        owner  = "cadadr";
+        repo   = "elisp";
+        rev    = "b41b899da9dec75cbf9f5fe8858d12c271391073";
+        sha256 = "1y8z27v0y2cmg2vjw5lsd3fs4rcrj0v6jcn5c439c0qlg8missp7";
+        # date = 2018-12-06T18:02:51+03:00;
       };
     });
 

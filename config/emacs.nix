@@ -17,6 +17,7 @@ with epkgs;
   auto-dictionary
   auto-minor-mode
   avy
+  bbdb
   bibliothek
   cakecrumbs
   camcorder
@@ -62,7 +63,6 @@ with epkgs;
   esup
   eval-in-repl
   exec-path-from-shell
-  eyebrowse
   fish-completion
   fish-mode
   flymake-shellcheck
@@ -73,6 +73,7 @@ with epkgs;
   git
   git-messenger
   gitignore-mode
+  gmail2bbdb
   go-eldoc
   go-mode
   gorepl-mode
@@ -151,6 +152,7 @@ with epkgs;
   rainbow-mode
   rake
   redtick
+  rjsx-mode
   rotate-text
   rspec-mode
   rubocopfmt
