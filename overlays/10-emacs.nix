@@ -12,6 +12,9 @@ let
     all-the-icons-dired = super.all-the-icons-dired.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/all-the-icons-dired.patch ];
     });
+    editorconfig = super.editorconfig.overrideAttrs(attrs: {
+      patches = [ ./emacs/patches/editorconfig.patch ];
+    });
     rspec-mode = super.rspec-mode.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/rspec-mode.patch ];
     });
