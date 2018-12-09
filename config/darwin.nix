@@ -32,6 +32,11 @@
     nonUS.remapTilde = true;
   };
 
+  fonts = {
+    fonts = import ./fonts.nix { inherit pkgs; };
+    enableFontDir = true;
+  };
+
   services = {
     activate-system.enable = true;
     skhd.enable = true;
