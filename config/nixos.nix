@@ -74,4 +74,6 @@ in {
     # Auto-mount disks.
     udisks2.enable = true;
   };
+
+  users.defaultUserShell = pkgs.fish;
 }

@@ -48,4 +48,9 @@ in rec {
     dataHome   = "${home_directory}/.local/share";
     cacheHome  = "${home_directory}/.cache";
   };
+
+  services.emacs = {
+    enable = true;
+    package = emacsFull;
+  }
 }
