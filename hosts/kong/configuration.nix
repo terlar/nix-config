@@ -7,6 +7,15 @@
 
     # Shared NixOS configuration.
     ../../config/nixos.nix
+    ../../config/nixos/gui.nix
+
+    # Hardware configuration.
+    ../../config/nixos/hardware/audio.nix
+    ../../config/nixos/hardware/backlight.nix
+    ../../config/nixos/hardware/battery.nix
+    ../../config/nixos/hardware/bluetooth.nix
+    ../../config/nixos/hardware/wireless.nix
+    ../../config/nixos/hardware/yubikey.nix
   ];
 
   system.stateVersion = "18.09";
@@ -70,5 +79,16 @@
     middleEmulation = true;
     naturalScrolling = true;
     scrollMethod = "twofinger";
+  };
+
+  # Add my user.
+  users.extraUsers.terje = {
+    isNormalUser = true;
+    createHome = true;
+    uid = 1000;
+    home = "/home/terje";
+    description = "Terje Larsen";
+    extraGroups = [ "wheel" "docker" ];
+    shell = pkgs.fish;
   };
 }

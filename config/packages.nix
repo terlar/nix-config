@@ -11,7 +11,6 @@ in ([
   coreutils
   moreutils
   fish
-  emacs
   openssh
 
   # git tools
@@ -53,9 +52,6 @@ in ([
   httpie
   jq
 ] ++ lib.optionals stdenv.isLinux [
-  rofi
-  xclip
-
   # dev tools
   docker
   docker_compose
@@ -65,6 +61,10 @@ in ([
   playerctl
   surfraw
   youtube-dl
+
+  # security tools
+  lastpass-cli
+  pass
 ] ++ lib.optionals stdenv.isDarwin [
   skhd
 

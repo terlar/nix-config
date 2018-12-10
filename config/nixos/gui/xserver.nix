@@ -10,7 +10,9 @@
     systemPackages = with pkgs; [
       feh
       gnome3.gcr
+      kitty
       libnotify
+      rofi
       xclip
       xfce.xfce4-notifyd
       xorg.xhost

@@ -1,16 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./xserver.nix
-  ];
+  imports = [ ./xserver.nix ];
 
   environment = {
     systemPackages = with pkgs; [
-      paper-gtk-theme
-      paper-icon-theme
       gnome2.gtk
       gnome3.gtk
+      paper-gtk-theme
+      paper-icon-theme
     ];
     
     sessionVariables = {
