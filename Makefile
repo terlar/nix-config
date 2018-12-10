@@ -1,8 +1,8 @@
 UNAME               := $(shell uname)
 NIX_CONF            := $(CURDIR)
-NIX_PATH            := darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix:nixpkgs=$(NIX_CONF)/nixpkgs
 NIXOS_CONFIG        := $(NIX_CONF)/configuration.nix
 HOME_MANAGER_CONFIG := $(NIX_CONF)/config/home.nix
+NIX_PATH            := nixpkgs=$(NIX_CONF)/nixpkgs:nixos-config=$(NIXOS_CONFIG):darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 
 ifeq ($(UNAME),Darwin)
@@ -13,7 +13,6 @@ SWITCH_SYSTEM := switch-nixos
 endif
 
 export NIX_PATH
-export NIXOS_CONFIG
 export HOME_MANAGER_CONFIG
 
 .DEFAULT_GOAL := help
@@ -48,10 +47,14 @@ switch-home: ## Switch to latest home config
 switch-system: ## Switch to latest system config
 switch-system: $(SWITCH_SYSTEM)
 switch-nixos: ## Switch to latest NixOS config
-	nixos-rebuild switch
+	sudo -E nixos-rebuild switch
 switch-darwin: ## Switch to latest Darwin config
 	darwin-rebuild switch -Q
 	@echo "Darwin generation: $$(darwin-rebuild --list-generations | tail -1)"
+
+.PHONY: build-nixos
+build-nixos:
+	nixos-rebuild build
 
 .PHONY: pull
 pull: ## Pull latest upstream changes
