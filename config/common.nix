@@ -5,8 +5,6 @@ let
   nix_directory = "${home_directory}/src/github.com/terlar/nix-config";
 in {
   time.timeZone = "Europe/Stockholm";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.consoleKeyMap = "us";
 
   nixpkgs = {
     config = {
@@ -40,7 +38,6 @@ in {
         "/usr/X11/man"
       ];
 
-      LANG        = "en_US";
       LC_CTYPE    = "en_US.UTF-8";
       LESSCHARSET = "utf-8";
       PAGER       = "less";
@@ -61,6 +58,5 @@ in {
     distributedBuilds = false;
   };
 
-  programs.bash.enable = true;
   programs.fish.enable = true;
 }

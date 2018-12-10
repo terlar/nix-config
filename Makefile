@@ -1,6 +1,7 @@
 UNAME               := $(shell uname)
 NIX_CONF            := $(CURDIR)
 NIX_PATH            := darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix:nixpkgs=$(NIX_CONF)/nixpkgs
+NIXOS_CONFIG        := $(NIX_CONF)/configuration.nix
 HOME_MANAGER_CONFIG := $(NIX_CONF)/config/home.nix
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 
@@ -12,6 +13,7 @@ SWITCH_SYSTEM := switch-nixos
 endif
 
 export NIX_PATH
+export NIXOS_CONFIG
 export HOME_MANAGER_CONFIG
 
 .DEFAULT_GOAL := help
