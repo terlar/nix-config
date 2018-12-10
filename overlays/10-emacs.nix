@@ -187,7 +187,7 @@ in {
           cp $srcdir/TAGS $dstdir
           echo '((nil . ((tags-file-name . "TAGS"))))' > $dstdir/.dir-locals.el
         done
-
+      '' + lib.optionalString stdenv.isDarwin ''
         mkdir -p $out/Applications
         mv nextstep/Emacs.app $out/Applications
       '';
@@ -222,7 +222,7 @@ in {
           cp $srcdir/TAGS $dstdir
           echo '((nil . ((tags-file-name . "TAGS"))))' > $dstdir/.dir-locals.el
         done
-
+      '' + lib.optionalString stdenv.isDarwin ''
         mkdir -p $out/Applications
         mv nextstep/Emacs.app $out/Applications
       '';
