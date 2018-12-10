@@ -13,6 +13,7 @@
   system.autoUpgrade.enable = true;
 
   networking.hostName = "kong";
+  networking.enableIPv6 = false;
 
   boot = {
     # Use the systemd-boot EFI boot loader.
