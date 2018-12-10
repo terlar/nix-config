@@ -5,6 +5,8 @@ let
   nix_directory = "${home_directory}/src/github.com/terlar/nix-config";
 in {
   time.timeZone = "Europe/Stockholm";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.consoleKeyMap = "us";
 
   nixpkgs = {
     config = {

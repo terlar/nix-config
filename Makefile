@@ -2,6 +2,7 @@ UNAME               := $(shell uname)
 NIX_CONF            := $(CURDIR)
 NIX_PATH            := darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix:nixpkgs=$(NIX_CONF)/nixpkgs
 HOME_MANAGER_CONFIG := $(NIX_CONF)/config/home.nix
+NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 
 ifeq ($(UNAME),Darwin)
 SWITCH_SYSTEM := switch-darwin
@@ -30,6 +31,10 @@ install-darwin: ## Install darwin
 	nix-shell darwin -A installer --run darwin-installer
 install-home: ## Install home-manager
 	nix-shell home-manager -A install --run 'home-manager switch'
+
+$(NIXOS_HOSTS):
+install-nixos-%: hosts/%/configuration.nix hosts/%/hardware-configuration.nix
+	ln -s $? .
 
 .PHONY: switch switch-home
 switch: switch-system switch-home ## Switch all
