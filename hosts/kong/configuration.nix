@@ -1,46 +1,44 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
 
-    # Shared NixOS configuration.
-    ../../config/nixos.nix
-    ../../config/nixos/gui.nix
+      # Shared NixOS configuration.
+      ../../config/nixos.nix
+      ../../config/nixos/gui.nix
 
-    # Hardware configuration.
-    ../../config/nixos/hardware/audio.nix
-    ../../config/nixos/hardware/backlight.nix
-    ../../config/nixos/hardware/battery.nix
-    ../../config/nixos/hardware/bluetooth.nix
-    ../../config/nixos/hardware/wireless.nix
-    ../../config/nixos/hardware/yubikey.nix
+      # Hardware configuration.
+      ../../config/nixos/hardware/audio.nix
+      ../../config/nixos/hardware/backlight.nix
+      ../../config/nixos/hardware/battery.nix
+      ../../config/nixos/hardware/bluetooth.nix
+      ../../config/nixos/hardware/wireless.nix
+      ../../config/nixos/hardware/yubikey.nix
+    ];
+
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Use the newer but stable kernel packages.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Kernel modules:
+  boot.kernelModules = [
+    "fuse"
+  ];
+  boot.blacklistedKernelModules = [
+    "fbcon"
+    "noveau"
+    "bbswitch"
   ];
 
-  system.stateVersion = "18.09";
-  system.autoUpgrade.enable = true;
-
   networking.hostName = "kong";
+  # Disable IPv6 due to resolving issues.
   networking.enableIPv6 = false;
-
-  boot = {
-    # Use the systemd-boot EFI boot loader.
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    # Use the newer but stable kernel packages.
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    # Kernel modules:
-    kernelModules = [
-      "fuse"
-    ];
-    blacklistedKernelModules = [
-      "fbcon"
-      "noveau"
-      "bbswitch"
-    ];
-  };
 
   # Update support for firmware.
   services.fwupd.enable = true;
@@ -83,12 +81,16 @@
 
   # Add my user.
   users.extraUsers.terje = {
-    isNormalUser = true;
     createHome = true;
-    uid = 1000;
+    extraGroups = [ "wheel" "docker" ];
+    group = "users";
     home = "/home/terje";
     description = "Terje Larsen";
-    extraGroups = [ "wheel" "docker" ];
     shell = pkgs.fish;
+    isNormalUser = true;
+    uid = 1000;
   };
+
+  system.stateVersion = "18.09";
+  system.autoUpgrade.enable = true;
 }

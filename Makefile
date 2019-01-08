@@ -24,12 +24,17 @@ help: ## Show this help message.
 	@echo "Targets:"
 	@egrep '^(.+)\:[^#]*##\ (.+)' ${MAKEFILE_LIST} | column -t -c 2 -s ':#'
 
+.PHONY: init
+init: ## Initialize sources (submodules)
+	git submodule update --init
+
 .PHONY: install-nix install-darwin install-home
 install-nix: ## Install nix and update submodules
 	curl https://nixos.org/nix/install | sh
-	git submodule update --init
 install-darwin: ## Install darwin
 	nix-shell darwin -A installer --run darwin-installer
+install-nixos: ## Install NixOS for current host
+	$(MAKE) install-nixos-$(shell hostname)
 install-home: ## Install home-manager
 	nix-shell home-manager -A install --run 'home-manager switch'
 

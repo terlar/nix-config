@@ -41,12 +41,6 @@ in {
     # Time management.
     ntp.enable = true;
 
-    # Local DNS cache.
-    dnsmasq = {
-      enable = true;
-      servers = [ "127.0.0.1#43" ];
-    };
-
     # Virtual terminal.
     kmscon = {
       enable = true;

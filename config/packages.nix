@@ -52,6 +52,8 @@ in ([
   httpie
   jq
 ] ++ lib.optionals stdenv.isLinux [
+  networkmanagerapplet
+
   # dev tools
   docker
   docker_compose
