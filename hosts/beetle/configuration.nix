@@ -8,11 +8,11 @@
       # Shared NixOS configuration.
       ../../config/nixos.nix
       ../../config/nixos/gui.nix
+      ../../config/nixos/gui/i3.nix
 
       # Hardware configuration.
       ../../config/nixos/hardware/backlight.nix
       ../../config/nixos/hardware/battery.nix
-      ../../config/nixos/hardware/bluetooth.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -48,7 +48,14 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
+
+  # Enable bluetooth support.
+  hardware.bluetooth.enable = true;
 
   # Enable touchpad support.
   services.xserver.libinput.enable = true;

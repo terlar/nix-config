@@ -1,16 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./xserver.nix ];
-
   environment = {
-    systemPackages = with pkgs; [
-      gnome2.gtk
-      gnome3.gtk
-      paper-gtk-theme
-      paper-icon-theme
-    ];
-    
     sessionVariables = {
       GTK2_RC_FILES = "${pkgs.gnome2.gtk}/share/themes/HighContrast/gtk-2.0/gtkrc";
       GTK_THEME = "HighContrast";

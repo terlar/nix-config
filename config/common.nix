@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  home_directory = builtins.getEnv "HOME";
-  nix_directory = "${home_directory}/src/github.com/terlar/nix-config";
+  homeDirectory = builtins.getEnv "HOME";
+  nixDirectory = "${homeDirectory}/src/github.com/terlar/nix-config";
 in {
   time.timeZone = "Europe/Stockholm";
 
@@ -27,11 +27,11 @@ in {
     shells = [ pkgs.fish ];
 
     variables = {
-      HOME_MANAGER_CONFIG = "${nix_directory}/config/home.nix";
+      HOME_MANAGER_CONFIG = "${nixDirectory}/config/home.nix";
 
       MANPATH = [
-        "${home_directory}/.nix-profile/share/man"
-        "${home_directory}/.nix-profile/man"
+        "${homeDirectory}/.nix-profile/share/man"
+        "${homeDirectory}/.nix-profile/man"
         "${config.system.path}/share/man"
         "${config.system.path}/man"
         "/usr/local/share/man"
@@ -48,10 +48,10 @@ in {
   nix = {
     package = pkgs.nixStable;
     nixPath =
-      [ "home-manager=${nix_directory}/home-manager"
-        "darwin=${nix_directory}/darwin"
-        "darwin-config=${nix_directory}/config/darwin.nix"
-        "nixpkgs=${nix_directory}/nixpkgs"
+      [ "home-manager=${nixDirectory}/home-manager"
+        "darwin=${nixDirectory}/darwin"
+        "darwin-config=${nixDirectory}/config/darwin.nix"
+        "nixpkgs=${nixDirectory}/nixpkgs"
       ];
 
     maxJobs = 10;

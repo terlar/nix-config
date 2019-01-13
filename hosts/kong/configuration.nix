@@ -59,6 +59,9 @@
     driSupport = true;
   };
 
+  # Font sizes for retina.
+  fonts.fontconfig.dpi = 180;
+
   # Original dimensions: 1016x571 millimeters
   # Divided by 2 (200% scaling)
   #

@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./theme.nix
-    ./xserver.nix
-  ];
-
   services.xserver = {
     windowManager = {
       i3 = {
@@ -21,6 +16,5 @@
   
   environment.systemPackages = with pkgs; [
     dex
-    i3lock-color
   ];
 }

@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./gui/i3.nix
-    ./gui/lightdm.nix
+    ./gui/theme.nix
     ./gui/ibus.nix
   ];
 
@@ -13,19 +12,23 @@
   # Permission escalation.
   security.polkit.enable = true;
 
-  # Start a DBus session.
-  services.xserver.startDbusSession = true;
+  services.autorandr.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    firefox
-    imagemagick
-    kitty
-    krita
-    maim
-    mpv
-    qutebrowser
-    slack
-    slop
-    spotify
-  ];
+  # Enable secrets store.
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+
+  services.xserver = {
+    enable = true;
+    autorun = true;
+
+    # Start a DBus session.
+    startDbusSession = true;
+
+    displayManager.lightdm = {
+      enable = true;
+      greeters.gtk.enable = true;
+    };
+  };
+
+  services.gnome3.at-spi2-core.enable = true;
 }

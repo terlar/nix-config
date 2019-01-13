@@ -17,9 +17,6 @@ in {
   # Enable super user handling.
   security.sudo.enable = true;
 
-  # Use Systemd for network management.
-  networking.useNetworkd = true;
-
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
@@ -28,7 +25,6 @@ in {
 
     fontconfig = {
       enable = true;
-      dpi = 180;
       defaultFonts = {
         monospace = [ "Iosevka Slab" ];
         sansSerif = [ "Noto Sans" ];
@@ -48,7 +44,7 @@ in {
       extraConfig = ''
         palette=solarized-white
         font-name=Iosevka Slab
-        font-size=20
+        font-size=16
         xkb-variant=${xkbVariant}
         xkb-options=${xkbOptions}
         xkb-repeat-delay=${toString repeatDelay}

@@ -10,3 +10,9 @@
 [submodule "emacs"]
 	path = overlays/emacs/src
 	url = https://git.savannah.gnu.org/git/emacs.git
+[submodule "dotfiles"]
+	path = config/dotfiles
+	url = https://github.com/terlar/dotfiles.git
+[submodule "config/emacs.d"]
+	path = config/emacs.d
+	url = https://github.com/terlar/emacs.d.git

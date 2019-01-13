@@ -4,11 +4,13 @@ with pkgs;
 
 let
   aspellEnv = aspellWithDicts(ps: [ ps.en ps.sv ]);
+  sysconfig = (import <nixpkgs/nixos> {}).config;
 in ([
   nixStable
   nix-prefetch-scripts
   home-manager
   coreutils
+  dnsutils
   moreutils
   fish
   openssh
@@ -52,8 +54,6 @@ in ([
   httpie
   jq
 ] ++ lib.optionals stdenv.isLinux [
-  networkmanagerapplet
-
   # dev tools
   docker
   docker_compose
@@ -67,6 +67,40 @@ in ([
   # security tools
   lastpass-cli
   pass
+] ++ lib.optionals sysconfig.services.xserver.enable [
+  feh
+  firefox
+  imagemagick
+  kitty
+  krita
+  maim
+  mpv
+  qutebrowser
+  rofi
+  slack
+  slop
+  spotify
+  xautolock
+  xclip
+  xorg.xhost
+  xsel
+  xss-lock
+
+  cifs-utils
+  nfs-utils
+
+  blueman
+  gnome3.gcr
+  gnome3.gnome-keyring
+  libnotify
+  networkmanagerapplet
+  pavucontrol
+  xfce.xfce4-notifyd
+
+  gnome2.gtk
+  gnome3.gtk
+  paper-gtk-theme
+  paper-icon-theme
 ] ++ lib.optionals stdenv.isDarwin [
   skhd
 
