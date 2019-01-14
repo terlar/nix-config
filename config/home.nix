@@ -147,7 +147,7 @@ in rec {
 
       compression = true;
       extraOptionOverrides = {
-        Include = "~/.ssh/private_config";
+        Include = "~/.ssh/config_private";
       };
 
       matchBlocks = {
@@ -169,6 +169,16 @@ in rec {
       lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=333333";
       inactiveInterval = 1;
     };
+
+    gpg-agent = {
+      enable = true;
+
+      enableSshSupport = true;
+      defaultCacheTtl = 600;
+      maxCacheTtl = 7200;
+    };
+
+    pasystray.enable = true;
   };
 
   xsession = {
