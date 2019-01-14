@@ -62,9 +62,13 @@ build-nixos:
 	nixos-rebuild build
 
 .PHONY: pull
-pull: ## Pull latest upstream changes
-	(cd config/dotfiles    && git pull --rebase)
-	(cd darwin             && git pull --rebase)
-	(cd home-manager       && git pull --rebase)
-	(cd nixpkgs            && git pull --rebase)
+pull: pull-dotfiles pull-emacs pull-nix ## Pull latest upstream changes
+pull-emacs: ## Pull latest Emacs upstream changes
 	(cd overlays/emacs/src && git pull --rebase)
+pull-dotfiles: ## Pull latest dotfiles
+	(cd config/dotfiles && git pull --rebase)
+	(cd config/emacs.d  && git pull --rebase)
+pull-nix: ## Pull latest nix upstream changes
+	(cd darwin       && git pull --rebase)
+	(cd home-manager && git pull --rebase)
+	(cd nixpkgs      && git pull --rebase)
