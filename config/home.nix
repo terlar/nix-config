@@ -79,6 +79,27 @@ in rec {
         { path = "~/.config/git/config-private"; }
       ];
 
+      aliases = {
+        unstage = "reset HEAD";
+        uncommit = "reset --soft HEAD^";
+        unpush = "push --force-with-lease origin HEAD^:master";
+        recommit = "commit --amend";
+        ignore = "update-index --assume-unchanged";
+        unignore = "update-index --no-assume-unchanged";
+        ignored = "!git ls-files -v | grep '^[[:lower:]]'";
+
+        tags = "tag -l";
+        remotes = "remote -v";
+        branches = ''!git for-each-ref \
+          --sort=-committerdate \
+          --format='%(color:blue)%(authordate:relative)\t \
+                    %(color:red)%(authorname)\t \
+                    %(color:black)%(color:bold)%(refname:short)' \
+          refs/remotes \
+          | column -ts'\t'
+        '';
+      };
+
       extraConfig = {
         branch = {
           # Automatic remote tracking.
