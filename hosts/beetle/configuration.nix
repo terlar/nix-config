@@ -60,8 +60,12 @@
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
+  # Enable docker support.
+  virtualisation.docker.enable = true;
+
   # Add my user.
   users.users."terje.larsen" = {
+    description = "Terje Larsen";
     createHome = true;
     extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "docker" ];
     group = "users";
