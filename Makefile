@@ -63,6 +63,7 @@ build-nixos:
 
 .PHONY: pull
 pull: ## Pull latest upstream changes
+	(cd config/dotfiles    && git pull --rebase)
 	(cd darwin             && git pull --rebase)
 	(cd home-manager       && git pull --rebase)
 	(cd nixpkgs            && git pull --rebase)
