@@ -28,7 +28,7 @@ in rec {
     ];
 
     sessionVariables = {
-      EDITOR = "${homeDirectory}/.nix-profile/bin/emacs";
+      EDITOR = "${homeDirectory}/.nix-profile/bin/emacsclient";
       TERMINAL = "${pkgs.kitty}/bin/kitty";
     };
 
