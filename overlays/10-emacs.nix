@@ -12,66 +12,8 @@ let
     all-the-icons-dired = super.all-the-icons-dired.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/all-the-icons-dired.patch ];
     });
-    editorconfig = super.editorconfig.overrideAttrs(attrs: {
-      patches = [ ./emacs/patches/editorconfig.patch ];
-    });
     rspec-mode = super.rspec-mode.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/rspec-mode.patch ];
-    });
-
-    eglot = super.eglot.overrideAttrs(attrs: {
-      version = "20181204";
-      src = pkgs.fetchFromGitHub {
-        owner  = "joaotavora";
-        repo   = "eglot";
-        rev    = "6b0b1b75948abe1f42f4f676c1379adc4372ec9b";
-        sha256 = "161g3a8f6aq4r6plwhbbq041wfbwx7prsx3khp2bsdc883c8lycw";
-        # date = 2018-12-07T23:23:28+00:00;
-      };
-    });
-
-    ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20181129";
-      src = pkgs.fetchFromGitHub {
-        owner  = "abo-abo";
-        repo   = "swiper";
-        rev    = "86635fb8268c07b9fb534357e8e0940c23edeef7";
-        sha256 = "1bx091lh9kyqpw4dpgrlars6ziyl37vvva6ycw5w65a6f2bb57ia";
-        # date = 2018-11-29T22:05:38+01:00;
-      };
-    });
-
-    magit = super.magit.overrideAttrs(attrs: {
-      version = "20181204";
-      src = pkgs.fetchFromGitHub {
-        owner  = "magit";
-        repo   = "magit";
-        rev    = "bf226698b769ba4cc12d3dad12d15a03319d36a5";
-        sha256 = "0bdqkx5hckqgq8p0maflfgiz3gwj4y6dhwmfr2xyxha8b8ih6b11";
-        # date = 2018-12-04T21:04:25+01:00;
-      };
-    });
-
-    nix-mode = super.nix-mode.overrideAttrs(attrs: {
-      version = "20181120";
-      src = pkgs.fetchFromGitHub {
-        owner  = "nixos";
-        repo   = "nix-mode";
-        rev    = "90ac0a74b205f11dc456676b6dbefc5072e7eb6c";
-        sha256 = "00v70v64icsi5iwrimdb311rvlcpazwg22hg12x7l6m87c949krf";
-        # date = 2018-11-20T16:53:03-06:00;
-      };
-    });
-
-    org-variable-pitch = super.org-variable-pitch.overrideAttrs(attrs: {
-      version = "20181206";
-      src = pkgs.fetchFromGitHub {
-        owner  = "cadadr";
-        repo   = "elisp";
-        rev    = "b41b899da9dec75cbf9f5fe8858d12c271391073";
-        sha256 = "1y8z27v0y2cmg2vjw5lsd3fs4rcrj0v6jcn5c439c0qlg8missp7";
-        # date = 2018-12-06T18:02:51+03:00;
-      };
     });
 
     org-pretty-table = self.melpaBuild rec {
@@ -150,6 +92,8 @@ let
 in {
   emacs = self.emacsHEAD;
   emacsPackagesNg = self.emacsHEADPackagesNg;
+
+  emacsOverrides = overrides;
 
   emacs26PackagesNg = ((pkgs.emacsPackagesNgGen self.emacs26).overrideScope' overrides);
   emacsHEADPackagesNg = ((pkgs.emacsPackagesNgGen self.emacsHEAD).overrideScope' overrides);

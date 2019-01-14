@@ -4,7 +4,6 @@ let
   homeDirectory = builtins.getEnv "HOME";
   nixDirectory = "${homeDirectory}/src/github.com/terlar/nix-config";
   emacsPackages = import ./emacs.nix pkgs;
-  emacsFull = pkgs.emacsPackagesNg.emacsWithPackages emacsPackages;
 in rec {
   imports = [
   ] ++ lib.optional (builtins.pathExists ../private) ../private;
@@ -24,7 +23,6 @@ in rec {
 
   home = {
     packages = with pkgs; [
-      emacsFull
       i3lock-color
       i3status
     ];
@@ -62,6 +60,13 @@ in rec {
 
     fish = {
       enable = true;
+    };
+
+    emacs = {
+      enable = true;
+      package = pkgs.emacsHEAD;
+      extraPackages = emacsPackages;
+      overrides = pkgs.emacsOverrides;
     };
 
     git = {
