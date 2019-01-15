@@ -13,6 +13,7 @@
       # Hardware configuration.
       ../../config/nixos/hardware/backlight.nix
       ../../config/nixos/hardware/battery.nix
+      ../../config/nixos/hardware/yubikey.nix
     ];
 
   # Use the systemd-boot EFI boot loader.

@@ -74,6 +74,10 @@ in rec {
 
       userName = "Terje Larsen";
       userEmail = "terlar@gmail.com";
+      signing = {
+        signByDefault = true;
+        key = "89AF679B037E1D2A";
+      };
 
       includes = [
         { path = "~/.config/git/config-private"; }
