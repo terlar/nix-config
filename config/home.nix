@@ -102,6 +102,10 @@ in rec {
           refs/remotes \
           | column -ts'\t'
         '';
+
+        fup = "!git --no-pager log --stat --since '1 day ago' --author $(git config user.email)";
+        head = "!git --no-pager log --stat -1";
+        recent = "!git log --stat -30";
       };
 
       extraConfig = {
