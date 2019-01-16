@@ -97,8 +97,8 @@ in rec {
         branches = ''!git for-each-ref \
           --sort=-committerdate \
           --format='%(color:blue)%(authordate:relative)\t \
-                    %(color:red)%(authorname)\t \
-                    %(color:black)%(color:bold)%(refname:short)' \
+          %(color:red)%(authorname)\t \
+          %(color:black)%(color:bold)%(refname:short)' \
           refs/remotes \
           | column -ts'\t'
         '';
@@ -163,6 +163,10 @@ in rec {
 
         ghq = {
           root = "~/src";
+        };
+
+        "url \"ssh://git@github.com/terlar\"" = {
+          insteadOf = "https://github.com/terlar";
         };
       };
     };
