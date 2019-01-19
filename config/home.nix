@@ -33,9 +33,7 @@ in rec {
     };
 
     file = {
-      ".editorconfig".text = ''
-        ${builtins.readFile ./dotfiles/editorconfig/.editorconfig}
-      '';
+      ".editorconfig".source = ./dotfiles/editorconfig/.editorconfig;
 
       ".emacs.d/init.el".source = pkgs.runCommand "init.el" {} ''
         cp ${./emacs.d/init.org} init.org
