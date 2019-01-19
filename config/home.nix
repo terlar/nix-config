@@ -260,7 +260,7 @@ in rec {
     screen-locker = {
       enable = true;
       lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=333333";
-      inactiveInterval = 1;
+      inactiveInterval = 10;
     };
 
     gpg-agent = {
