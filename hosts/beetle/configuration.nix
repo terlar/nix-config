@@ -62,7 +62,15 @@
   hardware.bluetooth.enable = true;
 
   # Enable touchpad support.
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput = {
+    enable = true;
+    disableWhileTyping = true;
+    tapping = true;
+    tappingDragLock = true;
+    middleEmulation = true;
+    naturalScrolling = true;
+    scrollMethod = "twofinger";
+  };
 
   # Enable docker support.
   virtualisation.docker.enable = true;

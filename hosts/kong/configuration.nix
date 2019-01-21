@@ -8,16 +8,13 @@
       # Shared NixOS configuration.
       ../../config/nixos.nix
       ../../config/nixos/gui.nix
+      ../../config/nixos/gui/i3.nix
 
       # Hardware configuration.
-      ../../config/nixos/hardware/audio.nix
       ../../config/nixos/hardware/backlight.nix
       ../../config/nixos/hardware/battery.nix
-      ../../config/nixos/hardware/bluetooth.nix
-      ../../config/nixos/hardware/wireless.nix
       ../../config/nixos/hardware/yubikey.nix
     ];
-
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -35,13 +32,19 @@
     "noveau"
     "bbswitch"
   ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.sysdig
+  ];
+
+  # Update support for firmware.
+  services.fwupd.enable = true;
 
   networking.hostName = "kong";
   # Disable IPv6 due to resolving issues.
   networking.enableIPv6 = false;
 
-  # Update support for firmware.
-  services.fwupd.enable = true;
+  # Enable network manager.
+  networking.networkmanager.enable = true;
 
   # Enable Intel video drivers.
   services.xserver.videoDrivers = [ "intel" ];
@@ -60,16 +63,21 @@
   };
 
   # Font sizes for retina.
-  fonts.fontconfig.dpi = 180;
+  fonts.fontconfig.dpi = 144;
 
-  # Original dimensions: 1016x571 millimeters
-  # Divided by 2 (200% scaling)
-  #
-  # dimensions:  3840x2160 pixels (508x286 millimeters)
-  # resolution:  192x192 dots per inch
-  services.xserver.monitorSection = ''
-    DisplaySize 508 286
-  '';
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
+
+  # Enable bluetooth support.
+  hardware.bluetooth.enable = true;
 
   # Enable touchpad support.
   services.xserver.libinput = {
@@ -82,14 +90,23 @@
     scrollMethod = "twofinger";
   };
 
+  # Enable docker support.
+  virtualisation.docker.enable = true;
+
   # Add my user.
   users.extraUsers.terje = {
+    description = "Terje Larsen";
     createHome = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [
+      "audio"
+      "disk"
+      "docker"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
     group = "users";
     home = "/home/terje";
-    description = "Terje Larsen";
-    shell = pkgs.fish;
     isNormalUser = true;
     uid = 1000;
   };
