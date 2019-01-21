@@ -1,1 +1,3 @@
-hardware-configuration.nix
+/private
+/configuration.nix
+/hardware-configuration.nix

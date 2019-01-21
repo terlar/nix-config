@@ -1,0 +1,52 @@
+From 0f1363da16bdc20cffb32f1d4846d14900fcc964 Mon Sep 17 00:00:00 2001
+From: Terje Larsen <terlar@gmail.com>
+Date: Tue, 27 Nov 2018 19:32:20 +0100
+Subject: [PATCH] Support a buffer with missing file-name
+
+This is caused by a transient state when deleting files with `wdired`.
+---
+ all-the-icons-dired.el | 31 ++++++++++++++++---------------
+ 1 file changed, 16 insertions(+), 15 deletions(-)
+
+diff --git a/all-the-icons-dired.el b/all-the-icons-dired.el
+index eaf8510..170a28a 100644
+--- a/all-the-icons-dired.el
++++ b/all-the-icons-dired.el
+@@ -60,21 +60,22 @@
+ 	  (when (dired-move-to-filename nil)
+ 	    (let ((file (dired-get-filename 'verbatim t)))
+ 	      (unless (member file '("." ".."))
+-		(let ((filename (dired-get-filename nil t)))
+-		  (if (file-directory-p filename)
+-		      (let* ((matcher (all-the-icons-match-to-alist file all-the-icons-dir-icon-alist))
+-			     (icon (cond
+-				    (remote-p
+-				     (all-the-icons-octicon "file-directory" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
+-				    ((file-symlink-p filename)
+-				     (all-the-icons-octicon "file-symlink-directory" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
+-				    ((all-the-icons-dir-is-submodule filename)
+-				     (all-the-icons-octicon "file-submodule" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
+-				    ((file-exists-p (format "%s/.git" filename))
+-				     (all-the-icons-octicon "repo" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
+-				    (t (apply (car matcher) (list (cadr matcher) :face 'all-the-icons-dired-dir-face :v-adjust all-the-icons-dired-v-adjust))))))
+-			(insert (concat icon " ")))
+-		    (insert (concat (all-the-icons-icon-for-file file :v-adjust all-the-icons-dired-v-adjust) " ")))))))
++                (let ((filename (dired-get-filename nil t)))
++                  (when filename
++                    (if (file-directory-p filename)
++                        (let* ((matcher (all-the-icons-match-to-alist file all-the-icons-dir-icon-alist))
++                               (icon (cond
++                                      (remote-p
++                                       (all-the-icons-octicon "file-directory" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
++                                      ((file-symlink-p filename)
++                                       (all-the-icons-octicon "file-symlink-directory" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
++                                      ((all-the-icons-dir-is-submodule filename)
++                                       (all-the-icons-octicon "file-submodule" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
++                                      ((file-exists-p (format "%s/.git" filename))
++                                       (all-the-icons-octicon "repo" :v-adjust all-the-icons-dired-v-adjust :face 'all-the-icons-dired-dir-face))
++                                      (t (apply (car matcher) (list (cadr matcher) :face 'all-the-icons-dired-dir-face :v-adjust all-the-icons-dired-v-adjust))))))
++                          (insert (concat icon " ")))
++                      (insert (concat (all-the-icons-icon-for-file file :v-adjust all-the-icons-dired-v-adjust) " "))))))))
+ 	  (forward-line 1))))))
+ 
+ (defun all-the-icons-dired--reset (&optional _arg _noconfirm)
