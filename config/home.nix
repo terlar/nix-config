@@ -4,6 +4,7 @@ let
   homeDirectory = builtins.getEnv "HOME";
   nixDirectory = "${homeDirectory}/src/github.com/terlar/nix-config";
   emacsPackages = import ./emacs.nix pkgs;
+  secrets = import ../load-secrets.nix;
 in rec {
   imports = [
   ] ++ lib.optional (builtins.pathExists ../private) ../private;
@@ -70,11 +71,11 @@ in rec {
     git = {
       enable = true;
 
-      userName = "Terje Larsen";
-      userEmail = "terlar@gmail.com";
+      userName = secrets.fullName;
+      userEmail = secrets.email;
       signing = {
         signByDefault = true;
-        key = "D036E3ACB86EB592";
+        key = secrets.gpgKey;
       };
 
       includes = [

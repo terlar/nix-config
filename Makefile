@@ -4,6 +4,7 @@ NIXOS_CONFIG        := $(NIX_CONF)/configuration.nix
 HOME_MANAGER_CONFIG := $(NIX_CONF)/config/home.nix
 NIX_PATH            := nixpkgs=$(NIX_CONF)/nixpkgs:nixos-config=$(NIXOS_CONFIG):darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
+PRIVATE_CONFIG_PATH := ../nix-config-private
 
 ifeq ($(UNAME),Darwin)
 SWITCH_SYSTEM := switch-darwin
@@ -28,15 +29,17 @@ help: ## Show this help message.
 init: ## Initialize sources (submodules)
 	git submodule update --init
 
-.PHONY: install-nix install-darwin install-home
+.PHONY: install-nix install-nixos install-darwin install-home install-private
 install-nix: ## Install nix and update submodules
 	curl https://nixos.org/nix/install | sh
-install-darwin: ## Install darwin
-	nix-shell darwin -A installer --run darwin-installer
 install-nixos: ## Install NixOS for current host
 	$(MAKE) install-nixos-$(shell hostname)
+install-darwin: ## Install darwin
+	nix-shell darwin -A installer --run darwin-installer
 install-home: ## Install home-manager
 	nix-shell home-manager -A install --run 'home-manager switch'
+install-private: ## Install private configuration
+	ln -s $(PRIVATE_CONFIG_PATH) private
 
 $(NIXOS_HOSTS):
 install-nixos-%: hosts/%/configuration.nix hosts/%/hardware-configuration.nix
