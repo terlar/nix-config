@@ -36,6 +36,9 @@
   boot.kernelModules = [
     "fuse"
   ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.sysdig
+  ];
 
   networking.hostName = "beetle";
   # Disable IPv6 due to resolving issues.
@@ -68,7 +71,15 @@
   users.users."terje.larsen" = {
     description = "Terje Larsen";
     createHome = true;
-    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "docker" ];
+    extraGroups = [
+      "adbusers"
+      "audio"
+      "disk"
+      "docker"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
     group = "users";
     home = "/home/terje.larsen";
     isNormalUser = true;
