@@ -193,7 +193,7 @@ in rec {
           prompt = "false";
         };
 
-        "difftool \"ediff\"".cmd = "ediff \"$LOCAL\" \"$REMOTE\"";
+        "difftool \"ediff\"".cmd = "ediff $LOCAL $REMOTE";
 
         rebase = {
           # Support fixup and squash commits.
@@ -213,6 +213,9 @@ in rec {
           prompt = "false";
           keepBackup = "false";
         };
+
+        "mergetool \"ediff\"".cmd =
+          "emacsclient --eval '(ediff-merge-files-with-ancestor \\\"'$LOCAL'\\\" \\\"'$REMOTE'\\\" \\\"'$BASE'\\\" nil \\\"'$MERGED'\\\")'";
 
         # Reuse recorded resolutions.
         rerere = {
@@ -309,6 +312,58 @@ in rec {
         };
       };
     };
+
+    rofi = {
+      enable = true;
+      font = "monospace 24";
+      separator = "solid";
+      colors =
+        let
+          bg = "#273238";
+            bgAlt = "#1e2529";
+            bgHigh = "#394249";
+            fg = "#c1c1c1";
+            fgHigh = "#ffffff";
+            fgActive = "#80cbc4";
+            fgUrgent = "#ff1844";
+          in {
+            window = {
+              background = bg;
+              border = bg;
+              separator = bgAlt;
+            };
+
+            rows = {
+              normal = {
+                foreground = fg;
+                background = bg;
+                backgroundAlt = bg;
+                highlight = {
+                  foreground = fgHigh;
+                  background = bgHigh;
+                };
+              };
+              active = {
+                foreground = fgActive;
+                background = bg;
+                backgroundAlt = bg;
+                highlight = {
+                  foreground = fgActive;
+                  background = bgHigh;
+                };
+              };
+              urgent = {
+                foreground = fgUrgent;
+                background = bg;
+                backgroundAlt = bg;
+                highlight = {
+                  foreground = fgUrgent;
+                  background = bgHigh;
+                };
+              };
+            };
+          };
+      };
   };
 
   services = {
