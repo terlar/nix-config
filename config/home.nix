@@ -74,7 +74,7 @@ in rec {
       userEmail = "terlar@gmail.com";
       signing = {
         signByDefault = true;
-        key = "89AF679B037E1D2A";
+        key = "D036E3ACB86EB592";
       };
 
       includes = [
