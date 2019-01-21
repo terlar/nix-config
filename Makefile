@@ -75,3 +75,7 @@ pull-nix: ## Pull latest nix upstream changes
 	(cd darwin       && git pull --rebase)
 	(cd home-manager && git pull --rebase)
 	(cd nixpkgs      && git pull --rebase)
+
+.PHONY: clean
+clean:
+	-@rm configuration.nix hardware-configuration.nix private 2>/dev/null ||:
