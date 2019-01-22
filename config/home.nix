@@ -315,7 +315,7 @@ in rec {
 
     rofi = {
       enable = true;
-      font = "monospace 24";
+      font = "monospace 16";
       separator = "solid";
       colors =
         let
