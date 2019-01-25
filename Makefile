@@ -67,14 +67,14 @@ build-nixos:
 .PHONY: pull
 pull: pull-dotfiles pull-emacs pull-nix ## Pull latest upstream changes
 pull-emacs: ## Pull latest Emacs upstream changes
-	(cd overlays/emacs/src && git pull --rebase)
+	git submodule update --remote overlays/emacs/src
 pull-dotfiles: ## Pull latest dotfiles
-	(cd config/dotfiles && git pull --rebase)
-	(cd config/emacs.d  && git pull --rebase)
+	git submodule update --remote config/dotfiles
+	git submodule update --remote config/emacs.d
 pull-nix: ## Pull latest nix upstream changes
-	(cd darwin       && git pull --rebase)
-	(cd home-manager && git pull --rebase)
-	(cd nixpkgs      && git pull --rebase)
+	git submodule update --remote darwin
+	git submodule update --remote home-manager
+	git submodule update --remote nixpkgs
 
 .PHONY: clean
 clean:
