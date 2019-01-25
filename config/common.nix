@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ options, config, pkgs, ... }:
 
 let
   homeDirectory = builtins.getEnv "HOME";
@@ -56,6 +56,15 @@ in {
 
     maxJobs = 10;
     distributedBuilds = false;
+
+    binaryCaches = options.nix.binaryCaches.default ++ [
+      "https://cachix.cachix.org"
+      "https://hie-nix.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
+    ];
   };
 
   programs.fish.enable = true;
