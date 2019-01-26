@@ -55,6 +55,8 @@ in ([
   editorconfig-core-c
   httpie
   jq
+  cabal2nix
+  stack2nix
 ] ++ lib.optionals stdenv.isLinux [
   # dev tools
   docker
