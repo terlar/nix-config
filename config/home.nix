@@ -410,10 +410,157 @@ in rec {
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
-      config = null;
-      extraConfig = ''
-        ${builtins.readFile ./dotfiles/i3/.config/i3/config}
-      '';
+      config = let
+        modifier = "Mod4";
+        fonts = [ "sans-serif 9" ];
+      in {
+        # Autostart
+        startup = [
+          { command = "${pkgs.dex}/bin/dex -ae i3"; always = true; notification = false; }
+        ];
+
+        # UI
+        inherit fonts;
+
+        # Borders
+        window.border = 0;
+        floating.border = 3;
+
+        # Gaps
+        gaps = {
+          inner = 5;
+          outer = 0;
+        };
+
+        # Status bar
+        bars = [
+          {
+            inherit fonts;
+            statusCommand = "${pkgs.i3status}/bin/i3status";
+            colors = {
+              background = "#333333";
+            };
+          }
+        ];
+
+        # Desktops
+        assigns = {
+          "2: web" = [ { class = "^Firefox$"; } ];
+          "9: com" = [ { class = "^Slack$"; } ];
+        };
+
+        # Floats
+        floating.criteria = [
+          { "class" = "Nm-connection-editor"; }
+          { "class" = "Pavucontrol"; }
+          { "class" = "Pinentry"; }
+          { "class" = "^.*blueman-manager.*$"; }
+        ];
+
+        # Keybindings
+        inherit modifier;
+        floating.modifier = "${modifier}";
+
+        modes = {
+          window = {
+            Left = "move absolute position 10 px 10 px";
+
+            Escape = "mode default";
+            Return = "mode default";
+            "Ctrl+g" = "mode default";
+          };
+
+          resize = {
+            "h" = "resize shrink width 10 px or 10 ppt";
+            "j" = "resize grow height 10 px or 10 ppt";
+            "k" = "resize shrink height 10 px or 10 ppt";
+            "l" = "resize grow width 10 px or 10 ppt";
+
+            Escape = "mode default";
+            Return = "mode default";
+            "Ctrl+g" = "mode default";
+          };
+        };
+
+        keybindings = {
+          "${modifier}+r" = "mode resize";
+          "${modifier}+w" = "mode window";
+
+          # Pulse Audio controls
+          "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 +5%";
+          "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 -5%";
+          "XF86AudioMute" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute 1 toggle";
+
+          # Media player controls
+          "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+          "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+          "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+
+          # Sreen brightness controls
+          "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -Ap 2";
+          "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -Up 2";
+
+          # Start a terminal
+          "${modifier}+Return" = "exec i3-sensible-terminal";
+          # Start program launcher
+          "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -show run";
+
+          # Change container layout (stacked, tabbed, toggle split)
+          "${modifier}+s" = "layout stacking";
+          "${modifier}+t" = "layout tabbed";
+          "${modifier}+e" = "layout toggle split";
+
+          # Toggle split direction
+          "${modifier}+v" = "split toggle";
+          # Toggle fullscreen mode for the focused container
+          "${modifier}+f" = "fullscreen toggle";
+          # Toggle tiling / floating
+          "${modifier}+Shift+space" = "floating toggle";
+
+          # Scratchpad
+          "${modifier}+grave" = "scratchpad show";
+          "${modifier}+Shift+grave" = "move scratchpad";
+
+          # Sticky
+          "${modifier}+z" = "sticky toggle";
+          # PIP
+          "${modifier}+Shift+z" = "floating enable,sticky enable,resize shrink width 10000px,resize grow width 800px,resize shrink height 10000px,resize grow height 400px,move absolute position 10 px 10 px";
+
+          # Change focus between tiling / floating windows
+          "${modifier}+space" = "focus mode_toggle";
+          # Focus the parent container
+          "${modifier}+a" = "focus parent";
+          # Focus the child container
+          "${modifier}+d" = "focus child";
+
+          # Change focus
+          "${modifier}+h" = "focus left";
+          "${modifier}+j" = "focus down";
+          "${modifier}+k" = "focus up";
+          "${modifier}+l" = "focus right";
+
+          # Move focused window
+          "${modifier}+Shift+h" = "move left";
+          "${modifier}+Shift+j" = "move down";
+          "${modifier}+Shift+k" = "move up";
+          "${modifier}+Shift+l" = "move right";
+
+          # Switch to monitor
+          "${modifier}+m" = "focus output up";
+          # Move workspace to monitor
+          "${modifier}+Shift+m" = "move workspace to output up";
+
+          # Kill focused window
+          "${modifier}+Shift+q" = "kill";
+
+          # Reload the configuration file
+          "${modifier}+Shift+c" = "reload";
+          # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+          "${modifier}+Shift+r" = "restart";
+          # Exit i3 (logs you out of your X session)
+          "${modifier}+Shift+BackSpace" = "exec \"i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'\"";
+        };
+      };
     };
   };
 
