@@ -5,8 +5,6 @@ with pkgs;
 let
   aspellEnv = aspellWithDicts(ps: [ ps.en ps.sv ]);
   sysconfig = (import <nixpkgs/nixos> {}).config;
-  lock = pkgs.callPackage ../packages/lock { };
-  logout = pkgs.callPackage ../packages/logout { };
 in ([
   nixStable
   nix-prefetch-scripts
@@ -72,8 +70,8 @@ in ([
   lastpass-cli
   pass
 ] ++ lib.optionals sysconfig.services.xserver.enable [
-  lock
-  logout
+  scripts.lock
+  scripts.logout
 
   feh
   firefox
