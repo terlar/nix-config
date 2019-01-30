@@ -1,10 +1,10 @@
-{ lib, python3Packages, fetchurl }:
+{ lib, pythonPackages, buildPythonPackage, fetchPypi }:
 
-python3Packages.buildPythonPackage rec {
+buildPythonPackage rec {
   pname = "google-auth-oauthlib";
   version = "0.2.0";
 
-  src = python3Packages.fetchPypi {
+  src = fetchPypi {
     inherit pname version;
     sha256 = "226d1d0960f86ba5d9efd426a70b291eaba96f47d071657e0254ea969025728a";
   };
@@ -16,14 +16,16 @@ python3Packages.buildPythonPackage rec {
     platforms = platforms.all;
   };
 
-  checkInputs = with python3Packages; [
+  checkInputs = with pythonPackages; [
     click
     mock
     pytest
   ];
 
-  propagatedBuildInputs = with python3Packages; [
+  propagatedBuildInputs = with pythonPackages; [
     google_auth
     requests_oauthlib
   ];
+
+  doCheck = false;
 }
