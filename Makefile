@@ -25,6 +25,10 @@ help: ## Show this help message.
 	@echo "Targets:"
 	@egrep '^(.+)\:[^#]*##\ (.+)' ${MAKEFILE_LIST} | column -t -c 2 -s ':#'
 
+.PHONY: print-path
+print-path: ## Print NIX_PATH
+	@echo $(NIX_PATH)
+
 .PHONY: init
 init: ## Initialize sources (submodules)
 	git submodule update --init

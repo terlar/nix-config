@@ -1,0 +1,21 @@
+diff --git a/screeninfo/screeninfo.py b/screeninfo/screeninfo.py
+index 7a69a15..61f9d41 100644
+--- a/screeninfo/screeninfo.py
++++ b/screeninfo/screeninfo.py
+@@ -115,14 +115,14 @@ def _enumerate_x11():
+             ('height', ctypes.c_short),
+         ]
+ 
+-    xlib = load_library('X11')
++    xlib = ctypes.cdll.LoadLibrary('@X11@')
+     xlib.XOpenDisplay.argtypes = [ctypes.c_char_p]
+     xlib.XOpenDisplay.restype = ctypes.POINTER(ctypes.c_void_p)
+     d = xlib.XOpenDisplay(b'')
+     if not d:
+         raise Exception('Could not open display')
+ 
+-    xinerama = load_library('Xinerama')
++    xinerama = ctypes.cdll.LoadLibrary('@Xinerama@')
+     if not xinerama.XineramaIsActive(d):
+         raise Exception('Xinerama is not active')
+ 

@@ -72,6 +72,7 @@ in ([
 ] ++ lib.optionals sysconfig.services.xserver.enable [
   scripts.lock
   scripts.logout
+  scripts.window_tiler
 
   feh
   firefox
