@@ -532,7 +532,7 @@ in rec {
           "${modifier}+z" = "sticky toggle";
 
           # PIP
-          "${modifier}+Shift+z" = "mark pip,floating enable,sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
+          "${modifier}+Shift+z" = "mark pip,[con_mark=\"pip\"] move scratchpad,[con_mark=\"pip\"] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
           # Move PIP window
           "${modifier}+Up" = "[con_mark=\"pip\"] focus,${tile} top-left && i3-msg 'focus tiling'";
           "${modifier}+Left" = "[con_mark=\"pip\"] focus,${tile} bottom-left && i3-msg 'focus tiling'";
