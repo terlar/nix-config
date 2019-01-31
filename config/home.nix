@@ -410,9 +410,11 @@ in rec {
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
+
       config = let
         modifier = "Mod4";
         fonts = [ "sans-serif 9" ];
+        tile = "exec ${pkgs.scripts.window_tiler}/bin/window_tiler";
       in {
         # Autostart
         startup = [
@@ -462,8 +464,11 @@ in rec {
         floating.modifier = "${modifier}";
 
         modes = {
-          window = {
-            Left = "move absolute position 10 px 10 px";
+          move = {
+            Up = "${tile} top-left; mode default";
+            Left = "${tile} bottom-left; mode default";
+            Down = "${tile} bottom-right; mode default";
+            Right = "${tile} top-right; mode default";
 
             Escape = "mode default";
             Return = "mode default";
@@ -484,7 +489,7 @@ in rec {
 
         keybindings = {
           "${modifier}+r" = "mode resize";
-          "${modifier}+w" = "mode window";
+          "${modifier}+w" = "mode move";
 
           # Pulse Audio controls
           "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 +5%";
@@ -521,10 +526,18 @@ in rec {
           "${modifier}+grave" = "scratchpad show";
           "${modifier}+Shift+grave" = "move scratchpad";
 
+          # Border
+          "${modifier}+b" = "border toggle";
           # Sticky
           "${modifier}+z" = "sticky toggle";
+
           # PIP
-          "${modifier}+Shift+z" = "floating enable,sticky enable,resize shrink width 10000px,resize grow width 800px,resize shrink height 10000px,resize grow height 400px,move absolute position 10 px 10 px";
+          "${modifier}+Shift+z" = "mark pip,floating enable,sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
+          # Move PIP window
+          "${modifier}+Up" = "[con_mark=\"pip\"] focus,${tile} top-left && i3-msg 'focus tiling'";
+          "${modifier}+Left" = "[con_mark=\"pip\"] focus,${tile} bottom-left && i3-msg 'focus tiling'";
+          "${modifier}+Down" = "[con_mark=\"pip\"] focus,${tile} bottom-right && i3-msg 'focus tiling'";
+          "${modifier}+Right" = "[con_mark=\"pip\"] focus,${tile} top-right && i3-msg 'focus tiling'";
 
           # Change focus between tiling / floating windows
           "${modifier}+space" = "focus mode_toggle";

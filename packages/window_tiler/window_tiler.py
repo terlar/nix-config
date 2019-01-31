@@ -100,11 +100,12 @@ def configure_logging(verbose: int):
 @click.option('-v', '--verbose', count=True)
 @click.argument('direction', type=click.Choice([
     'top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left',
-    'left-display', 'right-display', 'fullscreen']))
+    'left-display', 'right-display', 'pip' ]))
 def move_window(verbose, direction):
     configure_logging(verbose)
     dimension = get_window_dimensions()
     win_mon = get_monitor(dimension.abs_left_x)
+    gap = 10
     logger.debug(f"window monitor: {win_mon}")
 
     if direction == 'top':
@@ -112,30 +113,30 @@ def move_window(verbose, direction):
             win_mon.x, win_mon.y,
             win_mon.width, int(win_mon.height / 2))
 
-    if direction == 'top-right':
+    elif direction == 'top-right':
         window_move_resize(
-            win_mon.x + int(win_mon.width / 2), win_mon.y,
-            int(win_mon.width / 2), int(win_mon.height / 2))
+            win_mon.x + int(win_mon.width - dimension.width - gap), win_mon.y + gap,
+            dimension.width, dimension.height)
 
     elif direction == 'right':
         window_move_resize(
             win_mon.x + int(win_mon.width / 2), win_mon.y,
             int(win_mon.width / 2), win_mon.height)
 
-    if direction == 'bottom-right':
+    elif direction == 'bottom-right':
         window_move_resize(
-            win_mon.x + int(win_mon.width / 2), win_mon.y + int(win_mon.height / 2),
-            int(win_mon.width / 2), int(win_mon.height / 2))
+            win_mon.x + int(win_mon.width - dimension.width - gap), win_mon.y + int(win_mon.height - dimension.height - gap),
+            dimension.width, dimension.height)
 
     elif direction == 'bottom':
         window_move_resize(
             win_mon.x, win_mon.y + int(win_mon.height / 2),
             win_mon.width, int(win_mon.height / 2))
 
-    if direction == 'bottom-left':
+    elif direction == 'bottom-left':
         window_move_resize(
-            win_mon.x, win_mon.y + int(win_mon.height / 2),
-            int(win_mon.width / 2), int(win_mon.height / 2))
+            win_mon.x + gap, win_mon.y + int(win_mon.height - dimension.height - gap),
+            dimension.width, dimension.height)
 
     elif direction == 'left':
         window_move_resize(
@@ -144,23 +145,23 @@ def move_window(verbose, direction):
 
     elif direction == 'top-left':
         window_move_resize(
-            win_mon.x, win_mon.y,
-            int(win_mon.width / 2), int(win_mon.height / 2))
+            win_mon.x + gap, win_mon.y + gap,
+            dimension.width, dimension.height)
 
     elif direction == 'left-display':
         window_move_resize(
             0, 0,
-            win_mon.width, win_mon.height)
+            dimension.width, dimension.height)
 
     elif direction == 'right-display':
         window_move_resize(
             win_mon.width + 1, 0,
             dimension.width, dimension.height)
 
-    elif direction == 'fullscreen':
+    elif direction == 'pip':
         window_move_resize(
-            win_mon.x, win_mon.y,
-            win_mon.width - 10, win_mon.height)
+            win_mon.x + int(win_mon.width - (win_mon.width / 3) - 10), win_mon.y + 10,
+            int(win_mon.width / 3), int(win_mon.height / 3))
 
 
 if __name__ == '__main__':
