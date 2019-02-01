@@ -505,6 +505,10 @@ in rec {
           "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -Ap 2";
           "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -Up 2";
 
+          # Print screen
+          "Print" = "exec ${pkgs.maim}/bin/maim -i $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+          "${modifier}+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+
           # Start a terminal
           "${modifier}+Return" = "exec i3-sensible-terminal";
           # Start program launcher
