@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home = {
@@ -14,6 +14,8 @@
       lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=333333";
       inactiveInterval = 10;
     };
+
+    pasystray.enable = true;
   };
 
   xsession = {
