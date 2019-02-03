@@ -445,6 +445,10 @@ in rec {
           }
         ];
 
+        focus = {
+          followMouse = false;
+        };
+
         # Desktops
         assigns = {
           "2" = [ { class = "^Firefox$"; } ];
