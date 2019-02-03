@@ -12,7 +12,7 @@ in rec {
     ./home/linux/autorandr.nix
     ./home/linux/i3.nix
     ./home/linux/rofi.nix
-  ] ++ lib.optional (builtins.pathExists ../private) ../private;
+  ] ++ lib.optional (builtins.pathExists ../private/home.nix) ../private/home.nix;
 
   nixpkgs = {
     config = {

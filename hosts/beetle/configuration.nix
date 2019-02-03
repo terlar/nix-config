@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -14,7 +14,7 @@
       ../../config/nixos/hardware/backlight.nix
       ../../config/nixos/hardware/battery.nix
       ../../config/nixos/hardware/yubikey.nix
-    ];
+    ] ++ lib.optional (builtins.pathExists ./private/nixos.nix) ./private/nixos.nix;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
