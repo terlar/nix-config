@@ -27,6 +27,25 @@ let
       };
     });
 
+    eldoc-box = self.melpaBuild rec {
+      pname   = "eldoc-box";
+      version = "20190123";
+      src = pkgs.fetchFromGitHub {
+        owner  = "casouri";
+        repo   = "eldoc-box";
+        rev    = "6f18d015013d04e02349b44621e041d4d6faee40";
+        sha256 = "1h1b3zxfq0678wwbx5vxvl48g6ymzrj4rra710wa9hy9r3dc2lq6";
+        # date = 2019-01-23T14:39:51-05:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (eldoc-box :repo "casouri/eldoc-box" :fetcher github)
+      '';
+
+      meta = {
+        description = "This package displays ElDoc documentations in a childframe";
+      };
+    };
+
     org-pretty-table = self.melpaBuild rec {
       pname   = "org-pretty-table";
       version = "20131129";

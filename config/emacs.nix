@@ -50,6 +50,7 @@ with epkgs;
   edit-indirect
   editorconfig
   eglot
+  eldoc-box
   eldoc-overlay
   elixir-mode
   elm-mode
