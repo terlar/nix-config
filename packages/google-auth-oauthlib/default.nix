@@ -1,4 +1,4 @@
-{ lib, pythonPackages, buildPythonPackage, fetchPypi }:
+{ lib, python37Packages, buildPythonPackage, fetchPypi }:
 
 buildPythonPackage rec {
   pname = "google-auth-oauthlib";
@@ -16,13 +16,13 @@ buildPythonPackage rec {
     platforms = platforms.all;
   };
 
-  checkInputs = with pythonPackages; [
+  checkInputs = with python37Packages; [
     click
     mock
     pytest
   ];
 
-  propagatedBuildInputs = with pythonPackages; [
+  propagatedBuildInputs = with python37Packages; [
     google_auth
     requests_oauthlib
   ];
