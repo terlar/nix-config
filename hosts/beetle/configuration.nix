@@ -73,7 +73,10 @@
   };
 
   # Enable docker support.
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = "--experimental=true";
+  };
 
   # Add my user.
   users.users."terje.larsen" = {
