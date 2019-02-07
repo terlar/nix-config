@@ -98,6 +98,7 @@ in ([
   blueman
   gnome3.gcr
   gnome3.gnome-keyring
+  gnome3.seahorse
   libnotify
   networkmanagerapplet
   pavucontrol
