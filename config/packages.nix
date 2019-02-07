@@ -99,6 +99,7 @@ in ([
   gnome3.gcr
   gnome3.gnome-keyring
   gnome3.seahorse
+  libgnome-keyring
   libnotify
   networkmanagerapplet
   pavucontrol
