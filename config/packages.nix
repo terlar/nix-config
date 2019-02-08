@@ -59,6 +59,7 @@ in ([
   # dev tools
   docker
   docker_compose
+  shellcheck
   sysdig
 
   # media tools
