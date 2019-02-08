@@ -16,6 +16,19 @@ let
       patches = [ ./emacs/patches/rspec-mode.patch ];
     });
 
+    # Fix display function for Emacs 27.0.50.
+    imenu-list = super.imenu-list.overrideAttrs(attrs: {
+      version = "20190115.2330";
+      src = pkgs.fetchFromGitHub {
+        owner = "bmag";
+        repo = "imenu-list";
+        rev = "46008738f8fef578a763c308cf6695e5b4d4aa77";
+        sha256 = "14l3yw9y1nk103s7z5i1fmd6kvlb2p6ayi6sf9l1x1ydg9glrpl8";
+        # date = 2019-01-15T23:30:04+02:00;
+      };
+    });
+
+    # Fix wrong hash being received.
     lua-mode = super.lua-mode.overrideAttrs(attrs: {
       version = "20190113.1350";
       src = pkgs.fetchFromGitHub {
