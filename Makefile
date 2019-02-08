@@ -73,12 +73,18 @@ pull: pull-dotfiles pull-emacs pull-nix ## Pull latest upstream changes
 pull-emacs: ## Pull latest Emacs upstream changes
 	git submodule update --remote overlays/emacs/src
 pull-dotfiles: ## Pull latest dotfiles
+	git submodule sync config/dotfiles config/emacs.d
 	git submodule update --remote config/dotfiles
 	git submodule update --remote config/emacs.d
 pull-nix: ## Pull latest nix upstream changes
+	git submodule sync darwin home-manager nixpkgs
 	git submodule update --remote darwin
 	git submodule update --remote home-manager
 	git submodule update --remote nixpkgs
+
+dev-emacs-config: ## Use local config/emacs.d
+	git config --file=.gitmodules submodule."config/emacs.d".url file://$(HOME)/src/github.com/terlar/emacs.d
+	git submodule update --remote config/emacs.d
 
 .PHONY: clean
 clean:
