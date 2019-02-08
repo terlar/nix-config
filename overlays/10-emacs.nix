@@ -52,29 +52,29 @@ let
       };
     });
 
-    # Packages not in MELPA
-    eldoc-box = self.melpaBuild rec {
-      pname   = "eldoc-box";
-      version = "20190123";
+    # Packages not in MELPA.
+    eldoc-posframe = self.melpaBuild rec {
+      pname   = "eldoc-posframe";
+      version = "20190208.2332";
       src = pkgs.fetchFromGitHub {
-        owner  = "casouri";
-        repo   = "eldoc-box";
-        rev    = "6f18d015013d04e02349b44621e041d4d6faee40";
-        sha256 = "1h1b3zxfq0678wwbx5vxvl48g6ymzrj4rra710wa9hy9r3dc2lq6";
-        # date = 2019-01-23T14:39:51-05:00;
+        owner  = "terlar";
+        repo   = "eldoc-posframe";
+        rev    = "349364dee4500fc628d33303b977a8d2f492c99a";
+        sha256 = "0a3zmnlzbm0v60lhjvgdhrpf07r5ngy94a71pnbnm8cnxghkqfbz";
+        # date = 2019-02-08T23:32:55+01:00;
       };
       recipe = pkgs.writeText "recipe" ''
-        (eldoc-box :repo "casouri/eldoc-box" :fetcher github)
+        (eldoc-posframe :repo "terlar/eldoc-posframe" :fetcher github)
       '';
 
       meta = {
-        description = "This package displays ElDoc documentations in a childframe";
+        description = "Display eldoc information in a posframe.";
       };
     };
 
     org-pretty-table = self.melpaBuild rec {
       pname   = "org-pretty-table";
-      version = "20131129";
+      version = "20131129.1610";
       src = pkgs.fetchFromGitHub {
         owner  = "fuco1";
         repo   = "org-pretty-table";
@@ -98,7 +98,7 @@ let
 
     rotate-text = self.melpaBuild rec {
       pname   = "rotate-text";
-      version = "20090413";
+      version = "20090413.2236";
       src = pkgs.fetchFromGitHub {
         owner  = "nschum";
         repo   = "rotate-text.el";
@@ -123,7 +123,7 @@ let
 
     source-peek = self.melpaBuild rec {
       pname   = "source-peek";
-      version = "20170424";
+      version = "20170424.0347";
       src = pkgs.fetchFromGitHub {
         owner  = "iqbalansari";
         repo   = "emacs-source-peek";

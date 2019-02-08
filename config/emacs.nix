@@ -50,8 +50,8 @@ with epkgs;
   edit-indirect
   editorconfig
   eglot
-  eldoc-box
   eldoc-overlay
+  eldoc-posframe
   elixir-mode
   elm-mode
   emmet-mode
@@ -100,6 +100,7 @@ with epkgs;
   isend-mode
   ivy
   ivy-erlang-complete
+  ivy-posframe
   ivy-xref
   ivy-yasnippet
   javadoc-lookup
