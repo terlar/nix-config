@@ -40,6 +40,19 @@ let
       };
     });
 
+    # Support disabling spacer lines.
+    quick-peek = super.quick-peek.overrideAttrs(attrs: {
+      version = "20190208.1015";
+      src = pkgs.fetchFromGitHub {
+        owner = "cpitclaudel";
+        repo = "quick-peek";
+        rev = "fd8a6c81422932539d221f39f18c90f2811f2dd9";
+        sha256 = "18jr3syd7jd809qq1j61zwaaclmqn24qyb0mv0q8sj6ac4vzl1c3";
+        # date = 2019-02-08T10:15:39-05:00;
+      };
+    });
+
+    # Packages not in MELPA
     eldoc-box = self.melpaBuild rec {
       pname   = "eldoc-box";
       version = "20190123";
