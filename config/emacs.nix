@@ -180,7 +180,7 @@ with epkgs;
   typescript-mode
   use-package
   visual-fill-column
-  visual-regexp-steroids
+  visual-regexp
   vlf
   web-mode
   wgrep-ag
