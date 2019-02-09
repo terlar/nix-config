@@ -80,6 +80,7 @@
 
         # Floats
         floating.criteria = [
+          { "class" = "Ibus-ui-gtk3"; }
           { "class" = "Nm-connection-editor"; }
           { "class" = "Pavucontrol"; }
           { "class" = "Pinentry"; }

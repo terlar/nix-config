@@ -26,9 +26,24 @@ in {
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = [ "Iosevka Slab" ];
-        sansSerif = [ "Noto Sans" ];
-        serif     = [ "Noto Serif" ];
+        monospace = [
+          "Iosevka Slab"
+          "Noto Sans Mono CJK SC"
+          "Noto Emoji"
+          "Noto Sans Symbols"
+        ];
+        sansSerif = [
+          "Noto Sans"
+          "Noto Sans CJK SC"
+          "Noto Emoji"
+          "Noto Sans Symbols"
+        ];
+        serif = [
+          "Noto Serif"
+          "Noto Sans CJK SC"
+          "Noto Emoji"
+          "Noto Sans Symbols"
+        ];
       };
     };
   };
