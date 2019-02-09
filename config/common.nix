@@ -1,4 +1,4 @@
-{ options, config, pkgs, ... }:
+{ config, pkgs, lib, options, ... }:
 
 let
   homeDirectory = builtins.getEnv "HOME";
@@ -48,10 +48,13 @@ in {
   nix = {
     package = pkgs.nixStable;
     nixPath =
-      [ "home-manager=${nixDirectory}/home-manager"
+      [ "nixpkgs=${nixDirectory}/nixpkgs"
+        "home-manager=${nixDirectory}/home-manager"
+      ] ++ lib.optionals pkgs.stdenv.isLinux [
+        "nixos-config=${nixDirectory}/configuration.nix"
+      ] ++ lib.optionals pkgs.stdenv.isDarwin [
         "darwin=${nixDirectory}/darwin"
         "darwin-config=${nixDirectory}/config/darwin.nix"
-        "nixpkgs=${nixDirectory}/nixpkgs"
       ];
 
     maxJobs = 10;
