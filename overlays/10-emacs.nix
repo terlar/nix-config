@@ -55,13 +55,13 @@ let
     # Packages not in MELPA.
     eldoc-posframe = self.melpaBuild rec {
       pname   = "eldoc-posframe";
-      version = "20190208.2332";
+      version = "20190209.1123";
       src = pkgs.fetchFromGitHub {
         owner  = "terlar";
         repo   = "eldoc-posframe";
-        rev    = "349364dee4500fc628d33303b977a8d2f492c99a";
-        sha256 = "0a3zmnlzbm0v60lhjvgdhrpf07r5ngy94a71pnbnm8cnxghkqfbz";
-        # date = 2019-02-08T23:32:55+01:00;
+        rev    = "2e012a097dfab66a05a858b1486bba9f70956823";
+        sha256 = "1pn1g8mwcgxpavwj9z8rr244pak3n7jqbswjav5bni89s4wm9rhz";
+        # date = 2019-02-09T11:23:21+01:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (eldoc-posframe :repo "terlar/eldoc-posframe" :fetcher github)
