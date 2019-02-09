@@ -32,7 +32,16 @@
       in {
         # Autostart
         startup = [
-          { command = "${pkgs.dex}/bin/dex -ae i3"; always = true; notification = false; }
+          {
+            command = "${pkgs.dex}/bin/dex -ae i3";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "${pkgs.slack}/bin/slack";
+            always = true;
+            notification = false;
+          }
         ];
 
         # UI
