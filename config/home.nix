@@ -265,6 +265,10 @@ in rec {
       enableSshSupport = true;
       defaultCacheTtl = 600;
       maxCacheTtl = 7200;
+
+      extraConfig = ''
+        allow-emacs-pinentry
+      '';
     };
   };
 
