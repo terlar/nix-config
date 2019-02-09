@@ -255,6 +255,10 @@ in rec {
   };
 
   services = {
+    emacs = {
+      enable = true;
+    };
+
     gpg-agent = {
       enable = true;
 
