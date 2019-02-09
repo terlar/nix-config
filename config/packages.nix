@@ -61,6 +61,7 @@ in ([
   docker_compose
   shellcheck
   sysdig
+  lsof
 
   # media tools
   playerctl
