@@ -8,9 +8,11 @@ PRIVATE_CONFIG_PATH := ../nix-config-private
 
 ifeq ($(UNAME),Darwin)
 SWITCH_SYSTEM := switch-darwin
+GC_SYSTEM     := gc-darwin
 endif
 ifeq ($(UNAME),Linux)
 SWITCH_SYSTEM := switch-nixos
+GC_SYSTEM     := gc-nixos
 endif
 
 export NIX_PATH
@@ -82,9 +84,25 @@ pull-nix: ## Pull latest nix upstream changes
 	git submodule update --remote home-manager
 	git submodule update --remote nixpkgs
 
+.PHONY: dev-emacs-config
 dev-emacs-config: ## Use local config/emacs.d
 	git config --file=.gitmodules submodule."config/emacs.d".url file://$(HOME)/src/github.com/terlar/emacs.d
 	git submodule update --remote config/emacs.d
+
+.PHONY: gc gc-home
+gc: gc-system gc-home ## Clean up system packages and home generations (older than 1 week)
+gc-home: # Clean up home generations (older than 1 week)
+	home-manager expire-generations '-1 week'
+
+.PHONY: gc-system gc-nixos gc-darwin
+gc-system: # Clean system packages (older than 1 week)
+gc-system: $(GC_SYSTEM)
+gc-nixos: # Clean up NixOS packages (older than 1 week)
+	sudo -E nix-env -p /nix/var/nix/profiles/system --delete-generations old
+	nix-collect-garbage -d --delete-older-than 1w
+	sudo -E nixos-rebuild boot
+gc-darwin: # Clean up Darwin packages (older than 1 week)
+	nix-collect-garbage -d --delete-older-than 1w
 
 .PHONY: clean
 clean:
