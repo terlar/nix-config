@@ -28,8 +28,18 @@ in rec {
   };
 
   home = {
-    sessionVariables = {
-      EDITOR = "${homeDirectory}/.nix-profile/bin/emacsclient";
+    sessionVariables = let
+      emacsBinPath = "${config.programs.emacs.finalPackage}/bin";
+      editorScript = pkgs.writeScriptBin "emacseditor" ''
+        #!${pkgs.runtimeShell}
+        if [ -z "$1" ]; then
+        exec ${emacsBinPath}/emacsclient --create-frame --alternate-editor ${emacsBinPath}/emacs
+        else
+        exec ${emacsBinPath}/emacsclient --alternate-editor ${emacsBinPath}/emacs "$@"
+        fi
+      '';
+    in {
+      EDITOR = "${editorScript}/bin/emacseditor";
       TERMINAL = "${pkgs.kitty}/bin/kitty";
     };
 
@@ -193,7 +203,8 @@ in rec {
           prompt = "false";
         };
 
-        "difftool \"ediff\"".cmd = "ediff $LOCAL $REMOTE";
+        "difftool \"ediff\"".cmd =
+          "emacsclient --eval '(ediff-files \\\"'$LOCAL'\\\" \\\"'$REMOTE'\\\")'";
 
         rebase = {
           # Support fixup and squash commits.

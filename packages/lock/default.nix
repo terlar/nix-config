@@ -1,5 +1,5 @@
 { writeShellScriptBin, systemd }:
 
 writeShellScriptBin "lock" ''
-  ${systemd}/bin/loginctl lock-session $XDG_SESSION_ID
+  exec ${systemd}/bin/loginctl lock-session $XDG_SESSION_ID
 ''
