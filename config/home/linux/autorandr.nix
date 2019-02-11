@@ -49,11 +49,12 @@
               enable = true;
               primary = true;
               position = "0x0";
-              mode = "1920x1080";
+              mode = "3840x2160";
               rate = "60.00";
+              scale = "0.66x0.66";
             };
             eDP1 = {
-              position = "0x1080";
+              position = "0x1440";
               mode = "1920x1080";
               rate = "60.00";
             };
@@ -69,11 +70,12 @@
               enable = true;
               primary = true;
               position = "0x0";
-              mode = "1920x1080";
-              rate = "60.00";
+              mode = "3840x2160";
+              rate = "30.00";
+              scale = "0.66x0.66";
             };
             eDP1 = {
-              position = "0x1080";
+              position = "0x1440";
               mode = "1920x1080";
               rate = "60.00";
             };
