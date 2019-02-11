@@ -96,6 +96,25 @@ let
       };
     };
 
+    perfect-margin = self.melpaBuild rec {
+      pname   = "perfect-margin";
+      version = "20190211.0308";
+      src = pkgs.fetchFromGitHub {
+        owner  = "mpwang";
+        repo   = "perfect-margin";
+        rev    = "d5ffa1ffcf38dc93e0887849a11bc19a96fcde00";
+        sha256 = "0d5v2yh2fi3amysh87fy6pfz47mqzri4gv9x8svmy1arrwaxlybi";
+        # date = 2019-02-11T03:08:46+08:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (perfect-margin :repo "mpwang/perfect-margin" :fetcher github)
+      '';
+
+      meta = {
+        description = "Auto center emacs windows, work with minimap and/or linum-mode.";
+      };
+    };
+
     rotate-text = self.melpaBuild rec {
       pname   = "rotate-text";
       version = "20090413.2236";

@@ -138,6 +138,7 @@ with epkgs;
   package-lint
   page-break-lines
   pdf-tools
+  perfect-margin
   pip-requirements
   plantuml-mode
   projectile
