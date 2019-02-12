@@ -51,7 +51,10 @@
               position = "0x0";
               mode = "3840x2160";
               rate = "60.00";
-              scale = "0.66x0.66";
+              scale = {
+                x = 0.66;
+                y = 0.66;
+              };
             };
             eDP1 = {
               position = "0x1440";
@@ -72,7 +75,10 @@
               position = "0x0";
               mode = "3840x2160";
               rate = "30.00";
-              scale = "0.66x0.66";
+              scale = {
+                x = 0.66;
+                y = 0.66;
+              };
             };
             eDP1 = {
               position = "0x1440";
