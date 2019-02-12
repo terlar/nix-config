@@ -16,6 +16,30 @@ let
       patches = [ ./emacs/patches/rspec-mode.patch ];
     });
 
+    # Follow master.
+    company-mode = super.company-mode.overrideAttrs(attrs: {
+      version = "20190205.2200";
+      src = pkgs.fetchFromGitHub {
+        owner = "company-mode";
+        repo = "company-mode";
+        rev = "edbb3c5354ad7909b4b952c61fd8238fd656b1d0";
+        sha256 = "1a4nb7vivgdi0fn3spai9fp03qp5lbvnpdydr0jyg8fh5907jb7c";
+        # date = 2019-02-05T22:00:58+03:00;
+      };
+    });
+
+    # Follow master.
+    eglot = super.eglot.overrideAttrs(attrs: {
+      version = "20190211.2134";
+      src = pkgs.fetchFromGitHub {
+        owner = "joaotavora";
+        repo = "eglot";
+        rev = "dbf2dd2bc88d2f64ab24110f787b3289a5783df8";
+        sha256 = "0bbc1jmgfs7a5hxgv20khnzzkji7lv2m29qmi9b8s2ym21sqk8vl";
+        # date = 2019-02-11T21:34:50+00:00;
+      };
+    });
+
     # Fix display function for Emacs 27.0.50.
     imenu-list = super.imenu-list.overrideAttrs(attrs: {
       version = "20190115.2330";
