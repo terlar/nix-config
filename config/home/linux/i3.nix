@@ -164,12 +164,12 @@
           "${modifier}+z" = "sticky toggle";
 
           # PIP
-          "${modifier}+Shift+z" = "mark pip,[con_mark=\"pip\"] move scratchpad,[con_mark=\"pip\"] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
+          "${modifier}+Shift+z" = "mark pip,[con_mark=pip] move scratchpad,[con_mark=pip] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
           # Move PIP window
-          "${modifier}+Up" = "[con_mark=\"pip\"] focus,${tile} top-left && i3-msg 'focus tiling'";
-          "${modifier}+Left" = "[con_mark=\"pip\"] focus,${tile} bottom-left && i3-msg 'focus tiling'";
-          "${modifier}+Down" = "[con_mark=\"pip\"] focus,${tile} bottom-right && i3-msg 'focus tiling'";
-          "${modifier}+Right" = "[con_mark=\"pip\"] focus,${tile} top-right && i3-msg 'focus tiling'";
+          "${modifier}+Up" = "[con_mark=pip] focus,${tile} top-left && i3-msg 'focus tiling'";
+          "${modifier}+Left" = "[con_mark=pip] focus,${tile} bottom-left && i3-msg 'focus tiling'";
+          "${modifier}+Down" = "[con_mark=pip] focus,${tile} bottom-right && i3-msg 'focus tiling'";
+          "${modifier}+Right" = "[con_mark=pip] focus,${tile} top-right && i3-msg 'focus tiling'";
 
           # Change focus between tiling / floating windows
           "${modifier}+space" = "focus mode_toggle";
@@ -177,6 +177,8 @@
           "${modifier}+a" = "focus parent";
           # Focus the child container
           "${modifier}+d" = "focus child";
+          # Focus urgent
+          "${modifier}+u" = "[urgent=latest] focus";
 
           # Change focus
           "${modifier}+h" = "focus left";
@@ -233,7 +235,9 @@
           # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
           "${modifier}+Shift+r" = "restart";
           # Exit i3 (logs you out of your X session)
-          "${modifier}+Shift+BackSpace" = "exec \"i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'\"";
+          "${modifier}+Shift+BackSpace" = ''
+            exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+          '';
         };
       };
     };
