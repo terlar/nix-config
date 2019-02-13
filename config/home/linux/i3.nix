@@ -75,6 +75,7 @@
         # Desktops
         assigns = {
           "2" = [ { class = "^Firefox$"; } ];
+          "7" = [ { class = "^krita$"; } ];
           "9" = [ { class = "^Slack$"; } ];
         };
 
