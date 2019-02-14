@@ -99,19 +99,19 @@ dev-home-manager: ## Use my home-manager fork
 	git submodule update --remote home-manager
 
 .PHONY: gc gc-home
-gc: gc-system gc-home ## Clean up system packages and home generations (older than 1 week)
-gc-home: # Clean up home generations (older than 1 week)
-	home-manager expire-generations '-1 week'
+gc: gc-system gc-home ## Clean up system packages and home generations (older than 2 weeks)
+gc-home: # Clean up home generations (older than 2 weeks)
+	home-manager expire-generations '-2 weeks'
 
 .PHONY: gc-system gc-nixos gc-darwin
-gc-system: # Clean system packages (older than 1 week)
+gc-system: # Clean system packages (older than 2 weeks)
 gc-system: $(GC_SYSTEM)
-gc-nixos: # Clean up NixOS packages (older than 1 week)
+gc-nixos: # Clean up NixOS packages (older than 2 weeks)
 	sudo -E nix-env -p /nix/var/nix/profiles/system --delete-generations old
-	nix-collect-garbage -d --delete-older-than 1w
+	nix-collect-garbage -d --delete-older-than 2w
 	sudo -E nixos-rebuild boot
-gc-darwin: # Clean up Darwin packages (older than 1 week)
-	nix-collect-garbage -d --delete-older-than 1w
+gc-darwin: # Clean up Darwin packages (older than 2 weeks)
+	nix-collect-garbage -d --delete-older-than 2w
 
 .PHONY: clean
 clean:
