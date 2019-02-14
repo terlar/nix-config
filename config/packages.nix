@@ -59,6 +59,7 @@ in ([
   # dev tools
   docker
   docker_compose
+  docker-slim
   shellcheck
   sysdig
   lsof
