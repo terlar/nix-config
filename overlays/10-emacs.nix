@@ -40,6 +40,18 @@ let
       };
     });
 
+    # Follow master.
+    nix-mode = super.nix-mode.overrideAttrs(attrs: {
+      version = "20190119.1025";
+      src = pkgs.fetchFromGitHub {
+        owner = "nixos";
+        repo = "nix-mode";
+        rev = "1e53bed4d47c526c71113569f592c82845a17784";
+        sha256 = "172s5lxlns633gbi6sq6iws269chalh5k501n3wffp5i3b2xzdyq";
+        # date = 2019-01-19T10:25:21+01:00;
+      };
+    });
+
     # Fix display function for Emacs 27.0.50.
     imenu-list = super.imenu-list.overrideAttrs(attrs: {
       version = "20190115.2330";
