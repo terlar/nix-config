@@ -1,8 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  homeDirectory = builtins.getEnv "HOME";
-  nixDirectory = "${homeDirectory}/src/github.com/terlar/nix-config";
+  nixConf = builtins.getEnv "NIX_CONF";
   emacsPackages = import ./emacs.nix pkgs;
   secrets = import ../load-secrets.nix;
   sysconfig = (import <nixpkgs/nixos> {}).config;
@@ -60,7 +59,7 @@ in rec {
   programs = {
     home-manager = {
       enable = true;
-      path = "${nixDirectory}/home-manager";
+      path = "${nixConf}/home-manager";
     };
 
     direnv = {
@@ -285,10 +284,6 @@ in rec {
 
   xdg = {
     enable = true;
-
-    configHome = "${homeDirectory}/.config";
-    dataHome   = "${homeDirectory}/.local/share";
-    cacheHome  = "${homeDirectory}/.cache";
 
     configFile."i3status/config".source = ./dotfiles/i3/.config/i3status/config;
     configFile."kitty/kitty.conf".source = ./dotfiles/kitty/.config/kitty/kitty.conf;
