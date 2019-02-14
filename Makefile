@@ -2,19 +2,19 @@ UNAME               := $(shell uname)
 NIX_CONF            := $(CURDIR)
 NIXOS_CONFIG        := $(NIX_CONF)/configuration.nix
 HOME_MANAGER_CONFIG := $(NIX_CONF)/config/home.nix
-NIX_PATH            := nixpkgs=$(NIX_CONF)/nixpkgs
+NIX_PATH            := nixpkgs=$(NIX_CONF)/nixpkgs:home-manager=$(NIX_CONF)/home-manager
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 PRIVATE_CONFIG_PATH := ../nix-config-private
 
 ifeq ($(UNAME),Darwin)
 SWITCH_SYSTEM := switch-darwin
 GC_SYSTEM     := gc-darwin
-NIX_PATH      := nixpkgs=$(NIX_CONF)/nixpkgs:darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix
+NIX_PATH      := $(NIX_PATH):darwin=$(NIX_CONF)/darwin:darwin-config=$(NIX_CONF)/config/darwin.nix
 endif
 ifeq ($(UNAME),Linux)
 SWITCH_SYSTEM := switch-nixos
 GC_SYSTEM     := gc-nixos
-NIX_PATH      := nixpkgs=$(NIX_CONF)/nixpkgs:nixos-config=$(NIXOS_CONFIG)
+NIX_PATH      := $(NIX_PATH):nixos-config=$(NIXOS_CONFIG)
 endif
 
 export NIX_CONF
