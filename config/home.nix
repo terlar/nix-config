@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  nixConf = builtins.getEnv "NIX_CONF";
+  homeManagerPath = ../home-manager;
   emacsPackages = import ./emacs.nix pkgs;
   secrets = import ../load-secrets.nix;
   sysconfig = (import <nixpkgs/nixos> {}).config;
@@ -20,9 +20,9 @@ in rec {
 
     overlays =
       let path = ../overlays; in with builtins;
-      map (n: import (path + ("/" + n)))
-      (filter (n: match ".*\\.nix" n != null ||
-        pathExists (path + ("/" + n + "/default.nix")))
+      map (n: import (path + ("/" + n))) (
+        filter
+        (n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix")))
         (attrNames (readDir path)));
   };
 
@@ -59,7 +59,7 @@ in rec {
   programs = {
     home-manager = {
       enable = true;
-      path = "${nixConf}/home-manager";
+      path = toString homeManagerPath;
     };
 
     direnv = {
@@ -158,7 +158,8 @@ in rec {
 
         tags = "tag -l";
         remotes = "remote -v";
-        branches = ''!git for-each-ref \
+        branches = ''
+          !git for-each-ref \
           --sort=-committerdate \
           --format='%(color:blue)%(authordate:relative)\t \
           %(color:red)%(authorname)\t \
@@ -202,8 +203,9 @@ in rec {
           prompt = "false";
         };
 
-        "difftool \"ediff\"".cmd =
-          "emacsclient --eval '(ediff-files \\\"'$LOCAL'\\\" \\\"'$REMOTE'\\\")'";
+        "difftool \"ediff\"".cmd = ''
+          emacsclient --eval '(ediff-files "'$LOCAL'" "'$REMOTE'")'
+        '';
 
         rebase = {
           # Support fixup and squash commits.
@@ -224,8 +226,9 @@ in rec {
           keepBackup = "false";
         };
 
-        "mergetool \"ediff\"".cmd =
-          "emacsclient --eval '(ediff-merge-files-with-ancestor \\\"'$LOCAL'\\\" \\\"'$REMOTE'\\\" \\\"'$BASE'\\\" nil \\\"'$MERGED'\\\")'";
+        "mergetool \"ediff\"".cmd = ''
+          emacsclient --eval '(ediff-merge-files-with-ancestor "'$LOCAL'" "'$REMOTE'" "'$BASE'" nil "'$MERGED'")'
+        '';
 
         # Reuse recorded resolutions.
         rerere = {

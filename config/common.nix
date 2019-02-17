@@ -1,7 +1,12 @@
 { config, pkgs, lib, options, ... }:
 
 let
-  nixConf = builtins.getEnv "NIX_CONF";
+  darwinConfigPath = ./darwin.nix;
+  darwinPath = ../darwin;
+  homeManagerConfigPath = ./home.nix;
+  homeManagerPath = ../home-manager;
+  nixPkgsPath = ../nixpkgs;
+  nixosConfigPath = ../configuration.nix;
 in {
   time.timeZone = "Europe/Stockholm";
 
@@ -14,9 +19,8 @@ in {
 
     overlays =
       let path = ../overlays; in with builtins;
-      map (n: import (path + ("/" + n)))
-      (filter (n: match ".*\\.nix" n != null ||
-        pathExists (path + ("/" + n + "/default.nix")))
+      map (n: import (path + ("/" + n))) (
+        filter (n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix")))
         (attrNames (readDir path)));
   };
 
@@ -26,7 +30,7 @@ in {
     shells = [ pkgs.fish ];
 
     variables = {
-      HOME_MANAGER_CONFIG = "${nixConf}/config/home.nix";
+      HOME_MANAGER_CONFIG = toString homeManagerConfigPath;
 
       MANPATH = [
         "${config.system.path}/share/man"
@@ -44,15 +48,15 @@ in {
 
   nix = {
     package = pkgs.nixStable;
-    nixPath =
-      [ "nixpkgs=${nixConf}/nixpkgs"
-        "home-manager=${nixConf}/home-manager"
-      ] ++ lib.optionals pkgs.stdenv.isLinux [
-        "nixos-config=${nixConf}/configuration.nix"
-      ] ++ lib.optionals pkgs.stdenv.isDarwin [
-        "darwin=${nixConf}/darwin"
-        "darwin-config=${nixConf}/config/darwin.nix"
-      ];
+    nixPath = [
+      "nixpkgs=${toString nixPkgsPath}"
+      "home-manager=${toString homeManagerPath}"
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      "nixos-config=${toString nixosConfigPath}"
+    ] ++ lib.optionals pkgs.stdenv.isDarwin [
+      "darwin=${toString darwinPath}"
+      "darwin-config=${toString darwinConfigPath}"
+    ];
 
     maxJobs = 10;
     distributedBuilds = false;
