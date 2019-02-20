@@ -258,6 +258,7 @@ in rec {
         "github" = {
           hostname = "ssh.github.com";
           port = 443;
+          serverAliveInterval = 60;
           extraOptions = {
             ControlMaster = "auto";
             ControlPersist = "yes";
