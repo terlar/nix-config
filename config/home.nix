@@ -28,8 +28,8 @@ in rec {
 
   home = {
     sessionVariables = {
-      EDITOR = "${pkgs.scripts.emacseditor}/bin/emacseditor";
-      TERMINAL = "${pkgs.kitty}/bin/kitty";
+      EDITOR = "emacseditor";
+      TERMINAL = "kitty";
     };
 
     file = {
