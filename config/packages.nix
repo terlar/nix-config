@@ -73,6 +73,7 @@ in ([
   lastpass-cli
   pass
 ] ++ lib.optionals sysconfig.services.xserver.enable [
+  scripts.emacseditor
   scripts.lock
   scripts.logout
   scripts.window_tiler

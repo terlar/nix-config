@@ -27,18 +27,8 @@ in rec {
   };
 
   home = {
-    sessionVariables = let
-      emacsBinPath = "${config.programs.emacs.finalPackage}/bin";
-      editorScript = pkgs.writeScriptBin "emacseditor" ''
-        #!${pkgs.runtimeShell}
-        if [ -z "$1" ]; then
-        exec ${emacsBinPath}/emacsclient --create-frame --alternate-editor ${emacsBinPath}/emacs
-        else
-        exec ${emacsBinPath}/emacsclient --alternate-editor ${emacsBinPath}/emacs "$@"
-        fi
-      '';
-    in {
-      EDITOR = "${editorScript}/bin/emacseditor";
+    sessionVariables = {
+      EDITOR = "${pkgs.scripts.emacseditor}/bin/emacseditor";
       TERMINAL = "${pkgs.kitty}/bin/kitty";
     };
 
