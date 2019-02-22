@@ -90,6 +90,7 @@ in ([
   slack
   slop
   spotify
+  sxiv
   xautolock
   xclip
   xorg.xhost
