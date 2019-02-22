@@ -18,13 +18,25 @@ let
 
     # Follow master.
     company-mode = super.company-mode.overrideAttrs(attrs: {
-      version = "20190205.2200";
+      version = "20190221.1727";
       src = pkgs.fetchFromGitHub {
         owner = "company-mode";
         repo = "company-mode";
-        rev = "edbb3c5354ad7909b4b952c61fd8238fd656b1d0";
-        sha256 = "1a4nb7vivgdi0fn3spai9fp03qp5lbvnpdydr0jyg8fh5907jb7c";
-        # date = 2019-02-05T22:00:58+03:00;
+        rev = "20fe01542bf7665ba90f9fe1a86cbe0eea4d9f8a";
+        sha256 = "10q1709ikf5pk32c9wznz30sd8q41lp8qq1k9qrbcdyxxgizzqsf";
+        # date = 2019-02-21T17:27:47+03:00;
+      };
+    });
+
+    # Follow master.
+    dumb-jump = super.dumb-jump.overrideAttrs(attrs: {
+      version = "20190221.0923";
+      src = pkgs.fetchFromGitHub {
+        owner = "jacktasia";
+        repo = "dumb-jump";
+        rev = "64fcd1ca3181723fd8f7af3ea982f822cf601539";
+        sha256 = "0sfp8y12p517xawx10qg7g4w2khd22942wa9287v2viwv34hmdqh";
+        # date = 2019-02-21T09:23:27-08:00;
       };
     });
 
