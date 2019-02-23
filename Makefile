@@ -85,16 +85,18 @@ pull-nix: ## Pull latest nix upstream changes
 	git submodule update --remote home-manager
 	git submodule update --remote nixpkgs
 
-.PHONY: dev-emacs-config
+.PHONY: dev-emacs-config dev-home-manager dev-nixpkgs
 dev-emacs-config: ## Use local config/emacs.d
 	git config --file=.gitmodules submodule."config/emacs.d".url file://$(HOME)/src/github.com/terlar/emacs.d
 	git submodule update --remote config/emacs.d
-
-.PHONY: dev-home-manager
 dev-home-manager: ## Use my home-manager fork
 	git config --file=.gitmodules submodule.home-manager.url https://github.com/terlar/home-manager.git
 	git submodule sync home-manager
 	git submodule update --remote home-manager
+dev-nixpkgs: ## Use my nixpkgs fork
+	git config --file=.gitmodules submodule.nixpkgs.url https://github.com/terlar/nixpkgs.git
+	git submodule sync nixpkgs
+	git submodule update --remote nixpkgs
 
 .PHONY: gc gc-home
 gc: gc-system gc-home ## Clean up system packages and home generations (older than 2 weeks)
