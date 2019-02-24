@@ -65,8 +65,8 @@
   services.xserver.libinput = {
     enable = true;
     disableWhileTyping = true;
-    tapping = true;
-    tappingDragLock = true;
+    tapping = false;
+    tappingDragLock = false;
     middleEmulation = true;
     naturalScrolling = true;
     scrollMethod = "twofinger";
