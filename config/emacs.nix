@@ -45,6 +45,7 @@ with epkgs;
   docker-compose-mode
   docker-tramp
   dockerfile-mode
+  dtrt-indent
   dumb-jump
   easy-escape
   edit-indirect
