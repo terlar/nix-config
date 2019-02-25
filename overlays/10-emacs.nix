@@ -52,6 +52,18 @@ let
       };
     });
 
+    # Fix prettier format command.
+    format-all = super.format-all.overrideAttrs(attrs: {
+      version = "20190206.1333";
+      src = pkgs.fetchFromGitHub {
+        owner = "lassik";
+        repo = "emacs-format-all-the-code";
+        rev = "3d0eda591bc22fad6cbea3f84c716ae2b7fb80e6";
+        sha256 = "1k9m6lrp3d9msg7r88l9gkpiqj4w7aclnxqfw07cxhy9rzw5gwi3";
+        # date = 2019-02-06T13:33:24+02:00;
+      };
+    });
+
     # Follow master.
     nix-mode = super.nix-mode.overrideAttrs(attrs: {
       version = "20190119.1025";
