@@ -100,18 +100,6 @@ let
       };
     });
 
-    # Fix wrong hash being received.
-    lua-mode = super.lua-mode.overrideAttrs(attrs: {
-      version = "20190113.1350";
-      src = pkgs.fetchFromGitHub {
-        owner = "immerrr";
-        repo = "lua-mode";
-        rev = "95c64bb5634035630e8c59d10d4a1d1003265743";
-        sha256 = "0cawb544qylifkvqads307n0nfqg7lvyphqbpbzr2xvr5iyi4901";
-        # date = 2019-01-13T13:50:39+03:00;
-      };
-    });
-
     # Support disabling spacer lines.
     quick-peek = super.quick-peek.overrideAttrs(attrs: {
       version = "20190208.1015";
