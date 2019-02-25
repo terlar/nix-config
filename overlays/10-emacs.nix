@@ -64,6 +64,18 @@ let
       };
     });
 
+    # Fix update from cursor position.
+    nix-update = super.nix-update.overrideAttrs(attrs: {
+      version = "20190124.1135";
+      src = pkgs.fetchFromGitHub {
+        owner = "jwiegley";
+        repo = "nix-update-el";
+        rev = "fc6c39c2da3fcfa62f4796816c084a6389c8b6e7";
+        sha256 = "01cpl4w49m5dfkx7l8g1q183s341iz6vkjv2q4fbx93avd7msjgi";
+        # date = 2019-01-24T11:35:44-08:00;
+      };
+    });
+
     # Fix display function for Emacs 27.0.50.
     imenu-list = super.imenu-list.overrideAttrs(attrs: {
       version = "20190115.2330";
