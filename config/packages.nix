@@ -78,6 +78,7 @@ in ([
   scripts.logout
   scripts.window_tiler
 
+  chromium
   feh
   firefox
   imagemagick
