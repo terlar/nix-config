@@ -25,6 +25,7 @@ with epkgs;
   cider
   clojure-mode
   color-identifiers-mode
+  comment-or-uncomment-sexp
   company
   counsel
   counsel-tramp
@@ -80,6 +81,7 @@ with epkgs;
   go-mode
   gorepl-mode
   goto-chg
+  goto-line-preview
   gradle-mode
   groovy-mode
   haskell-mode
@@ -181,6 +183,7 @@ with epkgs;
   ts-comint
   tuareg
   typescript-mode
+  undo-propose
   use-package
   visual-fill-column
   visual-regexp

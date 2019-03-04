@@ -52,17 +52,6 @@ let
       };
     });
 
-    # Fix prettier format command.
-    format-all = super.format-all.overrideAttrs(attrs: {
-      version = "20190206.1333";
-      src = pkgs.fetchFromGitHub {
-        owner = "lassik";
-        repo = "emacs-format-all-the-code";
-        rev = "3d0eda591bc22fad6cbea3f84c716ae2b7fb80e6";
-        sha256 = "1k9m6lrp3d9msg7r88l9gkpiqj4w7aclnxqfw07cxhy9rzw5gwi3";
-        # date = 2019-02-06T13:33:24+02:00;
-      };
-    });
 
     # Follow master.
     nix-mode = super.nix-mode.overrideAttrs(attrs: {
@@ -76,15 +65,27 @@ let
       };
     });
 
-    # Fix update from cursor position.
-    nix-update = super.nix-update.overrideAttrs(attrs: {
-      version = "20190124.1135";
+    # Follow master.
+    objed = super.objed.overrideAttrs(attrs: {
+      version = "20190303.2244";
       src = pkgs.fetchFromGitHub {
-        owner = "jwiegley";
-        repo = "nix-update-el";
-        rev = "fc6c39c2da3fcfa62f4796816c084a6389c8b6e7";
-        sha256 = "01cpl4w49m5dfkx7l8g1q183s341iz6vkjv2q4fbx93avd7msjgi";
-        # date = 2019-01-24T11:35:44-08:00;
+        owner = "clemera";
+        repo = "objed";
+        rev = "b512017ba655dbce65c7396d18a22b9b65d29088";
+        sha256 = "12ygypi60vymd80i1hp9gzc1pa5saflkynal2hq8gdkb9lkqahlm";
+        # date = 2019-03-04T14:27:08+01:00;
+      };
+    });
+
+    # Fix prettier format command.
+    format-all = super.format-all.overrideAttrs(attrs: {
+      version = "20190206.1333";
+      src = pkgs.fetchFromGitHub {
+        owner = "lassik";
+        repo = "emacs-format-all-the-code";
+        rev = "3d0eda591bc22fad6cbea3f84c716ae2b7fb80e6";
+        sha256 = "1k9m6lrp3d9msg7r88l9gkpiqj4w7aclnxqfw07cxhy9rzw5gwi3";
+        # date = 2019-02-06T13:33:24+02:00;
       };
     });
 
@@ -97,6 +98,18 @@ let
         rev = "46008738f8fef578a763c308cf6695e5b4d4aa77";
         sha256 = "14l3yw9y1nk103s7z5i1fmd6kvlb2p6ayi6sf9l1x1ydg9glrpl8";
         # date = 2019-01-15T23:30:04+02:00;
+      };
+    });
+
+    # Fix update at cursor position.
+    nix-update = super.nix-update.overrideAttrs(attrs: {
+      version = "20190124.1135";
+      src = pkgs.fetchFromGitHub {
+        owner = "jwiegley";
+        repo = "nix-update-el";
+        rev = "fc6c39c2da3fcfa62f4796816c084a6389c8b6e7";
+        sha256 = "01cpl4w49m5dfkx7l8g1q183s341iz6vkjv2q4fbx93avd7msjgi";
+        # date = 2019-01-24T11:35:44-08:00;
       };
     });
 
@@ -113,6 +126,25 @@ let
     });
 
     # Packages not in MELPA.
+    comment-or-uncomment-sexp = self.melpaBuild rec {
+      pname   = "comment-or-uncomment-sexp";
+      version = "20190225.0822";
+      src = pkgs.fetchFromGitHub {
+        owner  = "malabarba";
+        repo   = "comment-or-uncomment-sexp";
+        rev    = "bec730d3fc1e6c17ff1339eb134af16c034a4d95";
+        sha256 = "1jhyr854qraza75hjza8fjz2s06iydmdsa61vf5bf2kj5g1bfqkj";
+        # date = 2019-02-25T08:22:09-03:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (comment-or-uncomment-sexp :repo "malabarba/comment-or-uncomment-sexp" :fetcher github)
+      '';
+
+      meta = {
+        description = "Emacs-lisp command for inteligently commenting and commenting the sexp under point.";
+      };
+    };
+
     eldoc-posframe = self.melpaBuild rec {
       pname   = "eldoc-posframe";
       version = "20190209.1123";
@@ -129,6 +161,25 @@ let
 
       meta = {
         description = "Display eldoc information in a posframe.";
+      };
+    };
+
+    goto-line-preview = self.melpaBuild rec {
+      pname   = "goto-line-preview";
+      version = "20190303.1553";
+      src = pkgs.fetchFromGitHub {
+        owner  = "jcs090218";
+        repo   = "goto-line-preview";
+        rev    = "bc2da7dc8fc738021b90eac1783bbf896a27b63f";
+        sha256 = "0kpi9746pq8lmvigrcr79bapfssy3pw1chcwsb025lijv3jq6hv1";
+        # date = 2019-03-03T15:53:02+08:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (goto-line-preview :repo "jcs090218/goto-line-preview" :fetcher github)
+      '';
+
+      meta = {
+        description = "Preview line when executing goto-line command.";
       };
     };
 
@@ -221,6 +272,25 @@ let
           the function at point (using different backends) and displays them inline in
           the current buffer.
         '';
+      };
+    };
+
+    undo-propose = self.melpaBuild rec {
+      pname   = "undo-propose";
+      version = "20190302.0820";
+      src = pkgs.fetchFromGitHub {
+        owner  = "jackkamm";
+        repo   = "undo-propose-el";
+        rev    = "503963cbe69197339cc6ab01a1b909590b433de7";
+        sha256 = "1acz7lsbqcyn06r5zhp4qkqmwz282mjpwvj20q2nv5v8qkby2qic";
+        # date = 2019-03-02T08:20:15-08:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (undo-propose :repo "jackkamm/undo-propose-el" :fetcher github)
+      '';
+
+      meta = {
+        description = "Navigate through your undo history in a temporary buffer.";
       };
     };
   };
