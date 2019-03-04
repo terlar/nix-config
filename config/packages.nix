@@ -26,6 +26,7 @@ in ([
 
   # system tools
   aspellEnv
+  browsh
   curl
   direnv
   fd
