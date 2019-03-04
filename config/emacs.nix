@@ -107,6 +107,7 @@ with epkgs;
   ivy-xref
   ivy-yasnippet
   javadoc-lookup
+  jest
   js2-mode
   js2-refactor
   kotlin-mode
