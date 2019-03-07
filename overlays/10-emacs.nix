@@ -1,7 +1,7 @@
 self: pkgs:
 
 let
-  overrides = self: super: super.melpaPackages // {
+  overrides = self: super: {
     kubernetes = super.kubernetes.overrideAttrs(attrs: {
       buildInputs = attrs.buildInputs ++ [ pkgs.git ];
     });
