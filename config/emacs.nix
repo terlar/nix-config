@@ -86,6 +86,7 @@ with epkgs;
   groovy-mode
   haskell-mode
   hasky-stack
+  helm-make
   helpful
   hide-lines
   hide-mode-line
