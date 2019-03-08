@@ -30,7 +30,7 @@
   ];
 
   # Use the newer but stable kernel packages.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_4_20;
 
   # Kernel modules:
   boot.kernelModules = [
