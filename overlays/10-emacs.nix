@@ -226,31 +226,6 @@ let
       };
     };
 
-    rotate-text = self.melpaBuild rec {
-      pname   = "rotate-text";
-      version = "20090413.2236";
-      src = pkgs.fetchFromGitHub {
-        owner  = "nschum";
-        repo   = "rotate-text.el";
-        rev    = "74c456f91bfefb19dfcd33dbb3bd8574d1f185c6";
-        sha256 = "1cgxv4aibkvv6lnssynn0438a615fz3zq8hg9sb0lhfgsr99pxln";
-        # date = 2009-04-13T22:36:18+02:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (rotate-text :repo "nschum/rotate-text.el" :fetcher github)
-      '';
-
-      meta = {
-        description = "Cycle through words, symbols and patterns";
-        longDescription = ''
-          rotate-text allows you cycle through commonly interchanged text with a single
-          keystroke.  For example, you can toggle between "frame-width" and
-          "frame-height", between "public", "protected" and "private" and between
-          "variable1", "variable2" through "variableN".
-        '';
-      };
-    };
-
     source-peek = self.melpaBuild rec {
       pname   = "source-peek";
       version = "20170424.0347";

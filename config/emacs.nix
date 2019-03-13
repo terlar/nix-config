@@ -13,6 +13,7 @@ with epkgs;
   ansible
   ansible-doc
   async
+  atomic-chrome
   auto-compile
   auto-dictionary
   auto-minor-mode
@@ -32,6 +33,7 @@ with epkgs;
   coverlay
   crystal-mode
   csv-mode
+  cycle-quotes
   deadgrep
   default-text-scale
   defrepeater
@@ -142,6 +144,7 @@ with epkgs;
   org-variable-pitch
   package-lint
   page-break-lines
+  parrot
   pdf-tools
   perfect-margin
   pip-requirements
@@ -161,7 +164,6 @@ with epkgs;
   rake
   redtick
   rjsx-mode
-  rotate-text
   rspec-mode
   rubocopfmt
   ruby-refactor
