@@ -57,13 +57,17 @@ in ([
   cabal2nix
   stack2nix
 ] ++ lib.optionals stdenv.isLinux [
+  # system tools
+  hdparm
+  lshw
+  lsof
+
   # dev tools
   docker
-  docker_compose
   docker-slim
+  docker_compose
   shellcheck
   sysdig
-  lsof
 
   # media tools
   playerctl
