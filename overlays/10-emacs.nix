@@ -226,6 +226,25 @@ let
       };
     };
 
+    realgud-node-inspect = self.melpaBuild rec {
+      pname = "realgud-node-inspect";
+      version = "20180920.0910";
+      src = pkgs.fetchFromGitHub {
+        owner  = "realgud";
+        repo   = "realgud-node-inspect";
+        rev    = "a8a5664c1e3629b979a0a594cdf1b962fac7f01b";
+        sha256 = "0y14qryka2aij49f14nk28spwzjimz9xpjzmcmhz5sgf3hdvwcql";
+        # date = 2018-09-20T09:10:13-04:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (realgud-node-inspect :repo "realgud/realgud-node-inspect" :fetcher github)
+      '';
+
+      meta = {
+        description = "realgud support for newer node inspect";
+      };
+    };
+
     source-peek = self.melpaBuild rec {
       pname   = "source-peek";
       version = "20170424.0347";
