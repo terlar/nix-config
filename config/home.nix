@@ -240,9 +240,6 @@ in rec {
       enable = true;
 
       compression = true;
-      extraOptionOverrides = {
-        Include = "~/.ssh/config_private";
-      };
 
       matchBlocks = {
         "github" = {
