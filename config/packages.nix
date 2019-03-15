@@ -76,6 +76,7 @@ in ([
 
   # security tools
   lastpass-cli
+  mkpasswd
   pass
 ] ++ lib.optionals sysconfig.services.xserver.enable [
   scripts.emacseditor
