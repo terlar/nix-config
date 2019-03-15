@@ -17,6 +17,18 @@ let
     });
 
     # Follow master.
+    cider = super.cider.overrideAttrs(attrs: {
+      version = "20190313.1658";
+      src = pkgs.fetchFromGitHub {
+        owner = "clojure-emacs";
+        repo = "cider";
+        rev = "4d98e3b8fff958380f04d26010ad05ebf2b7feeb";
+        sha256 = "0ycaahjnrj7slx5h8fl42mpfvkv4xd72fpbh71hjb2nv7qyk0sa3";
+        # date = 2019-03-13T16:58:41+02:00;
+      };
+    });
+
+    # Follow master.
     company-mode = super.company-mode.overrideAttrs(attrs: {
       version = "20190221.1727";
       src = pkgs.fetchFromGitHub {
