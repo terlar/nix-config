@@ -20,15 +20,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Encrpytion for root partition.
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
-      device = "/dev/disk/by-uuid/77e2f8f5-4799-4e86-9318-cb61589b8f89";
-      preLVM = true;
-    }
-  ];
-
   # Use the newer but stable kernel packages.
   boot.kernelPackages = pkgs.linuxPackages_4_20;
 
