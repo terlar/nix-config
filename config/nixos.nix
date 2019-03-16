@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   keyboardLayout = "us";
@@ -9,7 +9,7 @@ let
 in {
   imports = [
     ./common.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists ../private/nixos/default.nix) ../private/nixos;
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.consoleKeyMap = keyboardLayout;
