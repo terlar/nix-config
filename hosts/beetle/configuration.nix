@@ -41,8 +41,6 @@
   ];
 
   networking.hostName = "beetle";
-  # Disable IPv6 due to resolving issues.
-  networking.enableIPv6 = false;
 
   # Enable network manager.
   networking.networkmanager.enable = true;

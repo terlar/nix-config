@@ -40,8 +40,6 @@
   services.fwupd.enable = true;
 
   networking.hostName = "kong";
-  # Disable IPv6 due to resolving issues.
-  networking.enableIPv6 = false;
 
   # Enable network manager.
   networking.networkmanager.enable = true;
