@@ -30,13 +30,13 @@ let
 
     # Follow master.
     company-mode = super.company-mode.overrideAttrs(attrs: {
-      version = "20190221.1727";
+      version = "20190316.0301";
       src = pkgs.fetchFromGitHub {
         owner = "company-mode";
         repo = "company-mode";
-        rev = "20fe01542bf7665ba90f9fe1a86cbe0eea4d9f8a";
-        sha256 = "10q1709ikf5pk32c9wznz30sd8q41lp8qq1k9qrbcdyxxgizzqsf";
-        # date = 2019-02-21T17:27:47+03:00;
+        rev = "f965786c589f95a00901028e49f1eae415053f08";
+        sha256 = "0pzxim56nxynmlq459ljfy82nb6qgq1izy19ldwnyc36x1mqccgf";
+        # date = 2019-03-16T03:01:51+02:00;
       };
     });
 
@@ -54,13 +54,13 @@ let
 
     # Follow master.
     dumb-jump = super.dumb-jump.overrideAttrs(attrs: {
-      version = "20190221.0923";
+      version = "20190314.2232";
       src = pkgs.fetchFromGitHub {
         owner = "jacktasia";
         repo = "dumb-jump";
-        rev = "64fcd1ca3181723fd8f7af3ea982f822cf601539";
-        sha256 = "0sfp8y12p517xawx10qg7g4w2khd22942wa9287v2viwv34hmdqh";
-        # date = 2019-02-21T09:23:27-08:00;
+        rev = "59f91b408f6228be035ece10a79b5d460430116a";
+        sha256 = "0iqxk9i2qfav5c59k1pjarq2f6k8y1qxdscx3d36lhnh5jc5ydbz";
+        # date = 2019-03-14T22:32:57-07:00;
       };
     });
 
@@ -91,13 +91,13 @@ let
 
     # Follow master.
     objed = super.objed.overrideAttrs(attrs: {
-      version = "20190303.2244";
+      version = "20190315.1756";
       src = pkgs.fetchFromGitHub {
         owner = "clemera";
         repo = "objed";
-        rev = "b512017ba655dbce65c7396d18a22b9b65d29088";
-        sha256 = "12ygypi60vymd80i1hp9gzc1pa5saflkynal2hq8gdkb9lkqahlm";
-        # date = 2019-03-04T14:27:08+01:00;
+        rev = "aa8f32d155dbbcbdabf388acfec5ae09cadedf9a";
+        sha256 = "1z2db1n8q2zfrscviagygjvnbz0lzxx86jq5z4ri81shhja93j5r";
+        # date = 2019-03-15T17:56:41+01:00;
       };
     });
 
@@ -190,13 +190,13 @@ let
 
     goto-line-preview = self.melpaBuild rec {
       pname   = "goto-line-preview";
-      version = "20190303.1553";
+      version = "20190308.1538";
       src = pkgs.fetchFromGitHub {
         owner  = "jcs090218";
         repo   = "goto-line-preview";
-        rev    = "bc2da7dc8fc738021b90eac1783bbf896a27b63f";
-        sha256 = "0kpi9746pq8lmvigrcr79bapfssy3pw1chcwsb025lijv3jq6hv1";
-        # date = 2019-03-03T15:53:02+08:00;
+        rev    = "772fb942777a321b4698add1b94cff157f23a93b";
+        sha256 = "16zil8kjv7lfmy11g88p1cm24j9db319fgkwzsgf2vzp1m15l0pc";
+        # date = 2019-03-08T15:38:36+08:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (goto-line-preview :repo "jcs090218/goto-line-preview" :fetcher github)
@@ -233,13 +233,13 @@ let
 
     perfect-margin = self.melpaBuild rec {
       pname   = "perfect-margin";
-      version = "20190211.0308";
+      version = "20190303.0209";
       src = pkgs.fetchFromGitHub {
         owner  = "mpwang";
         repo   = "perfect-margin";
-        rev    = "d5ffa1ffcf38dc93e0887849a11bc19a96fcde00";
-        sha256 = "0d5v2yh2fi3amysh87fy6pfz47mqzri4gv9x8svmy1arrwaxlybi";
-        # date = 2019-02-11T03:08:46+08:00;
+        rev    = "f3723f59cd56d22043a2ef31e4b2aed08c7add1f";
+        sha256 = "108nj14cjcvz0yidsriirf0cyakdq6v0r5vap12k9nk85k9xwry2";
+        # date = 2019-03-03T02:09:15+08:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (perfect-margin :repo "mpwang/perfect-margin" :fetcher github)
