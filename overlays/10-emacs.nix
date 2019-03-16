@@ -41,6 +41,18 @@ let
     });
 
     # Follow master.
+    deadgrep = super.deadgrep.overrideAttrs(attrs: {
+      version = "20190314.2207";
+      src = pkgs.fetchFromGitHub {
+        owner = "wilfred";
+        repo = "deadgrep";
+        rev = "160e7adb7f043fc42ba6d4d891ad50ef1e063be7";
+        sha256 = "1sm92hj4ilq0h82fy5k5nzn7jq56yw2665ikqdcj89k9xldin6xi";
+        # date = 2019-03-14T22:07:10+00:00;
+      };
+    });
+
+    # Follow master.
     dumb-jump = super.dumb-jump.overrideAttrs(attrs: {
       version = "20190221.0923";
       src = pkgs.fetchFromGitHub {
