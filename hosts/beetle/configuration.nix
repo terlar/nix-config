@@ -1,20 +1,20 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      # Shared NixOS configuration.
-      ../../config/nixos.nix
-      ../../config/nixos/gui.nix
-      ../../config/nixos/gui/i3.nix
+    # Shared NixOS configuration.
+    ../../config/nixos.nix
+    ../../config/nixos/gui.nix
+    ../../config/nixos/gui/i3.nix
 
-      # Hardware configuration.
-      ../../config/nixos/hardware/backlight.nix
-      ../../config/nixos/hardware/battery.nix
-      ../../config/nixos/hardware/yubikey.nix
-    ] ++ lib.optional (builtins.pathExists ../../private/nixos.nix) ../../private/nixos.nix;
+    # Hardware configuration.
+    ../../config/nixos/hardware/backlight.nix
+    ../../config/nixos/hardware/battery.nix
+    ../../config/nixos/hardware/yubikey.nix
+  ] ++ lib.optional (builtins.pathExists ../../private/nixos.nix) ../../private/nixos.nix;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
