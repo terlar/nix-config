@@ -11,7 +11,7 @@
   services = {
     screen-locker = {
       enable = true;
-      lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=333333";
+      lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
       inactiveInterval = 10;
     };
 
@@ -29,9 +29,15 @@
         modifier = "Mod4";
         fonts = [ "sans-serif 9" ];
         tile = "exec ${pkgs.scripts.window_tiler}/bin/window_tiler";
+        bgMode = "tile";
       in {
         # Autostart
         startup = [
+          {
+            command = "${pkgs.feh}/bin/feh --bg-${bgMode} ~/.background-image";
+            always = true;
+            notification = false;
+          }
           {
             command = "${pkgs.dex}/bin/dex -ae i3";
             always = true;
@@ -53,7 +59,7 @@
 
         # Gaps
         gaps = {
-          inner = 5;
+          inner = 7;
           outer = 0;
         };
 
@@ -63,7 +69,29 @@
             inherit fonts;
             statusCommand = "${pkgs.i3status}/bin/i3status";
             colors = {
-              background = "#333333";
+              background = "#faf7ee";
+              statusline = "#292617";
+              separator = "#d5d2c8";
+              focusedWorkspace = {
+                border = "#d5d2c8";
+                background = "#d5d2c8";
+                text = "#292617";
+              };
+              activeWorkspace = {
+                border = "#faf7ee";
+                background = "#faf7ee";
+                text = "#292617";
+              };
+              inactiveWorkspace = {
+                border = "#faf7ee";
+                background = "#faf7ee";
+                text = "#292617";
+              };
+              urgentWorkspace = {
+                border = "#ef5350";
+                background = "#ef5350";
+                text = "#992222";
+              };
             };
           }
         ];
