@@ -162,6 +162,8 @@ with epkgs;
   rainbow-identifiers
   rainbow-mode
   rake
+  realgud
+  realgud-node-inspect
   redtick
   rjsx-mode
   rspec-mode

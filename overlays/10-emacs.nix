@@ -76,7 +76,6 @@ let
       };
     });
 
-
     # Follow master.
     nix-mode = super.nix-mode.overrideAttrs(attrs: {
       version = "20190119.1025";
@@ -147,6 +146,45 @@ let
         sha256 = "18jr3syd7jd809qq1j61zwaaclmqn24qyb0mv0q8sj6ac4vzl1c3";
         # date = 2019-02-08T10:15:39-05:00;
       };
+    });
+
+    # Include .nosearch file.
+    realgud = super.realgud.overrideAttrs(attrs: {
+      version = "20190121.1943";
+      src = pkgs.fetchFromGitHub {
+        owner = "realgud";
+        repo = "realgud";
+        rev = "1da5f2b5161bd5d5671b38ab182084e2d89e7c45";
+        sha256 = "19ijc3v1wz01631hyc3x1bgx9kczhdzc99jlxxfq9y5yr8p1s2qa";
+        # date = 2019-01-21T19:43:49-05:00;
+      };
+
+      recipe = pkgs.writeText "recipe" ''
+        (realgud
+        :fetcher github
+        :repo "realgud/realgud"
+        :files ("realgud.el" "realgud/.nosearch"
+        ("realgud/common"             "realgud/common/*.el")
+        ("realgud/common/buffer"      "realgud/common/buffer/*.el")
+        ("realgud/debugger/bashdb"    "realgud/debugger/bashdb/*.el")
+        ("realgud/debugger/gdb"       "realgud/debugger/gdb/*.el")
+        ("realgud/debugger/gub"       "realgud/debugger/gub/*.el")
+        ("realgud/debugger/ipdb"      "realgud/debugger/ipdb/*.el")
+        ("realgud/debugger/jdb"       "realgud/debugger/jdb/*.el")
+        ("realgud/debugger/kshdb"     "realgud/debugger/kshdb/*.el")
+        ("realgud/debugger/nodejs"    "realgud/debugger/nodejs/*.el")
+        ("realgud/debugger/pdb"       "realgud/debugger/pdb/*.el")
+        ("realgud/debugger/perldb"    "realgud/debugger/perldb/*.el")
+        ("realgud/debugger/rdebug"    "realgud/debugger/rdebug/*.el")
+        ("realgud/debugger/remake"    "realgud/debugger/remake/*.el")
+        ("realgud/debugger/trepan"    "realgud/debugger/trepan/*.el")
+        ("realgud/debugger/trepan.pl" "realgud/debugger/trepan.pl/*.el")
+        ("realgud/debugger/trepan2"   "realgud/debugger/trepan2/*.el")
+        ("realgud/debugger/trepan3k"  "realgud/debugger/trepan3k/*.el")
+        ("realgud/debugger/trepanjs"  "realgud/debugger/trepanjs/*.el")
+        ("realgud/debugger/zshdb"     "realgud/debugger/zshdb/*.el")
+        ("realgud/lang" "realgud/lang/*.el")))
+       '';
     });
 
     # Packages not in MELPA.
@@ -252,16 +290,20 @@ let
 
     realgud-node-inspect = self.melpaBuild rec {
       pname = "realgud-node-inspect";
-      version = "20180920.0910";
+      version = "20190317.2230";
       src = pkgs.fetchFromGitHub {
-        owner  = "realgud";
+        owner  = "terlar";
         repo   = "realgud-node-inspect";
-        rev    = "a8a5664c1e3629b979a0a594cdf1b962fac7f01b";
-        sha256 = "0y14qryka2aij49f14nk28spwzjimz9xpjzmcmhz5sgf3hdvwcql";
-        # date = 2018-09-20T09:10:13-04:00;
+        rev    = "284546506cc5f48f5c394661ed6498a3c3c53d1f";
+        sha256 = "16yrk84d0si5yghsqxbnjy8gh27cwmra42d85mhas18xvyx5dm4k";
+        # date = 2019-03-17T22:30:00+01:00;
       };
       recipe = pkgs.writeText "recipe" ''
-        (realgud-node-inspect :repo "realgud/realgud-node-inspect" :fetcher github)
+        (realgud-node-inspect
+        :fetcher github
+        :repo "realgud/realgud-node-inspect"
+        :files ("realgud-node-inspect.el" "node-inspect/.nosearch"
+        ("node-inspect" "node-inspect/*.el")))
       '';
 
       meta = {
