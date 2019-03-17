@@ -2,9 +2,11 @@
 
 {
   gtk = {
+    enable = true;
+
     theme = {
       name = "HighContrast";
-      package = pkgs.gnome3.gtk;
+      package = pkgs.gnome-themes-extra;
     };
 
     iconTheme = {
