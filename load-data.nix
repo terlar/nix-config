@@ -1,5 +1,5 @@
-if builtins.pathExists ./private/data.nix
-then import ./private/data.nix
+if builtins.pathExists <private-data>
+then import <private-data>
 else {
   username = "jdoe";
   name = "John Doe";

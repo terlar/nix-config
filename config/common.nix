@@ -7,6 +7,7 @@ let
   homeManagerPath = ../home-manager;
   nixPkgsPath = ../nixpkgs;
   nixosConfigPath = ../configuration.nix;
+  privateDataPath = ../private/data.nix;
 in {
   time.timeZone = "Europe/Stockholm";
 
@@ -51,6 +52,7 @@ in {
     nixPath = [
       "nixpkgs=${toString nixPkgsPath}"
       "home-manager=${toString homeManagerPath}"
+      "private-data=${toString privateDataPath}"
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       "nixos-config=${toString nixosConfigPath}"
     ] ++ lib.optionals pkgs.stdenv.isDarwin [
