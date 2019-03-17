@@ -36,7 +36,12 @@
   # Enable network manager.
   networking.networkmanager.enable = true;
 
+  # Enable network name resolution.
   services.resolved.enable = true;
+
+  # Enable zero-configuration networking with service discorvery.
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
