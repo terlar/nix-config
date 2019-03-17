@@ -5,6 +5,8 @@ NIX_PATH            := nixpkgs=$(CURDIR)/nixpkgs:home-manager=$(CURDIR)/home-man
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 PRIVATE_CONFIG_PATH := ../nix-config-private
 
+TIMESTAMP ?= $(shell date +%Y%m%d%H%M%S)
+
 ifeq ($(UNAME),Darwin)
 SWITCH_SYSTEM := switch-darwin
 GC_SYSTEM     := gc-darwin
@@ -116,3 +118,10 @@ gc-darwin: # Clean up Darwin packages (older than 2 weeks)
 .PHONY: clean
 clean:
 	-@rm configuration.nix hardware-configuration.nix private 2>/dev/null ||:
+
+.PHONY: backup
+backup: backup/$(TIMESTAMP)
+
+backup/$(TIMESTAMP):
+	mkdir -p $@/fish
+	cp $(HOME)/.local/share/fish/fish_history* $@/fish/.
