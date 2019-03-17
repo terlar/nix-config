@@ -9,6 +9,7 @@ in rec {
   imports = [
   ] ++ lib.optionals sysconfig.services.xserver.enable [
     ./home/linux/autorandr.nix
+    ./home/linux/gtk.nix
     ./home/linux/i3.nix
     ./home/linux/rofi.nix
   ] ++ lib.optional (builtins.pathExists ../private/home/default.nix) ../private/home;
