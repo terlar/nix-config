@@ -123,5 +123,6 @@ clean:
 backup: backup/$(TIMESTAMP)
 
 backup/$(TIMESTAMP):
-	mkdir -p $@/fish
+	mkdir -p $@/fish $@/gnupg
 	cp $(HOME)/.local/share/fish/fish_history* $@/fish/.
+	cp $(HOME)/.gnupg/sshcontrol $@/gnupg/.
