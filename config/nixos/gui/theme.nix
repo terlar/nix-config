@@ -3,7 +3,7 @@
 {
   environment = {
     sessionVariables = {
-      GTK2_RC_FILES = "${pkgs.gnome2.gtk}/share/themes/HighContrast/gtk-2.0/gtkrc";
+      GTK2_RC_FILES = "${pkgs.gnome-themes-extra}/share/themes/HighContrast/gtk-2.0/gtkrc";
       GTK_THEME = "HighContrast";
       QT_STYLE_OVERRIDE = "HighContrast";
       XCURSOR_THEME = "HighContrast";
@@ -12,7 +12,7 @@
   };
 
   services.xserver.displayManager.lightdm = {
-    background = "#1e1e1e";
+    background = "#d5d2c8";
     greeters.gtk = {
       theme = {
         name = "HighContrast";

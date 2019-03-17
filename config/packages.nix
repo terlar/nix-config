@@ -119,6 +119,7 @@ in ([
 
   gnome2.gtk
   gnome3.gtk
+  gnome-themes-extra
   paper-gtk-theme
   paper-icon-theme
 ] ++ lib.optionals stdenv.isDarwin [
