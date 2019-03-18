@@ -58,6 +58,9 @@
   # Enable bluetooth support.
   hardware.bluetooth.enable = true;
 
+  # Enable OpenGL.
+  hardware.opengl.enable = true;
+
   # Enable touchpad support.
   services.xserver.libinput = {
     enable = true;

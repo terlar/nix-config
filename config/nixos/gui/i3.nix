@@ -9,10 +9,13 @@
       };
       default = "i3";
     };
+
     desktopManager = {
       xterm.enable = false;
     };
   };
+
+  services.compton.enable = true;
   
   environment.systemPackages = with pkgs; [
     dex
