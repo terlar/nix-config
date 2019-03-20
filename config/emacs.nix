@@ -181,6 +181,7 @@ with epkgs;
   source-peek
   spray
   string-edit
+  string-inflection
   stripe-buffer
   suggest
   swiper
