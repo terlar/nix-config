@@ -47,8 +47,7 @@ install-darwin: ## Install darwin
 	nix-shell darwin -A installer --run darwin-installer
 install-home: ## Install home-manager
 	nix-shell home-manager -A install --run 'home-manager switch'
-install-private: ## Install private configuration
-	ln -s $(PRIVATE_CONFIG_PATH) private
+install-private: private ## Install private configuration
 
 $(NIXOS_HOSTS):
 install-nixos-%: hosts/%/configuration.nix hosts/%/hardware-configuration.nix
@@ -118,6 +117,9 @@ gc-darwin: # Clean up Darwin packages (older than 2 weeks)
 .PHONY: clean
 clean:
 	-@rm configuration.nix hardware-configuration.nix private 2>/dev/null ||:
+
+private:
+	ln -s $(PRIVATE_CONFIG_PATH) $@
 
 .PHONY: backup
 backup: backup/$(TIMESTAMP)
