@@ -39,7 +39,7 @@
   # Enable network name resolution.
   services.resolved.enable = true;
 
-  # Enable zero-configuration networking with service discorvery.
+  # Enable zero-configuration networking and service discorvery.
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
 
