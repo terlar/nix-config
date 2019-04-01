@@ -41,6 +41,38 @@ let
     });
 
     # Follow master.
+    counsel = super.counsel.overrideAttrs(attrs: {
+      version = "20190329.1020";
+      src = pkgs.fetchFromGitHub {
+        owner = "abo-abo";
+        repo = "swiper";
+        rev = "344aebcbfa229c6e63529c4ffa972097f4ec0a06";
+        sha256 = "03sk8jn3zmqyd2zphmnvlxy31jyq8pjdyzn6lwjbzs226df08h6a";
+        # date = 2019-03-29T10:20:14+01:00;
+      };
+    });
+    ivy = super.ivy.overrideAttrs(attrs: {
+      version = "20190329.1020";
+      src = pkgs.fetchFromGitHub {
+        owner = "abo-abo";
+        repo = "swiper";
+        rev = "344aebcbfa229c6e63529c4ffa972097f4ec0a06";
+        sha256 = "03sk8jn3zmqyd2zphmnvlxy31jyq8pjdyzn6lwjbzs226df08h6a";
+        # date = 2019-03-29T10:20:14+01:00;
+      };
+    });
+    swiper = super.swiper.overrideAttrs(attrs: {
+      version = "20190329.1020";
+      src = pkgs.fetchFromGitHub {
+        owner = "abo-abo";
+        repo = "swiper";
+        rev = "344aebcbfa229c6e63529c4ffa972097f4ec0a06";
+        sha256 = "03sk8jn3zmqyd2zphmnvlxy31jyq8pjdyzn6lwjbzs226df08h6a";
+        # date = 2019-03-29T10:20:14+01:00;
+      };
+    });
+
+    # Follow master.
     deadgrep = super.deadgrep.overrideAttrs(attrs: {
       version = "20190314.2207";
       src = pkgs.fetchFromGitHub {
