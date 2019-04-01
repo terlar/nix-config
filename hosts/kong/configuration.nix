@@ -23,7 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use the newer but stable kernel packages.
-  boot.kernelPackages = pkgs.linuxPackages_4_20;
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   # Kernel modules:
   boot.kernelModules = [
