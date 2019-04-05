@@ -65,6 +65,7 @@ with epkgs;
   es-mode
   esh-autosuggest
   eshell-fringe-status
+  eslintd-fix
   esup
   eval-in-repl
   exec-path-from-shell
