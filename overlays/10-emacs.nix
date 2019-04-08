@@ -343,6 +343,25 @@ let
       };
     };
 
+    reformatter = self.melpaBuild rec {
+      pname   = "reformatter";
+      version = "20190222.1042";
+      src = pkgs.fetchFromGitHub {
+        owner  = "purcell";
+        repo   = "reformatter.el";
+        rev    = "028dae00dd9a9c0846f6a2c9251af7acf68e6ad3";
+        sha256 = "0g3k8p6cysp3lx4ynd0df8d2vqxs3faanpmf4f10l2zm3z4bcz4g";
+        # date = 2019-02-22T10:42:21+13:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (reformatter :repo "purcell/reformatter.el" :fetcher github)
+      '';
+
+      meta = {
+        description = "Define commands which run reformatters on the current Emacs buffer";
+      };
+    };
+
     source-peek = self.melpaBuild rec {
       pname   = "source-peek";
       version = "20170424.0347";

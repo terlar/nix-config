@@ -166,6 +166,7 @@ with epkgs;
   realgud
   realgud-node-inspect
   redtick
+  reformatter
   rjsx-mode
   rspec-mode
   rubocopfmt
