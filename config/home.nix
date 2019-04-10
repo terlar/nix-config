@@ -80,8 +80,9 @@ in rec {
       };
 
       ignores = [
-        ".envrc"
+        ".dir-locals.el"
         ".direnv/"
+        ".envrc"
       ];
 
       aliases = {
