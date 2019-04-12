@@ -42,33 +42,33 @@ let
 
     # Follow master.
     counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190329.1020";
+      version = "20190412.1043";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "344aebcbfa229c6e63529c4ffa972097f4ec0a06";
-        sha256 = "03sk8jn3zmqyd2zphmnvlxy31jyq8pjdyzn6lwjbzs226df08h6a";
-        # date = 2019-03-29T10:20:14+01:00;
+        rev = "2221a5c4625639bb3df3f3248efc32c43cf8a924";
+        sha256 = "0ggqd0fg57idav2g64iapz4pvdh0169bim6isz9qlm5cqw7iivxk";
+        # date = 2019-04-12T10:43:56+02:00;
       };
     });
     ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190329.1020";
+      version = "20190412.1043";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "344aebcbfa229c6e63529c4ffa972097f4ec0a06";
-        sha256 = "03sk8jn3zmqyd2zphmnvlxy31jyq8pjdyzn6lwjbzs226df08h6a";
-        # date = 2019-03-29T10:20:14+01:00;
+        rev = "2221a5c4625639bb3df3f3248efc32c43cf8a924";
+        sha256 = "0ggqd0fg57idav2g64iapz4pvdh0169bim6isz9qlm5cqw7iivxk";
+        # date = 2019-04-12T10:43:56+02:00;
       };
     });
     swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190329.1020";
+      version = "20190412.1043";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "344aebcbfa229c6e63529c4ffa972097f4ec0a06";
-        sha256 = "03sk8jn3zmqyd2zphmnvlxy31jyq8pjdyzn6lwjbzs226df08h6a";
-        # date = 2019-03-29T10:20:14+01:00;
+        rev = "2221a5c4625639bb3df3f3248efc32c43cf8a924";
+        sha256 = "0ggqd0fg57idav2g64iapz4pvdh0169bim6isz9qlm5cqw7iivxk";
+        # date = 2019-04-12T10:43:56+02:00;
       };
     });
 
