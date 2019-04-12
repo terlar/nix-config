@@ -258,25 +258,6 @@ let
       };
     };
 
-    goto-line-preview = self.melpaBuild rec {
-      pname   = "goto-line-preview";
-      version = "20190308.1538";
-      src = pkgs.fetchFromGitHub {
-        owner  = "jcs090218";
-        repo   = "goto-line-preview";
-        rev    = "772fb942777a321b4698add1b94cff157f23a93b";
-        sha256 = "16zil8kjv7lfmy11g88p1cm24j9db319fgkwzsgf2vzp1m15l0pc";
-        # date = 2019-03-08T15:38:36+08:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (goto-line-preview :repo "jcs090218/goto-line-preview" :fetcher github)
-      '';
-
-      meta = {
-        description = "Preview line when executing goto-line command.";
-      };
-    };
-
     org-pretty-table = self.melpaBuild rec {
       pname   = "org-pretty-table";
       version = "20131129.1610";

@@ -83,7 +83,6 @@ with epkgs;
   go-mode
   gorepl-mode
   goto-chg
-  goto-line-preview
   gradle-mode
   groovy-mode
   haskell-mode
