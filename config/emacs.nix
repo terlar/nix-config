@@ -145,7 +145,6 @@ with epkgs;
   page-break-lines
   parrot
   pdf-tools
-  perfect-margin
   pip-requirements
   plantuml-mode
   projectile

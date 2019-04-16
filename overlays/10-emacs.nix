@@ -6,9 +6,6 @@ let
       buildInputs = attrs.buildInputs ++ [ pkgs.git ];
     });
 
-    all-the-icons = super.all-the-icons.overrideAttrs(attrs: {
-      patches = [ ./emacs/patches/all-the-icons.patch ];
-    });
     all-the-icons-dired = super.all-the-icons-dired.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/all-the-icons-dired.patch ];
     });
@@ -18,205 +15,70 @@ let
 
     # Follow master.
     cider = super.cider.overrideAttrs(attrs: {
-      version = "20190313.1658";
+      version = "20190415.1807";
       src = pkgs.fetchFromGitHub {
         owner = "clojure-emacs";
         repo = "cider";
-        rev = "4d98e3b8fff958380f04d26010ad05ebf2b7feeb";
-        sha256 = "0ycaahjnrj7slx5h8fl42mpfvkv4xd72fpbh71hjb2nv7qyk0sa3";
-        # date = 2019-03-13T16:58:41+02:00;
+        rev = "d5b4bfcb2958e0252425674fd2aaa3746fb40d64";
+        sha256 = "0a6xzanhwrf83xhcrapgrnvdsdfblrfna9iwbvbs015k3r8mignz";
+        # date = 2019-04-15T18:07:28+02:00;
       };
     });
 
     # Follow master.
     company-mode = super.company-mode.overrideAttrs(attrs: {
-      version = "20190316.0301";
+      version = "20190415.0503";
       src = pkgs.fetchFromGitHub {
         owner = "company-mode";
         repo = "company-mode";
-        rev = "f965786c589f95a00901028e49f1eae415053f08";
-        sha256 = "0pzxim56nxynmlq459ljfy82nb6qgq1izy19ldwnyc36x1mqccgf";
-        # date = 2019-03-16T03:01:51+02:00;
+        rev = "3eda0ba23921d43b733f7975e56d490a34b9f30b";
+        sha256 = "0shmv48bq9l5xm60dwx9lqyq6b39y3d7qjxdlah7dpipv5vhra42";
+        # date = 2019-04-15T05:03:58+03:00;
       };
     });
 
     # Follow master.
     counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190412.1043";
+      version = "20190414.2226";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "2221a5c4625639bb3df3f3248efc32c43cf8a924";
-        sha256 = "0ggqd0fg57idav2g64iapz4pvdh0169bim6isz9qlm5cqw7iivxk";
-        # date = 2019-04-12T10:43:56+02:00;
+        rev = "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e";
+        sha256 = "1pfa7vvv8krsvy7990irnmcsdwf490r7sgbn8bck0r5vv8dgp7vr";
+        # date = 2019-04-14T22:26:30+03:00;
       };
     });
     ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190412.1043";
+      version = "20190414.2226";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "2221a5c4625639bb3df3f3248efc32c43cf8a924";
-        sha256 = "0ggqd0fg57idav2g64iapz4pvdh0169bim6isz9qlm5cqw7iivxk";
-        # date = 2019-04-12T10:43:56+02:00;
+        rev = "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e";
+        sha256 = "1pfa7vvv8krsvy7990irnmcsdwf490r7sgbn8bck0r5vv8dgp7vr";
+        # date = 2019-04-14T22:26:30+03:00;
       };
     });
     swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190412.1043";
+      version = "20190414.2226";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "2221a5c4625639bb3df3f3248efc32c43cf8a924";
-        sha256 = "0ggqd0fg57idav2g64iapz4pvdh0169bim6isz9qlm5cqw7iivxk";
-        # date = 2019-04-12T10:43:56+02:00;
-      };
-    });
-
-    # Follow master.
-    deadgrep = super.deadgrep.overrideAttrs(attrs: {
-      version = "20190314.2207";
-      src = pkgs.fetchFromGitHub {
-        owner = "wilfred";
-        repo = "deadgrep";
-        rev = "160e7adb7f043fc42ba6d4d891ad50ef1e063be7";
-        sha256 = "1sm92hj4ilq0h82fy5k5nzn7jq56yw2665ikqdcj89k9xldin6xi";
-        # date = 2019-03-14T22:07:10+00:00;
-      };
-    });
-
-    # Follow master.
-    dumb-jump = super.dumb-jump.overrideAttrs(attrs: {
-      version = "20190314.2232";
-      src = pkgs.fetchFromGitHub {
-        owner = "jacktasia";
-        repo = "dumb-jump";
-        rev = "59f91b408f6228be035ece10a79b5d460430116a";
-        sha256 = "0iqxk9i2qfav5c59k1pjarq2f6k8y1qxdscx3d36lhnh5jc5ydbz";
-        # date = 2019-03-14T22:32:57-07:00;
-      };
-    });
-
-    # Follow master.
-    eglot = super.eglot.overrideAttrs(attrs: {
-      version = "20190213.0924";
-      src = pkgs.fetchFromGitHub {
-        owner = "joaotavora";
-        repo = "eglot";
-        rev = "7d6e3cf5d7ae098aa6c8572343c8bc9b8453aace";
-        sha256 = "1q616yp9zi9a76sjb9f901r4cck40p8f5rgxmdwsavagl5w8d8cz";
-        # date = 2019-02-13T09:24:02+00:00;
-      };
-    });
-
-    # Follow master.
-    nix-mode = super.nix-mode.overrideAttrs(attrs: {
-      version = "20190119.1025";
-      src = pkgs.fetchFromGitHub {
-        owner = "nixos";
-        repo = "nix-mode";
-        rev = "1e53bed4d47c526c71113569f592c82845a17784";
-        sha256 = "172s5lxlns633gbi6sq6iws269chalh5k501n3wffp5i3b2xzdyq";
-        # date = 2019-01-19T10:25:21+01:00;
+        rev = "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e";
+        sha256 = "1pfa7vvv8krsvy7990irnmcsdwf490r7sgbn8bck0r5vv8dgp7vr";
+        # date = 2019-04-14T22:26:30+03:00;
       };
     });
 
     # Follow master.
     objed = super.objed.overrideAttrs(attrs: {
-      version = "20190315.1756";
+      version = "20190416.1738";
       src = pkgs.fetchFromGitHub {
         owner = "clemera";
         repo = "objed";
-        rev = "aa8f32d155dbbcbdabf388acfec5ae09cadedf9a";
-        sha256 = "1z2db1n8q2zfrscviagygjvnbz0lzxx86jq5z4ri81shhja93j5r";
-        # date = 2019-03-15T17:56:41+01:00;
+        rev = "cf22d170b07172e034c457cc349336c85ec785d4";
+        sha256 = "0k6bgl851jfzkr9d3xi757a1npqmk6kgkzklcqwl3h562agq5zv6";
+        # date = 2019-04-16T17:38:31+02:00;
       };
-    });
-
-    # Fix prettier format command.
-    format-all = super.format-all.overrideAttrs(attrs: {
-      version = "20190206.1333";
-      src = pkgs.fetchFromGitHub {
-        owner = "lassik";
-        repo = "emacs-format-all-the-code";
-        rev = "3d0eda591bc22fad6cbea3f84c716ae2b7fb80e6";
-        sha256 = "1k9m6lrp3d9msg7r88l9gkpiqj4w7aclnxqfw07cxhy9rzw5gwi3";
-        # date = 2019-02-06T13:33:24+02:00;
-      };
-    });
-
-    # Fix display function for Emacs 27.0.50.
-    imenu-list = super.imenu-list.overrideAttrs(attrs: {
-      version = "20190115.2330";
-      src = pkgs.fetchFromGitHub {
-        owner = "bmag";
-        repo = "imenu-list";
-        rev = "46008738f8fef578a763c308cf6695e5b4d4aa77";
-        sha256 = "14l3yw9y1nk103s7z5i1fmd6kvlb2p6ayi6sf9l1x1ydg9glrpl8";
-        # date = 2019-01-15T23:30:04+02:00;
-      };
-    });
-
-    # Fix update at cursor position.
-    nix-update = super.nix-update.overrideAttrs(attrs: {
-      version = "20190124.1135";
-      src = pkgs.fetchFromGitHub {
-        owner = "jwiegley";
-        repo = "nix-update-el";
-        rev = "fc6c39c2da3fcfa62f4796816c084a6389c8b6e7";
-        sha256 = "01cpl4w49m5dfkx7l8g1q183s341iz6vkjv2q4fbx93avd7msjgi";
-        # date = 2019-01-24T11:35:44-08:00;
-      };
-    });
-
-    # Support disabling spacer lines.
-    quick-peek = super.quick-peek.overrideAttrs(attrs: {
-      version = "20190208.1015";
-      src = pkgs.fetchFromGitHub {
-        owner = "cpitclaudel";
-        repo = "quick-peek";
-        rev = "fd8a6c81422932539d221f39f18c90f2811f2dd9";
-        sha256 = "18jr3syd7jd809qq1j61zwaaclmqn24qyb0mv0q8sj6ac4vzl1c3";
-        # date = 2019-02-08T10:15:39-05:00;
-      };
-    });
-
-    # Include .nosearch file.
-    realgud = super.realgud.overrideAttrs(attrs: {
-      version = "20190121.1943";
-      src = pkgs.fetchFromGitHub {
-        owner = "realgud";
-        repo = "realgud";
-        rev = "1da5f2b5161bd5d5671b38ab182084e2d89e7c45";
-        sha256 = "19ijc3v1wz01631hyc3x1bgx9kczhdzc99jlxxfq9y5yr8p1s2qa";
-        # date = 2019-01-21T19:43:49-05:00;
-      };
-
-      recipe = pkgs.writeText "recipe" ''
-        (realgud
-        :fetcher github
-        :repo "realgud/realgud"
-        :files ("realgud.el" "realgud/.nosearch"
-        ("realgud/common"             "realgud/common/*.el")
-        ("realgud/common/buffer"      "realgud/common/buffer/*.el")
-        ("realgud/debugger/bashdb"    "realgud/debugger/bashdb/*.el")
-        ("realgud/debugger/gdb"       "realgud/debugger/gdb/*.el")
-        ("realgud/debugger/gub"       "realgud/debugger/gub/*.el")
-        ("realgud/debugger/ipdb"      "realgud/debugger/ipdb/*.el")
-        ("realgud/debugger/jdb"       "realgud/debugger/jdb/*.el")
-        ("realgud/debugger/kshdb"     "realgud/debugger/kshdb/*.el")
-        ("realgud/debugger/nodejs"    "realgud/debugger/nodejs/*.el")
-        ("realgud/debugger/pdb"       "realgud/debugger/pdb/*.el")
-        ("realgud/debugger/perldb"    "realgud/debugger/perldb/*.el")
-        ("realgud/debugger/rdebug"    "realgud/debugger/rdebug/*.el")
-        ("realgud/debugger/remake"    "realgud/debugger/remake/*.el")
-        ("realgud/debugger/trepan"    "realgud/debugger/trepan/*.el")
-        ("realgud/debugger/trepan.pl" "realgud/debugger/trepan.pl/*.el")
-        ("realgud/debugger/trepan2"   "realgud/debugger/trepan2/*.el")
-        ("realgud/debugger/trepan3k"  "realgud/debugger/trepan3k/*.el")
-        ("realgud/debugger/trepanjs"  "realgud/debugger/trepanjs/*.el")
-        ("realgud/debugger/zshdb"     "realgud/debugger/zshdb/*.el")
-        ("realgud/lang" "realgud/lang/*.el")))
-       '';
     });
 
     # Packages not in MELPA.
@@ -282,34 +144,15 @@ let
       };
     };
 
-    perfect-margin = self.melpaBuild rec {
-      pname   = "perfect-margin";
-      version = "20190303.0209";
-      src = pkgs.fetchFromGitHub {
-        owner  = "mpwang";
-        repo   = "perfect-margin";
-        rev    = "f3723f59cd56d22043a2ef31e4b2aed08c7add1f";
-        sha256 = "108nj14cjcvz0yidsriirf0cyakdq6v0r5vap12k9nk85k9xwry2";
-        # date = 2019-03-03T02:09:15+08:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (perfect-margin :repo "mpwang/perfect-margin" :fetcher github)
-      '';
-
-      meta = {
-        description = "Auto center emacs windows, work with minimap and/or linum-mode.";
-      };
-    };
-
     realgud-node-inspect = self.melpaBuild rec {
       pname = "realgud-node-inspect";
-      version = "20190317.2230";
+      version = "20190317.1812";
       src = pkgs.fetchFromGitHub {
-        owner  = "terlar";
+        owner  = "realgud";
         repo   = "realgud-node-inspect";
-        rev    = "284546506cc5f48f5c394661ed6498a3c3c53d1f";
+        rev    = "e9590727c981caf424b8736448a29f4111d3e8c1";
         sha256 = "16yrk84d0si5yghsqxbnjy8gh27cwmra42d85mhas18xvyx5dm4k";
-        # date = 2019-03-17T22:30:00+01:00;
+        # date = 2019-03-17T18:12:25-04:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (realgud-node-inspect
@@ -321,25 +164,6 @@ let
 
       meta = {
         description = "realgud support for newer node inspect";
-      };
-    };
-
-    reformatter = self.melpaBuild rec {
-      pname   = "reformatter";
-      version = "20190222.1042";
-      src = pkgs.fetchFromGitHub {
-        owner  = "purcell";
-        repo   = "reformatter.el";
-        rev    = "028dae00dd9a9c0846f6a2c9251af7acf68e6ad3";
-        sha256 = "0g3k8p6cysp3lx4ynd0df8d2vqxs3faanpmf4f10l2zm3z4bcz4g";
-        # date = 2019-02-22T10:42:21+13:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (reformatter :repo "purcell/reformatter.el" :fetcher github)
-      '';
-
-      meta = {
-        description = "Define commands which run reformatters on the current Emacs buffer";
       };
     };
 
@@ -364,25 +188,6 @@ let
           the function at point (using different backends) and displays them inline in
           the current buffer.
         '';
-      };
-    };
-
-    undo-propose = self.melpaBuild rec {
-      pname   = "undo-propose";
-      version = "20190302.0820";
-      src = pkgs.fetchFromGitHub {
-        owner  = "jackkamm";
-        repo   = "undo-propose-el";
-        rev    = "503963cbe69197339cc6ab01a1b909590b433de7";
-        sha256 = "1acz7lsbqcyn06r5zhp4qkqmwz282mjpwvj20q2nv5v8qkby2qic";
-        # date = 2019-03-02T08:20:15-08:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (undo-propose :repo "jackkamm/undo-propose-el" :fetcher github)
-      '';
-
-      meta = {
-        description = "Navigate through your undo history in a temporary buffer.";
       };
     };
   };
