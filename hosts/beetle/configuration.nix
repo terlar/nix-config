@@ -36,8 +36,8 @@
   # Enable network manager.
   networking.networkmanager.enable = true;
 
-  # Enable network name resolution.
-  services.resolved.enable = true;
+  # Disable local network name resolution.
+  services.resolved.enable = false;
 
   # Enable zero-configuration networking and service discorvery.
   services.avahi.enable = true;
