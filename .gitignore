@@ -2,3 +2,4 @@
 /private
 /configuration.nix
 /hardware-configuration.nix
+/programs.sqlite

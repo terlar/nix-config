@@ -11,6 +11,8 @@ in {
     ./common.nix
   ] ++ lib.optional (builtins.pathExists ../private/nixos/default.nix) ../private/nixos;
 
+  programs.command-not-found.dbPath = ../programs.sqlite;
+
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.consoleKeyMap = keyboardLayout;
 

@@ -118,6 +118,12 @@ gc-darwin: # Clean up Darwin packages (older than 2 weeks)
 clean:
 	-@rm configuration.nix hardware-configuration.nix private 2>/dev/null ||:
 
+.PHONY: programs.sqlite
+programs.sqlite:
+	wget https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz -O - \
+	  | tar xJf - --wildcards "nixos*/programs.sqlite" -O \
+	  > programs.sqlite
+
 private:
 	ln -s $(PRIVATE_CONFIG_PATH) $@
 
