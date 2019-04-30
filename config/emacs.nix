@@ -145,6 +145,7 @@ with epkgs;
   page-break-lines
   parrot
   pdf-tools
+  pdfgrep
   pip-requirements
   plantuml-mode
   projectile

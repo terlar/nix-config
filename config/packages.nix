@@ -38,6 +38,7 @@ in ([
   htop
   most
   p7zip
+  pdfgrep
   pinentry
   pwgen
   ripgrep
