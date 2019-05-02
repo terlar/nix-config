@@ -120,6 +120,25 @@ let
       };
     };
 
+    flymake-eslint = self.melpaBuild rec {
+      pname = "flymake-eslint";
+      version = "20190411.2346";
+      src = pkgs.fetchFromGitHub {
+        owner  = "orzechowskid";
+        repo   = "flymake-eslint";
+        rev    = "b0951ae2be75e19b7df4ef0e3947897869b837d1";
+        sha256 = "1mnr3nfahjlxl3p4axkqhzzkfzp98vdl8j1hr8mnlm7payz6vkdm";
+        # date = 2019-04-11T23:46:43-04:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (flymake-eslint :fetcher github :repo "orzechowskid/flymake-eslint"))
+      '';
+
+      meta = {
+        description = "Flymake backend for Javascript using eslint";
+      };
+    };
+
     org-pretty-table = self.melpaBuild rec {
       pname   = "org-pretty-table";
       version = "20131129.1610";
