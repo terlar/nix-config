@@ -15,7 +15,7 @@
   services.autorandr.enable = true;
 
   # Enable secrets store.
-  security.pam.services.lightdm.enableGnomeKeyring = true;
+  services.gnome3.gnome-keyring.enable = true;
 
   services.xserver = {
     enable = true;
