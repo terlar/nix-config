@@ -15,57 +15,57 @@ let
 
     # Follow master.
     cider = super.cider.overrideAttrs(attrs: {
-      version = "20190415.1807";
+      version = "20190419.1509";
       src = pkgs.fetchFromGitHub {
         owner = "clojure-emacs";
         repo = "cider";
-        rev = "d5b4bfcb2958e0252425674fd2aaa3746fb40d64";
-        sha256 = "0a6xzanhwrf83xhcrapgrnvdsdfblrfna9iwbvbs015k3r8mignz";
-        # date = 2019-04-15T18:07:28+02:00;
+        rev = "3d85b4dc9ce5e130b61186334bc8f732ebeeaada";
+        sha256 = "1a39dd29dlxp34xjn6zpinqqfcmxrhzj3h6gi1dl1qjr64d76bfq";
+        # date = 2019-04-19T15:09:30+03:00;
       };
     });
 
     # Follow master.
     company-mode = super.company-mode.overrideAttrs(attrs: {
-      version = "20190415.0503";
+      version = "20190430.2152";
       src = pkgs.fetchFromGitHub {
         owner = "company-mode";
         repo = "company-mode";
-        rev = "3eda0ba23921d43b733f7975e56d490a34b9f30b";
-        sha256 = "0shmv48bq9l5xm60dwx9lqyq6b39y3d7qjxdlah7dpipv5vhra42";
-        # date = 2019-04-15T05:03:58+03:00;
+        rev = "ad6ff0eecca99dc5ac8b6a8a6174df7d2ad88ae7";
+        sha256 = "0cps5sl9iij1wrpcnhi7xqv58cqsrswhc8r7hj1c00w8288z978w";
+        # date = 2019-04-30T21:52:15+03:00;
       };
     });
 
     # Follow master.
     counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190414.2226";
+      version = "20190508.1542";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e";
-        sha256 = "1pfa7vvv8krsvy7990irnmcsdwf490r7sgbn8bck0r5vv8dgp7vr";
-        # date = 2019-04-14T22:26:30+03:00;
+        rev = "b49f17fa47083c008877c4c9e0b32f2ee610af5f";
+        sha256 = "10mhipn1dic9sf5k4yxndilwmwphcgqbpqnm3svj3h1br3l5b7wq";
+        # date = 2019-05-08T15:42:47+02:00;
       };
     });
     ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190414.2226";
+      version = "20190508.1542";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e";
-        sha256 = "1pfa7vvv8krsvy7990irnmcsdwf490r7sgbn8bck0r5vv8dgp7vr";
-        # date = 2019-04-14T22:26:30+03:00;
+        rev = "b49f17fa47083c008877c4c9e0b32f2ee610af5f";
+        sha256 = "10mhipn1dic9sf5k4yxndilwmwphcgqbpqnm3svj3h1br3l5b7wq";
+        # date = 2019-05-08T15:42:47+02:00;
       };
     });
     swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190414.2226";
+      version = "20190508.1542";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e";
-        sha256 = "1pfa7vvv8krsvy7990irnmcsdwf490r7sgbn8bck0r5vv8dgp7vr";
-        # date = 2019-04-14T22:26:30+03:00;
+        rev = "b49f17fa47083c008877c4c9e0b32f2ee610af5f";
+        sha256 = "10mhipn1dic9sf5k4yxndilwmwphcgqbpqnm3svj3h1br3l5b7wq";
+        # date = 2019-05-08T15:42:47+02:00;
       };
     });
 
@@ -83,13 +83,13 @@ let
 
     # Follow master.
     objed = super.objed.overrideAttrs(attrs: {
-      version = "20190416.1738";
+      version = "20190502.1951";
       src = pkgs.fetchFromGitHub {
         owner = "clemera";
         repo = "objed";
-        rev = "cf22d170b07172e034c457cc349336c85ec785d4";
-        sha256 = "0k6bgl851jfzkr9d3xi757a1npqmk6kgkzklcqwl3h562agq5zv6";
-        # date = 2019-04-16T17:38:31+02:00;
+        rev = "4d1a4453a50fe21fd2de0ddb24871d14f33220b3";
+        sha256 = "01bgli9b5iw0hp2m2ibwby5l14xsinmhm4has59r04wg3jrycia4";
+        # date = 2019-05-02T19:51:42+02:00;
       };
     });
 
@@ -134,13 +134,13 @@ let
 
     flymake-eslint = self.melpaBuild rec {
       pname = "flymake-eslint";
-      version = "20190411.2346";
+      version = "20190503.1336";
       src = pkgs.fetchFromGitHub {
         owner  = "orzechowskid";
         repo   = "flymake-eslint";
-        rev    = "b0951ae2be75e19b7df4ef0e3947897869b837d1";
-        sha256 = "1mnr3nfahjlxl3p4axkqhzzkfzp98vdl8j1hr8mnlm7payz6vkdm";
-        # date = 2019-04-11T23:46:43-04:00;
+        rev    = "e61a327c4cc85706b176f45bf612300e55a5b67b";
+        sha256 = "0rm7d7phydzqh27la7hpsq6m1akzcnxhrivr0fvm8lcpk8m1vdj7";
+        # date = 2019-05-03T13:36:04-04:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (flymake-eslint :fetcher github :repo "orzechowskid/flymake-eslint"))
