@@ -16,6 +16,7 @@
 
   # Enable secrets store.
   services.gnome3.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   services.xserver = {
     enable = true;
