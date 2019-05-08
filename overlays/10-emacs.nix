@@ -70,6 +70,18 @@ let
     });
 
     # Follow master.
+    eglot = super.eglot.overrideAttrs(attrs: {
+      version = "20190508.1233";
+      src = pkgs.fetchFromGitHub {
+        owner = "joaotavora";
+        repo = "eglot";
+        rev = "b868ee168a3c72debb7843d23468c4bba83b95f5";
+        sha256 = "1w4gyz1pbf3abj2gqnq5s3h8rk1ybqs5g9lhswwamcynyzzb88b5";
+        # date = 2019-05-08T12:33:34+01:00;
+      };
+    });
+
+    # Follow master.
     objed = super.objed.overrideAttrs(attrs: {
       version = "20190416.1738";
       src = pkgs.fetchFromGitHub {
