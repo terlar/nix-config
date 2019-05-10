@@ -23,7 +23,7 @@ with epkgs;
   cakecrumbs
   camcorder
   caml
-  cider
+  cider parseedn
   clojure-mode
   color-identifiers-mode
   comment-or-uncomment-sexp
