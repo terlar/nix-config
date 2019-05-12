@@ -149,10 +149,6 @@
 
         keybindings = {
           # Disabled keys
-          Up = "nop";
-          Left = "nop";
-          Down = "nop";
-          Right = "nop";
           Prior = "nop";
           Next = "nop";
 
