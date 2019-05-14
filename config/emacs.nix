@@ -147,6 +147,7 @@ with epkgs;
   parrot
   pdf-tools
   pdfgrep
+  pepita
   pip-requirements
   plantuml-mode
   projectile

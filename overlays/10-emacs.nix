@@ -175,6 +175,26 @@ let
       };
     };
 
+    pepita = self.melpaBuild rec {
+      pname   = "pepita";
+      version = "20190509.2131";
+      src = pkgs.fetchFromGitHub {
+        owner = "sebasmonia";
+        repo = "pepita";
+        rev = "c3f5956326895dc8f01329bdad139d69f60dcf8d";
+        sha256 = "0m6hkd0pn5i73vci6ni28f8nyxr9jpm5c4lwjk419k63m8znjd92";
+        # date = 2019-05-09T21:31:07-06:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (pepita :repo "sebasmonia/pepita" :fetcher github)
+      '';
+      packageRequires = [ self.csv ];
+
+      meta = {
+        description = "Run Splunk search from Emacs";
+      };
+    };
+
     realgud-node-inspect = self.melpaBuild rec {
       pname = "realgud-node-inspect";
       version = "20190317.1812";
