@@ -134,13 +134,13 @@ let
 
     flymake-eslint = self.melpaBuild rec {
       pname = "flymake-eslint";
-      version = "20190503.1336";
+      version = "20190517.1028";
       src = pkgs.fetchFromGitHub {
         owner  = "orzechowskid";
         repo   = "flymake-eslint";
-        rev    = "e61a327c4cc85706b176f45bf612300e55a5b67b";
-        sha256 = "0rm7d7phydzqh27la7hpsq6m1akzcnxhrivr0fvm8lcpk8m1vdj7";
-        # date = 2019-05-03T13:36:04-04:00;
+        rev    = "29d86fdc828074744babbeaa622881dd77bed90a";
+        sha256 = "1zbrxkgi3nn12x3sslxwq06fr8mf6r2yxbphxy0jad3aaa40r7gr";
+        # date = 2019-05-17T10:28:04-04:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (flymake-eslint :fetcher github :repo "orzechowskid/flymake-eslint"))
