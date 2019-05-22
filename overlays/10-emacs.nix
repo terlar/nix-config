@@ -138,9 +138,9 @@ let
       src = pkgs.fetchFromGitHub {
         owner  = "orzechowskid";
         repo   = "flymake-eslint";
-        rev    = "29d86fdc828074744babbeaa622881dd77bed90a";
-        sha256 = "1zbrxkgi3nn12x3sslxwq06fr8mf6r2yxbphxy0jad3aaa40r7gr";
-        # date = 2019-05-17T10:28:04-04:00;
+        rev    = "d4be92ea779ea333b599fd125817f943a676a63a";
+        sha256 = "1x0ipsg0gd5lflx7kyyaz7zv6xnjzmhh1k32f01qr69zarf31nw0";
+        # date = 2019-05-21T00:11:35-04:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (flymake-eslint :fetcher github :repo "orzechowskid/flymake-eslint"))
