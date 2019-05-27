@@ -40,6 +40,7 @@ in ([
   p7zip
   pdfgrep
   pinentry
+  procs
   pwgen
   ripgrep
   tldr
