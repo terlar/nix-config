@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
     # Shared NixOS configuration.
@@ -23,7 +24,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use the newer but stable kernel packages.
-  boot.kernelPackages = pkgs.linuxPackages_5_0;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Kernel modules:
   boot.kernelModules = [
