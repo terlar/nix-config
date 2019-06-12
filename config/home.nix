@@ -29,6 +29,7 @@ in rec {
 
   home = {
     sessionVariables = {
+      BROWSER = "qutebrowser";
       EDITOR = "emacseditor";
       TERMINAL = "kitty";
     };
@@ -224,12 +225,14 @@ in rec {
   xdg = {
     enable = true;
 
-    configFile."i3status/config".source = ./dotfiles/i3/.config/i3status/config;
-    configFile."kitty/kitty.conf".source = ./dotfiles/kitty/.config/kitty/kitty.conf;
     # Fish configuration.
     configFile."fish/completions".source = ./dotfiles/fish/.config/fish/completions;
     configFile."fish/conf.d".source = ./dotfiles/fish/.config/fish/conf.d;
     configFile."fish/functions".source = ./dotfiles/fish/.config/fish/functions;
+
+    configFile."i3status/config".source = ./dotfiles/i3/.config/i3status/config;
+    configFile."kitty/kitty.conf".source = ./dotfiles/kitty/.config/kitty/kitty.conf;
+    configFile."qutebrowser/config.py".source = ./dotfiles/qutebrowser/.config/qutebrowser/config.py;
   };
 
   manual.html.enable = true;
