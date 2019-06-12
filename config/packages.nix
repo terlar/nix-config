@@ -102,6 +102,7 @@ in ([
   spotify
   sxiv
   xautolock
+  xcalib
   xclip
   xorg.xhost
   xsel
