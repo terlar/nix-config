@@ -233,6 +233,13 @@ in rec {
     configFile."i3status/config".source = ./dotfiles/i3/.config/i3status/config;
     configFile."kitty/kitty.conf".source = ./dotfiles/kitty/.config/kitty/kitty.conf;
     configFile."qutebrowser/config.py".source = ./dotfiles/qutebrowser/.config/qutebrowser/config.py;
+
+    configFile."mimeapps.list".text = ''
+      [Default Applications]
+      x-scheme-handler/http=qutebrowser.desktop
+      x-scheme-handler/https=qutebrowser.desktop
+      x-scheme-handler/ftp=qutebrowser.desktop
+    '';
   };
 
   manual.html.enable = true;
