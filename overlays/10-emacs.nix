@@ -15,13 +15,13 @@ let
 
     # Follow master.
     cider = super.cider.overrideAttrs(attrs: {
-      version = "20190419.1509";
+      version = "20190610.1108";
       src = pkgs.fetchFromGitHub {
         owner = "clojure-emacs";
         repo = "cider";
-        rev = "3d85b4dc9ce5e130b61186334bc8f732ebeeaada";
-        sha256 = "1a39dd29dlxp34xjn6zpinqqfcmxrhzj3h6gi1dl1qjr64d76bfq";
-        # date = 2019-04-19T15:09:30+03:00;
+        rev = "c3b86ba4738ac1fb61ecacde97506e89bb9dedb6";
+        sha256 = "0m4210jqmral487sfb4blsycamdjihi0pm7fdg0w7pgbnp3fv6ai";
+        # date = 2019-06-10T11:08:12+03:00;
       };
     });
 
@@ -39,57 +39,69 @@ let
 
     # Follow master.
     counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190508.1542";
+      version = "20190613.1739";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "b49f17fa47083c008877c4c9e0b32f2ee610af5f";
-        sha256 = "10mhipn1dic9sf5k4yxndilwmwphcgqbpqnm3svj3h1br3l5b7wq";
-        # date = 2019-05-08T15:42:47+02:00;
+        rev = "44b2d7d6a8a81d1ed5c2aaa613eabe7e25c0b9a3";
+        sha256 = "09fiqjyb31f7h2a9ak7fclrn42960ggcd065j76fk4lnqjh97c07";
+        # date = 2019-06-13T17:39:51+02:00;
       };
     });
     ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190508.1542";
+      version = "20190613.1739";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "b49f17fa47083c008877c4c9e0b32f2ee610af5f";
-        sha256 = "10mhipn1dic9sf5k4yxndilwmwphcgqbpqnm3svj3h1br3l5b7wq";
-        # date = 2019-05-08T15:42:47+02:00;
+        rev = "44b2d7d6a8a81d1ed5c2aaa613eabe7e25c0b9a3";
+        sha256 = "09fiqjyb31f7h2a9ak7fclrn42960ggcd065j76fk4lnqjh97c07";
+        # date = 2019-06-13T17:39:51+02:00;
       };
     });
     swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190508.1542";
+      version = "20190613.1739";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "b49f17fa47083c008877c4c9e0b32f2ee610af5f";
-        sha256 = "10mhipn1dic9sf5k4yxndilwmwphcgqbpqnm3svj3h1br3l5b7wq";
-        # date = 2019-05-08T15:42:47+02:00;
+        rev = "44b2d7d6a8a81d1ed5c2aaa613eabe7e25c0b9a3";
+        sha256 = "09fiqjyb31f7h2a9ak7fclrn42960ggcd065j76fk4lnqjh97c07";
+        # date = 2019-06-13T17:39:51+02:00;
       };
     });
 
     # Follow master.
     eglot = super.eglot.overrideAttrs(attrs: {
-      version = "20190508.1233";
+      version = "20190512.1147";
       src = pkgs.fetchFromGitHub {
         owner = "joaotavora";
         repo = "eglot";
-        rev = "b868ee168a3c72debb7843d23468c4bba83b95f5";
-        sha256 = "1w4gyz1pbf3abj2gqnq5s3h8rk1ybqs5g9lhswwamcynyzzb88b5";
-        # date = 2019-05-08T12:33:34+01:00;
+        rev = "5f629ebfb680f43849ca894c7166a2b54ff5ba50";
+        sha256 = "0jja8c2f6scy4bb3p79bn3sjkzkz10mmb8aivg9x1ynki96rc2ja";
+        # date = 2019-05-12T11:47:37+01:00;
+      };
+    });
+
+    # Follow master.
+    nix-mode = super.nix-mode.overrideAttrs(attrs: {
+      version = "20190614.1523";
+      src = pkgs.fetchFromGitHub {
+        owner = "nixos";
+        repo = "nix-mode";
+        rev = "a33ccd4fd78b1496e4178600623e04f7f98c31fe";
+        sha256 = "1ryqbrfyhwm982w2az2cz518686gnvh1sfjs6az1cskrhknhva0r";
+        # date = 2019-06-14T15:23:17-04:00;
       };
     });
 
     # Follow master.
     objed = super.objed.overrideAttrs(attrs: {
-      version = "20190502.1951";
+      version = "20190530.1636";
       src = pkgs.fetchFromGitHub {
         owner = "clemera";
         repo = "objed";
-        rev = "4d1a4453a50fe21fd2de0ddb24871d14f33220b3";
-        sha256 = "01bgli9b5iw0hp2m2ibwby5l14xsinmhm4has59r04wg3jrycia4";
-        # date = 2019-05-02T19:51:42+02:00;
+        rev = "70cf23ee694651e9b6feada6e380318e519b649b";
+        sha256 = "080nlv4hdhmk791g6r15p04prgmhqyzdrphaiz5mj1zdws2yjhmb";
+        # date = 2019-05-30T16:36:31+02:00;
       };
     });
 
@@ -177,13 +189,13 @@ let
 
     pepita = self.melpaBuild rec {
       pname   = "pepita";
-      version = "20190509.2131";
+      version = "20190604.1204";
       src = pkgs.fetchFromGitHub {
         owner = "sebasmonia";
         repo = "pepita";
-        rev = "c3f5956326895dc8f01329bdad139d69f60dcf8d";
-        sha256 = "0m6hkd0pn5i73vci6ni28f8nyxr9jpm5c4lwjk419k63m8znjd92";
-        # date = 2019-05-09T21:31:07-06:00;
+        rev = "f4f13f9723b7d8c2ea5b3f5579224a0451f2defd";
+        sha256 = "0jwd4n1z2q1bil33pw78vl3zaah6wpmgf9pjlbkdf5j2jlpyl4iq";
+        # date = 2019-06-04T12:04:22-06:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (pepita :repo "sebasmonia/pepita" :fetcher github)
@@ -197,13 +209,13 @@ let
 
     realgud-node-inspect = self.melpaBuild rec {
       pname = "realgud-node-inspect";
-      version = "20190317.1812";
+      version = "20190526.1545";
       src = pkgs.fetchFromGitHub {
         owner  = "realgud";
         repo   = "realgud-node-inspect";
-        rev    = "e9590727c981caf424b8736448a29f4111d3e8c1";
-        sha256 = "16yrk84d0si5yghsqxbnjy8gh27cwmra42d85mhas18xvyx5dm4k";
-        # date = 2019-03-17T18:12:25-04:00;
+        rev    = "c3ed48cf3bc2b28f9fd23bcf60ea13a3cf019fc8";
+        sha256 = "00ywz4kp90wkfi1ncn9zj6vjw9igiv34gvx6fqfi8ha3q5xljzps";
+        # date = 2019-05-26T15:45:49-04:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (realgud-node-inspect
