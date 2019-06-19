@@ -4,6 +4,7 @@ with pkgs;
 
 let
   aspellEnv = aspellWithDicts(ps: [ ps.en ps.sv ]);
+  hunspellEnv = hunspellWithDicts(with hunspellDicts; [en-us sv-se]);
   sysconfig = (import <nixpkgs/nixos> {}).config;
 in ([
   nixStable
@@ -36,6 +37,7 @@ in ([
   gnumake
   gnupg
   htop
+  hunspellEnv
   most
   p7zip
   pdfgrep
