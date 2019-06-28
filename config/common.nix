@@ -63,7 +63,7 @@ in {
     maxJobs = 10;
     distributedBuilds = false;
 
-    binaryCaches = options.nix.binaryCaches.default ++ [
+    binaryCaches = [
       "https://cachix.cachix.org"
       "https://hie-nix.cachix.org"
     ];
