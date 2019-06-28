@@ -15,13 +15,13 @@ let
 
     # Follow master.
     cider = super.cider.overrideAttrs(attrs: {
-      version = "20190610.1108";
+      version = "20190626.1517";
       src = pkgs.fetchFromGitHub {
         owner = "clojure-emacs";
         repo = "cider";
-        rev = "c3b86ba4738ac1fb61ecacde97506e89bb9dedb6";
-        sha256 = "0m4210jqmral487sfb4blsycamdjihi0pm7fdg0w7pgbnp3fv6ai";
-        # date = 2019-06-10T11:08:12+03:00;
+        rev = "04cde7c9f6884f443d5525c46d267d1b39f989c6";
+        sha256 = "1gay8jysill2p5vaawlk7vwdbc61n0jh5qqh2jwpgwfjpk64r2ni";
+        # date = 2019-06-26T15:17:13+02:00;
       };
     });
 
@@ -39,57 +39,69 @@ let
 
     # Follow master.
     counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190613.1739";
+      version = "20190627.2144";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "44b2d7d6a8a81d1ed5c2aaa613eabe7e25c0b9a3";
-        sha256 = "09fiqjyb31f7h2a9ak7fclrn42960ggcd065j76fk4lnqjh97c07";
-        # date = 2019-06-13T17:39:51+02:00;
+        rev = "d260c48f88c3d500771a9764d0d4d13e45a6885b";
+        sha256 = "15w3wm3bbv0nzgfa7y5k8sgz2ld4shvi6mcz3rj1zsk39j30qjf1";
+        # date = 2019-06-27T21:44:10+02:00;
       };
     });
     ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190613.1739";
+      version = "20190627.2144";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "44b2d7d6a8a81d1ed5c2aaa613eabe7e25c0b9a3";
-        sha256 = "09fiqjyb31f7h2a9ak7fclrn42960ggcd065j76fk4lnqjh97c07";
-        # date = 2019-06-13T17:39:51+02:00;
+        rev = "d260c48f88c3d500771a9764d0d4d13e45a6885b";
+        sha256 = "15w3wm3bbv0nzgfa7y5k8sgz2ld4shvi6mcz3rj1zsk39j30qjf1";
+        # date = 2019-06-27T21:44:10+02:00;
       };
     });
     swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190613.1739";
+      version = "20190627.2144";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "44b2d7d6a8a81d1ed5c2aaa613eabe7e25c0b9a3";
-        sha256 = "09fiqjyb31f7h2a9ak7fclrn42960ggcd065j76fk4lnqjh97c07";
-        # date = 2019-06-13T17:39:51+02:00;
+        rev = "d260c48f88c3d500771a9764d0d4d13e45a6885b";
+        sha256 = "15w3wm3bbv0nzgfa7y5k8sgz2ld4shvi6mcz3rj1zsk39j30qjf1";
+        # date = 2019-06-27T21:44:10+02:00;
       };
     });
 
     # Follow master.
     eglot = super.eglot.overrideAttrs(attrs: {
-      version = "20190512.1147";
+      version = "20190627.1756";
       src = pkgs.fetchFromGitHub {
         owner = "joaotavora";
         repo = "eglot";
-        rev = "5f629ebfb680f43849ca894c7166a2b54ff5ba50";
-        sha256 = "0jja8c2f6scy4bb3p79bn3sjkzkz10mmb8aivg9x1ynki96rc2ja";
-        # date = 2019-05-12T11:47:37+01:00;
+        rev = "4548202afa73edb65b60aaab2a0532f2d63874a9";
+        sha256 = "0bkh2sn9nk691wicimlqzcbnvbxcmh7rgr0g4bk8d1yv85w1pzii";
+        # date = 2019-06-27T17:56:45+01:00;
+      };
+    });
+
+    # Follow master.
+    magit = super.magit.overrideAttrs(attrs: {
+      version = "20190625.2146";
+      src = pkgs.fetchFromGitHub {
+        owner = "magit";
+        repo = "magit";
+        rev = "fe3965de28b96a95adc4564111df90ac1fd5739c";
+        sha256 = "0zssaj2va8fak316x6xf32ml3b35yg3w4p7gs9jv624gcnbmzc5b";
+        # date = 2019-06-25T21:46:53+02:00;
       };
     });
 
     # Follow master.
     nix-mode = super.nix-mode.overrideAttrs(attrs: {
-      version = "20190614.1523";
+      version = "20190627.1252";
       src = pkgs.fetchFromGitHub {
         owner = "nixos";
         repo = "nix-mode";
-        rev = "a33ccd4fd78b1496e4178600623e04f7f98c31fe";
-        sha256 = "1ryqbrfyhwm982w2az2cz518686gnvh1sfjs6az1cskrhknhva0r";
-        # date = 2019-06-14T15:23:17-04:00;
+        rev = "c577957d668ea9513cc1cafc911ef6789d9fcb14";
+        sha256 = "0q0i8l7yz0jn6a4bn3sg7brk39fcycbcx8gncx1z919c7jhgffm0";
+        # date = 2019-06-27T12:52:16-04:00;
       };
     });
 
