@@ -135,6 +135,7 @@ with epkgs;
   org
   org-bullets
   org-cliplink
+  org-download
   org-noter
   org-plus-contrib
   org-pretty-table
@@ -167,6 +168,7 @@ with epkgs;
   realgud-node-inspect
   redtick
   reformatter
+  repl-toggle
   rjsx-mode
   rspec-mode
   rubocopfmt
