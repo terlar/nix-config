@@ -80,6 +80,18 @@ in {
 
     # Auto-mount disks.
     udisks2.enable = true;
+
+    # IRC gateway for message services.n
+    bitlbee = {
+      enable = true;
+      plugins = [
+        pkgs.bitlbee-facebook
+      ];
+      libpurple_plugins = [
+        pkgs.purple-hangouts
+        pkgs.telegram-purple
+      ];
+    };
   };
 
   users.defaultUserShell = pkgs.fish;
