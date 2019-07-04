@@ -71,13 +71,13 @@ let
 
     # Follow master.
     eglot = super.eglot.overrideAttrs(attrs: {
-      version = "20190627.1756";
+      version = "20190702.2258";
       src = pkgs.fetchFromGitHub {
         owner = "joaotavora";
         repo = "eglot";
-        rev = "4548202afa73edb65b60aaab2a0532f2d63874a9";
-        sha256 = "0bkh2sn9nk691wicimlqzcbnvbxcmh7rgr0g4bk8d1yv85w1pzii";
-        # date = 2019-06-27T17:56:45+01:00;
+        rev = "d6508e06b3569f2c2fa6d09326eadad47f41345a";
+        sha256 = "0148ml7g0pgxczjyq1f3prc50rwqvmpnix1lc7svy4h9izng80l4";
+        # date = 2019-07-02T22:58:41+01:00;
       };
     });
 
