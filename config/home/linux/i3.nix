@@ -129,6 +129,7 @@
             Left = "${tile} bottom-left; mode default";
             Down = "${tile} bottom-right; mode default";
             Right = "${tile} top-right; mode default";
+            space = "move position center; mode default";
 
             Escape = "mode default";
             Return = "mode default";
