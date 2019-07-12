@@ -193,7 +193,7 @@
 
           # Scratchpad
           "${modifier}+grave" = "scratchpad show";
-          "${modifier}+Shift+grave" = "move scratchpad";
+          "${modifier}+Shift+grave" = "floating enable, border pixel, move scratchpad";
 
           # Border
           "${modifier}+b" = "border toggle";
