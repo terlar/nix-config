@@ -83,13 +83,13 @@ let
 
     # Follow master.
     magit = super.magit.overrideAttrs(attrs: {
-      version = "20190625.2146";
+      version = "20190713.1914";
       src = pkgs.fetchFromGitHub {
         owner = "magit";
         repo = "magit";
-        rev = "fe3965de28b96a95adc4564111df90ac1fd5739c";
-        sha256 = "0zssaj2va8fak316x6xf32ml3b35yg3w4p7gs9jv624gcnbmzc5b";
-        # date = 2019-06-25T21:46:53+02:00;
+        rev = "5362cf75f0a72be1f75efc62aed377b9c18251a1";
+        sha256 = "1z5j21lz478cz5p81xpnhy02a0yylzvkyhm8qpa8m1cis35nsq39";
+        # date = 2019-07-13T19:14:10+02:00;
       };
     });
 
@@ -201,13 +201,13 @@ let
 
     pepita = self.melpaBuild rec {
       pname   = "pepita";
-      version = "20190604.1204";
+      version = "20190714.1124";
       src = pkgs.fetchFromGitHub {
         owner = "sebasmonia";
         repo = "pepita";
-        rev = "f4f13f9723b7d8c2ea5b3f5579224a0451f2defd";
-        sha256 = "0jwd4n1z2q1bil33pw78vl3zaah6wpmgf9pjlbkdf5j2jlpyl4iq";
-        # date = 2019-06-04T12:04:22-06:00;
+        rev = "c73e1e89e4928eb32ad9e0c8bf78cdc4caf553db";
+        sha256 = "1k1wn3fa3y5c966isgchpnx2g3vqnlxz26p466srycpd8ya4gqy1";
+        # date = 2019-07-14T11:24:36-06:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (pepita :repo "sebasmonia/pepita" :fetcher github)
