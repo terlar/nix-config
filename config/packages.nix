@@ -93,6 +93,7 @@ in ([
   imagemagick
   kitty
   krita
+  luakit
   maim
   mpv
   qutebrowser

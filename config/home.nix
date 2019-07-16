@@ -240,6 +240,12 @@ in rec {
       x-scheme-handler/https=qutebrowser.desktop
       x-scheme-handler/ftp=qutebrowser.desktop
     '';
+
+    configFile."luakit/userconf.lua".text = ''
+      local vertical_tabs = require "vertical_tabs"
+      local settings = require "settings"
+      settings.vertical_tabs.sidebar_width = 120
+    '';
   };
 
   manual.html.enable = true;
