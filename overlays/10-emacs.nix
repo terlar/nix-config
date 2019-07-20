@@ -118,6 +118,25 @@ let
     });
 
     # Packages not in MELPA.
+    apheleia = self.melpaBuild rec {
+      pname   = "apheleia";
+      version = "20190717.1126";
+      src = pkgs.fetchFromGitHub {
+        owner  = "raxod502";
+        repo   = "apheleia";
+        rev    = "4e9f797210bd0e3777bf4f973ce137c43b1506fb";
+        sha256 = "099drn6a98469xmvxzzrb0a6l0c1v1xpbs42zkrbnyzkv2b0x70f";
+        # date = 2019-07-17T11:26:52-07:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (apheleia :repo "raxod502/apheleia" :fetcher github)
+      '';
+
+      meta = {
+        description = "Run code formatter on buffer contents without moving point, using RCS patches and dynamic programming.";
+      };
+    };
+
     comment-or-uncomment-sexp = self.melpaBuild rec {
       pname   = "comment-or-uncomment-sexp";
       version = "20190225.0822";

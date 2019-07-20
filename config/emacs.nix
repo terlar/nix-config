@@ -12,6 +12,7 @@ with epkgs;
   all-the-icons-ivy
   ansible
   ansible-doc
+  apheleia
   async
   atomic-chrome
   auto-compile
