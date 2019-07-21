@@ -15,9 +15,8 @@ in rec {
   ] ++ lib.optional (builtins.pathExists ../private/home/default.nix) ../private/home;
 
   nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
+    # Configuration for nixpkgs within `home-manager` evaluation.
+    config = import ./nixpkgs.nix;
 
     overlays =
       let path = ../overlays; in with builtins;
@@ -224,6 +223,9 @@ in rec {
 
   xdg = {
     enable = true;
+
+    # Configuration for nixpkgs outside `home-manager`, such as `nix-env`.
+    configFile."nixpkgs/config.nix".source = ./nixpkgs.nix;
 
     # Fish configuration.
     configFile."fish/completions".source = ./dotfiles/fish/.config/fish/completions;
