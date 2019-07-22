@@ -137,10 +137,11 @@
           };
 
           resize = {
-            "h" = "resize shrink width 10 px or 10 ppt";
-            "j" = "resize grow height 10 px or 10 ppt";
-            "k" = "resize shrink height 10 px or 10 ppt";
-            "l" = "resize grow width 10 px or 10 ppt";
+            "h" = "resize shrink width 10px or 10ppt";
+            "j" = "resize grow height 10px or 10ppt";
+            "k" = "resize shrink height 10px or 10ppt";
+            "l" = "resize grow width 10px or 10ppt";
+            space = "resize shrink width 10000px; resize grow width 1280px; resize shrink height 10000px; resize grow height 800px";
 
             Escape = "mode default";
             Return = "mode default";
