@@ -55,6 +55,7 @@ with epkgs;
   edit-indirect
   editorconfig
   eglot
+  ejira
   eldoc-overlay
   eldoc-posframe
   elixir-mode

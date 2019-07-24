@@ -156,6 +156,26 @@ let
       };
     };
 
+    ejira = self.melpaBuild rec {
+      pname   = "ejira";
+      version = "20181212.1420";
+      src = pkgs.fetchFromGitHub {
+        owner  = "nyyManni";
+        repo   = "ejira";
+        rev    = "9ef57f96456f0bb3be17befb000d960f5ac766b4";
+        sha256 = "056k1wczaqkvqx24hfcjfixknr51aqk2fmy7kgrsvhygw7b6gcla";
+        # date = 2018-12-12T14:20:51+02:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (ejira :repo "nyyManni/ejira" :fetcher github)
+      '';
+      packageRequires = [ self.language-detection self.ox-jira ];
+
+      meta = {
+        description = "JIRA integration to Emacs org-mode.";
+      };
+    };
+
     eldoc-posframe = self.melpaBuild rec {
       pname   = "eldoc-posframe";
       version = "20190209.1123";
