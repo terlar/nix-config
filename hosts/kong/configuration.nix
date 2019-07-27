@@ -23,15 +23,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Prevent system freezes.
+  boot.kernelParams = ["acpi_rev_override=1"];
   # Use the newer but stable kernel packages.
-  boot.kernelPackages = pkgs.linuxPackages_5_1;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Kernel modules:
   boot.kernelModules = [
     "fuse"
-  ];
-  boot.blacklistedKernelModules = [
-    "bbswitch" "fbcon" "fuse" "noveau"
   ];
   boot.extraModulePackages = [
     config.boot.kernelPackages.sysdig
@@ -49,14 +48,15 @@
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
 
-  # Enable Intel video drivers.
-  services.xserver.videoDrivers = [ "intel" ];
-
-  # Dual graphic cards support.
-  hardware.bumblebee = {
-    enable = true;
-    pmMethod = "none";
-    connectDisplay = true;
+  # Graphics settings.
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    optimus_prime = {
+      enable = true;
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
+    };
   };
 
   # OpenGL settings.
