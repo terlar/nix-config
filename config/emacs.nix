@@ -72,6 +72,7 @@ with epkgs;
   exec-path-from-shell
   fish-completion
   fish-mode
+  flymake-diagnostic-at-point
   flymake-eslint
   flymake-shellcheck
   flyspell-correct-ivy
