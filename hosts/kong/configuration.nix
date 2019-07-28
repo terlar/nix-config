@@ -48,23 +48,6 @@
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
 
-  # Graphics settings.
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    optimus_prime = {
-      enable = true;
-      nvidiaBusId = "PCI:1:0:0";
-      intelBusId = "PCI:0:2:0";
-    };
-  };
-
-  # OpenGL settings.
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
-
   # Font sizes for retina.
   fonts.fontconfig.dpi = 144;
 
