@@ -59,6 +59,9 @@ in ([
   editorconfig-core-c
   httpie
   jq
+
+  # dev env tools
+  cabal2nix
 ] ++ lib.optionals stdenv.isLinux [
   # system tools
   hdparm
