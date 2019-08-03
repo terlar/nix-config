@@ -46,7 +46,7 @@ install-nixos: ## Install NixOS for current host
 install-darwin: ## Install darwin
 	nix-shell darwin -A installer --run darwin-installer
 install-home: ## Install home-manager
-	nix-shell home-manager -A install --run 'home-manager switch'
+	nix-shell home-manager -A install --run 'home-manager -b bak switch'
 install-private: private ## Install private configuration
 
 $(NIXOS_HOSTS):
@@ -56,7 +56,7 @@ install-nixos-%: hosts/%/configuration.nix hosts/%/hardware-configuration.nix
 .PHONY: switch switch-home
 switch: switch-system switch-home ## Switch all
 switch-home: ## Switch to latest home config
-	home-manager switch
+	home-manager -b bak switch
 	@echo "Home generation: $$(home-manager generations | head -1)"
 
 .PHONY: switch-system switch-nixos switch-darwin
