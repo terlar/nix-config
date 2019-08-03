@@ -65,11 +65,11 @@ in {
 
     binaryCaches = [
       "https://cachix.cachix.org"
-      "https://hie-nix.cachix.org"
+      "https://all-hies.cachix.org"
     ];
     binaryCachePublicKeys = [
       "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
-      "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
+      "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
     ];
   };
 
