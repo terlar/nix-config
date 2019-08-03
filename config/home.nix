@@ -121,7 +121,6 @@ in rec {
 
         fetch = {
           prune = "true";
-          recurseSubmodules = "true";
         };
 
         pull = {
