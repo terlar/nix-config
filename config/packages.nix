@@ -58,6 +58,7 @@ in ([
   bat
   editorconfig-core-c
   httpie
+  httpie-aws-authv4
   jq
 
   # dev env tools
