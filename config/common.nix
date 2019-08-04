@@ -6,24 +6,19 @@ let
   homeManagerConfigPath = ./home.nix;
   homeManagerPath = ../home-manager;
   nixPkgsPath = ../nixpkgs;
+  nixPkgsOverlaysPath = ../overlays;
   nixosConfigPath = ../configuration.nix;
   privateDataPath = ../private/data.nix;
 in {
   time.timeZone = "Europe/Stockholm";
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowBroken = false;
-      allowUnsupportedSystem = true;
-    };
-
-    overlays =
-      let path = ../overlays; in with builtins;
-      map (n: import (path + ("/" + n))) (
-        filter (n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix")))
-        (attrNames (readDir path)));
-  };
+  nixpkgs.config = import ./nixpkgs.nix;
+  nixpkgs.overlays = map
+    (n: import (nixPkgsOverlaysPath + ("/" + n)))
+    (builtins.filter
+      (n: builtins.match
+        ".*\\.nix" n != null || builtins.pathExists (nixPkgsOverlaysPath + ("/" + n + "/default.nix")))
+      (lib.attrNames (builtins.readDir nixPkgsOverlaysPath)));
 
   environment = {
     systemPackages = import ./packages.nix { inherit pkgs; };
@@ -51,6 +46,7 @@ in {
     package = pkgs.nixStable;
     nixPath = [
       "nixpkgs=${toString nixPkgsPath}"
+      "nixpkgs-overlays=${toString nixPkgsOverlaysPath}"
       "home-manager=${toString homeManagerPath}"
       "private-data=${toString privateDataPath}"
     ] ++ lib.optionals pkgs.stdenv.isLinux [

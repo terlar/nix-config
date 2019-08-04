@@ -14,17 +14,8 @@ in rec {
     ./home/linux/rofi.nix
   ] ++ lib.optional (builtins.pathExists ../private/home/default.nix) ../private/home;
 
-  nixpkgs = {
-    # Configuration for nixpkgs within `home-manager` evaluation.
-    config = import ./nixpkgs.nix;
-
-    overlays =
-      let path = ../overlays; in with builtins;
-      map (n: import (path + ("/" + n))) (
-        filter
-        (n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix")))
-        (attrNames (readDir path)));
-  };
+  # Configuration for nixpkgs within `home-manager` evaluation.
+  nixpkgs.config = import ./nixpkgs.nix;
 
   home = {
     sessionVariables = {
