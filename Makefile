@@ -21,6 +21,8 @@ endif
 export NIX_PATH
 export HOME_MANAGER_CONFIG
 
+QUTEBROWSER_DICTS := en-US sv-SE
+
 .DEFAULT_GOAL := help
 .PHONY: help
 help: ## Show this help message.
@@ -52,6 +54,10 @@ install-private: private ## Install private configuration
 $(NIXOS_HOSTS):
 install-nixos-%: hosts/%/configuration.nix hosts/%/hardware-configuration.nix
 	ln -s $? .
+
+.PHONY: install-qutebrowser-dicts
+install-qutebrowser-dicts:
+	$(shell nix-build '<nixpkgs>' --no-build-output -A qutebrowser)/share/qutebrowser/scripts/dictcli.py install $(QUTEBROWSER_DICTS)
 
 .PHONY: switch switch-home
 switch: switch-system switch-home ## Switch all

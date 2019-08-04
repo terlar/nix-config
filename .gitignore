@@ -1,5 +1,6 @@
 /backup
 /private
+/result
 /configuration.nix
 /hardware-configuration.nix
 /programs.sqlite
