@@ -228,10 +228,10 @@ in rec {
 
     configFile."mimeapps.list".text = ''
       [Default Applications]
-      x-scheme-handler/http=qutebrowser.desktop
-      x-scheme-handler/https=qutebrowser.desktop
-      x-scheme-handler/ftp=qutebrowser.desktop
-      application/pdf=emacsclient.desktop
+      x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop;
+      x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop;
+      x-scheme-handler/ftp=org.qutebrowser.qutebrowser.desktop;
+      application/pdf=emacsclient.desktop;
     '';
 
     configFile."luakit/userconf.lua".text = ''
