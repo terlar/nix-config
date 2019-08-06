@@ -116,6 +116,7 @@ with epkgs;
   jest
   js2-mode
   js2-refactor
+  json-navigator
   kotlin-mode
   kubernetes
   kubernetes-tramp
