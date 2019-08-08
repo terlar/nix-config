@@ -15,13 +15,13 @@ let
 
     # Follow master.
     cider = super.cider.overrideAttrs(attrs: {
-      version = "20190720.1956";
+      version = "20190805.1927";
       src = pkgs.fetchFromGitHub {
         owner = "clojure-emacs";
         repo = "cider";
-        rev = "cb7d63b63a7b2e7572cb18f405b56d568eec499d";
-        sha256 = "1jqx9ss96lci9cjb2d0dxv5yfs20bdg1l913d4d1hwyizk7gi003";
-        # date = 2019-07-20T19:56:49+03:00;
+        rev = "e0fb1c9e87623b343efd5edb2c869e89ff18f895";
+        sha256 = "04kiyf4mcdz34gxqi5iks9dxhg8yj32kajigx0qb3f8scpxfcjhr";
+        # date = 2019-08-05T18:19:27+02:00;
       };
     });
 
@@ -39,33 +39,33 @@ let
 
     # Follow master.
     counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190726.2334";
+      version = "20190807.1906";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "1a4ebdaff8cf67faa69f412e6fa9ed2743c6bc92";
-        sha256 = "18kaxr41ayzmxd891z30ph9szhhchy0d44q6aq77i795c63msqrw";
-        # date = 2019-07-26T23:34:15+02:00;
+        rev = "0be5b5818c1d96b67aa314c9f4031a1d9a730399";
+        sha256 = "1h1wj7l5wdrqg4njvwzn8rqw771hjllzgwml3v91kbz6x7j7lqzk";
+        # date = 2019-08-07T19:06:33+02:00;
       };
     });
     ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190726.2334";
+      version = "20190807.1906";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "1a4ebdaff8cf67faa69f412e6fa9ed2743c6bc92";
-        sha256 = "18kaxr41ayzmxd891z30ph9szhhchy0d44q6aq77i795c63msqrw";
-        # date = 2019-07-26T23:34:15+02:00;
+        rev = "0be5b5818c1d96b67aa314c9f4031a1d9a730399";
+        sha256 = "1h1wj7l5wdrqg4njvwzn8rqw771hjllzgwml3v91kbz6x7j7lqzk";
+        # date = 2019-08-07T19:06:33+02:00;
       };
     });
     swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190726.2334";
+      version = "20190807.1906";
       src = pkgs.fetchFromGitHub {
         owner = "abo-abo";
         repo = "swiper";
-        rev = "1a4ebdaff8cf67faa69f412e6fa9ed2743c6bc92";
-        sha256 = "18kaxr41ayzmxd891z30ph9szhhchy0d44q6aq77i795c63msqrw";
-        # date = 2019-07-26T23:34:15+02:00;
+        rev = "0be5b5818c1d96b67aa314c9f4031a1d9a730399";
+        sha256 = "1h1wj7l5wdrqg4njvwzn8rqw771hjllzgwml3v91kbz6x7j7lqzk";
+        # date = 2019-08-07T19:06:33+02:00;
       };
     });
 
@@ -209,13 +209,13 @@ let
 
     pepita = self.melpaBuild rec {
       pname   = "pepita";
-      version = "20190717.1640";
+      version = "20190801.1305";
       src = pkgs.fetchFromGitHub {
         owner = "sebasmonia";
         repo = "pepita";
-        rev = "a1cbd6022033c078ffa879f0aa63d4da4b0443b5";
-        sha256 = "1827i8b2cr1hwdb0cnjmjdg4k1saiajp0ifhphcarx64f3c797vd";
-        # date = 2019-07-17T16:40:29-06:00;
+        rev = "1d67dad08cb994dd2fa637ea591db14cbb00d644";
+        sha256 = "09lqjssg72bq437cvg15dxmy7j446raaknvkp7pl5357vgmqcdy0";
+        # date = 2019-08-01T13:05:21-06:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (pepita :repo "sebasmonia/pepita" :fetcher github)
