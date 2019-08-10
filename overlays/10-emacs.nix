@@ -82,6 +82,18 @@ let
     });
 
     # Follow master.
+    flymake-diagnostic-at-point = super.flymake-diagnostic-at-point.overrideAttrs(attrs: {
+      version = "20190810.2232";
+      src = pkgs.fetchFromGitHub {
+        owner = "terlar";
+        repo = "flymake-diagnostic-at-point";
+        rev = "8a4f5c1160cbb6c2464db9f5c104812b0c0c6d4f";
+        sha256 = "17hkqspg2w1yjlcz3g6kxxrcz13202a1x2ha6rdp4f1bgam5lhzq";
+        # date = 2019-08-10T22:32:04+02:00;
+      };
+    });
+
+    # Follow master.
     nix-mode = super.nix-mode.overrideAttrs(attrs: {
       version = "20190627.1252";
       src = pkgs.fetchFromGitHub {
