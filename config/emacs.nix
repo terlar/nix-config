@@ -29,6 +29,7 @@ with epkgs;
   color-identifiers-mode
   comment-or-uncomment-sexp
   company
+  company-terraform
   counsel
   counsel-tramp
   coverlay
@@ -194,6 +195,8 @@ with epkgs;
   suggest
   swiper
   tao-theme
+  terraform-doc
+  terraform-mode
   transpose-frame
   ts-comint
   tuareg

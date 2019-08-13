@@ -285,6 +285,25 @@ let
         '';
       };
     };
+
+    terraform-doc = self.melpaBuild rec {
+      pname   = "terraform-doc";
+      version = "20190813.1954";
+      src = pkgs.fetchFromGitHub {
+        owner  = "txgvnn";
+        repo   = "terraform-doc";
+        rev    = "e07d8a9b26567ea4f4252336ee70d488c25ba30a";
+        sha256 = "0l16a0j2v180rfx6kwn6dw8i7b1dw8j7ljrf5pib2nzrl54rylr3";
+        # date = 2019-08-13T19:54:32+07:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (terraform-doc :repo "txgvnn/terraform-doc" :fetcher github)
+      '';
+
+      meta = {
+        description = "Lookup docs from Terraform hompage";
+      };
+    };
   };
 in {
   emacs = self.emacsHEAD;
