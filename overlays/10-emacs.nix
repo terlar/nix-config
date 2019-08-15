@@ -95,13 +95,13 @@ let
 
     # Follow master.
     nix-mode = super.nix-mode.overrideAttrs(attrs: {
-      version = "20190627.1252";
+      version = "20190703.726";
       src = pkgs.fetchFromGitHub {
         owner = "nixos";
         repo = "nix-mode";
-        rev = "c577957d668ea9513cc1cafc911ef6789d9fcb14";
-        sha256 = "0q0i8l7yz0jn6a4bn3sg7brk39fcycbcx8gncx1z919c7jhgffm0";
-        # date = 2019-06-27T12:52:16-04:00;
+        rev = "ddf091708b9069f1fe0979a7be4e719445eed918";
+        sha256 = "0s8ljr4d7kys2xqrhkvj75l7babvk60kxgy4vmyqfwj6xmcxi3ad";
+        # date = 2019-07-03T07:26:21+02:00;
       };
     });
 
