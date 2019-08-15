@@ -19,6 +19,7 @@ with epkgs;
   auto-dictionary
   auto-minor-mode
   avy
+  awscli-capf
   bbdb
   bibliothek
   cakecrumbs

@@ -137,6 +137,29 @@ let
       };
     };
 
+    awscli-capf = self.melpaBuild rec {
+      pname   = "awscli-capf";
+      version = "20190814.1003";
+      src = pkgs.fetchFromGitHub {
+        owner = "sebasmonia";
+        repo = "awscli-capf";
+        rev = "5b2e5272914f1d3f43640203a34cae070879fa44";
+        sha256 = "11a7nmgwr6jm8f1nyn4fxmqnjnf38z708m4jxmql82xlim09xfxx";
+        # date = 2019-08-14T10:03:06-06:00;
+      };
+      recipe = pkgs.writeText "recipe" ''
+        (awscli-capf
+          :fetcher github
+          :repo "sebasmonia/awscli-capf"
+          :files (:defaults "awscli-capf-docs.data"))
+      '';
+      packageRequires = [ self.company];
+
+      meta = {
+        description = "Completion at point function for the AWS CLI";
+      };
+    };
+
     ejira = self.melpaBuild rec {
       pname   = "ejira";
       version = "20181212.1420";
