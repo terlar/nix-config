@@ -73,6 +73,8 @@ in ([
   docker
   docker-slim
   docker_compose
+  nodePackages.jsonlint
+  nodePackages.prettier
   shellcheck
   sysdig
 

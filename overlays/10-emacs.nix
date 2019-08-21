@@ -14,74 +14,6 @@ let
     });
 
     # Follow master.
-    cider = super.cider.overrideAttrs(attrs: {
-      version = "20190805.1927";
-      src = pkgs.fetchFromGitHub {
-        owner = "clojure-emacs";
-        repo = "cider";
-        rev = "e0fb1c9e87623b343efd5edb2c869e89ff18f895";
-        sha256 = "04kiyf4mcdz34gxqi5iks9dxhg8yj32kajigx0qb3f8scpxfcjhr";
-        # date = 2019-08-05T18:19:27+02:00;
-      };
-    });
-
-    # Follow master.
-    company-mode = super.company-mode.overrideAttrs(attrs: {
-      version = "20190430.2152";
-      src = pkgs.fetchFromGitHub {
-        owner = "company-mode";
-        repo = "company-mode";
-        rev = "ad6ff0eecca99dc5ac8b6a8a6174df7d2ad88ae7";
-        sha256 = "0cps5sl9iij1wrpcnhi7xqv58cqsrswhc8r7hj1c00w8288z978w";
-        # date = 2019-04-30T21:52:15+03:00;
-      };
-    });
-
-    # Follow master.
-    counsel = super.counsel.overrideAttrs(attrs: {
-      version = "20190807.1906";
-      src = pkgs.fetchFromGitHub {
-        owner = "abo-abo";
-        repo = "swiper";
-        rev = "0be5b5818c1d96b67aa314c9f4031a1d9a730399";
-        sha256 = "1h1wj7l5wdrqg4njvwzn8rqw771hjllzgwml3v91kbz6x7j7lqzk";
-        # date = 2019-08-07T19:06:33+02:00;
-      };
-    });
-    ivy = super.ivy.overrideAttrs(attrs: {
-      version = "20190807.1906";
-      src = pkgs.fetchFromGitHub {
-        owner = "abo-abo";
-        repo = "swiper";
-        rev = "0be5b5818c1d96b67aa314c9f4031a1d9a730399";
-        sha256 = "1h1wj7l5wdrqg4njvwzn8rqw771hjllzgwml3v91kbz6x7j7lqzk";
-        # date = 2019-08-07T19:06:33+02:00;
-      };
-    });
-    swiper = super.swiper.overrideAttrs(attrs: {
-      version = "20190807.1906";
-      src = pkgs.fetchFromGitHub {
-        owner = "abo-abo";
-        repo = "swiper";
-        rev = "0be5b5818c1d96b67aa314c9f4031a1d9a730399";
-        sha256 = "1h1wj7l5wdrqg4njvwzn8rqw771hjllzgwml3v91kbz6x7j7lqzk";
-        # date = 2019-08-07T19:06:33+02:00;
-      };
-    });
-
-    # Follow master.
-    eglot = super.eglot.overrideAttrs(attrs: {
-      version = "20190718.2036";
-      src = pkgs.fetchFromGitHub {
-        owner = "joaotavora";
-        repo = "eglot";
-        rev = "f45fdc6674a6cda16dc71966334f5346500e9498";
-        sha256 = "18n4w2cxzhc6yyr7bdggb19hmzk2h7m1d6r7nnr90ldryb05yyf0";
-        # date = 2019-07-18T20:36:56+01:00;
-      };
-    });
-
-    # Follow master.
     flymake-diagnostic-at-point = super.flymake-diagnostic-at-point.overrideAttrs(attrs: {
       version = "20190810.2232";
       src = pkgs.fetchFromGitHub {
@@ -93,40 +25,16 @@ let
       };
     });
 
-    # Follow master.
-    nix-mode = super.nix-mode.overrideAttrs(attrs: {
-      version = "20190703.726";
-      src = pkgs.fetchFromGitHub {
-        owner = "nixos";
-        repo = "nix-mode";
-        rev = "ddf091708b9069f1fe0979a7be4e719445eed918";
-        sha256 = "0s8ljr4d7kys2xqrhkvj75l7babvk60kxgy4vmyqfwj6xmcxi3ad";
-        # date = 2019-07-03T07:26:21+02:00;
-      };
-    });
-
-    # Follow master.
-    objed = super.objed.overrideAttrs(attrs: {
-      version = "20190717.1053";
-      src = pkgs.fetchFromGitHub {
-        owner = "clemera";
-        repo = "objed";
-        rev = "fea114824e11fdae7871fb3b5ddf4ed2472cbda0";
-        sha256 = "0lf88ivfsl5la075jg1y56kf0v96hp2539b54lwyabz0rpc0c7in";
-        # date = 2019-07-17T10:53:58+02:00;
-      };
-    });
-
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
-      version = "20190815.0823";
+      version = "20190815.1748";
       src = pkgs.fetchFromGitHub {
         owner  = "raxod502";
         repo   = "apheleia";
-        rev    = "d44128023594b2765f2e6b58dce2d291709f2ac5";
-        sha256 = "06hmlwgk7wc1405jimffc6crc4br4qvxnfr8im306l554ziqhw0y";
-        # date = 2019-08-15T08:23:47-07:00;
+        rev    = "49568bb1668c05050cd7ec014c94405435e596b3";
+        sha256 = "1vv54spksf2bk64sihd29r857zx56ycay5p8v8vhm8w68ia9vqbj";
+        # date = 2019-08-15T17:48:56-07:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (apheleia :repo "raxod502/apheleia" :fetcher github)
@@ -139,13 +47,13 @@ let
 
     awscli-capf = self.melpaBuild rec {
       pname   = "awscli-capf";
-      version = "20190814.1003";
+      version = "20190819.756";
       src = pkgs.fetchFromGitHub {
         owner = "sebasmonia";
         repo = "awscli-capf";
-        rev = "5b2e5272914f1d3f43640203a34cae070879fa44";
-        sha256 = "11a7nmgwr6jm8f1nyn4fxmqnjnf38z708m4jxmql82xlim09xfxx";
-        # date = 2019-08-14T10:03:06-06:00;
+        rev = "42ff59b14b47a5cb3bf0cb91fdf74f8f8ccbe123";
+        sha256 = "0js100gchn14wp8mgxhhdlzjh0d37ydxn53ryznl2wrl377lk3xb";
+        # date = 2019-08-19T07:56:04-06:00;
       };
       recipe = pkgs.writeText "recipe" ''
         (awscli-capf
@@ -199,25 +107,6 @@ let
       };
     };
 
-    flymake-eslint = self.melpaBuild rec {
-      pname = "flymake-eslint";
-      version = "20190720.1028";
-      src = pkgs.fetchFromGitHub {
-        owner  = "orzechowskid";
-        repo   = "flymake-eslint";
-        rev    = "5624f61c782c91710014620ebbaadab44a7e2b1f";
-        sha256 = "113hbdsgp950safyry3a2bpml3h2jjhypmfyjjyj3fibiigx9fmi";
-        # date = 2019-07-20T11:01:37-04:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (flymake-eslint :fetcher github :repo "orzechowskid/flymake-eslint"))
-      '';
-
-      meta = {
-        description = "Flymake backend for Javascript using eslint";
-      };
-    };
-
     org-pretty-table = self.melpaBuild rec {
       pname   = "org-pretty-table";
       version = "20131129.1610";
@@ -239,49 +128,6 @@ let
           appropriate unicode box-drawing glyphs, see
           http://en.wikipedia.org/wiki/Box-drawing_character
         '';
-      };
-    };
-
-    pepita = self.melpaBuild rec {
-      pname   = "pepita";
-      version = "20190801.1305";
-      src = pkgs.fetchFromGitHub {
-        owner = "sebasmonia";
-        repo = "pepita";
-        rev = "1d67dad08cb994dd2fa637ea591db14cbb00d644";
-        sha256 = "09lqjssg72bq437cvg15dxmy7j446raaknvkp7pl5357vgmqcdy0";
-        # date = 2019-08-01T13:05:21-06:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (pepita :repo "sebasmonia/pepita" :fetcher github)
-      '';
-      packageRequires = [ self.csv ];
-
-      meta = {
-        description = "Run Splunk search from Emacs";
-      };
-    };
-
-    realgud-node-inspect = self.melpaBuild rec {
-      pname = "realgud-node-inspect";
-      version = "20190526.1545";
-      src = pkgs.fetchFromGitHub {
-        owner  = "realgud";
-        repo   = "realgud-node-inspect";
-        rev    = "c3ed48cf3bc2b28f9fd23bcf60ea13a3cf019fc8";
-        sha256 = "00ywz4kp90wkfi1ncn9zj6vjw9igiv34gvx6fqfi8ha3q5xljzps";
-        # date = 2019-05-26T15:45:49-04:00;
-      };
-      recipe = pkgs.writeText "recipe" ''
-        (realgud-node-inspect
-        :fetcher github
-        :repo "realgud/realgud-node-inspect"
-        :files ("realgud-node-inspect.el" "node-inspect/.nosearch"
-        ("node-inspect" "node-inspect/*.el")))
-      '';
-
-      meta = {
-        description = "realgud support for newer node inspect";
       };
     };
 

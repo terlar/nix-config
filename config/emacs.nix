@@ -76,7 +76,9 @@ with epkgs;
   fish-mode
   flymake-diagnostic-at-point
   flymake-eslint
+  flymake-racket
   flymake-shellcheck
+  flymake-quickdef
   flyspell-correct-ivy
   focus
   format-all
