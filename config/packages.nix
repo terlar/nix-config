@@ -60,6 +60,14 @@ in ([
   httpie
   httpie-aws-authv4
   jq
+  nodePackages.jsonlint
+  nodePackages.prettier
+  shellcheck
+
+  # plantuml
+  graphviz
+  jre
+  plantuml
 
   # dev env tools
   cabal2nix
@@ -73,9 +81,6 @@ in ([
   docker
   docker-slim
   docker_compose
-  nodePackages.jsonlint
-  nodePackages.prettier
-  shellcheck
   sysdig
 
   # media tools

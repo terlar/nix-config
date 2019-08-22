@@ -35,6 +35,8 @@ in rec {
       ".emacs.d/lisp".source = ./emacs.d/lisp;
       ".emacs.d/snippets".source = ./emacs.d/snippets;
       ".emacs.d/templates".source = ./emacs.d/templates;
+
+      ".local/lib/plantuml.jar".source = "${pkgs.plantuml}/lib/plantuml.jar";
     };
   };
 
