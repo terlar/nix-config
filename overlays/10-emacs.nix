@@ -14,6 +14,17 @@ let
     });
 
     # Follow master.
+    eglot = super.eglot.overrideAttrs(attrs: {
+      version = "20190826.2310";
+      src = pkgs.fetchFromGitHub {
+        owner = "terlar";
+        repo = "eglot";
+        rev = "15228b564d9fe335137f7b4722dc35e1eea0a593";
+        sha256 = "179y4scyynmikc6gvz9zihhk7k23794s8z9qagxqrdk5v6lw7mlc";
+        # date = 2019-08-26T23:10:17+02:00;
+      };
+    });
+
     flymake-diagnostic-at-point = super.flymake-diagnostic-at-point.overrideAttrs(attrs: {
       version = "20190810.2232";
       src = pkgs.fetchFromGitHub {
