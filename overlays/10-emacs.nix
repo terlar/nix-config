@@ -198,8 +198,8 @@ in {
     (pkgs.emacs26.override { srcRepo = true; })
     (attrs: rec {
       name = "emacs-${version}${versionModifier}";
-      version = "26.1";
-      versionModifier = "";
+      version = "26.3";
+      versionModifier = "-rc1";
 
       buildInputs =
         emacs26.buildInputs ++
@@ -213,8 +213,8 @@ in {
 
       src = fetchgit {
         url = https://git.savannah.gnu.org/git/emacs.git;
-        rev = "c418c85617babbe7b63730fefb71e2c87a0141af";
-        sha256 = "1m374vaq5zaylds7g049vx1j8d67hv69pmdnsrnaypmj83gqf46x";
+        rev = "96dd0196c28bc36779584e47fffcca433c9309cd";
+        sha256 = "0s5szdgs6pmj1x8brca7403jvv61s4xq19g4s0bfgiwvqzv0f6d5";
       };
 
       postInstall = ''
