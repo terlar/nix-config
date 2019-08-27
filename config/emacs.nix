@@ -151,7 +151,7 @@ with epkgs;
   org-radiobutton
   org-tree-slide
   org-variable-pitch
-  package-lint
+  package-lint-flymake
   page-break-lines
   parrot
   pdf-tools
