@@ -195,14 +195,19 @@ in {
   emacsHEADPackagesNg = ((pkgs.emacsPackagesNgGen self.emacsHEAD).overrideScope' overrides);
 
   emacs26 = with pkgs; stdenv.lib.overrideDerivation
-    (pkgs.emacs26.override { srcRepo = true; }) (attrs: rec {
+    (pkgs.emacs26.override { srcRepo = true; })
+    (attrs: rec {
       name = "emacs-${version}${versionModifier}";
       version = "26.1";
       versionModifier = "";
 
-      buildInputs = emacs26.buildInputs ++
-        [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev
-          imagemagick.dev ];
+      buildInputs =
+        emacs26.buildInputs ++
+        [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev imagemagick.dev ];
+
+      configureFlags =
+        emacs26.configureFlags ++
+        [ "--with-imagemagick" ];
 
       patches = [];
 
@@ -234,14 +239,19 @@ in {
     });
 
   emacsHEAD = with pkgs; stdenv.lib.overrideDerivation
-    (pkgs.emacs26.override { srcRepo = true; }) (attrs: rec {
+    (pkgs.emacs26.override { srcRepo = true; })
+    (attrs: rec {
       name = "emacs-${version}${versionModifier}";
       version = "27.0";
       versionModifier = ".50";
 
-      buildInputs = emacs26.buildInputs ++
-        [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev
-          imagemagick.dev ];
+      buildInputs =
+        emacs26.buildInputs ++
+        [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev imagemagick.dev ];
+
+      configureFlags =
+        emacs26.configureFlags ++
+        [ "--with-imagemagick" ];
 
       patches = [];
 
