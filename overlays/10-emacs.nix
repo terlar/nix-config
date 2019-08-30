@@ -190,52 +190,10 @@ in {
   emacsPackagesNg = self.emacsHEADPackagesNg;
   emacsOverrides = overrides;
 
-  emacs26PackagesNg = ((pkgs.emacsPackagesNgGen self.emacs26).overrideScope' overrides);
   emacsHEADPackagesNg = ((pkgs.emacsPackagesNgGen self.emacsHEAD).overrideScope' overrides);
 
-  emacs26 = with pkgs; stdenv.lib.overrideDerivation
-    (pkgs.emacs26.override { srcRepo = true; })
-    (attrs: rec {
-      name = "emacs-${version}${versionModifier}";
-      version = "26.3";
-      versionModifier = "-rc1";
-
-      buildInputs = emacs26.buildInputs ++
-                    [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev ];
-
-      configureFlags = emacs26.configureFlags;
-
-      patches = [];
-
-      src = fetchgit {
-        url = https://git.savannah.gnu.org/git/emacs.git;
-        rev = "96dd0196c28bc36779584e47fffcca433c9309cd";
-        sha256 = "0s5szdgs6pmj1x8brca7403jvv61s4xq19g4s0bfgiwvqzv0f6d5";
-      };
-
-      postInstall = ''
-        mkdir -p $out/share/emacs/site-lisp
-        cp ${./emacs/site-start.el} $out/share/emacs/site-lisp/site-start.el
-        $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
-
-        rm -rf $out/var
-        rm -rf $out/share/emacs/${version}/site-lisp
-
-        for srcdir in src lisp lwlib ; do
-          dstdir=$out/share/emacs/${version}/$srcdir
-          mkdir -p $dstdir
-          find $srcdir -name "*.[chm]" -exec cp {} $dstdir \;
-          cp $srcdir/TAGS $dstdir
-          echo '((nil . ((tags-file-name . "TAGS"))))' > $dstdir/.dir-locals.el
-        done
-      '' + lib.optionalString stdenv.isDarwin ''
-        mkdir -p $out/Applications
-        mv nextstep/Emacs.app $out/Applications
-      '';
-    });
-
   emacsHEAD = with pkgs; stdenv.lib.overrideDerivation
-    (pkgs.emacs26.override { srcRepo = true; })
+    (emacs26.override { srcRepo = true; })
     (attrs: rec {
       name = "emacs-${version}${versionModifier}";
       version = "27.0";
@@ -243,8 +201,6 @@ in {
 
       buildInputs = emacs26.buildInputs ++
                     [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev ];
-
-      configureFlags = emacs26.configureFlags;
 
       patches = [];
 
