@@ -40,6 +40,36 @@ let
       };
     });
 
+    org = mkDerivation rec {
+      name = "emacs-org-${version}";
+      version = "20190830";
+
+      src = fetchgit {
+        url = https://code.orgmode.org/bzg/org-mode.git;
+        rev = "fcc0d8f509f12ca55efe548bf78150d7ca0fc95a";
+        sha256 = "0ybfvy84vj4znh644nxl17n1hjcwvsvn0dcggpsy98svb39glapa";
+        # date = 2019-08-30T08:51:02+02:00;
+      };
+
+      preBuild = ''
+        makeFlagsArray=(
+          prefix="$out/share"
+          ORG_ADD_CONTRIB="org* ox*"
+        );
+      '';
+
+      preInstall = ''
+        perl -i -pe "s%/usr/share%$out%;" local.mk
+      '';
+
+      buildInputs = [ super.emacs ] ++ (with pkgs; [ texinfo perl which ]);
+
+      meta = {
+        homepage = "https://elpa.gnu.org/packages/org.html";
+        license = licenses.free;
+      };
+    };
+
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";

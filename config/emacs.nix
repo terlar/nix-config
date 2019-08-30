@@ -145,7 +145,6 @@ with epkgs;
   org-cliplink
   org-download
   org-noter
-  org-plus-contrib
   org-pretty-table
   org-preview-html
   org-radiobutton
