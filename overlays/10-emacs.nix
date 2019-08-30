@@ -188,7 +188,6 @@ let
 in {
   emacs = self.emacsHEAD;
   emacsPackagesNg = self.emacsHEADPackagesNg;
-
   emacsOverrides = overrides;
 
   emacs26PackagesNg = ((pkgs.emacsPackagesNgGen self.emacs26).overrideScope' overrides);
@@ -201,13 +200,10 @@ in {
       version = "26.3";
       versionModifier = "-rc1";
 
-      buildInputs =
-        emacs26.buildInputs ++
-        [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev imagemagick.dev ];
+      buildInputs = emacs26.buildInputs ++
+                    [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev ];
 
-      configureFlags =
-        emacs26.configureFlags ++
-        [ "--with-imagemagick" ];
+      configureFlags = emacs26.configureFlags;
 
       patches = [];
 
@@ -245,13 +241,10 @@ in {
       version = "27.0";
       versionModifier = ".50";
 
-      buildInputs =
-        emacs26.buildInputs ++
-        [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev imagemagick.dev ];
+      buildInputs = emacs26.buildInputs ++
+                    [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev ];
 
-      configureFlags =
-        emacs26.configureFlags ++
-        [ "--with-imagemagick" ];
+      configureFlags = emacs26.configureFlags;
 
       patches = [];
 
