@@ -1,0 +1,12 @@
+index 0fffee6866..0f993bd103 100644
+--- a/jsonrpc.el
++++ b/jsonrpc.el
+@@ -161,7 +161,7 @@ immediately."
+   "Process MESSAGE just received from CONNECTION.
+ This function will destructure MESSAGE and call the appropriate
+ dispatcher in CONNECTION."
+-  (cl-destructuring-bind (&key method id error params result _jsonrpc)
++  (cl-destructuring-bind (&key method id error params result _jsonrpc _meta)
+       message
+     (let (continuations)
+       (jsonrpc--log-event connection message 'server)

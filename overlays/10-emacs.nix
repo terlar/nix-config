@@ -17,6 +17,21 @@ let
       patches = [ ./emacs/patches/rspec-mode.patch ];
     });
 
+    jsonrpc = let
+      src = jsonrpc.src;
+      patch = ./emacs/patches/jsonrpc.patch;
+      patchedSrc = mkDerivation {
+        name = "${src.name}-patched";
+        inherit src;
+        phases = [ "patchPhase" ];
+        patchPhase = "patch $src -o $out < ${patch}";
+      };
+    in self.elpaBuild rec {
+      inherit (jsonrpc) pname ename version meta;
+      src = patchedSrc;
+      packageRequires = [ super.emacs ];
+    };
+
     # Follow master.
     eglot = eglot.overrideAttrs(attrs: {
       version = "20190826.2310";
