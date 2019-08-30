@@ -26,16 +26,6 @@ in rec {
 
     file = {
       ".editorconfig".source = ./dotfiles/editorconfig/.editorconfig;
-
-      ".emacs.d/init.el".source = pkgs.runCommand "init.el" {} ''
-        cp ${./emacs.d/init.org} init.org
-        ${pkgs.emacs}/bin/emacs --batch ./init.org -f org-babel-tangle
-        mv init.el $out
-      '';
-      ".emacs.d/lisp".source = ./emacs.d/lisp;
-      ".emacs.d/snippets".source = ./emacs.d/snippets;
-      ".emacs.d/templates".source = ./emacs.d/templates;
-
       ".local/lib/plantuml.jar".source = "${pkgs.plantuml}/lib/plantuml.jar";
     };
   };
@@ -218,6 +208,16 @@ in rec {
 
     # Configuration for nixpkgs outside `home-manager`, such as `nix-env`.
     configFile."nixpkgs/config.nix".source = ./nixpkgs.nix;
+
+    # Emacs.
+    configFile."emacs/init.el".source = pkgs.runCommand "init.el" {} ''
+      cp ${./emacs.d/init.org} init.org
+      ${pkgs.emacs}/bin/emacs --batch ./init.org -f org-babel-tangle
+      mv init.el $out
+    '';
+    configFile."emacs/lisp".source = ./emacs.d/lisp;
+    configFile."emacs/snippets".source = ./emacs.d/snippets;
+    configFile."emacs/templates".source = ./emacs.d/templates;
 
     # Fish configuration.
     configFile."fish/completions".source = ./dotfiles/fish/.config/fish/completions;
