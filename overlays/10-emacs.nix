@@ -6,10 +6,6 @@ let
     inherit (pkgs) fetchurl fetchgit fetchFromGitHub;
     inherit (pkgs) writeText;
   in {
-    kubernetes = kubernetes.overrideAttrs(attrs: {
-      buildInputs = attrs.buildInputs ++ [ pkgs.git ];
-    });
-
     all-the-icons-dired = all-the-icons-dired.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/all-the-icons-dired.patch ];
     });
@@ -111,9 +107,9 @@ let
       src = fetchFromGitHub {
         owner = "sebasmonia";
         repo = "awscli-capf";
-        rev = "42ff59b14b47a5cb3bf0cb91fdf74f8f8ccbe123";
-        sha256 = "0js100gchn14wp8mgxhhdlzjh0d37ydxn53ryznl2wrl377lk3xb";
-        # date = 2019-08-19T07:56:04-06:00;
+        rev = "6670b4db6bd35f0ea9ede598a9c17384046f4400";
+        sha256 = "0pnz8jiapd8i8ya2j9lns22rg903iq65pby89wpmz7cidzg6lgf0";
+        # date = 2019-09-09T09:34:19-06:00;
       };
       recipe = writeText "recipe" ''
         (awscli-capf
@@ -212,25 +208,6 @@ let
           the function at point (using different backends) and displays them inline in
           the current buffer.
         '';
-      };
-    };
-
-    terraform-doc = self.melpaBuild rec {
-      pname   = "terraform-doc";
-      version = "20190813.1954";
-      src = fetchFromGitHub {
-        owner  = "txgvnn";
-        repo   = "terraform-doc";
-        rev    = "e07d8a9b26567ea4f4252336ee70d488c25ba30a";
-        sha256 = "0l16a0j2v180rfx6kwn6dw8i7b1dw8j7ljrf5pib2nzrl54rylr3";
-        # date = 2019-08-13T19:54:32+07:00;
-      };
-      recipe = writeText "recipe" ''
-        (terraform-doc :repo "txgvnn/terraform-doc" :fetcher github)
-      '';
-
-      meta = {
-        description = "Lookup docs from Terraform hompage";
       };
     };
   };
