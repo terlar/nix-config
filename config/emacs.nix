@@ -175,6 +175,7 @@ with epkgs;
   realgud-node-inspect
   redtick
   reformatter
+  relative-buffers
   repl-toggle
   rjsx-mode
   rspec-mode
