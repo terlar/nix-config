@@ -81,6 +81,17 @@ let
       };
     };
 
+    relative-buffers = relative-buffers.overrideAttrs(attrs: {
+      version = "20190914.415";
+      src = fetchFromGitHub {
+        owner = "terlar";
+        repo = "relative-buffers";
+        rev = "69410dde9798b81b2640de47f1cfb0521d079c6f";
+        sha256 = "14nqs14ml33wlrm268dpijs0n2b12yrlysk1qd62fc7k5hvz9wxl";
+        # date = 2019-09-14T04:15:30+02:00;
+      };
+    });
+
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
