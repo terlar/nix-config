@@ -30,6 +30,7 @@ with epkgs;
   color-identifiers-mode
   comment-or-uncomment-sexp
   company
+  company-erlang
   company-terraform
   counsel
   counsel-tramp
@@ -112,7 +113,6 @@ with epkgs;
   inf-ruby
   isend-mode
   ivy
-  ivy-erlang-complete
   ivy-posframe
   ivy-xref
   ivy-yasnippet

@@ -7,7 +7,7 @@
       GTK_THEME = "HighContrast";
       QT_STYLE_OVERRIDE = "HighContrast";
       XCURSOR_THEME = "HighContrast";
-      XCURSOR_SIZE = "64";
+      XCURSOR_SIZE = "32";
     };
   };
 

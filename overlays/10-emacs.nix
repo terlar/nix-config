@@ -9,9 +9,6 @@ let
     all-the-icons-dired = all-the-icons-dired.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/all-the-icons-dired.patch ];
     });
-    rspec-mode = rspec-mode.overrideAttrs(attrs: {
-      patches = [ ./emacs/patches/rspec-mode.patch ];
-    });
 
     jsonrpc = let
       src = jsonrpc.src;
@@ -224,10 +221,10 @@ let
   };
 in {
   emacs = self.emacsHEAD;
-  emacsPackagesNg = self.emacsHEADPackagesNg;
+  emacsPackages = self.emacsHEADPackages;
   emacsOverrides = overrides;
 
-  emacsHEADPackagesNg = ((pkgs.emacsPackagesNgGen self.emacsHEAD).overrideScope' overrides);
+  emacsHEADPackages = ((pkgs.emacsPackagesFor self.emacsHEAD).overrideScope' overrides);
 
   emacsHEAD = with pkgs; stdenv.lib.overrideDerivation
     (emacs26.override { srcRepo = true; })
