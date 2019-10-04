@@ -116,7 +116,6 @@
           { "class" = "Nm-connection-editor"; }
           { "class" = "Pavucontrol"; }
           { "class" = "Pinentry"; }
-          { "class" = "^.*blueman-manager.*$"; }
         ];
 
         # Keybindings
