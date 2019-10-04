@@ -50,13 +50,13 @@ let
 
     org = mkDerivation rec {
       name = "emacs-org-${version}";
-      version = "20190830";
+      version = "20190929";
 
       src = fetchgit {
         url = https://code.orgmode.org/bzg/org-mode.git;
-        rev = "fcc0d8f509f12ca55efe548bf78150d7ca0fc95a";
-        sha256 = "0ybfvy84vj4znh644nxl17n1hjcwvsvn0dcggpsy98svb39glapa";
-        # date = 2019-08-30T08:51:02+02:00;
+        rev = "d215c3a8c0b4c027cfc3bad37f38ab23747fefd6";
+        sha256 = "0gjsg2r2dr4phvpwn27ycgm730sil71cfqjg00figkl6m2i4m74v";
+        # date = 2019-09-29T15:49:08-04:00;
       };
 
       preBuild = ''
@@ -79,26 +79,26 @@ let
     };
 
     relative-buffers = relative-buffers.overrideAttrs(attrs: {
-      version = "20190914.415";
+      version = "20191004.1505";
       src = fetchFromGitHub {
-        owner = "terlar";
+        owner = "proofit404";
         repo = "relative-buffers";
-        rev = "69410dde9798b81b2640de47f1cfb0521d079c6f";
-        sha256 = "14nqs14ml33wlrm268dpijs0n2b12yrlysk1qd62fc7k5hvz9wxl";
-        # date = 2019-09-14T04:15:30+02:00;
+        rev = "6064cd0b3cbd42c4a46c70fc396f05be71f42bd6";
+        sha256 = "0wzxnbbzzjkzrnfdbdn7k172ad6mnhq5y3swcbilnk1w1a1lzyhn";
+        # date = 2019-10-04T15:05:23+03:00;
       };
     });
 
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
-      version = "20190815.1748";
+      version = "20190920.1712";
       src = fetchFromGitHub {
         owner  = "raxod502";
         repo   = "apheleia";
-        rev    = "49568bb1668c05050cd7ec014c94405435e596b3";
-        sha256 = "1vv54spksf2bk64sihd29r857zx56ycay5p8v8vhm8w68ia9vqbj";
-        # date = 2019-08-15T17:48:56-07:00;
+        rev    = "fab32d51a1db7c29b5f6e55d739254a96e372447";
+        sha256 = "04pls7zahy4jfkikv6fvd9vfpm4glhyanmmkx79hgi9pwdv966rf";
+        # date = 2019-09-20T17:12:09-07:00;
       };
       recipe = writeText "recipe" ''
         (apheleia :repo "raxod502/apheleia" :fetcher github)
@@ -111,13 +111,13 @@ let
 
     awscli-capf = self.melpaBuild rec {
       pname   = "awscli-capf";
-      version = "20190819.756";
+      version = "20190930.917";
       src = fetchFromGitHub {
         owner = "sebasmonia";
         repo = "awscli-capf";
-        rev = "6670b4db6bd35f0ea9ede598a9c17384046f4400";
-        sha256 = "0pnz8jiapd8i8ya2j9lns22rg903iq65pby89wpmz7cidzg6lgf0";
-        # date = 2019-09-09T09:34:19-06:00;
+        rev = "1a75f88f53a2969fe821c31e6857861d0a0c0a5e";
+        sha256 = "13ry0lhh8ss93h9c60gc02i28bwc70jb4fzqmvw778fk0shj8jxn";
+        # date = 2019-09-30T09:17:12-06:00;
       };
       recipe = writeText "recipe" ''
         (awscli-capf
@@ -134,13 +134,13 @@ let
 
     ejira = self.melpaBuild rec {
       pname   = "ejira";
-      version = "20181212.1420";
+      version = "20191002.2302";
       src = fetchFromGitHub {
         owner  = "nyyManni";
         repo   = "ejira";
-        rev    = "9ef57f96456f0bb3be17befb000d960f5ac766b4";
-        sha256 = "056k1wczaqkvqx24hfcjfixknr51aqk2fmy7kgrsvhygw7b6gcla";
-        # date = 2018-12-12T14:20:51+02:00;
+        rev    = "3e346aecea954ac10f1effbc0860d7ad097eee15";
+        sha256 = "0vajdvyxp81dgwysh0xkfl26da5gfwi0q88fzcvfg1307n079waa";
+        # date = 2019-10-02T23:02:16+03:00;
       };
       recipe = writeText "recipe" ''
         (ejira :repo "nyyManni/ejira" :fetcher github)
