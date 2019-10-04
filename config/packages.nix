@@ -76,6 +76,9 @@ in ([
   lshw
   lsof
 
+  # network tools
+  traceroute
+
   # dev tools
   docker
   docker-slim
