@@ -6,10 +6,12 @@ let
     inherit (pkgs) fetchurl fetchgit fetchFromGitHub;
     inherit (pkgs) writeText;
   in {
+    # Fix conflict with wdired.
     all-the-icons-dired = all-the-icons-dired.overrideAttrs(attrs: {
       patches = [ ./emacs/patches/all-the-icons-dired.patch ];
     });
 
+    # Fix code actions when using javascript-typescript-langserver.
     jsonrpc = let
       src = jsonrpc.src;
       patch = ./emacs/patches/jsonrpc.patch;
@@ -27,13 +29,13 @@ let
 
     # Follow master.
     eglot = eglot.overrideAttrs(attrs: {
-      version = "20190826.2310";
+      version = "20191005.1256";
       src = fetchFromGitHub {
-        owner = "terlar";
+        owner = "joaotavora";
         repo = "eglot";
-        rev = "15228b564d9fe335137f7b4722dc35e1eea0a593";
-        sha256 = "179y4scyynmikc6gvz9zihhk7k23794s8z9qagxqrdk5v6lw7mlc";
-        # date = 2019-08-26T23:10:17+02:00;
+        rev = "4693abf3d45f98e19d79d3231098db89c102c8b0";
+        sha256 = "1bgbjxzjqw95hl09y62bwhbbqzm5i03524sjcbvhjw6gr1p6ij5f";
+        # date = 2019-10-05T12:56:38+01:00;
       };
     });
 
