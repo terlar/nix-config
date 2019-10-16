@@ -29,13 +29,13 @@ let
 
     # Follow master.
     eglot = eglot.overrideAttrs(attrs: {
-      version = "20191005.1256";
+      version = "20191015.1732";
       src = fetchFromGitHub {
         owner = "joaotavora";
         repo = "eglot";
-        rev = "4693abf3d45f98e19d79d3231098db89c102c8b0";
-        sha256 = "1bgbjxzjqw95hl09y62bwhbbqzm5i03524sjcbvhjw6gr1p6ij5f";
-        # date = 2019-10-05T12:56:38+01:00;
+        rev = "9359c153f4a9654133db40adb1264392876b9dd2";
+        sha256 = "1grqax4yr9mi0g9jk6y6gssjypm75bbdmnxqqxbkxcggx80npzbq";
+        # date = 2019-10-15T17:32:57+01:00;
       };
     });
 
@@ -52,13 +52,13 @@ let
 
     org = mkDerivation rec {
       name = "emacs-org-${version}";
-      version = "20190929";
+      version = "20191014";
 
       src = fetchgit {
         url = https://code.orgmode.org/bzg/org-mode.git;
-        rev = "d215c3a8c0b4c027cfc3bad37f38ab23747fefd6";
-        sha256 = "0gjsg2r2dr4phvpwn27ycgm730sil71cfqjg00figkl6m2i4m74v";
-        # date = 2019-09-29T15:49:08-04:00;
+        rev = "8c5a78858121fa68da3729e07f7ee9dc86293c74";
+        sha256 = "0zhdm55kc6q4f47jz7pxdijhkx6c5mm4a5wbqv1vbdcz7ydixhwi";
+        # date = 2019-10-14T17:40:22+02:00;
       };
 
       preBuild = ''
@@ -136,13 +136,13 @@ let
 
     ejira = self.melpaBuild rec {
       pname   = "ejira";
-      version = "20191002.2302";
+      version = "20191015.648";
       src = fetchFromGitHub {
         owner  = "nyyManni";
         repo   = "ejira";
-        rev    = "3e346aecea954ac10f1effbc0860d7ad097eee15";
-        sha256 = "0vajdvyxp81dgwysh0xkfl26da5gfwi0q88fzcvfg1307n079waa";
-        # date = 2019-10-02T23:02:16+03:00;
+        rev    = "64f839ae8c44bc66228aed453c58caeeecf2f571";
+        sha256 = "04f40iklhkp1azxb6jivwzjbw8iig0dwbg9ww598nghp8b9vilmz";
+        # date = 2019-10-15T06:48:34+03:00;
       };
       recipe = writeText "recipe" ''
         (ejira :repo "nyyManni/ejira" :fetcher github)
@@ -199,7 +199,7 @@ let
 
     source-peek = self.melpaBuild rec {
       pname   = "source-peek";
-      version = "20170424.0347";
+      version = "20170424.347";
       src = fetchFromGitHub {
         owner  = "iqbalansari";
         repo   = "emacs-source-peek";
