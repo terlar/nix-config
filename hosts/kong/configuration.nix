@@ -34,7 +34,7 @@
 
   # Kernel modules:
   boot.kernelModules = [ "fuse" ];
-  boot.blacklistedKernelModules = [ "nouveau" "bbswitch" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
   boot.extraModulePackages = [
     config.boot.kernelPackages.sysdig
   ];
