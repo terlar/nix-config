@@ -19,5 +19,6 @@
   
   environment.systemPackages = with pkgs; [
     dex
+    xssproxy
   ];
 }

@@ -44,6 +44,11 @@
             notification = false;
           }
           {
+            command = "${pkgs.xssproxy}/bin/xssproxy";
+            always = true;
+            notification = false;
+          }
+          {
             command = "${pkgs.slack}/bin/slack";
             always = true;
             notification = false;
