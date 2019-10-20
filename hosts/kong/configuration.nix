@@ -24,14 +24,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Prevent system freezes.
-  boot.kernelParams = ["acpi_rev_override=1"];
+  boot.kernelParams = [
+    "acpi_rev_override=1"
+    "nouveau.modeset=0"
+    "pcie_aspm=off"
+  ];
   # Use the newer but stable kernel packages.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Kernel modules:
-  boot.kernelModules = [
-    "fuse"
-  ];
+  boot.kernelModules = [ "fuse" ];
+  boot.blacklistedKernelModules = [ "nouveau" "bbswitch" ];
   boot.extraModulePackages = [
     config.boot.kernelPackages.sysdig
   ];
@@ -65,6 +68,9 @@
 
   # Enable bluetooth support.
   hardware.bluetooth.enable = true;
+
+  # Disable Nvidia graphics card.
+  hardware.nvidiaOptimus.disable = true;
 
   # Enable touchpad support.
   services.xserver.libinput = {
