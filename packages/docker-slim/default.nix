@@ -7,15 +7,15 @@ let
 
   if darwinPredicate then {
     file = "dist_mac.zip";
-    sha256 = "0xk6qxqzni71glsxafhmsxalcrfbaijaflw1s25ccy1ci6xljcc0";
+    sha256 = "1pjk92aajwi2rgrx0fpkbn84yqaya8ffrm2p32xy9d53r5946pac";
   } else {
     file = "dist_linux.tar.gz";
-    sha256 = "0ff3086cr01hja551lk8x5dbyy18f9gl9fhn2ixwn1vb2zim10sx";
+    sha256 = "1l0kpwmi054myri37jfqf4jssfvzdi28xsn3b901pirqhy5z40d3";
   };
 in stdenv.mkDerivation rec {
   shortname = "docker-slim";
   name = "${shortname}-${version}";
-  version = "1.23";
+  version = "1.25.3";
 
   src = fetchurl {
     url = "https://github.com/docker-slim/docker-slim/releases/download/${version}/${metadata.file}";
