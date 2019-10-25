@@ -62,6 +62,7 @@ in ([
   nodePackages.jsonlint
   nodePackages.prettier
   shellcheck
+  saw
 
   # plantuml
   graphviz
