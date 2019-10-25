@@ -65,7 +65,6 @@ with epkgs;
   elixir-mode
   elm-mode
   emmet-mode
-  ensime
   erlang
   eros
   es-mode
