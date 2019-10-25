@@ -45,6 +45,7 @@ with epkgs;
   devdocs
   diff-hl
   diminish
+  dired-git-info
   dired-sidebar
   dired-subtree
   direnv
@@ -113,6 +114,7 @@ with epkgs;
   inf-ruby
   isend-mode
   ivy
+  ivy-ghq
   ivy-posframe
   ivy-xref
   ivy-yasnippet

@@ -173,6 +173,25 @@ let
       };
     };
 
+    ivy-ghq = self.melpaBuild rec {
+      pname   = "ivy-ghq";
+      version = "20190310.2029";
+      src = fetchFromGitHub {
+        owner  = "analyticd";
+        repo   = "ivy-ghq";
+        rev    = "fe7e722335676d5a2277a9c33e6796f7f46d84d8";
+        sha256 = "1hvw05v563njadqlj87dywvr086h77zg6hgysyl22x5vb4727zvw";
+        # date = 2019-03-10T20:29:01-07:00;
+      };
+      recipe = writeText "recipe" ''
+        (ivy-ghq :repo "analyticd/ivy-ghq" :fetcher github)
+      '';
+
+      meta = {
+        description = "Navigate to ghq managed git repos quickly using ivy Emacs package.";
+      };
+    };
+
     org-pretty-table = self.melpaBuild rec {
       pname   = "org-pretty-table";
       version = "20131129.1610";
