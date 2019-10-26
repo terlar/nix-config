@@ -29,13 +29,13 @@ let
 
     # Follow master.
     eglot = eglot.overrideAttrs(attrs: {
-      version = "20191015.1732";
+      version = "20191024.1232";
       src = fetchFromGitHub {
         owner = "joaotavora";
         repo = "eglot";
-        rev = "9359c153f4a9654133db40adb1264392876b9dd2";
-        sha256 = "1grqax4yr9mi0g9jk6y6gssjypm75bbdmnxqqxbkxcggx80npzbq";
-        # date = 2019-10-15T17:32:57+01:00;
+        rev = "32ba9d09ec40c68b086e6ff0a2d7c3bdd8393df0";
+        sha256 = "059bm1chzxvfs46izshc2q1fgg1c0gpffasjg5lgh49vk66jmyxf";
+        # date = 2019-10-24T12:32:51+01:00;
       };
     });
 
@@ -52,13 +52,13 @@ let
 
     org = mkDerivation rec {
       name = "emacs-org-${version}";
-      version = "20191014";
+      version = "20191026";
 
       src = fetchgit {
         url = https://code.orgmode.org/bzg/org-mode.git;
-        rev = "8c5a78858121fa68da3729e07f7ee9dc86293c74";
-        sha256 = "0zhdm55kc6q4f47jz7pxdijhkx6c5mm4a5wbqv1vbdcz7ydixhwi";
-        # date = 2019-10-14T17:40:22+02:00;
+        rev = "58ceff522bec39ca4511024a0ad747e2135919f9";
+        sha256 = "0l3briq3gqfx3825nqdf8k3rn928psmgpy9jcnhksqb7m44l5591";
+        # date = 2019-10-26T02:38:53+02:00;
       };
 
       preBuild = ''
