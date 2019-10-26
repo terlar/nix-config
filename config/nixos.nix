@@ -8,10 +8,9 @@ let
   repeatInterval = 33; # 30Hz
 in {
   imports = [
+    # <nixpkgs/nixos/modules/base.nix>
     ./common.nix
   ] ++ lib.optional (builtins.pathExists ../private/nixos/default.nix) ../private/nixos;
-
-  programs.command-not-found.dbPath = ../programs.sqlite;
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.consoleKeyMap = keyboardLayout;
@@ -47,6 +46,15 @@ in {
           "Noto Sans Symbols"
         ];
       };
+    };
+  };
+
+  programs = {
+    command-not-found.dbPath = ../programs.sqlite;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
     };
   };
 

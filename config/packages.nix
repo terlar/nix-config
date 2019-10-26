@@ -35,13 +35,11 @@ in ([
   file
   fzy
   gnumake
-  gnupg
   htop
   hunspellEnv
   most
   p7zip
   pdfgrep
-  pinentry
   procs
   pwgen
   ripgrep

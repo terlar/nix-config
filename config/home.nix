@@ -166,6 +166,10 @@ in rec {
       };
     };
 
+    gpg = {
+      enable = true;
+    };
+
     ssh = {
       enable = true;
 
@@ -188,18 +192,6 @@ in rec {
   services = {
     emacs = {
       enable = true;
-    };
-
-    gpg-agent = {
-      enable = true;
-
-      enableSshSupport = true;
-      defaultCacheTtl = 600;
-      maxCacheTtl = 7200;
-
-      extraConfig = ''
-        allow-emacs-pinentry
-      '';
     };
   };
 
