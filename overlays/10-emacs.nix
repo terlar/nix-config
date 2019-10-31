@@ -147,7 +147,7 @@ let
       recipe = writeText "recipe" ''
         (ejira :repo "nyyManni/ejira" :fetcher github)
       '';
-      packageRequires = [ self.language-detection self.ox-jira ];
+      packageRequires = [ self.s self.f self.ox-jira self.dash self.jiralib2 self.language-detection ];
 
       meta = {
         description = "JIRA integration to Emacs org-mode.";
