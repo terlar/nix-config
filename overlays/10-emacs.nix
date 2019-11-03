@@ -16,7 +16,7 @@ let
       src = jsonrpc.src;
       patch = ./emacs/patches/jsonrpc.patch;
       patchedSrc = mkDerivation {
-        name = "${src.name}-patched";
+        name = "emacs-${jsonrpc.pname}-${jsonrpc.version}-patched.el";
         inherit src;
         phases = [ "patchPhase" ];
         patchPhase = "patch $src -o $out < ${patch}";
@@ -25,6 +25,20 @@ let
       inherit (jsonrpc) pname ename version meta;
       src = patchedSrc;
       packageRequires = [ super.emacs ];
+    };
+
+    seq = let
+      src = seq.src;
+      patchedSrc = mkDerivation {
+        name = "emacs-${seq.pname}-${seq.version}-patched.tar";
+        inherit src;
+        phases = [ "unpackPhase" "patchPhase" ];
+        patches = [ ./emacs/patches/seq.patch ];
+        postPatch = "tar -C .. -cf $out $sourceRoot";
+      };
+    in self.elpaBuild rec {
+      inherit (seq) pname ename version meta;
+      src = patchedSrc;
     };
 
     # Follow master.
