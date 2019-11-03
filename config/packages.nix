@@ -102,6 +102,7 @@ in ([
   traceroute
 ] ++ lib.optionals sysconfig.services.xserver.enable [
   scripts.emacseditor
+  scripts.emacsmail
   scripts.insomnia
   scripts.lock
   scripts.logout

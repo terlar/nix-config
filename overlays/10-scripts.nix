@@ -3,6 +3,7 @@ self: super:
 {
   scripts = {
     emacseditor = super.callPackage ../packages/emacseditor { };
+    emacsmail = super.callPackage ../packages/emacsmail { };
     insomnia = super.callPackage ../packages/insomnia { };
     lock = super.callPackage ../packages/lock { };
     logout = super.callPackage ../packages/logout { };

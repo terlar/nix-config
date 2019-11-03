@@ -225,6 +225,7 @@ in rec {
       x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop;
       x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop;
       x-scheme-handler/ftp=org.qutebrowser.qutebrowser.desktop;
+      x-scheme-handler/mailto=emacsmail.desktop;
       application/pdf=emacsclient.desktop;
     '';
 
@@ -254,6 +255,20 @@ in rec {
       Categories=Development;TextEditor;
       StartupWMClass=Emacs
       Keywords=Text;Editor;
+    '';
+
+    dataFile."applications/emacsmail.desktop".text = ''
+      [Desktop Entry]
+      Name=Emacsmail
+      GenericName=Mail/News Client
+      Comment=Mail/News Client
+      Encoding=UTF-8
+      MimeType=x-scheme-handler/mailto;
+      Exec=${pkgs.scripts.emacsmail}/bin/emacsmail %u
+      Icon=emacs
+      Type=Application
+      Terminal=false
+      StartupWMClass=Emacs
     '';
   };
 
