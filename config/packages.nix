@@ -10,11 +10,24 @@ in ([
   nixStable
   nix-prefetch-scripts
   home-manager
-  coreutils
-  dnsutils
-  moreutils
-  fish
-  openssh
+
+  # compression/archive tools
+  p7zip
+  unrar
+  unzip
+  zip
+
+  # dev tools
+  bat
+  cabal2nix
+  editorconfig-core-c
+  gnumake
+  httpie
+  jq
+  nodePackages.jsonlint
+  nodePackages.prettier
+  saw
+  shellcheck
 
   # git tools
   git-lfs
@@ -25,74 +38,68 @@ in ([
   gitAndTools.hub
   gitAndTools.tig
 
-  # system tools
+  # network tools
+  curl
+  dnsutils
+  openssh
+  wget
+
+  # security tools
+  lastpass-cli
+  mkpasswd
+  pass
+  pwgen
+
+  # utility tools
   aspellEnv
   browsh
   buku
-  curl
+  coreutils
   direnv
   fd
   file
+  fish
   fzy
-  gnumake
   htop
   hunspellEnv
+  moreutils
   most
-  p7zip
   pdfgrep
   procs
-  pwgen
   ripgrep
   tldr
   tree
   units
-  unrar
-  unzip
-  wget
   xsv
-  zip
-
-  # dev tools
-  bat
-  editorconfig-core-c
-  httpie
-  jq
-  nodePackages.jsonlint
-  nodePackages.prettier
-  shellcheck
-  saw
 
   # plantuml
   graphviz
   jre
   plantuml
 
-  # dev env tools
-  cabal2nix
+  # samba
+  nfs-utils
+  cifs-utils
 ] ++ lib.optionals stdenv.isLinux [
-  # system tools
-  hdparm
-  lshw
-  lsof
-
-  # network tools
-  traceroute
-
   # dev tools
   docker
   docker-slim
   docker_compose
   sysdig
 
+  # hardware tools
+  hdparm
+  lshw
+  lsof
+  pciutils
+
   # media tools
   playerctl
   surfraw
   youtube-dl
 
-  # security tools
-  lastpass-cli
-  mkpasswd
-  pass
+  # network tools
+  traceroute
 ] ++ lib.optionals sysconfig.services.xserver.enable [
   scripts.emacseditor
   scripts.insomnia
@@ -100,31 +107,26 @@ in ([
   scripts.logout
   scripts.window_tiler
 
+  # appearance
+  gnome2.gtk
+  gnome3.gtk
+  gnome-themes-extra
+  paper-gtk-theme
+  paper-icon-theme
+
+  # applications
   chromium
-  feh
   firefox
-  imagemagick
   kitty
   krita
   luakit
-  maim
   mpv
   qutebrowser
-  rofi
   slack
-  slop
   spotify
   sxiv
-  xautolock
-  xcalib
-  xclip
-  xorg.xhost
-  xsel
-  xss-lock
 
-  cifs-utils
-  nfs-utils
-
+  # desktop
   gnome3.gcr
   gnome3.gnome-keyring
   gnome3.seahorse
@@ -134,14 +136,21 @@ in ([
   pavucontrol
   xfce.xfce4-notifyd
 
-  gnome2.gtk
-  gnome3.gtk
-  gnome-themes-extra
-  paper-gtk-theme
-  paper-icon-theme
+  # utility
+  feh
+  imagemagick
+  maim
+  rofi
+  slop
+  xautolock
+  xcalib
+  xclip
+  xorg.xhost
+  xsel
+  xss-lock
 ] ++ lib.optionals stdenv.isDarwin [
   skhd
 
-  # Applications
+  # applications
   docker
 ])
