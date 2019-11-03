@@ -1,4 +1,4 @@
-{ stdenv, buildGoPackage, fetchgit }:
+{ stdenv, buildGoPackage, fetchurl }:
 
 buildGoPackage rec {
   name = "saw-${version}";
@@ -6,10 +6,9 @@ buildGoPackage rec {
 
   goPackagePath = "github.com/TylerBrock/saw";
 
-  src = fetchgit {
-    url = https://github.com/TylerBrock/saw;
-    rev = "v${version}";
-    sha256 = "06c5svy6iq15b0dzsprw460j23p6ma26w0jp39xcn5nb1s1girq8";
+  src = fetchurl {
+    url = "https://github.com/TylerBrock/saw/archive/v${version}.tar.gz";
+    sha256 = "1ksbkqhcjxkd2hnfa4x73sv6f0pdpc10vzw62abmwwbay8j7plij";
   };
 
   goDeps = ./deps.nix;
