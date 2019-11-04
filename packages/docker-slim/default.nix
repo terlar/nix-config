@@ -35,7 +35,7 @@ in stdenv.mkDerivation rec {
   meta = with stdenv.lib; {
     description = "Minify and Secure Docker containers";
 
-    license = licenses.apache2;
+    license = licenses.asl20;
     homepage = https://github.com/docker-slim/docker-slim;
     platforms = with platforms; unix;
   };
