@@ -90,7 +90,7 @@ let
 
       meta = {
         homepage = "https://elpa.gnu.org/packages/org.html";
-        license = licenses.free;
+        license = lib.licenses.free;
       };
     };
 
