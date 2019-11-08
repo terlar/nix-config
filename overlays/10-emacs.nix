@@ -66,13 +66,13 @@ let
 
     org = mkDerivation rec {
       name = "emacs-org-${version}";
-      version = "20191026";
+      version = "20191108.1158";
 
       src = fetchgit {
-        url = https://code.orgmode.org/bzg/org-mode.git;
-        rev = "58ceff522bec39ca4511024a0ad747e2135919f9";
-        sha256 = "0l3briq3gqfx3825nqdf8k3rn928psmgpy9jcnhksqb7m44l5591";
-        # date = 2019-10-26T02:38:53+02:00;
+        url = https://code.orgmode.org/terlar/org-mode.git;
+        rev = "fbe245c0b09513ee5a6d3b189e112708b9d08da0";
+        sha256 = "0p6f32cp650j97c5x7cvg05lld7hsj7fcsz44frqd6p5gf445b6y";
+        # date = 2019-11-08T11:58:25+01:00;
       };
 
       preBuild = ''

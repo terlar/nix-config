@@ -26,7 +26,6 @@ in rec {
 
     file = {
       ".editorconfig".source = ./dotfiles/editorconfig/.editorconfig;
-      ".local/lib/plantuml.jar".source = "${pkgs.plantuml}/lib/plantuml.jar";
     };
   };
 

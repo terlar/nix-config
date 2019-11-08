@@ -26,6 +26,7 @@ in ([
   jq
   nodePackages.jsonlint
   nodePackages.prettier
+  plantuml
   saw
   shellcheck
 
@@ -71,11 +72,6 @@ in ([
   tree
   units
   xsv
-
-  # plantuml
-  graphviz
-  jre
-  plantuml
 
   # samba
   nfs-utils
