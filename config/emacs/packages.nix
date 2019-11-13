@@ -59,12 +59,13 @@ with epkgs;
   edit-indirect
   editorconfig
   eglot
-  ejira
+  ejc-sql
   eldoc-overlay
   eldoc-posframe
   elixir-mode
   elm-mode
   emmet-mode
+  emr
   erlang
   eros
   es-mode
@@ -191,6 +192,7 @@ with epkgs;
   smart-jump
   smartparens
   smex
+  solaire-mode
   source-peek
   spray
   string-edit

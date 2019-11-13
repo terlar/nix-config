@@ -1,20 +1,20 @@
 self: pkgs:
 
-let
-  overrides = super: self: with self; let
+{
+  emacsPackagesOverrides = super: self: with self; let
     inherit (pkgs.stdenv) mkDerivation lib;
     inherit (pkgs) fetchurl fetchgit fetchFromGitHub;
     inherit (pkgs) writeText;
   in {
     # Fix conflict with wdired.
     all-the-icons-dired = all-the-icons-dired.overrideAttrs(attrs: {
-      patches = [ ./emacs/patches/all-the-icons-dired.patch ];
+      patches = [ ./patches/all-the-icons-dired.patch ];
     });
 
     # Fix code actions when using javascript-typescript-langserver.
     jsonrpc = let
       src = jsonrpc.src;
-      patch = ./emacs/patches/jsonrpc.patch;
+      patch = ./patches/jsonrpc.patch;
       patchedSrc = mkDerivation {
         name = "emacs-${jsonrpc.pname}-${jsonrpc.version}-patched.el";
         inherit src;
@@ -27,13 +27,14 @@ let
       packageRequires = [ super.emacs ];
     };
 
+    # Fix recursive loop when used together with Emacs 27.
     seq = let
       src = seq.src;
       patchedSrc = mkDerivation {
         name = "emacs-${seq.pname}-${seq.version}-patched.tar";
         inherit src;
         phases = [ "unpackPhase" "patchPhase" ];
-        patches = [ ./emacs/patches/seq.patch ];
+        patches = [ ./patches/seq.patch ];
         postPatch = "tar -C .. -cf $out $sourceRoot";
       };
     in self.elpaBuild rec {
@@ -41,18 +42,7 @@ let
       src = patchedSrc;
     };
 
-    # Follow master.
-    eglot = eglot.overrideAttrs(attrs: {
-      version = "20191024.1232";
-      src = fetchFromGitHub {
-        owner = "joaotavora";
-        repo = "eglot";
-        rev = "32ba9d09ec40c68b086e6ff0a2d7c3bdd8393df0";
-        sha256 = "059bm1chzxvfs46izshc2q1fgg1c0gpffasjg5lgh49vk66jmyxf";
-        # date = 2019-10-24T12:32:51+01:00;
-      };
-    });
-
+    # Personal forks.
     flymake-diagnostic-at-point = flymake-diagnostic-at-point.overrideAttrs(attrs: {
       version = "20190810.2232";
       src = fetchFromGitHub {
@@ -94,17 +84,6 @@ let
       };
     };
 
-    relative-buffers = relative-buffers.overrideAttrs(attrs: {
-      version = "20191004.1505";
-      src = fetchFromGitHub {
-        owner = "proofit404";
-        repo = "relative-buffers";
-        rev = "6064cd0b3cbd42c4a46c70fc396f05be71f42bd6";
-        sha256 = "0wzxnbbzzjkzrnfdbdn7k172ad6mnhq5y3swcbilnk1w1a1lzyhn";
-        # date = 2019-10-04T15:05:23+03:00;
-      };
-    });
-
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
@@ -122,29 +101,6 @@ let
 
       meta = {
         description = "Run code formatter on buffer contents without moving point, using RCS patches and dynamic programming.";
-      };
-    };
-
-    awscli-capf = self.melpaBuild rec {
-      pname   = "awscli-capf";
-      version = "20190930.917";
-      src = fetchFromGitHub {
-        owner = "sebasmonia";
-        repo = "awscli-capf";
-        rev = "1a75f88f53a2969fe821c31e6857861d0a0c0a5e";
-        sha256 = "13ry0lhh8ss93h9c60gc02i28bwc70jb4fzqmvw778fk0shj8jxn";
-        # date = 2019-09-30T09:17:12-06:00;
-      };
-      recipe = writeText "recipe" ''
-        (awscli-capf
-          :fetcher github
-          :repo "sebasmonia/awscli-capf"
-          :files (:defaults "awscli-capf-docs.data"))
-      '';
-      packageRequires = [ self.company];
-
-      meta = {
-        description = "Completion at point function for the AWS CLI";
       };
     };
 
@@ -254,45 +210,4 @@ let
       };
     };
   };
-in {
-  emacs = self.emacsHEAD;
-  emacsPackages = self.emacsHEADPackages;
-  emacsOverrides = overrides;
-
-  emacsHEADPackages = ((pkgs.emacsPackagesFor self.emacsHEAD).overrideScope' overrides);
-
-  emacsHEAD = with pkgs; stdenv.lib.overrideDerivation
-    (emacs26.override { srcRepo = true; })
-    (attrs: rec {
-      name = "emacs-${version}${versionModifier}";
-      version = "27.0";
-      versionModifier = ".50";
-
-      buildInputs = emacs26.buildInputs ++
-                    [ git libpng.dev libjpeg.dev libungif libtiff.dev librsvg.dev ];
-
-      patches = [];
-
-      src = ./emacs/src;
-
-      postInstall = ''
-        mkdir -p $out/share/emacs/site-lisp
-        cp ${./emacs/site-start.el} $out/share/emacs/site-lisp/site-start.el
-        $out/bin/emacs --batch -f batch-byte-compile $out/share/emacs/site-lisp/site-start.el
-
-        rm -rf $out/var
-        rm -rf $out/share/emacs/${version}/site-lisp
-
-        for srcdir in src lisp lwlib ; do
-          dstdir=$out/share/emacs/${version}/$srcdir
-          mkdir -p $dstdir
-          find $srcdir -name "*.[chm]" -exec cp {} $dstdir \;
-          cp $srcdir/TAGS $dstdir
-          echo '((nil . ((tags-file-name . "TAGS"))))' > $dstdir/.dir-locals.el
-        done
-      '' + lib.optionalString stdenv.isDarwin ''
-        mkdir -p $out/Applications
-        mv nextstep/Emacs.app $out/Applications
-      '';
-    });
 }

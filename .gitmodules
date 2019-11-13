@@ -10,15 +10,14 @@
 	path = home-manager
 	url = https://github.com/rycee/home-manager.git
 	branch = master
-[submodule "emacs"]
-	path = overlays/emacs/src
-	url = https://git.savannah.gnu.org/git/emacs.git
-	branch = master
 [submodule "dotfiles"]
 	path = config/dotfiles
 	url = https://github.com/terlar/dotfiles.git
 	branch = master
-[submodule "config/emacs.d"]
-	path = config/emacs.d
+[submodule "config/emacs/emacs.d"]
+	path = config/emacs/emacs.d
 	url = https://github.com/terlar/emacs.d.git
 	branch = master
+[submodule "overlays/emacs"]
+	path = overlays/emacs
+	url = https://github.com/nix-community/emacs-overlay

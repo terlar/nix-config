@@ -2,11 +2,11 @@
 
 let
   homeManagerPath = ../home-manager;
-  emacsPackages = import ./emacs.nix pkgs;
   data = import ../load-data.nix;
   sysconfig = (import <nixpkgs/nixos> {}).config;
 in rec {
   imports = [
+    ./emacs
   ] ++ lib.optionals sysconfig.services.xserver.enable [
     ./home/linux/autorandr.nix
     ./home/linux/gtk.nix
@@ -20,7 +20,6 @@ in rec {
   home = {
     sessionVariables = {
       BROWSER = "qutebrowser";
-      EDITOR = "emacseditor";
       TERMINAL = "kitty";
     };
 
@@ -42,13 +41,6 @@ in rec {
 
     fish = {
       enable = true;
-    };
-
-    emacs = {
-      enable = true;
-      package = pkgs.emacsHEAD;
-      extraPackages = emacsPackages;
-      overrides = pkgs.emacsOverrides;
     };
 
     git = {
@@ -122,10 +114,6 @@ in rec {
           prompt = "false";
         };
 
-        "difftool \"ediff\"".cmd = ''
-          emacsclient --eval '(ediff-files "'$LOCAL'" "'$REMOTE'")'
-        '';
-
         rebase = {
           # Support fixup and squash commits.
           autoSquash = "true";
@@ -144,10 +132,6 @@ in rec {
           prompt = "false";
           keepBackup = "false";
         };
-
-        "mergetool \"ediff\"".cmd = ''
-          emacsclient --eval '(ediff-merge-files-with-ancestor "'$LOCAL'" "'$REMOTE'" "'$BASE'" nil "'$MERGED'")'
-        '';
 
         # Reuse recorded resolutions.
         rerere = {
@@ -188,27 +172,11 @@ in rec {
     };
   };
 
-  services = {
-    emacs = {
-      enable = true;
-    };
-  };
-
   xdg = {
     enable = true;
 
     # Configuration for nixpkgs outside `home-manager`, such as `nix-env`.
     configFile."nixpkgs/config.nix".source = ./nixpkgs.nix;
-
-    # Emacs.
-    configFile."emacs/init.el".source = pkgs.runCommand "init.el" {} ''
-      cp ${./emacs.d/init.org} init.org
-      ${pkgs.emacs}/bin/emacs --batch ./init.org -f org-babel-tangle
-      mv init.el $out
-    '';
-    configFile."emacs/lisp".source = ./emacs.d/lisp;
-    configFile."emacs/snippets".source = ./emacs.d/snippets;
-    configFile."emacs/templates".source = ./emacs.d/templates;
 
     # Fish configuration.
     configFile."fish/completions".source = ./dotfiles/fish/.config/fish/completions;
@@ -239,35 +207,6 @@ in rec {
         local chars = interleave("asdfg", "hjkl")
         return trim(sort(reverse(chars)))
       end
-    '';
-
-    dataFile."applications/emacsclient.desktop".text = ''
-      [Desktop Entry]
-      Name=Emacsclient
-      GenericName=Text Editor
-      Comment=Edit text
-      MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;application/pdf;
-      Exec=${pkgs.scripts.emacseditor}/bin/emacseditor %F
-      Icon=emacs
-      Type=Application
-      Terminal=false
-      Categories=Development;TextEditor;
-      StartupWMClass=Emacs
-      Keywords=Text;Editor;
-    '';
-
-    dataFile."applications/emacsmail.desktop".text = ''
-      [Desktop Entry]
-      Name=Emacsmail
-      GenericName=Mail/News Client
-      Comment=Mail/News Client
-      Encoding=UTF-8
-      MimeType=x-scheme-handler/mailto;
-      Exec=${pkgs.scripts.emacsmail}/bin/emacsmail %u
-      Icon=emacs
-      Type=Application
-      Terminal=false
-      StartupWMClass=Emacs
     '';
   };
 
