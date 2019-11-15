@@ -22,6 +22,7 @@ in ([
   cabal2nix
   editorconfig-core-c
   gnumake
+  hey
   httpie
   jq
   nodePackages.jsonlint
