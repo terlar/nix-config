@@ -28,6 +28,10 @@ in rec {
     };
   };
 
+  services = {
+    lorri.enable = true;
+  };
+
   programs = {
     home-manager = {
       enable = true;
