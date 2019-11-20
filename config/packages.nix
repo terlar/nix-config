@@ -113,7 +113,6 @@ in ([
   paper-icon-theme
 
   # applications
-  chromium
   firefox
   kitty
   krita
