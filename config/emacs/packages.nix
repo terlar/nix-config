@@ -21,6 +21,7 @@ with epkgs;
   avy
   awscli-capf
   bbdb
+  berrys-theme
   bibliothek
   cakecrumbs
   camcorder
@@ -143,6 +144,7 @@ with epkgs;
   ob-http
   objed
   org
+  org-babel-eval-in-repl
   org-bullets
   org-cliplink
   org-download
