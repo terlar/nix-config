@@ -56,13 +56,13 @@ self: pkgs:
 
     org = mkDerivation rec {
       name = "emacs-org-${version}";
-      version = "20191108.1158";
+      version = "20191124.2339";
 
       src = fetchgit {
         url = https://code.orgmode.org/terlar/org-mode.git;
-        rev = "fbe245c0b09513ee5a6d3b189e112708b9d08da0";
-        sha256 = "0p6f32cp650j97c5x7cvg05lld7hsj7fcsz44frqd6p5gf445b6y";
-        # date = 2019-11-08T11:58:25+01:00;
+        rev = "303cf04d74993bf4c658fb1e46b9979f98fedafe";
+        sha256 = "0vva0rqlz7nbh4fmn50jvs5sffggjqak4k65s21bhmm1qyliypx3";
+        # date = 2019-11-24T23:39:14+01:00;
       };
 
       preBuild = ''
@@ -87,13 +87,13 @@ self: pkgs:
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
-      version = "20190920.1712";
+      version = "20191116.2205";
       src = fetchFromGitHub {
         owner  = "raxod502";
         repo   = "apheleia";
-        rev    = "fab32d51a1db7c29b5f6e55d739254a96e372447";
-        sha256 = "04pls7zahy4jfkikv6fvd9vfpm4glhyanmmkx79hgi9pwdv966rf";
-        # date = 2019-09-20T17:12:09-07:00;
+        rev    = "61f9335756bbc2102e4c91cb3f5361891c74f27c";
+        sha256 = "0i5i9z6grr7nzxs94xbgb9mf4qirj1lcdqhl698p0rj1097yny7q";
+        # date = 2019-11-16T22:05:28-08:00;
       };
       recipe = writeText "recipe" ''
         (apheleia :repo "raxod502/apheleia" :fetcher github)
@@ -106,13 +106,13 @@ self: pkgs:
 
     ejira = self.melpaBuild rec {
       pname   = "ejira";
-      version = "20191015.648";
+      version = "20191114.2121";
       src = fetchFromGitHub {
         owner  = "nyyManni";
         repo   = "ejira";
-        rev    = "64f839ae8c44bc66228aed453c58caeeecf2f571";
-        sha256 = "04f40iklhkp1azxb6jivwzjbw8iig0dwbg9ww598nghp8b9vilmz";
-        # date = 2019-10-15T06:48:34+03:00;
+        rev    = "6f1c211a2a997187eecb90603c72f16eb6c6d77d";
+        sha256 = "1mz145nki5i8clnfmvc7ikk1jnq4058bhaxnjydbddnxk2c411ir";
+        # date = 2019-11-14T21:21:21+02:00;
       };
       recipe = writeText "recipe" ''
         (ejira :repo "nyyManni/ejira" :fetcher github)
@@ -145,13 +145,13 @@ self: pkgs:
 
     ivy-ghq = self.melpaBuild rec {
       pname   = "ivy-ghq";
-      version = "20190310.2029";
+      version = "20191123.655";
       src = fetchFromGitHub {
         owner  = "analyticd";
         repo   = "ivy-ghq";
-        rev    = "fe7e722335676d5a2277a9c33e6796f7f46d84d8";
-        sha256 = "1hvw05v563njadqlj87dywvr086h77zg6hgysyl22x5vb4727zvw";
-        # date = 2019-03-10T20:29:01-07:00;
+        rev    = "b0c05b91e2098233aa7fac7fad9d39f78146d44b";
+        sha256 = "0hvhbkgxbb9arxcpz3nyyc0176hzg0j5538vmvl2ybjxcalls5jy";
+        # date = 2019-11-23T06:55:02-08:00;
       };
       recipe = writeText "recipe" ''
         (ivy-ghq :repo "analyticd/ivy-ghq" :fetcher github)
