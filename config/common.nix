@@ -1,4 +1,4 @@
-{ config, pkgs, lib, options, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   darwinConfigPath = ./darwin.nix;
