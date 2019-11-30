@@ -78,6 +78,8 @@ in ([
   nfs-utils
   cifs-utils
 ] ++ lib.optionals stdenv.isLinux [
+  menu
+
   # dev tools
   docker
   docker-slim
