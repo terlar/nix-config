@@ -28,13 +28,6 @@ in {
     variables = {
       HOME_MANAGER_CONFIG = toString homeManagerConfigPath;
 
-      MANPATH = [
-        "${config.system.path}/share/man"
-        "${config.system.path}/man"
-        "/usr/local/share/man"
-        "/usr/X11/man"
-      ];
-
       LC_CTYPE    = "en_US.UTF-8";
       LESSCHARSET = "utf-8";
       PAGER       = "less";
