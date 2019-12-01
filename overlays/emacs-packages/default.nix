@@ -60,9 +60,9 @@ self: pkgs:
 
       src = fetchgit {
         url = https://code.orgmode.org/terlar/org-mode.git;
-        rev = "303cf04d74993bf4c658fb1e46b9979f98fedafe";
-        sha256 = "0vva0rqlz7nbh4fmn50jvs5sffggjqak4k65s21bhmm1qyliypx3";
-        # date = 2019-11-24T23:39:14+01:00;
+        rev = "5f3b98944ab9775c72d12fd37bd60d4ff7c0ea96";
+        sha256 = "01jf3zk3nkgfqis8mmagigpgcmibdcnjcjbb7bqcpbrg1hsfiy7y";
+        # date = 2019-12-01T20:58:15+01:00;
       };
 
       preBuild = ''
