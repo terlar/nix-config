@@ -145,10 +145,19 @@ in rec {
 
         ghq = {
           root = "~/src";
+
+          "git@code.orgmode.org:" = {
+            vcs = "git";
+          };
+          "https://git.savannah.gnu.org/git/" = {
+            vcs = "git";
+          };
         };
 
-        "url \"ssh://git@github.com/terlar\"" = {
-          insteadOf = "https://github.com/terlar";
+        url = {
+          "ssh://git@github.com/terlar" = {
+            insteadOf = "https://github.com/terlar";
+          };
         };
       };
     };
