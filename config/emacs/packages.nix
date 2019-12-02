@@ -21,12 +21,12 @@ with epkgs;
   avy
   awscli-capf
   bbdb
-  berrys-theme
   bibliothek
   cakecrumbs
   camcorder
   caml
   cider parseedn
+  circadian
   clojure-mode
   color-identifiers-mode
   comment-or-uncomment-sexp
@@ -202,7 +202,6 @@ with epkgs;
   stripe-buffer
   suggest
   swiper
-  tao-theme
   terraform-doc
   terraform-mode
   transpose-frame
@@ -226,4 +225,14 @@ with epkgs;
   yasnippet-snippets
   yatemplate
   zoom-window
+] ++ [
+  almost-mono-themes
+  berrys-theme
+  commentary-theme
+  doneburn-theme
+  eink-theme
+  monotropic-theme
+  poet-theme
+  punpun-theme
+  tao-theme
 ]
