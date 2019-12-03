@@ -27,21 +27,6 @@ self: pkgs:
       packageRequires = [ super.emacs ];
     };
 
-    # Fix recursive loop when used together with Emacs 27.
-    seq = let
-      src = seq.src;
-      patchedSrc = mkDerivation {
-        name = "emacs-${seq.pname}-${seq.version}-patched.tar";
-        inherit src;
-        phases = [ "unpackPhase" "patchPhase" ];
-        patches = [ ./patches/seq.patch ];
-        postPatch = "tar -C .. -cf $out $sourceRoot";
-      };
-    in self.elpaBuild rec {
-      inherit (seq) pname ename version meta;
-      src = patchedSrc;
-    };
-
     # Personal forks.
     flymake-diagnostic-at-point = flymake-diagnostic-at-point.overrideAttrs(attrs: {
       version = "20190810.2232";
