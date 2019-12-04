@@ -34,6 +34,7 @@ with epkgs;
   company-erlang
   company-terraform
   counsel
+  counsel-jq
   counsel-tramp
   coverlay
   crystal-mode
