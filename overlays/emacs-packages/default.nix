@@ -70,13 +70,13 @@ self: pkgs:
     };
 
     org-variable-pitch = org-variable-pitch.overrideAttrs(attrs: {
-      version = "20191122.1536";
+      version = "20191206.1519";
       src = fetchFromGitHub {
         owner = "terlar";
         repo = "elisp";
-        rev = "780026dd4ad8066ca6895ef263ba332f9255146e";
-        sha256 = "1844azh80lfw9mpggw50iirv4sdqbs19hm5is25rhvlycmm2041r";
-        # date = 2019-11-22T15:36:48+01:00;
+        rev = "8a926d6f6efc4edf878d636497d37daf41b3a001";
+        sha256 = "0m0ikyw36bivsr0f3wwqsn8i3kzck0vg98gb0sv2n17xpfi387qm";
+        # date = 2019-12-06T15:19:36+01:00;
       };
     });
 
