@@ -69,17 +69,6 @@ self: pkgs:
       };
     };
 
-    org-variable-pitch = org-variable-pitch.overrideAttrs(attrs: {
-      version = "20191206.1519";
-      src = fetchFromGitHub {
-        owner = "terlar";
-        repo = "elisp";
-        rev = "8a926d6f6efc4edf878d636497d37daf41b3a001";
-        sha256 = "0m0ikyw36bivsr0f3wwqsn8i3kzck0vg98gb0sv2n17xpfi387qm";
-        # date = 2019-12-06T15:19:36+01:00;
-      };
-    });
-
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
