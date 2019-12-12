@@ -145,7 +145,21 @@
             "j" = "resize grow height 10px or 10ppt";
             "k" = "resize shrink height 10px or 10ppt";
             "l" = "resize grow width 10px or 10ppt";
-            space = "resize shrink width 10000px; resize grow width 1280px; resize shrink height 10000px; resize grow height 800px";
+            space = "resize shrink width 10000px; resize grow width 1280px; resize shrink height 10000px; resize grow height 800px; move position center; mode default";
+
+            Escape = "mode default";
+            Return = "mode default";
+            "Ctrl+g" = "mode default";
+          };
+
+          screenshot = {
+            "d" = "exec ${pkgs.maim}/bin/maim -l | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+            "Shift+d" = "exec ${pkgs.maim}/bin/maim -l ~/screen-$(date +%s).png; mode default";
+            "w" = "exec ${pkgs.maim}/bin/maim -li $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+            "Shift+w" = "exec ${pkgs.maim}/bin/maim -li $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
+            space = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+            "Shift+space" = "exec ${pkgs.maim}/bin/maim -s ~/screen-$(date +%s).png; mode default";
+            "z" = "exec ${pkgs.maim}/bin/maim -l | ${pkgs.feh}/bin/feh - -Fx; mode default";
 
             Escape = "mode default";
             Return = "mode default";
@@ -176,8 +190,7 @@
           "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -Up 2";
 
           # Print screen
-          "Print" = "exec ${pkgs.maim}/bin/maim -i $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
-          "${modifier}+Print" = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png";
+          "Print" = "mode screenshot";
 
           # Start a terminal
           "${modifier}+Return" = "exec i3-sensible-terminal";
