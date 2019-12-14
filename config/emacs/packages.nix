@@ -88,7 +88,6 @@ with epkgs;
   format-all
   general
   git
-  git-messenger
   gitignore-mode
   gmail2bbdb
   go-eldoc
@@ -211,6 +210,7 @@ with epkgs;
   typescript-mode
   undo-propose
   use-package
+  vc-msg
   visual-fill-column
   visual-regexp
   vlf
