@@ -1,7 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  services.autorandr.enable = true;
+
   services.xserver = {
+    enable = true;
+    autorun = true;
+
+    # Start a DBus session.
+    startDbusSession = true;
+
     windowManager = {
       i3 = {
         enable = true;
@@ -12,6 +20,11 @@
 
     desktopManager = {
       xterm.enable = false;
+    };
+
+    displayManager.lightdm = {
+      enable = true;
+      greeters.gtk.enable = true;
     };
   };
 
