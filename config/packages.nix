@@ -69,6 +69,7 @@ in ([
   pdfgrep
   procs
   ripgrep
+  texlive.combined.scheme-full
   tldr
   tree
   units
