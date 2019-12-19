@@ -15,16 +15,18 @@
         enable = true;
         package = pkgs.i3-gaps;
       };
-      default = "i3";
     };
 
     desktopManager = {
       xterm.enable = false;
     };
 
-    displayManager.lightdm = {
-      enable = true;
-      greeters.gtk.enable = true;
+    displayManager = {
+      defaultSession = "none+i3";
+      lightdm = {
+        enable = true;
+        greeters.gtk.enable = true;
+      };
     };
   };
 
