@@ -13,7 +13,7 @@ in {
   ] ++ lib.optional (builtins.pathExists ../private/nixos/default.nix) ../private/nixos;
 
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.consoleKeyMap = keyboardLayout;
+  console.keyMap = keyboardLayout;
 
   # Enable super user handling.
   security.sudo.enable = true;
