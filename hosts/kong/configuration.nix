@@ -56,7 +56,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.cnijfilter_3_80 pkgs.cups-bjnp pkgs.gutenprint pkgs.gutenprintBin ];
+  services.printing.drivers = [ pkgs.cups-bjnp pkgs.gutenprint pkgs.gutenprintBin ];
 
   # Enable sound.
   sound.enable = true;

@@ -1,6 +1,6 @@
 [submodule "nixpkgs"]
 	path = nixpkgs
-        url = https://github.com/terlar/nixpkgs
+        url = https://github.com/nixos/nixpkgs
         branch = master
 [submodule "darwin"]
 	path = darwin
