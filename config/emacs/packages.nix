@@ -5,6 +5,7 @@ with epkgs;
 [
   ace-link
   ace-window
+  adaptive-wrap
   aggressive-indent
   alchemist
   all-the-icons
