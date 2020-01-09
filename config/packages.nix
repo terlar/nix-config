@@ -30,6 +30,7 @@ in ([
   plantuml
   saw
   shellcheck
+  termtosvg
 
   # git tools
   git-lfs
