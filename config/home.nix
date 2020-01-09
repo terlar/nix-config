@@ -43,6 +43,71 @@ in rec {
       stdlib = builtins.readFile ./home/common/direnv/stdlib.sh;
     };
 
+    firefox = {
+      enable = true;
+
+      profiles.default = {
+        isDefault = true;
+        settings = {
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        };
+        userChrome = ''
+          /*** Tabs toolbar */
+          /* Hide in main window */
+          #main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar {
+            opacity: 0;
+            pointer-events: none;
+          }
+          #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+              visibility: collapse !important;
+          }
+
+          /*** Navigation bar ***/
+          #navigator-toolbox {
+            visibility: collapse;
+          }
+
+          /*** Sidebar ***/
+          /* Min and max width removal */
+          #sidebar {
+              max-width: none !important;
+              min-width: 0px !important;
+          }
+
+          /*** Tree Style Tab ***/
+          /* Hide splitter */
+          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+              display: none !important;
+          }
+          /* Hide sidebar header */
+          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+              visibility: collapse;
+          }
+          /* Shrink sidebar until hovered */
+          :root {
+              --thin-tab-width: 2px;
+              --wide-tab-width: 250px;
+          }
+          #sidebar-box:not([sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]) {
+              min-width: var(--wide-tab-width) !important;
+              max-width: none !important;
+          }
+          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] {
+              position: relative !important;
+              transition: all 200ms !important;
+              min-width: var(--thin-tab-width) !important;
+              max-width: var(--thin-tab-width) !important;
+          }
+          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover {
+              transition: all 200ms !important;
+              min-width: var(--wide-tab-width) !important;
+              max-width: var(--wide-tab-width) !important;
+              margin-right: calc((var(--wide-tab-width) - var(--thin-tab-width)) * -1) !important;
+          }
+        '';
+      };
+    };
+
     fish = {
       enable = true;
     };
