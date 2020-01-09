@@ -69,6 +69,7 @@ in ([
   pdfgrep
   procs
   ripgrep
+  ripgrep-all
   texlive.combined.scheme-full
   tldr
   tree
