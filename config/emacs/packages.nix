@@ -132,6 +132,7 @@ with epkgs;
   magit
   markdown-mode
   markdown-toc
+  messages-are-flowing
   miniedit
   minions
   minitest
