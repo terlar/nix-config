@@ -32,12 +32,12 @@ in {
   };
 
   xdg = {
-    configFile."emacs/config.el".source = pkgs.runCommand "config.el" {} ''
+    configFile."emacs/init.el".source = pkgs.runCommand "init.el" {} ''
       cp ${./emacs.d/init.org} init.org
       ${pkgs.emacs}/bin/emacs --batch ./init.org -f org-babel-tangle
       mv init.el $out
     '';
-    configFile."emacs/init.el".source = ./init.el;
+    configFile."emacs/early-init.el".source = ./emacs.d/early-init.el;
     configFile."emacs/lisp".source = ./emacs.d/lisp;
     configFile."emacs/snippets".source = ./emacs.d/snippets;
     configFile."emacs/templates".source = ./emacs.d/templates;
