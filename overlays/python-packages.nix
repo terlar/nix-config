@@ -7,5 +7,5 @@ self: super:
   python36 = super.python36.override { packageOverrides = self.pythonOverrides; };
   python37 = super.python37.override { packageOverrides = self.pythonOverrides; };
 
-  pythonOverrides = import ./python-packages;
+  pythonOverrides = import ../pkgs/python-packages;
 }
