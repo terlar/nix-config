@@ -52,14 +52,14 @@ in rec {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
         userChrome = ''
-          /*** Tabs toolbar */
+          /*** Tabs toolbar ***/
           /* Hide in main window */
           #main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar {
             opacity: 0;
             pointer-events: none;
           }
           #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-              visibility: collapse !important;
+            visibility: collapse !important;
           }
 
           /*** Navigation bar ***/
@@ -67,42 +67,61 @@ in rec {
             visibility: collapse;
           }
 
-          /*** Sidebar ***/
-          /* Min and max width removal */
-          #sidebar {
-              max-width: none !important;
-              min-width: 0px !important;
-          }
-
-          /*** Tree Style Tab ***/
+          /*** Sidebery ***/
           /* Hide splitter */
-          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
-              display: none !important;
+          #sidebar-splitter {
+            width: 0 !important;
           }
           /* Hide sidebar header */
-          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
-              visibility: collapse;
+          #sidebar-header {
+            display: none;
           }
-          /* Shrink sidebar until hovered */
-          :root {
-              --thin-tab-width: 2px;
-              --wide-tab-width: 250px;
+          #main-window #appcontent {
+            margin-left: 30px;
           }
-          #sidebar-box:not([sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]) {
-              min-width: var(--wide-tab-width) !important;
-              max-width: none !important;
+          #main-window #sidebar-box {
+            position: fixed;
+            z-index: 999;
+            display: block;
+            min-width: 0px !important;
+            max-width: none !important;
+            width: 30px !important;
+            height: 100% !important;
+            overflow: hidden;
+            box-shadow: 0 0 8px 0 #00000064, 1px 0 0 0 #212121;
+            transition: all 0.12s;
           }
-          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] {
-              position: relative !important;
-              transition: all 200ms !important;
-              min-width: var(--thin-tab-width) !important;
-              max-width: var(--thin-tab-width) !important;
+          #main-window #sidebar {
+            position: absolute;
+            z-index: 999;
+            min-width: 0px !important;
+            max-width: none !important;
+            left: 0;
+            top: 0;
+            right: auto;
+            bottom: auto;
+            width: 30px;
+            height: 100%;
           }
-          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover {
-              transition: all 200ms !important;
-              min-width: var(--wide-tab-width) !important;
-              max-width: var(--wide-tab-width) !important;
-              margin-right: calc((var(--wide-tab-width) - var(--thin-tab-width)) * -1) !important;
+
+          /* Completely (almost) hide in fullscreen */
+          #main-window[inFullscreen] #appcontent {
+            margin-left: 1px;
+          }
+          #main-window[inFullscreen] #sidebar-box,
+          #main-window[inFullscreen] #sidebar {
+            width: 1px !important;
+          }
+
+          /* Show on hover */
+          #main-window #sidebar-box:hover,
+          #main-window[inFullscreen] #sidebar-box:hover,
+          #main-window #sidebar-box:hover #sidebar,
+          #main-window[inFullscreen] #sidebar-box:hover #sidebar {
+            width: 250px !important;
+          }
+          #main-window #sidebar-box:hover #sidebar:before {
+            transform: translateX(-100%);
           }
         '';
       };
