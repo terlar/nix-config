@@ -235,7 +235,6 @@ with epkgs;
   doneburn-theme
   eink-theme
   monotropic-theme
-  poet-theme
   punpun-theme
   tao-theme
 ]
