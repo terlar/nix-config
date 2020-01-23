@@ -7,6 +7,7 @@ self: super:
     insomnia = super.callPackage ./scripts/insomnia { };
     lock = super.callPackage ./scripts/lock { };
     logout = super.callPackage ./scripts/logout { };
+    themepark = super.callPackage ./scripts/themepark { };
     window_tiler = super.callPackage ./scripts/window_tiler { };
   };
 

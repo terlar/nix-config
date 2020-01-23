@@ -281,7 +281,12 @@ in rec {
     configFile."fish/functions".source = ./dotfiles/fish/.config/fish/functions;
 
     configFile."i3status/config".source = ./dotfiles/i3/.config/i3status/config;
+
     configFile."kitty/kitty.conf".source = ./dotfiles/kitty/.config/kitty/kitty.conf;
+    configFile."kitty/diff.conf".source = ./dotfiles/kitty/.config/kitty/diff.conf;
+    configFile."kitty/colors-dark.conf".source = ./dotfiles/kitty/.config/kitty/colors-dark.conf;
+    configFile."kitty/colors-light.conf".source = ./dotfiles/kitty/.config/kitty/colors-light.conf;
+
     configFile."qutebrowser/config.py".source = ./dotfiles/qutebrowser/.config/qutebrowser/config.py;
 
     configFile."mimeapps.list".text = ''

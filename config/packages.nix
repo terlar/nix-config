@@ -108,6 +108,7 @@ in ([
   scripts.insomnia
   scripts.lock
   scripts.logout
+  scripts.themepark
   scripts.window_tiler
 
   # appearance
