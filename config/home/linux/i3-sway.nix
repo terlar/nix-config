@@ -129,13 +129,13 @@ let
       };
 
       screenshot = {
-        "d" = "exec ${pkgs.maim}/bin/maim -l | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-        "Shift+d" = "exec ${pkgs.maim}/bin/maim -l ~/screen-$(date +%s).png; mode default";
-        "w" = "exec ${pkgs.maim}/bin/maim -li $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-        "Shift+w" = "exec ${pkgs.maim}/bin/maim -li $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
-        space = "exec ${pkgs.maim}/bin/maim -s | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-        "Shift+space" = "exec ${pkgs.maim}/bin/maim -s ~/screen-$(date +%s).png; mode default";
-        "z" = "exec ${pkgs.maim}/bin/maim -l | ${pkgs.feh}/bin/feh - -Fx; mode default";
+        "d" = "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+        "Shift+d" = "exec ${pkgs.maim}/bin/maim -ul ~/screen-$(date +%s).png; mode default";
+        "w" = "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+        "Shift+w" = "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
+        space = "exec ${pkgs.maim}/bin/maim -us | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+        "Shift+space" = "exec ${pkgs.maim}/bin/maim -us ~/screen-$(date +%s).png; mode default";
+        "z" = "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.feh}/bin/feh - -Fx; mode default";
 
         Escape = "mode default";
         Return = "mode default";
