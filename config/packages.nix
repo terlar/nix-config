@@ -151,9 +151,4 @@ in ([
   xorg.xhost
   xsel
   xss-lock
-] ++ lib.optionals stdenv.isDarwin [
-  skhd
-
-  # applications
-  docker
 ])

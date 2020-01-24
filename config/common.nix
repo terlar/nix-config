@@ -37,11 +37,8 @@ in {
       "dotfiles=${toString <dotfiles>}"
       "emacs-config=${toString <emacs-config>}"
       "private-data=${toString <private-data>}"
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ] ++ lib.optionals (builtins.pathExists <nixos-config>) [
       "nixos-config=${toString <nixos-config>}"
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
-      "darwin=${toString <darwin>}"
-      "darwin-config=${toString <darwin-config>}"
     ];
 
     maxJobs = 10;

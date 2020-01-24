@@ -8,11 +8,6 @@ PRIVATE_CONFIG_PATH := ../nix-config-private
 
 TIMESTAMP ?= $(shell date +%Y%m%d%H%M%S)
 
-ifeq ($(UNAME),Darwin)
-SWITCH_SYSTEM := switch-darwin
-GC_SYSTEM     := gc-darwin
-NIX_PATH      := $(NIX_PATH):darwin=$(EXTERNAL)/darwin:darwin-config=$(CURDIR)/config/darwin.nix
-endif
 ifeq ($(UNAME),Linux)
 SWITCH_SYSTEM := switch-nixos
 GC_SYSTEM     := gc-nixos
@@ -41,13 +36,11 @@ print-path: ## Print NIX_PATH
 init: ## Initialize sources (submodules)
 	git submodule update --init
 
-.PHONY: install-nix install-nixos install-darwin install-home install-private
+.PHONY: install-nix install-nixos install-home install-private
 install-nix: ## Install nix and update submodules
 	curl https://nixos.org/nix/install | sh
 install-nixos: ## Install NixOS for current host
 	$(MAKE) install-nixos-$(shell hostname)
-install-darwin: ## Install darwin
-	nix-shell darwin -A installer --run darwin-installer
 install-home: ## Install home-manager
 	nix-shell home-manager -A install --run 'home-manager -b bak switch'
 install-private: private ## Install private configuration
@@ -66,14 +59,11 @@ switch-home: ## Switch to latest home config
 	home-manager -b bak switch
 	@echo "Home generation: $$(home-manager generations | head -1)"
 
-.PHONY: switch-system switch-nixos switch-darwin
+.PHONY: switch-system switch-nixos
 switch-system: ## Switch to latest system config
 switch-system: $(SWITCH_SYSTEM)
 switch-nixos: ## Switch to latest NixOS config
 	sudo -E nixos-rebuild switch
-switch-darwin: ## Switch to latest Darwin config
-	darwin-rebuild switch -Q
-	@echo "Darwin generation: $$(darwin-rebuild --list-generations | tail -1)"
 
 .PHONY: build-nixos
 build-nixos:
@@ -89,8 +79,7 @@ pull-dotfiles: ## Pull latest dotfiles
 	git submodule update --remote external/dotfiles
 	git submodule update --remote external/emacs.d
 pull-nix: ## Pull latest nix upstream changes
-	git submodule sync external/darwin external/home-manager external/nixpkgs
-	git submodule update --remote external/darwin
+	git submodule sync external/home-manager external/nixpkgs
 	git submodule update --remote external/home-manager
 	git submodule update --remote external/nixpkgs
 
@@ -112,15 +101,13 @@ gc: gc-system gc-home ## Clean up system packages and home generations (older th
 gc-home: # Clean up home generations (older than 2 weeks)
 	home-manager expire-generations '-2 weeks'
 
-.PHONY: gc-system gc-nixos gc-darwin
+.PHONY: gc-system gc-nixos
 gc-system: # Clean system packages (older than 2 weeks)
 gc-system: $(GC_SYSTEM)
 gc-nixos: # Clean up NixOS packages (older than 2 weeks)
 	sudo -E nix-env -p /nix/var/nix/profiles/system --delete-generations old
 	nix-collect-garbage -d --delete-older-than 2w
 	sudo -E nixos-rebuild boot
-gc-darwin: # Clean up Darwin packages (older than 2 weeks)
-	nix-collect-garbage -d --delete-older-than 2w
 
 .PHONY: clean
 clean:

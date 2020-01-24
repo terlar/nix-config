@@ -1,5 +1,5 @@
 #+TITLE: nix-config
-Configuration for Darwin, NixOS and user home (dotfiles).
+Configuration for NixOS and user home (dotfiles).
 
 * Setup
 ** NixOS
@@ -8,24 +8,13 @@ Configuration for Darwin, NixOS and user home (dotfiles).
    make install-home
    #+END_SRC
 
-** Darwin
-   Install *nix* the package manager.
-   #+BEGIN_SRC sh
-   make install-nix
-   #+END_SRC
-
-   Install system.
-   #+BEGIN_SRC sh
-   make install-darwin
-   #+END_SRC
-
 ** Home management only
    #+BEGIN_SRC sh
    make install-home
    #+END_SRC
 
 * Usage
-  Switch both system (Darwin/NixOS) and home.
+Switch both system (NixOS) and home.
   #+BEGIN_SRC sh
   make switch
   #+END_SRC
