@@ -136,6 +136,7 @@ with epkgs;
   miniedit
   minions
   minitest
+  multicolumn
   nameless
   nginx-mode
   nix-mode
@@ -234,7 +235,9 @@ with epkgs;
   commentary-theme
   doneburn-theme
   eink-theme
+  gruvbox-theme
   monotropic-theme
   punpun-theme
+  solarized-theme
   tao-theme
 ]
