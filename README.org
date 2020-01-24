@@ -33,3 +33,30 @@ Switch both system (NixOS) and home.
   #+BEGIN_SRC sh
   make pull
   #+END_SRC
+
+* Tasks
+** TODO Extract some inline stuff into external files
+** TODO Migrate all tasks to nix-shell
+** TODO Document injecting configuration via search paths
+** TODO Manage programs.sqlite via configuration.nix
+[[https://discourse.nixos.org/t/specifying-unstable-commit-directly-in-configuration-nix/3366][NixOS Discourse: Specifying unstable commit directly in configuration.nix]]
+** TODO Compile elisp files
+#+BEGIN_SRC nix
+emacsConfig =
+  configFile."emacs-config".source = let
+    emacsBatch = "${pkgs.emacs}/bin/emacs -batch -q -no-site-file"
+  in pkgs.runCommand "init.EC" {} ''
+    cp ${<emacs-config/init.org>} init.org
+    ${emacsBatch} ./init.org -f org-babel-tangle
+    ${emacsBatch} -f batch-byte-compile ./init.el
+    mv init.el* $out
+  '';
+#+END_SRC
+
+** TODO Configure nix GC via service
+#+begin_src nix
+nix.gc.automatic = true;
+nix.gc.dates = "12:12";
+#+end_src
+** TODO Ability to pin nixpkgs? as alternative to the submodule
+** TODO Auto-load host configuration instead of relying on symlink?
