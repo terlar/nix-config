@@ -20,20 +20,29 @@ let
     private-data = privateDataPath;
   });
 
-  reloadEmacsConfig = writeShellScriptBin "reload-emacs-config" ''
-    set -euxo pipefail
+  switchNixos = writeShellScriptBin "switch-nixos" ''
+    set -euo pipefail
+    sudo -E nixos-rebuild switch $@
+  '';
 
-    home-manager -b bak switch
+  switchHome = writeShellScriptBin "switch-home" ''
+    set -euo pipefail
+    home-manager -b bak switch $@
     echo "Home generation: $(home-manager generations | head -1)"
+  '';
 
+  reloadEmacsConfig = writeShellScriptBin "reload-emacs-config" ''
+    set -euo pipefail
+    ${switchHome}/bin/switch-home
     systemctl --user restart emacs.service
-
     while ! emacsclient -a false -e t 2>/dev/null
     do sleep 1; done
     emacsclient -nc
   '';
 in mkShell {
   buildInputs = [
+    switchHome
+    switchNixos
     reloadEmacsConfig
   ];
 
