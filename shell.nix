@@ -1,7 +1,26 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ nixpkgsPath ? ./nixpkgs
+, overlaysPath ? ./overlays
+, nixosConfigPath ? ./configuration.nix
+, homeManagerPath ? ./home-manager
+, dotfilesPath ? ./config/dotfiles
+, emacsConfigPath ? ./config/emacs/emacs.d
+, privateDataPath ? ./private/data.nix
+}:
+
+with (import nixpkgsPath {});
 
 let
-  reloadEmacsConfig = pkgs.writeShellScriptBin "reload-emacs-config" ''
+  nixPath = builtins.concatStringsSep ":" (lib.mapAttrsToList (name: value: name + "=" + (toString value)) {
+    nixpkgs = nixpkgsPath;
+    nixpkgs-overlays = overlaysPath;
+    nixos-config = nixosConfigPath;
+    home-manager = homeManagerPath;
+    dotfiles = dotfilesPath;
+    emacs-config = emacsConfigPath;
+    private-data = privateDataPath;
+  });
+
+  reloadEmacsConfig = writeShellScriptBin "reload-emacs-config" ''
     set -euxo pipefail
 
     home-manager -b bak switch
@@ -13,8 +32,12 @@ let
     do sleep 1; done
     emacsclient -nc
   '';
-in pkgs.mkShell {
+in mkShell {
   buildInputs = [
     reloadEmacsConfig
   ];
+
+  shellHook = ''
+    NIX_PATH=${nixPath}
+  '';
 }

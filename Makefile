@@ -1,7 +1,7 @@
 UNAME               := $(shell uname)
 NIXOS_CONFIG        := $(CURDIR)/configuration.nix
 HOME_MANAGER_CONFIG := $(CURDIR)/config/home.nix
-NIX_PATH            := nixpkgs=$(CURDIR)/nixpkgs:nixpkgs-overlays=$(CURDIR)/overlays:home-manager=$(CURDIR)/home-manager:private-data=$(CURDIR)/private/data.nix
+NIX_PATH            := nixpkgs=$(CURDIR)/nixpkgs:nixpkgs-overlays=$(CURDIR)/overlays:home-manager=$(CURDIR)/home-manager:private-data=$(CURDIR)/private/data.nix:dotfiles=$(CURDIR)/config/dotfiles:emacs-config=$(CURDIR)/config/emacs/emacs.d
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 PRIVATE_CONFIG_PATH := ../nix-config-private
 

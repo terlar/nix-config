@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  homeManagerPath = ../home-manager;
   data = import ../load-data.nix;
   sysconfig = (import <nixpkgs/nixos> {}).config;
 in rec {
@@ -24,7 +23,7 @@ in rec {
     };
 
     file = {
-      ".editorconfig".source = ./dotfiles/editorconfig/.editorconfig;
+      ".editorconfig".source = <dotfiles/editorconfig/.editorconfig> ;
     };
   };
 
@@ -35,7 +34,7 @@ in rec {
   programs = {
     home-manager = {
       enable = true;
-      path = toString homeManagerPath;
+      path = toString <home-manager>;
     };
 
     direnv = {
@@ -276,18 +275,18 @@ in rec {
     configFile."nixpkgs/config.nix".source = ./nixpkgs.nix;
 
     # Fish configuration.
-    configFile."fish/completions".source = ./dotfiles/fish/.config/fish/completions;
-    configFile."fish/conf.d".source = ./dotfiles/fish/.config/fish/conf.d;
-    configFile."fish/functions".source = ./dotfiles/fish/.config/fish/functions;
+    configFile."fish/completions".source = <dotfiles/fish/.config/fish/completions> ;
+    configFile."fish/conf.d".source = <dotfiles/fish/.config/fish/conf.d> ;
+    configFile."fish/functions".source = <dotfiles/fish/.config/fish/functions> ;
 
-    configFile."i3status/config".source = ./dotfiles/i3/.config/i3status/config;
+    configFile."i3status/config".source = <dotfiles/i3/.config/i3status/config> ;
 
-    configFile."kitty/kitty.conf".source = ./dotfiles/kitty/.config/kitty/kitty.conf;
-    configFile."kitty/diff.conf".source = ./dotfiles/kitty/.config/kitty/diff.conf;
-    configFile."kitty/colors-dark.conf".source = ./dotfiles/kitty/.config/kitty/colors-dark.conf;
-    configFile."kitty/colors-light.conf".source = ./dotfiles/kitty/.config/kitty/colors-light.conf;
+    configFile."kitty/kitty.conf".source = <dotfiles/kitty/.config/kitty/kitty.conf> ;
+    configFile."kitty/diff.conf".source = <dotfiles/kitty/.config/kitty/diff.conf> ;
+    configFile."kitty/colors-dark.conf".source = <dotfiles/kitty/.config/kitty/colors-dark.conf> ;
+    configFile."kitty/colors-light.conf".source = <dotfiles/kitty/.config/kitty/colors-light.conf> ;
 
-    configFile."qutebrowser/config.py".source = ./dotfiles/qutebrowser/.config/qutebrowser/config.py;
+    configFile."qutebrowser/config.py".source = <dotfiles/qutebrowser/.config/qutebrowser/config.py> ;
 
     configFile."mimeapps.list".text = ''
       [Default Applications]

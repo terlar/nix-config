@@ -1,24 +1,17 @@
 { config, pkgs, lib, ... }:
 
 let
-  darwinConfigPath = ./darwin.nix;
-  darwinPath = ../darwin;
   homeManagerConfigPath = ./home.nix;
-  homeManagerPath = ../home-manager;
-  nixPkgsPath = ../nixpkgs;
-  nixPkgsOverlaysPath = ../overlays;
-  nixosConfigPath = ../configuration.nix;
-  privateDataPath = ../private/data.nix;
 in {
   time.timeZone = "Europe/Stockholm";
 
   nixpkgs.config = import ./nixpkgs.nix;
   nixpkgs.overlays = map
-    (n: import (nixPkgsOverlaysPath + ("/" + n)))
+    (n: import (<nixpkgs-overlays> + ("/" + n)))
     (builtins.filter
       (n: builtins.match
-        ".*\\.nix" n != null || builtins.pathExists (nixPkgsOverlaysPath + ("/" + n + "/default.nix")))
-      (lib.attrNames (builtins.readDir nixPkgsOverlaysPath)));
+        ".*\\.nix" n != null || builtins.pathExists (<nixpkgs-overlays> + ("/" + n + "/default.nix")))
+      (lib.attrNames (builtins.readDir <nixpkgs-overlays>)));
 
   environment = {
     systemPackages = import ./packages.nix { inherit pkgs; };
@@ -38,15 +31,17 @@ in {
   nix = {
     package = pkgs.nixStable;
     nixPath = [
-      "nixpkgs=${toString nixPkgsPath}"
-      "nixpkgs-overlays=${toString nixPkgsOverlaysPath}"
-      "home-manager=${toString homeManagerPath}"
-      "private-data=${toString privateDataPath}"
+      "nixpkgs=${toString <nixpkgs>}"
+      "nixpkgs-overlays=${toString <nixpkgs-overlays>}"
+      "home-manager=${toString <home-manager>}"
+      "dotfiles=${toString <dotfiles>}"
+      "emacs-config=${toString <emacs-config>}"
+      "private-data=${toString <private-data>}"
     ] ++ lib.optionals pkgs.stdenv.isLinux [
-      "nixos-config=${toString nixosConfigPath}"
+      "nixos-config=${toString <nixos-config>}"
     ] ++ lib.optionals pkgs.stdenv.isDarwin [
-      "darwin=${toString darwinPath}"
-      "darwin-config=${toString darwinConfigPath}"
+      "darwin=${toString <darwin>}"
+      "darwin-config=${toString <darwin-config>}"
     ];
 
     maxJobs = 10;
