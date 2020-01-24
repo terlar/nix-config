@@ -1,21 +1,21 @@
-[submodule "nixpkgs"]
-	path = nixpkgs
-        url = https://github.com/nixos/nixpkgs
-        branch = master
-[submodule "darwin"]
-	path = darwin
+[submodule "external/nixpkgs"]
+	path = external/nixpkgs
+	url = https://github.com/nixos/nixpkgs
+	branch = master
+[submodule "external/darwin"]
+	path = external/darwin
 	url = https://github.com/LnL7/nix-darwin.git
 	branch = master
-[submodule "home-manager"]
-	path = home-manager
+[submodule "external/home-manager"]
+	path = external/home-manager
 	url = https://github.com/rycee/home-manager.git
 	branch = master
-[submodule "dotfiles"]
-	path = config/dotfiles
+[submodule "external/dotfiles"]
+	path = external/dotfiles
 	url = https://github.com/terlar/dotfiles.git
 	branch = master
-[submodule "config/emacs/emacs.d"]
-	path = config/emacs/emacs.d
+[submodule "external/emacs.d"]
+	path = external/emacs.d
 	url = https://github.com/terlar/emacs.d.git
 	branch = master
 [submodule "overlays/emacs"]

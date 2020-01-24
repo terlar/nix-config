@@ -1,9 +1,9 @@
-{ nixpkgsPath ? ./nixpkgs
+{ nixpkgsPath ? ./external/nixpkgs
 , overlaysPath ? ./overlays
 , nixosConfigPath ? ./configuration.nix
-, homeManagerPath ? ./home-manager
-, dotfilesPath ? ./config/dotfiles
-, emacsConfigPath ? ./config/emacs/emacs.d
+, dotfilesPath ? ./external/dotfiles
+, emacsConfigPath ? ./external/emacs.d
+, homeManagerPath ? ./external/home-manager
 , privateDataPath ? ./private/data.nix
 }:
 

@@ -1,7 +1,8 @@
 UNAME               := $(shell uname)
 NIXOS_CONFIG        := $(CURDIR)/configuration.nix
 HOME_MANAGER_CONFIG := $(CURDIR)/config/home.nix
-NIX_PATH            := nixpkgs=$(CURDIR)/nixpkgs:nixpkgs-overlays=$(CURDIR)/overlays:home-manager=$(CURDIR)/home-manager:private-data=$(CURDIR)/private/data.nix:dotfiles=$(CURDIR)/config/dotfiles:emacs-config=$(CURDIR)/config/emacs/emacs.d
+EXTERNAL            := $(CURDIR)/external
+NIX_PATH            := nixpkgs=$(EXTERNAL)/nixpkgs:nixpkgs-overlays=$(CURDIR)/overlays:home-manager=$(EXTERNAL)/home-manager:private-data=$(CURDIR)/private/data.nix:dotfiles=$(EXTERNAL)/dotfiles:emacs-config=$(EXTERNAL)/emacs.d
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
 PRIVATE_CONFIG_PATH := ../nix-config-private
 
@@ -10,7 +11,7 @@ TIMESTAMP ?= $(shell date +%Y%m%d%H%M%S)
 ifeq ($(UNAME),Darwin)
 SWITCH_SYSTEM := switch-darwin
 GC_SYSTEM     := gc-darwin
-NIX_PATH      := $(NIX_PATH):darwin=$(CURDIR)/darwin:darwin-config=$(CURDIR)/config/darwin.nix
+NIX_PATH      := $(NIX_PATH):darwin=$(EXTERNAL)/darwin:darwin-config=$(CURDIR)/config/darwin.nix
 endif
 ifeq ($(UNAME),Linux)
 SWITCH_SYSTEM := switch-nixos
@@ -84,27 +85,27 @@ pull-emacs: ## Pull latest Emacs upstream changes
 	git submodule sync overlays/emacs
 	git submodule update --remote overlays/emacs
 pull-dotfiles: ## Pull latest dotfiles
-	git submodule sync config/dotfiles config/emacs/emacs.d
-	git submodule update --remote config/dotfiles
-	git submodule update --remote config/emacs/emacs.d
+	git submodule sync external/dotfiles external/emacs.d
+	git submodule update --remote external/dotfiles
+	git submodule update --remote external/emacs.d
 pull-nix: ## Pull latest nix upstream changes
-	git submodule sync darwin home-manager nixpkgs
-	git submodule update --remote darwin
-	git submodule update --remote home-manager
-	git submodule update --remote nixpkgs
+	git submodule sync external/darwin external/home-manager external/nixpkgs
+	git submodule update --remote external/darwin
+	git submodule update --remote external/home-manager
+	git submodule update --remote external/nixpkgs
 
 .PHONY: dev-emacs-config dev-home-manager dev-nixpkgs
 dev-emacs-config: ## Use local config/emacs.d
-	git config --file=.gitmodules submodule."config/emacs.d".url file://$(HOME)/src/github.com/terlar/emacs.d
-	git submodule update --remote config/emacs.d
+	git config --file=.gitmodules submodule."external/emacs.d".url file://$(HOME)/src/github.com/terlar/emacs.d
+	git submodule update --remote external/emacs.d
 dev-home-manager: ## Use my home-manager fork
-	git config --file=.gitmodules submodule.home-manager.url https://github.com/terlar/home-manager.git
-	git submodule sync home-manager
-	git submodule update --remote home-manager
+	git config --file=.gitmodules submodule."external/home-manager".url https://github.com/terlar/home-manager.git
+	git submodule sync external/home-manager
+	git submodule update --remote external/home-manager
 dev-nixpkgs: ## Use my nixpkgs fork
-	git config --file=.gitmodules submodule.nixpkgs.url https://github.com/terlar/nixpkgs.git
-	git submodule sync nixpkgs
-	git submodule update --remote nixpkgs
+	git config --file=.gitmodules submodule."external/nixpkgs".url https://github.com/terlar/nixpkgs.git
+	git submodule sync external/nixpkgs
+	git submodule update --remote external/nixpkgs
 
 .PHONY: gc gc-home
 gc: gc-system gc-home ## Clean up system packages and home generations (older than 2 weeks)
