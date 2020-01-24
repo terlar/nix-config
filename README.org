@@ -60,3 +60,5 @@ nix.gc.dates = "12:12";
 #+end_src
 ** TODO Ability to pin nixpkgs? as alternative to the submodule
 ** TODO Auto-load host configuration instead of relying on symlink?
+** TODO Backup helper
+** TODO GC helpers?
