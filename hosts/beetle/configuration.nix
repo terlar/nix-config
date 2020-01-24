@@ -1,9 +1,14 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+  username = "terje.larsen";
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # Home manager module
+    <home-manager/nixos>
 
     # Shared NixOS configuration.
     ../../config/nixos.nix
@@ -82,9 +87,11 @@
   };
 
   # Add my user.
-  users.users."terje.larsen" = {
+  users.users."${username}" = {
     description = "Terje Larsen";
-    createHome = true;
+    isNormalUser = true;
+    uid = 1000;
+    group = "users";
     extraGroups = [
       "adbusers"
       "audio"
@@ -94,12 +101,13 @@
       "video"
       "wheel"
     ];
-    group = "users";
-    home = "/home/terje.larsen";
-    isNormalUser = true;
-    uid = 1000;
+    createHome = true;
+    home = "/home/${username}";
   };
 
-  system.stateVersion = "18.09";
+  # Manage home.
+  home-manager.users."${username}" = import ../../config/home.nix;
+
+  system.stateVersion = "19.09";
   system.autoUpgrade.enable = true;
 }
