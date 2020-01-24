@@ -1,47 +1,49 @@
 #+TITLE: nix-config
-Configuration for NixOS and user home (dotfiles).
-
-* Setup
-** NixOS
-   Install home.
-   #+BEGIN_SRC sh
-   make install-home
-   #+END_SRC
-
-** Home management only
-   #+BEGIN_SRC sh
-   make install-home
-   #+END_SRC
+Configuration for NixOS and user home (dot files).
 
 * Usage
-Switch both system (NixOS) and home.
-  #+BEGIN_SRC sh
-  make switch
-  #+END_SRC
+Switch both system (NixOS) and home:
+#+BEGIN_SRC sh
+nix-shell --run switch-nixos
+#+end_src
 
-  Switch system only.
-  #+BEGIN_SRC sh
-  make switch-system
-  #+END_SRC
+Switch home only:
+#+BEGIN_SRC sh
+nix-shell --run switch-home
+#+end_src
 
-  Switch home only.
-  #+BEGIN_SRC sh
-  make switch-home
-  #+END_SRC
+Update the upstream sources:
+#+BEGIN_SRC sh
+nix-shell --run update-all-sources
 
-  Update the upstream repositories.
-  #+BEGIN_SRC sh
-  make pull
-  #+END_SRC
+nix-shell --run update-dotfile-sources
+nix-shell --run update-emacs-sources
+nix-shell --run update-nix-sources
+#+end_src
+
+* Development
+The available search paths and their defaults are:
+- =nixpkgsPath= :: =./external/nixpkgs=
+- =overlaysPath= :: =./overlays=
+- =nixosConfigPath= :: =./configuration.nix=
+- =dotfilesPath= :: =./external/dotfiles=
+- =emacsConfigPath= :: =./external/emacs.d=
+- =homeManagerPath= :: =./external/home-manager=
+- =homeManagerConfigPath= :: =./config/home.nix=
+- =privateDataPath= :: =./private/data.nix=
+
+Run with local version of search paths:
+#+begin_src sh
+nix-shell --argstr dotfilesPath ../dotfiles
+#+end_src
 
 * Tasks
 ** TODO Extract some inline stuff into external files
 ** TODO Migrate all tasks to nix-shell
-** TODO Document injecting configuration via search paths
 ** TODO Manage programs.sqlite via configuration.nix
 [[https://discourse.nixos.org/t/specifying-unstable-commit-directly-in-configuration-nix/3366][NixOS Discourse: Specifying unstable commit directly in configuration.nix]]
 ** TODO Compile elisp files
-#+BEGIN_SRC nix
+#+begin_src nix
 emacsConfig =
   configFile."emacs-config".source = let
     emacsBatch = "${pkgs.emacs}/bin/emacs -batch -q -no-site-file"
@@ -51,8 +53,7 @@ emacsConfig =
     ${emacsBatch} -f batch-byte-compile ./init.el
     mv init.el* $out
   '';
-#+END_SRC
-
+#+end_src
 ** TODO Configure nix GC via service
 #+begin_src nix
 nix.gc.automatic = true;
