@@ -39,7 +39,6 @@ in rec {
 
     direnv = {
       enable = true;
-      stdlib = builtins.readFile ./home/common/direnv/stdlib.sh;
     };
 
     firefox = {
