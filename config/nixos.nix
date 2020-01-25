@@ -12,6 +12,11 @@ in {
     ./common.nix
   ] ++ lib.optional (builtins.pathExists <private/nixos>) <private/nixos> ;
 
+  nix = {
+    gc.automatic = true;
+    gc.dates = "12:12";
+  };
+
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = keyboardLayout;
 

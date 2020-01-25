@@ -58,11 +58,6 @@ emacsConfig =
     mv init.el* $out
   '';
 #+end_src
-** TODO Configure nix GC via service
-#+begin_src nix
-nix.gc.automatic = true;
-nix.gc.dates = "12:12";
-#+end_src
 ** TODO Ability to pin nixpkgs? as alternative to the submodule
 ** TODO GC helpers?
 ** TODO Home manager config for qutebrowser + dicts
