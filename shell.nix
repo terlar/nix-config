@@ -79,8 +79,18 @@ let
     set -euo pipefail
     ${qutebrowser}/share/qutebrowser/scripts/dictcli.py install $@
   '';
+
+  backup = writeShellScriptBin "backup" ''
+    set -euo pipefail
+    TIMESTAMP="$(date +%Y%m%d%H%M%S)"
+    BACKUP_DIR="backup/$TIMESTAMP"
+    mkdir -p "$BACKUP_DIR/fish" "$BACKUP_DIR/gnupg"
+    cp "$HOME"/.local/share/fish/fish_history* "$BACKUP_DIR/fish"
+    cp "$HOME"/.gnupg/sshcontrol "$BACKUP_DIR/gnupg"
+  '';
 in mkShell {
   buildInputs = [
+    backup
     git
     installQutebrowserDicts
     reloadEmacsConfig

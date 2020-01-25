@@ -1,5 +1,3 @@
-TIMESTAMP = $(shell date +%Y%m%d%H%M%S)
-
 .DEFAULT_GOAL = help
 .PHONY: help
 help: ## Show this help message.
@@ -14,11 +12,3 @@ programs.sqlite:
 	wget https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz -O - \
 	  | tar xJf - --wildcards "nixos*/programs.sqlite" -O \
 	  > programs.sqlite
-
-.PHONY: backup
-backup: backup/$(TIMESTAMP)
-
-backup/$(TIMESTAMP):
-	mkdir -p $@/fish $@/gnupg
-	cp $(HOME)/.local/share/fish/fish_history* $@/fish/.
-	cp $(HOME)/.gnupg/sshcontrol $@/gnupg/.
