@@ -1,10 +1,18 @@
+let
+  hostname = builtins.replaceStrings ["\n"] [""] (builtins.readFile /etc/hostname);
+  hostNixosConfig = ./hosts + "/${hostname}/configuration.nix";
+  defaultNixosConfig =
+    if (builtins.pathExists hostNixosConfig)
+    then hostNixosConfig
+    else /etc/nixos/configuration.nix;
+in
 { nixpkgs ? ./external/nixpkgs
 , overlays ? ./overlays
 , dotfiles ? ./external/dotfiles
 , emacs-config ? ./external/emacs.d
 , home-manager ? ./external/home-manager
 , home-manager-config ? ./config/home.nix
-, nixos-config ? ./configuration.nix
+, nixos-config ? defaultNixosConfig
 , private ? ../nix-config-private
 }:
 

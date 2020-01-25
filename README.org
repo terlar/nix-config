@@ -32,7 +32,7 @@ nix-shell --run update-nix-sources
 The available search paths and their defaults are:
 - =nixpkgs= :: =./external/nixpkgs=
 - =overlays= :: =./overlays=
-- =nixos-config= :: =./configuration.nix=
+- =nixos-config= :: =./hosts/{hostname}/configuration.nix=
 - =dotfiles= :: =./external/dotfiles=
 - =emacs-config= :: =./external/emacs.d=
 - =home-manager= :: =./external/home-manager=
