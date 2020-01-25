@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  imports = [
+    ./local-keyboard.nix
+  ];
+}

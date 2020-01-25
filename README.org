@@ -61,3 +61,5 @@ emacsConfig =
 ** TODO Ability to pin nixpkgs? as alternative to the submodule
 ** TODO GC helpers?
 ** TODO Home manager config for qutebrowser + dicts
+** TODO Look into if more PA config is needed:
+- [[https://github.com/dejanr/dotfiles/blob/ef9c27cf93a17e0af4bdf5cc378d2808b5326afa/nix/config/nixpkgs/roles/multimedia.nix#L35][Sample]]

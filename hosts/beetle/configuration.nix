@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   data = import ../../load-data.nix {};
@@ -7,18 +7,23 @@ in {
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    # Shared NixOS configuration.
+    ../../config/nixos/base.nix
+    ../../config/nixos/backlight.nix
+    ../../config/nixos/battery.nix
+    ../../config/nixos/docker.nix
+    ../../config/nixos/fonts.nix
+    ../../config/nixos/gui.nix
+    ../../config/nixos/gui/i3.nix
+    ../../config/nixos/yubikey.nix
+
     # Home manager module
     <home-manager/nixos>
 
-    # Shared NixOS configuration.
-    ../../config/nixos.nix
-    ../../config/nixos/gui.nix
-    ../../config/nixos/gui/i3.nix
-
-    # Hardware configuration.
-    ../../config/nixos/hardware/backlight.nix
-    ../../config/nixos/hardware/battery.nix
-    ../../config/nixos/hardware/yubikey.nix
+    # Import local modules
+    ../../modules
+  ] ++ lib.optionals (builtins.pathExists <private/nixos>) [
+    <private/nixos>
   ];
 
   system.stateVersion = "19.09";
@@ -50,6 +55,9 @@ in {
       enable = true;
       extraModules = [ pkgs.pulseaudio-modules-bt ];
       package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
     };
   };
 
@@ -103,9 +111,18 @@ in {
   # Manage home.
   home-manager.users."${data.username}" = import ../../config/home.nix;
 
-  # Docker support.
-  virtualisation.docker = {
+  # Enable super user handling.
+  security.sudo.enable = true;
+
+  time.timeZone = "Europe/Stockholm";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # Keyboard preferences.
+  local.keyboard = {
     enable = true;
-    extraOptions = "--experimental=true";
+    xkbVariant = "altgr-intl";
+    xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
+    xkbRepeatDelay = 200;
+    xkbRepeatInterval = 33; # 30Hz
   };
 }
