@@ -1,5 +1,4 @@
 NIXOS_HOSTS         := $(addprefix install-nixos-,$(notdir $(wildcard hosts/*)))
-PRIVATE_CONFIG_PATH ?= ../nix-config-private
 
 TIMESTAMP = $(shell date +%Y%m%d%H%M%S)
 
@@ -24,16 +23,13 @@ install-qutebrowser-dicts:
 
 .PHONY: clean
 clean:
-	-@rm configuration.nix hardware-configuration.nix private 2>/dev/null ||:
+	-@rm configuration.nix hardware-configuration.nix 2>/dev/null ||:
 
 .PHONY: programs.sqlite
 programs.sqlite:
 	wget https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz -O - \
 	  | tar xJf - --wildcards "nixos*/programs.sqlite" -O \
 	  > programs.sqlite
-
-private:
-	ln -s $(PRIVATE_CONFIG_PATH) $@
 
 .PHONY: backup
 backup: backup/$(TIMESTAMP)

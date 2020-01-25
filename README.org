@@ -1,6 +1,13 @@
 #+TITLE: nix-config
 Configuration for NixOS and user home (dot files).
 
+* Setup
+Prepare your private data, by configuring the search path =<private/data>=.  The format is
+specified in [[file:load-data.nix]].
+
+You can also optionally provide extra private configuration for nixos and home-manager by
+providing =<private/nixos>= and =<private/home>= respectively.
+
 * Usage
 Switch both system (NixOS) and home:
 #+BEGIN_SRC sh
@@ -23,18 +30,18 @@ nix-shell --run update-nix-sources
 
 * Development
 The available search paths and their defaults are:
-- =nixpkgsPath= :: =./external/nixpkgs=
-- =overlaysPath= :: =./overlays=
-- =nixosConfigPath= :: =./configuration.nix=
-- =dotfilesPath= :: =./external/dotfiles=
-- =emacsConfigPath= :: =./external/emacs.d=
-- =homeManagerPath= :: =./external/home-manager=
-- =homeManagerConfigPath= :: =./config/home.nix=
-- =privateDataPath= :: =./private/data.nix=
+- =nixpkgs= :: =./external/nixpkgs=
+- =overlays= :: =./overlays=
+- =nixos-config= :: =./configuration.nix=
+- =dotfiles= :: =./external/dotfiles=
+- =emacs-config= :: =./external/emacs.d=
+- =home-manager= :: =./external/home-manager=
+- =home-manager-config= :: =./config/home.nix=
+- =private= :: =../nix-config-private=
 
 Run with local version of search paths:
 #+begin_src sh
-nix-shell --argstr dotfilesPath ../dotfiles
+nix-shell --argstr dotfiles ../dotfiles
 #+end_src
 
 * Tasks

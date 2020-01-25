@@ -1,25 +1,23 @@
-{ nixpkgsPath ? ./external/nixpkgs
-, overlaysPath ? ./overlays
-, nixosConfigPath ? ./configuration.nix
-, dotfilesPath ? ./external/dotfiles
-, emacsConfigPath ? ./external/emacs.d
-, homeManagerPath ? ./external/home-manager
-, homeManagerConfigPath ? ./config/home.nix
-, privateDataPath ? ./private/data.nix
+{ nixpkgs ? ./external/nixpkgs
+, overlays ? ./overlays
+, dotfiles ? ./external/dotfiles
+, emacs-config ? ./external/emacs.d
+, home-manager ? ./external/home-manager
+, home-manager-config ? ./config/home.nix
+, nixos-config ? ./configuration.nix
+, private ? ../nix-config-private
 }:
 
-with (import nixpkgsPath {});
+with (import nixpkgs {});
 
 let
   nixPath = builtins.concatStringsSep ":" (lib.mapAttrsToList (name: value: name + "=" + (toString value)) {
-    nixpkgs = nixpkgsPath;
-    nixpkgs-overlays = overlaysPath;
-    nixos-config = nixosConfigPath;
-    home-manager = homeManagerPath;
-    home-manager-config = homeManagerConfigPath;
-    dotfiles = dotfilesPath;
-    emacs-config = emacsConfigPath;
-    private-data = privateDataPath;
+    nixpkgs-overlays = overlays;
+    inherit nixpkgs
+      dotfiles emacs-config
+      home-manager home-manager-config
+      nixos-config
+      private;
   });
 
   switchNixos = writeShellScriptBin "switch-nixos" ''

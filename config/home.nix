@@ -11,7 +11,7 @@ in rec {
     ./home/linux/gtk.nix
     ./home/linux/i3.nix
     ./home/linux/rofi.nix
-  ] ++ lib.optional (builtins.pathExists ../private/home/default.nix) ../private/home;
+  ] ++ lib.optional (builtins.pathExists <private/home>) <private/home> ;
 
   # Configuration for nixpkgs within `home-manager` evaluation.
   nixpkgs.config = import ./nixpkgs.nix;
@@ -23,7 +23,7 @@ in rec {
     };
 
     file = {
-      ".editorconfig".source = <dotfiles/editorconfig/.editorconfig> ;
+      ".editorconfig".source = <dotfiles/editorconfig/.editorconfig>;
     };
   };
 

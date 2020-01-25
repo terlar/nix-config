@@ -33,10 +33,10 @@ in {
     nixPath = [
       "nixpkgs=${toString <nixpkgs>}"
       "nixpkgs-overlays=${toString <nixpkgs-overlays>}"
-      "home-manager=${toString <home-manager>}"
       "dotfiles=${toString <dotfiles>}"
       "emacs-config=${toString <emacs-config>}"
-      "private-data=${toString <private-data>}"
+      "home-manager=${toString <home-manager>}"
+      "private=${toString <private>}"
     ] ++ lib.optionals (builtins.pathExists <nixos-config>) [
       "nixos-config=${toString <nixos-config>}"
     ];

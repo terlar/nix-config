@@ -19,7 +19,7 @@ in {
     ../../config/nixos/hardware/backlight.nix
     ../../config/nixos/hardware/battery.nix
     ../../config/nixos/hardware/yubikey.nix
-  ] ++ lib.optional (builtins.pathExists ../../private/nixos.nix) ../../private/nixos.nix;
+  ];
 
   # Update support for firmware.
   services.fwupd.enable = true;
