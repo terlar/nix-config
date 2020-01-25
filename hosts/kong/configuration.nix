@@ -21,75 +21,78 @@ in {
     ../../config/nixos/hardware/yubikey.nix
   ];
 
+  system.stateVersion = "19.09";
+  networking.hostName = "kong";
+
   # Update support for firmware.
   services.fwupd.enable = true;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = rec {
+    # Use the systemd-boot EFI boot loader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
-  # Prevent system freezes.
-  boot.kernelParams = [
-    "acpi_rev_override=1"
-    "nouveau.modeset=0"
-    "pcie_aspm=off"
-  ];
-  # Use the newer but stable kernel packages.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  # Kernel modules:
-  boot.kernelModules = [ "fuse" ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
-  boot.extraModulePackages = [
-    config.boot.kernelPackages.sysdig
-  ];
+    # Prevent system freezes.
+    kernelParams = [
+      "acpi_rev_override=1"
+      "nouveau.modeset=0"
+      "pcie_aspm=off"
+    ];
 
-  networking.hostName = "kong";
+    kernelModules = [ "fuse" ];
+    blacklistedKernelModules = [ "nouveau" ];
+    extraModulePackages = [
+      kernelPackages.sysdig
+    ];
+  };
 
-  # Enable network manager.
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+
+    nvidiaOptimus.disable = true;
+
+    bluetooth.enable = true;
+    opengl.enable = true;
+    pulseaudio = {
+      enable = true;
+      extraModules = [ pkgs.pulseaudio-modules-bt ];
+      package = pkgs.pulseaudioFull;
+    };
+  };
+
   networking.networkmanager.enable = true;
 
-  # Enable network name resolution.
-  services.resolved.enable = true;
+  system.autoUpgrade.enable = true;
 
-  # Enable zero-configuration networking and service discorvery.
-  services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services = {
+    # Enable zero-configuration networking and service discorvery.
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
 
-  # Font sizes for retina.
-  fonts.fontconfig.dpi = 144;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.cups-bjnp pkgs.gutenprint pkgs.gutenprintBin ];
+    };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.cups-bjnp pkgs.gutenprint pkgs.gutenprintBin ];
+    # Enable network name resolution.
+    resolved.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
+    # Enable touchpad support.
+    xserver.libinput = {
+      enable = true;
+      disableWhileTyping = true;
+      tapping = false;
+      tappingDragLock = false;
+      middleEmulation = true;
+      naturalScrolling = true;
+      scrollMethod = "twofinger";
+    };
   };
-
-  # Enable bluetooth support.
-  hardware.bluetooth.enable = true;
-
-  # Disable Nvidia graphics card.
-  hardware.nvidiaOptimus.disable = true;
-
-  # Enable touchpad support.
-  services.xserver.libinput = {
-    enable = true;
-    disableWhileTyping = true;
-    tapping = true;
-    tappingDragLock = true;
-    middleEmulation = true;
-    naturalScrolling = true;
-    scrollMethod = "twofinger";
-  };
-
-  # Enable docker support.
-  virtualisation.docker.enable = true;
 
   # Add my user.
   users.extraUsers."${data.username}" = {
@@ -112,6 +115,12 @@ in {
   # Manage home.
   home-manager.users."${data.username}" = import ../../config/home.nix;
 
-  system.stateVersion = "19.09";
-  system.autoUpgrade.enable = true;
+  # Docker support.
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = "--experimental=true";
+  };
+
+  # Font sizes for retina.
+  fonts.fontconfig.dpi = 144;
 }

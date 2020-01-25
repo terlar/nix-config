@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   data = import ../../load-data.nix {};
@@ -21,69 +21,64 @@ in {
     ../../config/nixos/hardware/yubikey.nix
   ];
 
+  system.stateVersion = "19.09";
+  networking.hostName = "beetle";
+
   # Update support for firmware.
   services.fwupd.enable = true;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = rec {
+    # Use the systemd-boot EFI boot loader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
-  # Use the newer but stable kernel packages.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  # Kernel modules:
-  boot.kernelModules = [
-    "fuse"
-  ];
-  boot.extraModulePackages = [
-    config.boot.kernelPackages.sysdig
-  ];
+    kernelModules = [ "fuse" ];
+    extraModulePackages = [
+      kernelPackages.sysdig
+    ];
+  };
 
-  networking.hostName = "beetle";
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
 
-  # Enable network manager.
+    bluetooth.enable = true;
+    opengl.enable = true;
+    pulseaudio = {
+      enable = true;
+      extraModules = [ pkgs.pulseaudio-modules-bt ];
+      package = pkgs.pulseaudioFull;
+    };
+  };
+
   networking.networkmanager.enable = true;
 
-  # Disable local network name resolution.
-  services.resolved.enable = false;
+  system.autoUpgrade.enable = true;
 
-  # Enable zero-configuration networking and service discorvery.
-  services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services = {
+    # Enable zero-configuration networking and service discorvery.
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.gutenprint ];
+    printing = {
+      enable = true;
+      drivers = [ pkgs.gutenprint ];
+    };
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
-
-  # Enable bluetooth support.
-  hardware.bluetooth.enable = true;
-
-  # Enable OpenGL.
-  hardware.opengl.enable = true;
-
-  # Enable touchpad support.
-  services.xserver.libinput = {
-    enable = true;
-    disableWhileTyping = true;
-    tapping = false;
-    tappingDragLock = false;
-    middleEmulation = true;
-    naturalScrolling = true;
-    scrollMethod = "twofinger";
-  };
-
-  # Enable docker support.
-  virtualisation.docker = {
-    enable = true;
-    extraOptions = "--experimental=true";
+    # Enable touchpad support.
+    xserver.libinput = {
+      enable = true;
+      disableWhileTyping = true;
+      tapping = false;
+      tappingDragLock = false;
+      middleEmulation = true;
+      naturalScrolling = true;
+      scrollMethod = "twofinger";
+    };
   };
 
   # Add my user.
@@ -108,6 +103,9 @@ in {
   # Manage home.
   home-manager.users."${data.username}" = import ../../config/home.nix;
 
-  system.stateVersion = "19.09";
-  system.autoUpgrade.enable = true;
+  # Docker support.
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = "--experimental=true";
+  };
 }
