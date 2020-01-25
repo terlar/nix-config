@@ -1,3 +1,5 @@
+override:
+
 if builtins.pathExists <private/data>
 then import <private/data>
 else {
@@ -7,4 +9,4 @@ else {
   keys = {
     gpg = "";
   };
-}
+} // override

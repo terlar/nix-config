@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  username = "terje";
+  data = import ../../load-data.nix { username = "terje" };
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -92,8 +92,8 @@ in {
   virtualisation.docker.enable = true;
 
   # Add my user.
-  users.extraUsers."${username}" = {
-    description = "Terje Larsen";
+  users.extraUsers."${data.username}" = {
+    description = data.name;
     isNormalUser = true;
     uid = 1000;
     group = "users";
@@ -106,11 +106,11 @@ in {
       "wheel"
     ];
     createHome = true;
-    home = "/home/${username}";
+    home = "/home/${data.username}";
   };
 
   # Manage home.
-  home-manager.users."${username}" = import ../../config/home.nix;
+  home-manager.users."${data.username}" = import ../../config/home.nix;
 
   system.stateVersion = "19.09";
   system.autoUpgrade.enable = true;

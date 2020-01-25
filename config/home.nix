@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  data = import ../load-data.nix;
+  data = import ../load-data.nix {};
   sysconfig = (import <nixpkgs/nixos> {}).config;
 in rec {
   imports = [
