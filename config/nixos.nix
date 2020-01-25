@@ -2,10 +2,11 @@
 
 let
   keyboardLayout = "us";
-  xkbVariant     = "altgr-intl";
-  xkbOptions     = "lv3:ralt_switch,ctrl:nocaps";
-  repeatDelay    = 200;
+  xkbVariant = "altgr-intl";
+  xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
+  repeatDelay = 200;
   repeatInterval = 33; # 30Hz
+  nixosUnstable = builtins.fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz;
 in {
   imports = [
     ./common.nix
@@ -49,7 +50,7 @@ in {
   };
 
   programs = {
-    command-not-found.dbPath = ../programs.sqlite;
+    command-not-found.dbPath = "${nixosUnstable}/programs.sqlite";
 
     gnupg.agent = {
       enable = true;

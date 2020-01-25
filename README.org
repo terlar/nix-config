@@ -46,9 +46,6 @@ nix-shell --argstr dotfiles ../dotfiles
 
 * Tasks
 ** TODO Extract some inline stuff into external files
-** TODO Migrate all tasks to nix-shell
-** TODO Manage programs.sqlite via configuration.nix
-[[https://discourse.nixos.org/t/specifying-unstable-commit-directly-in-configuration-nix/3366][NixOS Discourse: Specifying unstable commit directly in configuration.nix]]
 ** TODO Compile elisp files
 #+begin_src nix
 emacsConfig =
@@ -67,6 +64,5 @@ nix.gc.automatic = true;
 nix.gc.dates = "12:12";
 #+end_src
 ** TODO Ability to pin nixpkgs? as alternative to the submodule
-** TODO Auto-load host configuration instead of relying on symlink?
-** TODO Backup helper
 ** TODO GC helpers?
+** TODO Home manager config for qutebrowser + dicts
