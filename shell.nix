@@ -74,9 +74,15 @@ let
     do sleep 1; done
     emacsclient -nc
   '';
+
+  installQutebrowserDicts = writeShellScriptBin "install-qb-dicts" ''
+    set -euo pipefail
+    ${qutebrowser}/share/qutebrowser/scripts/dictcli.py install $@
+  '';
 in mkShell {
   buildInputs = [
     git
+    installQutebrowserDicts
     reloadEmacsConfig
     switchHome
     switchNixos

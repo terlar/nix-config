@@ -1,7 +1,5 @@
 TIMESTAMP = $(shell date +%Y%m%d%H%M%S)
 
-QUTEBROWSER_DICTS = en-US sv-SE
-
 .DEFAULT_GOAL = help
 .PHONY: help
 help: ## Show this help message.
@@ -10,10 +8,6 @@ help: ## Show this help message.
 	@echo
 	@echo "Targets:"
 	@egrep '^(.+)\:[^#]*##\ (.+)' ${MAKEFILE_LIST} | column -t -c 2 -s ':#'
-
-.PHONY: install-qutebrowser-dicts
-install-qutebrowser-dicts:
-	$(shell nix-build '<nixpkgs>' --no-build-output -A qutebrowser)/share/qutebrowser/scripts/dictcli.py install $(QUTEBROWSER_DICTS)
 
 .PHONY: programs.sqlite
 programs.sqlite:
