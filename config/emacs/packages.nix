@@ -24,7 +24,6 @@ with epkgs;
   bbdb
   bibliothek
   cakecrumbs
-  camcorder
   caml
   cider parseedn
   circadian
