@@ -7,7 +7,6 @@ in {
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # Shared NixOS configuration.
     ../../config/nixos/base.nix
     ../../config/nixos/backlight.nix
     ../../config/nixos/battery.nix

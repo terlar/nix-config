@@ -7,10 +7,12 @@ in rec {
   imports = [
     ./emacs
   ] ++ lib.optionals sysconfig.services.xserver.enable [
+    ./home/firefox
     ./home/linux/autorandr.nix
     ./home/linux/gtk.nix
     ./home/linux/i3.nix
     ./home/linux/rofi.nix
+    ./home/qutebrowser
   ] ++ lib.optional (builtins.pathExists <private/home>) <private/home> ;
 
   # Configuration for nixpkgs within `home-manager` evaluation.
@@ -18,7 +20,6 @@ in rec {
 
   home = {
     sessionVariables = {
-      BROWSER = "qutebrowser";
       TERMINAL = "kitty";
     };
 
@@ -39,90 +40,6 @@ in rec {
 
     direnv = {
       enable = true;
-    };
-
-    firefox = {
-      enable = true;
-
-      profiles.default = {
-        isDefault = true;
-        settings = {
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        };
-        userChrome = ''
-          /*** Tabs toolbar ***/
-          /* Hide in main window */
-          #main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar {
-            opacity: 0;
-            pointer-events: none;
-          }
-          #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-            visibility: collapse !important;
-          }
-
-          /*** Navigation bar ***/
-          #navigator-toolbox {
-            visibility: collapse;
-          }
-
-          /*** Sidebery ***/
-          /* Hide splitter */
-          #sidebar-splitter {
-            width: 0 !important;
-          }
-          /* Hide sidebar header */
-          #sidebar-header {
-            display: none;
-          }
-          #main-window #appcontent {
-            margin-left: 30px;
-          }
-          #main-window #sidebar-box {
-            position: fixed;
-            z-index: 999;
-            display: block;
-            min-width: 0px !important;
-            max-width: none !important;
-            width: 30px !important;
-            height: 100% !important;
-            overflow: hidden;
-            box-shadow: 0 0 8px 0 #00000064, 1px 0 0 0 #212121;
-            transition: all 0.12s;
-          }
-          #main-window #sidebar {
-            position: absolute;
-            z-index: 999;
-            min-width: 0px !important;
-            max-width: none !important;
-            left: 0;
-            top: 0;
-            right: auto;
-            bottom: auto;
-            width: 30px;
-            height: 100%;
-          }
-
-          /* Completely (almost) hide in fullscreen */
-          #main-window[inFullscreen] #appcontent {
-            margin-left: 1px;
-          }
-          #main-window[inFullscreen] #sidebar-box,
-          #main-window[inFullscreen] #sidebar {
-            width: 1px !important;
-          }
-
-          /* Show on hover */
-          #main-window #sidebar-box:hover,
-          #main-window[inFullscreen] #sidebar-box:hover,
-          #main-window #sidebar-box:hover #sidebar,
-          #main-window[inFullscreen] #sidebar-box:hover #sidebar {
-            width: 250px !important;
-          }
-          #main-window #sidebar-box:hover #sidebar:before {
-            transform: translateX(-100%);
-          }
-        '';
-      };
     };
 
     fish = {
@@ -285,16 +202,13 @@ in rec {
     configFile."kitty/colors-dark.conf".source = <dotfiles/kitty/.config/kitty/colors-dark.conf> ;
     configFile."kitty/colors-light.conf".source = <dotfiles/kitty/.config/kitty/colors-light.conf> ;
 
-    configFile."qutebrowser/config.py".source = <dotfiles/qutebrowser/.config/qutebrowser/config.py> ;
-
-    configFile."mimeapps.list".text = ''
-      [Default Applications]
-      x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop;
-      x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop;
-      x-scheme-handler/ftp=org.qutebrowser.qutebrowser.desktop;
-      x-scheme-handler/mailto=emacsmail.desktop;
-      application/pdf=emacsclient.desktop;
-    '';
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/mailto" = "emacsmail.desktop";
+        "application/pdf" = "emacsclient.desktop";
+      };
+    };
 
     configFile."luakit/userconf.lua".text = ''
       local vertical_tabs = require "vertical_tabs"
