@@ -1,7 +1,7 @@
 override:
 
-if builtins.pathExists <private/data>
-then import <private/data>
+(if builtins.pathExists <private/data>
+ then import <private/data>
 else {
   username = "jdoe";
   name = "John Doe";
@@ -9,4 +9,4 @@ else {
   keys = {
     gpg = "";
   };
-} // override
+}) // override
