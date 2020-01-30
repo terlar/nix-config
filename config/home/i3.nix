@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -20,4 +20,6 @@
     enable = true;
     package = pkgs.i3-gaps;
   };
+
+  xdg.configFile."i3status/config".source = <dotfiles/i3/.config/i3status/config> ;
 }
