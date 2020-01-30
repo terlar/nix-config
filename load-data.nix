@@ -3,9 +3,9 @@ override:
 (if builtins.pathExists <private/data>
  then import <private/data>
 else {
-  username = "jdoe";
-  name = "John Doe";
-  email = "john.doe@example.com";
+  username = "another";
+  name = "A. N. Other";
+  email = "another@example.com";
   keys = {
     gpg = "";
   };
