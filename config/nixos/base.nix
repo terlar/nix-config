@@ -17,13 +17,15 @@ in {
 
     binaryCaches = [
       "https://cache.nixos.org"
-      "https://cachix.cachix.org"
       "https://all-hies.cachix.org"
+      "https://cachix.cachix.org"
+      "https://emacs-ci.cachix.org"
     ];
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
       "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "emacs-ci.cachix.org-1:B5FVOrxhXXrOL0S+tQ7USrhjMT5iOPH+QN9q0NItom4="
     ];
 
     gc.automatic = true;

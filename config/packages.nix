@@ -7,9 +7,10 @@ let
   hunspellEnv = hunspellWithDicts(with hunspellDicts; [en-us sv-se]);
   sysconfig = (import <nixpkgs/nixos> {}).config;
 in ([
-  nixStable
-  nix-prefetch-scripts
+  cachix
   home-manager
+  nix-prefetch-scripts
+  nixStable
 
   # compression/archive tools
   p7zip
