@@ -72,21 +72,15 @@ self: pkgs:
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
-      version = "20191116.2205";
+      version = "20200102.1130";
       src = fetchFromGitHub {
         owner  = "raxod502";
         repo   = "apheleia";
-        rev    = "61f9335756bbc2102e4c91cb3f5361891c74f27c";
-        sha256 = "0i5i9z6grr7nzxs94xbgb9mf4qirj1lcdqhl698p0rj1097yny7q";
-        # date = 2019-11-16T22:05:28-08:00;
+        rev    = "179219e619ebaa095760e2a92ef57bb3a28869bc";
+        sha256 = "0zwjcgb4n9nay7c6wdrmxqx73nshr2is1ymdc4wd1bd49sb5481i";
+        # date = 2020-01-02T11:30:45-07:00;
       };
-      recipe = writeText "recipe" ''
-        (apheleia :repo "raxod502/apheleia" :fetcher github)
-      '';
-
-      meta = {
-        description = "Run code formatter on buffer contents without moving point, using RCS patches and dynamic programming.";
-      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
     ejira = self.melpaBuild rec {
@@ -99,14 +93,8 @@ self: pkgs:
         sha256 = "1mz145nki5i8clnfmvc7ikk1jnq4058bhaxnjydbddnxk2c411ir";
         # date = 2019-11-14T21:21:21+02:00;
       };
-      recipe = writeText "recipe" ''
-        (ejira :repo "nyyManni/ejira" :fetcher github)
-      '';
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
       packageRequires = [ self.s self.f self.ox-jira self.dash self.jiralib2 self.language-detection ];
-
-      meta = {
-        description = "JIRA integration to Emacs org-mode.";
-      };
     };
 
     eldoc-posframe = self.melpaBuild rec {
@@ -119,32 +107,20 @@ self: pkgs:
         sha256 = "1pn1g8mwcgxpavwj9z8rr244pak3n7jqbswjav5bni89s4wm9rhz";
         # date = 2019-02-09T11:23:21+01:00;
       };
-      recipe = writeText "recipe" ''
-        (eldoc-posframe :repo "terlar/eldoc-posframe" :fetcher github)
-      '';
-
-      meta = {
-        description = "Display eldoc information in a posframe.";
-      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
     };
 
     ivy-ghq = self.melpaBuild rec {
       pname   = "ivy-ghq";
-      version = "20191123.655";
+      version = "20191231.1957";
       src = fetchFromGitHub {
         owner  = "analyticd";
         repo   = "ivy-ghq";
-        rev    = "b0c05b91e2098233aa7fac7fad9d39f78146d44b";
-        sha256 = "0hvhbkgxbb9arxcpz3nyyc0176hzg0j5538vmvl2ybjxcalls5jy";
-        # date = 2019-11-23T06:55:02-08:00;
+        rev    = "78a4cd32a7d7556c7c987b0089ea354e41b6f901";
+        sha256 = "1ddpdhg26nhqdd30k36c3mkciv5k2ca7vqmy3q855qnimir97zxz";
+        # date = 2019-12-31T19:57:04-08:00;
       };
-      recipe = writeText "recipe" ''
-        (ivy-ghq :repo "analyticd/ivy-ghq" :fetcher github)
-      '';
-
-      meta = {
-        description = "Navigate to ghq managed git repos quickly using ivy Emacs package.";
-      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
     org-pretty-table = self.melpaBuild rec {
@@ -157,18 +133,7 @@ self: pkgs:
         sha256 = "09avbl1mmgs3b1ya0rvv9kswq2k7d133zgr18cazl3jkpvh35lxg";
         # date = 2013-11-29T16:10:09+01:00;
       };
-      recipe = writeText "recipe" ''
-        (org-pretty-table :repo "fuco1/org-pretty-table" :fetcher github)
-      '';
-
-      meta = {
-        description = "Replace org-table characters with box-drawing unicode glyphs";
-        longDescription = ''
-          This replaces the characters - | and + in `org-mode' tables with
-          appropriate unicode box-drawing glyphs, see
-          http://en.wikipedia.org/wiki/Box-drawing_character
-        '';
-      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
     source-peek = self.melpaBuild rec {
@@ -181,18 +146,7 @@ self: pkgs:
         sha256 = "14ai66c7j2k04a0vav92ybaikcc8cng5i5vy0iwpg7b2cws8a2zg";
         # date = 2017-04-24T03:47:10+05:30;
       };
-      recipe = writeText "recipe" ''
-        (source-peek :repo "iqbalansari/emacs-source-peek" :fetcher github)
-      '';
-
-      meta = {
-        description = "Display function definitions inline";
-        longDescription = ''
-          This package adds the command `source-peek' which fetches the definition of
-          the function at point (using different backends) and displays them inline in
-          the current buffer.
-        '';
-      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
   };
 }
