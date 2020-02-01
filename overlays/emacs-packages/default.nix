@@ -41,13 +41,13 @@ self: pkgs:
 
     org = mkDerivation rec {
       name = "emacs-org-${version}";
-      version = "20191124.2339";
+      version = "20200201.1122";
 
       src = fetchgit {
         url = https://code.orgmode.org/terlar/org-mode.git;
-        rev = "5f3b98944ab9775c72d12fd37bd60d4ff7c0ea96";
-        sha256 = "01jf3zk3nkgfqis8mmagigpgcmibdcnjcjbb7bqcpbrg1hsfiy7y";
-        # date = 2019-12-01T20:58:15+01:00;
+        rev = "55953033962b72b49b974e2e58fc2063bf47ba71";
+        sha256 = "1wcbq5ah1dxy70ld8d2djfmr70986r875lyanp4d40rv3agxs4wd";
+        # date = 2020-02-01T11:22:03+01:00;
       };
 
       preBuild = ''
