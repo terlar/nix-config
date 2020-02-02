@@ -235,6 +235,8 @@ with epkgs;
   doneburn-theme
   eink-theme
   gruvbox-theme
+  modus-operandi-theme
+  modus-vivendi-theme
   monotropic-theme
   punpun-theme
   solarized-theme
