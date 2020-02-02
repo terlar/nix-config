@@ -144,6 +144,7 @@ in ([
   feh
   imagemagick
   maim
+  peek
   rofi
   slop
   xautolock
