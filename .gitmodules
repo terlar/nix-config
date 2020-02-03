@@ -1,6 +1,6 @@
 [submodule "external/nixpkgs"]
 	path = external/nixpkgs
-	url = https://github.com/nixos/nixpkgs
+	url = https://github.com/terlar/nixpkgs
 	branch = master
 [submodule "external/home-manager"]
 	path = external/home-manager
