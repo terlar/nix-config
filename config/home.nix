@@ -7,6 +7,7 @@ in rec {
     ./emacs
   ] ++ lib.optionals sysconfig.services.xserver.enable [
     ./home/autorandr.nix
+    ./home/ergonomic-keys.nix
     ./home/firefox
     ./home/fish
     ./home/git.nix
