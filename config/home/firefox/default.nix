@@ -28,10 +28,5 @@ in {
       "x-scheme-handler/https" = desktopFile;
       "x-scheme-handler/ftp" = desktopFile;
     };
-    defaultApplications = {
-      "x-scheme-handler/http" = desktopFile;
-      "x-scheme-handler/https" = desktopFile;
-      "x-scheme-handler/ftp" = desktopFile;
-    };
   };
 }
