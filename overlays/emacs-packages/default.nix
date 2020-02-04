@@ -83,6 +83,19 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
+    eglot-x = self.melpaBuild rec {
+      pname   = "eglot-x";
+      version = "20200104.1435";
+      src = fetchFromGitHub {
+        owner  = "nemethf";
+        repo   = "eglot-x";
+        rev    = "910848d8d6dde3712a2a2610c00569c46614b1fc";
+        sha256 = "0sl6k5y3b855mbix310l9xzwqm4nb8ljjq4w7y6r1acpfwd7lkdc";
+        # date = 2020-01-04T14:35:35+01:00;
+      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
+    };
+
     ejira = self.melpaBuild rec {
       pname   = "ejira";
       version = "20191114.2121";

@@ -61,6 +61,7 @@ with epkgs;
   edit-indirect
   editorconfig
   eglot
+  eglot-x
   ejc-sql
   eldoc-overlay
   eldoc-posframe
