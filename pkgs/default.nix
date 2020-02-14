@@ -11,7 +11,6 @@ self: super:
     window_tiler = super.callPackage ./scripts/window_tiler { };
   };
 
-  docker-slim = super.callPackage ./docker-slim { };
   gore = super.callPackage ./gore { };
   hey = super.callPackage ./hey { };
   saw = super.callPackage ./saw { };
