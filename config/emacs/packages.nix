@@ -186,7 +186,6 @@ with epkgs;
   repl-toggle
   rjsx-mode
   rspec-mode
-  rubocopfmt
   ruby-refactor
   rustic
   salt-mode
