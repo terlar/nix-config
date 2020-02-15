@@ -13,6 +13,7 @@ in {
       "private=${toString <private>}"
     ] ++ lib.optionals (builtins.pathExists <nixos-config>) [
       "nixos-config=${toString <nixos-config>}"
+      "nixos-hardware=${toString <nixos-hardware>}"
     ];
 
     binaryCaches = [

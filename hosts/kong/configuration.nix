@@ -6,6 +6,9 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    <nixos-hardware/common/cpu/intel>
+    <nixos-hardware/common/pc/laptop>
+    <nixos-hardware/common/pc/ssd>
 
     ../../config/nixos/backlight.nix
     ../../config/nixos/base.nix
@@ -90,6 +93,9 @@ in {
 
     # Enable network name resolution.
     resolved.enable = true;
+
+    # Monitor and control temperature.
+    thermald.enable = true;
 
     # Enable touchpad support.
     xserver.libinput = {

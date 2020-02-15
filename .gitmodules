@@ -1,19 +1,18 @@
 [submodule "external/nixpkgs"]
 	path = external/nixpkgs
-	url = https://github.com/nixos/nixpkgs
-	branch = master
+	url = https://github.com/nixos/nixpkgs.git
+[submodule "external/nixos-hardware"]
+	path = external/nixos-hardware
+	url = https://github.com/nixos/nixos-hardware.git
 [submodule "external/home-manager"]
 	path = external/home-manager
 	url = https://github.com/rycee/home-manager.git
-	branch = master
 [submodule "external/dotfiles"]
 	path = external/dotfiles
 	url = https://github.com/terlar/dotfiles.git
-	branch = master
+[submodule "overlays/emacs"]
+	path = overlays/emacs
+	url = https://github.com/nix-community/emacs-overlay.git
 [submodule "external/emacs.d"]
 	path = external/emacs.d
 	url = https://github.com/terlar/emacs.d.git
-	branch = master
-[submodule "overlays/emacs"]
-	path = overlays/emacs
-	url = https://github.com/nix-community/emacs-overlay

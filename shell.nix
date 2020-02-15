@@ -13,6 +13,7 @@ in
 , home-manager ? ./external/home-manager
 , home-manager-config ? ./config/home.nix
 , nixos-config ? defaultNixosConfig
+, nixos-hardware ? ./external/nixos-hardware
 , private ? ../nix-config-private
 }:
 
@@ -24,7 +25,7 @@ let
     inherit nixpkgs
       dotfiles emacs-config
       home-manager home-manager-config
-      nixos-config
+      nixos-config nixos-hardware
       private;
   });
 
@@ -61,8 +62,9 @@ let
 
   updateNixSources = writeShellScriptBin "update-nix-sources" ''
     set -euo pipefail
-    git submodule sync external/home-manager external/nixpkgs
+    git submodule sync external/home-manager external/nixos-hardware external/nixpkgs
     git submodule update --remote external/home-manager
+    git submodule update --remote external/nixos-hardware
     git submodule update --remote external/nixpkgs
   '';
 
