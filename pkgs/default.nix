@@ -13,5 +13,6 @@ self: super:
 
   gore = super.callPackage ./gore { };
   hey = super.callPackage ./hey { };
+  kmonad-bin = super.callPackage ./kmonad-bin { };
   saw = super.callPackage ./saw { };
 }
