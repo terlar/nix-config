@@ -1,8 +1,9 @@
 INPUT = LINUX_DEVICE L64 /dev/input/event0
 OUTPUT = UINPUT_SINK
 
-@let = TH 200 ret lctl      // Return when tapped, control when held
-@ret = TH 200 ret rctl      // Return when tapped, control when held
+@let = TH 200 ret lctl // Return when tapped, control when held
+@ret = TH 200 ret rctl // Return when tapped, control when held
+@spc = TH 200 spc lctl // Space when tapped, control when held
 
 // Source codes
 SRC
@@ -21,5 +22,5 @@ LAYER default
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   @let a    s    d    f    g    h    j    k    l    ;    '    @ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rctl      up
+  lctl lmet lalt           @spc           ralt rctl      up
 						    left down rght
