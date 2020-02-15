@@ -3,22 +3,8 @@
 let
   sysconfig = (import <nixpkgs/nixos> {}).config;
 in rec {
-  imports = [
-    ./emacs
-  ] ++ lib.optionals sysconfig.services.xserver.enable [
-    ./home/autorandr.nix
-    ./home/firefox
-    ./home/fish
-    ./home/git.nix
-    ./home/gtk.nix
-    ./home/i3.nix
-    ./home/kitty
-    ./home/qutebrowser
-    ./home/rofi.nix
-  ] ++ lib.optional (builtins.pathExists <private/home>) <private/home> ;
-
   # Configuration for nixpkgs within `home-manager` evaluation.
-  nixpkgs.config = import ./nixpkgs.nix;
+  nixpkgs.config = import ../nixpkgs.nix;
 
   home.file.".editorconfig".source = <dotfiles/editorconfig/.editorconfig> ;
 
@@ -50,7 +36,7 @@ in rec {
     enable = true;
 
     # Configuration for nixpkgs outside `home-manager`, such as `nix-env`.
-    configFile."nixpkgs/config.nix".source = ./nixpkgs.nix;
+    configFile."nixpkgs/config.nix".source = ../nixpkgs.nix;
 
     mimeApps = {
       enable = true;

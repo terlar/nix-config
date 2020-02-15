@@ -99,10 +99,9 @@ in {
   };
 
   # Add my user.
-  users.extraUsers."${data.username}" = {
+  users.users."${data.username}" = {
     description = data.name;
     isNormalUser = true;
-    uid = 1000;
     group = "users";
     extraGroups = [
       "audio"
@@ -117,7 +116,21 @@ in {
   };
 
   # Manage home.
-  home-manager.users."${data.username}" = import ../../config/home.nix;
+  home-manager.users."${data.username}" = { ... }: {
+    imports = [
+      ../../config/home/common.nix
+      ../../config/emacs
+      ../../config/home/autorandr.nix
+      ../../config/home/firefox
+      ../../config/home/fish
+      ../../config/home/git.nix
+      ../../config/home/gtk.nix
+      ../../config/home/i3.nix
+      ../../config/home/kitty
+      ../../config/home/qutebrowser
+      ../../config/home/rofi.nix
+    ] ++ lib.optional (builtins.pathExists <private/home>) <private/home>;
+  };
 
   # Enable super user handling.
   security.sudo.enable = true;
