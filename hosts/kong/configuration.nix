@@ -7,8 +7,8 @@ in {
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ../../config/nixos/base.nix
     ../../config/nixos/backlight.nix
+    ../../config/nixos/base.nix
     ../../config/nixos/battery.nix
     ../../config/nixos/docker.nix
     ../../config/nixos/fonts.nix
@@ -76,6 +76,11 @@ in {
     avahi = {
       enable = true;
       nssmdns = true;
+    };
+
+    kmonad = {
+      enable = true;
+      extraConfig = builtins.readFile ./kmonad.kbd;
     };
 
     printing = {
