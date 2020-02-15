@@ -37,6 +37,8 @@ in {
   boot = rec {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
+    # Prevent small EFI partition filling up.
+    loader.systemd-boot.configurationLimit = 10;
     loader.efi.canTouchEfiVariables = true;
 
     kernelPackages = pkgs.linuxPackages_latest;
