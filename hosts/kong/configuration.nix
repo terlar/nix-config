@@ -4,14 +4,14 @@ let
   data = import ../../load-data.nix { username = "terje"; };
 in {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    # Hardware.
     <nixos-hardware/common/cpu/intel>
     <nixos-hardware/common/pc/laptop>
     <nixos-hardware/common/pc/ssd>
+    ./hardware-configuration.nix
 
-    ../../config/nixos/backlight.nix
     ../../config/nixos/base.nix
+    ../../config/nixos/backlight.nix
     ../../config/nixos/battery.nix
     ../../config/nixos/docker.nix
     ../../config/nixos/fonts.nix
@@ -19,10 +19,10 @@ in {
     ../../config/nixos/gui/i3.nix
     ../../config/nixos/yubikey.nix
 
-    # Home manager module
+    # Home manager module.
     <home-manager/nixos>
 
-    # Import local modules
+    # Import local modules.
     ../../modules
   ] ++ lib.optionals (builtins.pathExists <private/nixos>) [
     <private/nixos>
@@ -96,17 +96,6 @@ in {
 
     # Monitor and control temperature.
     thermald.enable = true;
-
-    # Enable touchpad support.
-    xserver.libinput = {
-      enable = true;
-      disableWhileTyping = true;
-      tapping = false;
-      tappingDragLock = false;
-      middleEmulation = true;
-      naturalScrolling = true;
-      scrollMethod = "twofinger";
-    };
   };
 
   # Add my user.

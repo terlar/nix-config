@@ -4,7 +4,10 @@ let
   data = import ../../load-data.nix {};
 in {
   imports = [
-    # Include the results of the hardware scan.
+    # Hardware.
+    <nixos-hardware/common/cpu/intel>
+    <nixos-hardware/common/pc/laptop>
+    <nixos-hardware/common/pc/ssd>
     ./hardware-configuration.nix
 
     ../../config/nixos/base.nix
@@ -16,10 +19,10 @@ in {
     ../../config/nixos/gui/i3.nix
     ../../config/nixos/yubikey.nix
 
-    # Home manager module
+    # Home manager module.
     <home-manager/nixos>
 
-    # Import local modules
+    # Import local modules.
     ../../modules
   ] ++ lib.optionals (builtins.pathExists <private/nixos>) [
     <private/nixos>
@@ -76,16 +79,8 @@ in {
       drivers = [ pkgs.gutenprint ];
     };
 
-    # Enable touchpad support.
-    xserver.libinput = {
-      enable = true;
-      disableWhileTyping = true;
-      tapping = false;
-      tappingDragLock = false;
-      middleEmulation = true;
-      naturalScrolling = true;
-      scrollMethod = "twofinger";
-    };
+    # Monitor and control temperature.
+    thermald.enable = true;
   };
 
   # Add my user.
