@@ -13,20 +13,29 @@ in {
       default = pkgs.fish;
       defaultText = "pkgs.fish";
       example = literalExample "pkgs.zsh";
-      description = "The Shell derivation to use";
+      description = "The Shell derivation to use.";
     };
 
     defaultUserShell = mkOption {
       type = types.bool;
       default = true;
-      description = "Set the shell as default user shell.";
+      description = "Set the shell as default user Shell.";
+    };
+
+    pager = mkOption {
+      type = types.str;
+      default = "less";
+      description = "The pager to use in Shell.";
     };
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
       environment = {
-        variables.SHELL = "${cfg.package}${cfg.package.shellPath}";
+        sessionVariables = {
+          SHELL = "${cfg.package}${cfg.package.shellPath}";
+          PAGER = cfg.pager;
+        };
       };
     }
 

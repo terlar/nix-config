@@ -49,13 +49,5 @@ in {
     udisks2.enable = true;
   };
 
-  environment = {
-    systemPackages = import ./packages.nix { inherit pkgs; };
-
-    variables = {
-      LC_CTYPE    = "en_US.UTF-8";
-      LESSCHARSET = "utf-8";
-      PAGER       = "less";
-    };
-  };
+  environment.systemPackages = import ./packages.nix { inherit pkgs; };
 }
