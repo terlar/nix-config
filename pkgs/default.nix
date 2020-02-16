@@ -1,18 +1,18 @@
-self: super:
+self: pkgs:
 
 {
   scripts = {
-    emacseditor = super.callPackage ./scripts/emacseditor { };
-    emacsmail = super.callPackage ./scripts/emacsmail { };
-    insomnia = super.callPackage ./scripts/insomnia { };
-    lock = super.callPackage ./scripts/lock { };
-    logout = super.callPackage ./scripts/logout { };
-    themepark = super.callPackage ./scripts/themepark { };
-    window_tiler = super.callPackage ./scripts/window_tiler { };
+    emacseditor = pkgs.callPackage ./scripts/emacseditor { };
+    emacsmail = pkgs.callPackage ./scripts/emacsmail { };
+    insomnia = pkgs.callPackage ./scripts/insomnia { };
+    lock = pkgs.callPackage ./scripts/lock { };
+    logout = pkgs.callPackage ./scripts/logout { };
+    themepark = pkgs.callPackage ./scripts/themepark { };
+    window_tiler = pkgs.callPackage ./scripts/window_tiler { };
   };
 
-  gore = super.callPackage ./gore { };
-  hey = super.callPackage ./hey { };
-  kmonad-bin = super.callPackage ./kmonad-bin { };
-  saw = super.callPackage ./saw { };
+  gore = pkgs.callPackage ./gore { };
+  hey = pkgs.callPackage ./hey { };
+  kmonad-bin = pkgs.callPackage ./kmonad-bin { };
+  saw = pkgs.callPackage ./saw { };
 }
