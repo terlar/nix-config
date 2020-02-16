@@ -17,7 +17,7 @@ in {
     <home-manager/nixos>
 
     # Import local modules.
-    ../../modules
+    ../../modules/nixos
   ] ++ lib.optionals (builtins.pathExists <private/nixos>) [
     <private/nixos>
   ];
@@ -79,6 +79,9 @@ in {
       ../../config/home/common.nix
       ../../config/home/gui.nix
       ../../config/home/emacs
+
+      # Import local modules.
+      ../../modules/home
     ] ++ lib.optionals (builtins.pathExists <private/home>) [
       <private/home>
     ];

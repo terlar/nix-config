@@ -4,9 +4,13 @@ let
   desktopFile = "org.qutebrowser.qutebrowser.desktop";
 in {
   home.sessionVariables.BROWSER = "qutebrowser";
-  xdg = {
-    configFile."qutebrowser/config.py".source = <dotfiles/qutebrowser/.config/qutebrowser/config.py> ;
 
+  programs.qutebrowser = {
+    enable = true;
+    extraConfig = builtins.readFile <dotfiles/qutebrowser/.config/qutebrowser/config.py> ;
+  };
+
+  xdg = {
     mimeApps = {
       associations.added = {
         "x-scheme-handler/http" = desktopFile;

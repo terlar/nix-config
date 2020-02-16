@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  imports = [
+    ./programs/qutebrowser.nix
+  ];
+}
