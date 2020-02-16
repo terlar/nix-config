@@ -78,7 +78,7 @@ in {
     imports = [
       ../../config/home/common.nix
       ../../config/home/gui.nix
-      ../../config/emacs
+      ../../config/home/emacs
     ] ++ lib.optionals (builtins.pathExists <private/home>) [
       <private/home>
     ];
