@@ -105,10 +105,10 @@ in {
   # Font sizes for retina.
   fonts.fontconfig.dpi = 144;
 
-  # Shell.
-  local.shell = {
+  # Dictionaries.
+  local.dictionaries = {
     enable = true;
-    package = pkgs.fish;
+    languages = ["en-us" "sv-se"];
   };
 
   # Keyboard preferences.
@@ -118,5 +118,11 @@ in {
     xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
     xkbRepeatDelay = 500;
     xkbRepeatInterval = 33; # 30Hz
+  };
+
+  # Shell.
+  local.shell = {
+    enable = true;
+    package = pkgs.fish;
   };
 }

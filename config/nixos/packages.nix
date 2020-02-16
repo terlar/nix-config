@@ -2,10 +2,7 @@
 
 with pkgs;
 
-let
-  aspellEnv = aspellWithDicts(ps: [ ps.en ps.sv ]);
-  hunspellEnv = hunspellWithDicts(with hunspellDicts; [en-us sv-se]);
-in [
+[
   # nix
   cachix
   home-manager
@@ -52,7 +49,6 @@ in [
   pwgen
 
   # utility
-  aspellEnv
   browsh
   buku
   coreutils
@@ -61,7 +57,6 @@ in [
   fish
   fzy
   htop
-  hunspellEnv
   menu
   moreutils
   most

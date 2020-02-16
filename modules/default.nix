@@ -3,7 +3,8 @@
 {
   imports = [
     ./kmonad.nix
-    ./local-shell.nix
+    ./local-dictionaries.nix
     ./local-keyboard.nix
+    ./local-shell.nix
   ];
 }
