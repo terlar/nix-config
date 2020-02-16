@@ -72,13 +72,13 @@ self: pkgs:
     # Packages not in MELPA.
     apheleia = self.melpaBuild rec {
       pname   = "apheleia";
-      version = "20200102.1130";
+      version = "20200209.1305";
       src = fetchFromGitHub {
         owner  = "raxod502";
         repo   = "apheleia";
-        rev    = "179219e619ebaa095760e2a92ef57bb3a28869bc";
-        sha256 = "0zwjcgb4n9nay7c6wdrmxqx73nshr2is1ymdc4wd1bd49sb5481i";
-        # date = 2020-01-02T11:30:45-07:00;
+        rev    = "76f0d946e7c860dbd1382828c2858b36bd06d507";
+        sha256 = "181cip7nxv2hfm03rar1qm4fibh30b77jp6xz8q4jlgn31r3g9wc";
+        # date = 2020-02-09T13:05:32-08:00;
       };
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
