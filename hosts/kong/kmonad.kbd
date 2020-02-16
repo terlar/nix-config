@@ -1,9 +1,9 @@
 INPUT = LINUX_DEVICE L64 /dev/input/event0
 OUTPUT = UINPUT_SINK
 
-@let = TH 200 ret lctl // Return when tapped, control when held
-@ret = TH 200 ret rctl // Return when tapped, control when held
-@spc = TH 200 spc lctl // Space when tapped, control when held
+@let = TH 170 ret lctl // Return when tapped, control when held
+@ret = TH 170 ret rctl // Return when tapped, control when held
+@spc = TH 170 spc lctl // Space when tapped, control when held
 
 // Source codes
 SRC
