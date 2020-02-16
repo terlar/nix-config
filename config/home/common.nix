@@ -1,8 +1,6 @@
 { lib, ... }:
 
-let
-  sysconfig = (import <nixpkgs/nixos> {}).config;
-in rec {
+{
   # Configuration for nixpkgs within `home-manager` evaluation.
   nixpkgs.config = import ../nixpkgs.nix;
 
@@ -18,13 +16,8 @@ in rec {
       path = toString <home-manager>;
     };
 
-    direnv = {
-      enable = true;
-    };
-
-    gpg = {
-      enable = true;
-    };
+    direnv.enable = true;
+    gpg.enable = true;
 
     ssh = {
       enable = true;

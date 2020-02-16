@@ -10,14 +10,8 @@ in {
     <nixos-hardware/common/pc/ssd>
     ./hardware-configuration.nix
 
-    ../../config/nixos/base.nix
-    ../../config/nixos/backlight.nix
-    ../../config/nixos/battery.nix
-    ../../config/nixos/docker.nix
-    ../../config/nixos/fonts.nix
-    ../../config/nixos/gui.nix
-    ../../config/nixos/gui/i3.nix
-    ../../config/nixos/yubikey.nix
+    ../../profiles/development.nix
+    ../../profiles/laptop.nix
 
     # Home manager module.
     <home-manager/nixos>
@@ -31,8 +25,8 @@ in {
   system.stateVersion = "19.09";
   networking.hostName = "kong";
 
-  # Update support for firmware.
-  services.fwupd.enable = true;
+  time.timeZone = "Europe/Stockholm";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   boot = rec {
     # Use the systemd-boot EFI boot loader.
@@ -52,36 +46,17 @@ in {
 
     kernelModules = [ "fuse" ];
     blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = [
-      kernelPackages.sysdig
-    ];
   };
 
   hardware = {
-    cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
-
     nvidiaOptimus.disable = true;
-
-    bluetooth.enable = true;
     opengl.enable = true;
-    pulseaudio = {
-      enable = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
-      package = pkgs.pulseaudioFull;
-    };
   };
 
-  networking.networkmanager.enable = true;
-
-  system.autoUpgrade.enable = true;
-
   services = {
-    # Enable zero-configuration networking and service discorvery.
-    avahi = {
-      enable = true;
-      nssmdns = true;
-    };
+    # Update support for firmware.
+    fwupd.enable = true;
 
     kmonad = {
       enable = true;
@@ -95,9 +70,6 @@ in {
 
     # Enable network name resolution.
     resolved.enable = true;
-
-    # Monitor and control temperature.
-    thermald.enable = true;
   };
 
   # Add my user.
@@ -131,14 +103,10 @@ in {
       ../../config/home/kitty
       ../../config/home/qutebrowser
       ../../config/home/rofi.nix
-    ] ++ lib.optional (builtins.pathExists <private/home>) <private/home>;
+    ] ++ lib.optionals (builtins.pathExists <private/home>) [
+      <private/home>
+    ];
   };
-
-  # Enable super user handling.
-  security.sudo.enable = true;
-
-  time.timeZone = "Europe/Stockholm";
-  i18n.defaultLocale = "en_US.UTF-8";
 
   # Keyboard preferences.
   local.keyboard = {
@@ -149,9 +117,8 @@ in {
     xkbRepeatInterval = 33; # 30Hz
   };
 
+  # Earlier font size setup.
+  console.earlySetup = true;
   # Font sizes for retina.
   fonts.fontconfig.dpi = 144;
-
-  # Earlier font-size setup.
-  console.earlySetup = true;
 }

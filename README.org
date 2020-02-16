@@ -29,14 +29,14 @@ nix-shell --run update-nix-sources
 #+end_src
 
 * Development
-The available search paths and their defaults are:
+The available search paths (=$NIX_PATH=) and their defaults are:
 - =nixpkgs= :: =./external/nixpkgs=
 - =overlays= :: =./overlays=
 - =nixos-config= :: =./hosts/{hostname}/configuration.nix=
+- =nixos-hardware= :: =./external/nixos-hardware=
+- =home-manager= :: =./external/home-manager=
 - =dotfiles= :: =./external/dotfiles=
 - =emacs-config= :: =./external/emacs.d=
-- =home-manager= :: =./external/home-manager=
-- =home-manager-config= :: =./config/home.nix=
 - =private= :: =../nix-config-private=
 
 Run with local version of search paths:

@@ -8,12 +8,11 @@ let
 in
 { nixpkgs ? ./external/nixpkgs
 , overlays ? ./overlays
-, dotfiles ? ./external/dotfiles
-, emacs-config ? ./external/emacs.d
-, home-manager ? ./external/home-manager
-, home-manager-config ? ./config/home.nix
 , nixos-config ? defaultNixosConfig
 , nixos-hardware ? ./external/nixos-hardware
+, home-manager ? ./external/home-manager
+, dotfiles ? ./external/dotfiles
+, emacs-config ? ./external/emacs.d
 , private ? ../nix-config-private
 }:
 
@@ -24,7 +23,7 @@ let
     nixpkgs-overlays = overlays;
     inherit nixpkgs
       dotfiles emacs-config
-      home-manager home-manager-config
+      home-manager
       nixos-config nixos-hardware
       private;
   });
