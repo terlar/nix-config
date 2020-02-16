@@ -93,16 +93,8 @@ in {
   home-manager.users."${data.username}" = { ... }: {
     imports = [
       ../../config/home/common.nix
+      ../../config/home/gui.nix
       ../../config/emacs
-      ../../config/home/autorandr.nix
-      ../../config/home/firefox
-      ../../config/home/fish
-      ../../config/home/git.nix
-      ../../config/home/gtk.nix
-      ../../config/home/i3.nix
-      ../../config/home/kitty
-      ../../config/home/qutebrowser
-      ../../config/home/rofi.nix
     ] ++ lib.optionals (builtins.pathExists <private/home>) [
       <private/home>
     ];

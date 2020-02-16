@@ -1,14 +1,19 @@
 { lib, ... }:
 
 {
+  imports = [
+    ../../config/home/fish
+    ../../config/home/git.nix
+  ];
+
   # Configuration for nixpkgs within `home-manager` evaluation.
   nixpkgs.config = import ../nixpkgs.nix;
+  # Configuration for nixpkgs outside `home-manager`, such as `nix-env`.
+  xdg.configFile."nixpkgs/config.nix".source = ../nixpkgs.nix;
+
+  services.lorri.enable = true;
 
   home.file.".editorconfig".source = <dotfiles/editorconfig/.editorconfig> ;
-
-  services = {
-    lorri.enable = true;
-  };
 
   programs = {
     home-manager = {
@@ -25,32 +30,13 @@
     };
   };
 
-  xdg = {
+  xdg.enable = true;
+  xdg.mimeApps = {
     enable = true;
-
-    # Configuration for nixpkgs outside `home-manager`, such as `nix-env`.
-    configFile."nixpkgs/config.nix".source = ../nixpkgs.nix;
-
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "x-scheme-handler/mailto" = "emacsmail.desktop";
-        "application/pdf" = "emacsclient.desktop";
-      };
+    defaultApplications = {
+      "x-scheme-handler/mailto" = "emacsmail.desktop";
+      "application/pdf" = "emacsclient.desktop";
     };
-
-    configFile."luakit/userconf.lua".text = ''
-      local vertical_tabs = require "vertical_tabs"
-
-      local settings = require "settings"
-      settings.vertical_tabs.sidebar_width = 120
-
-      local select = require "select"
-      select.label_maker = function ()
-        local chars = interleave("asdfg", "hjkl")
-        return trim(sort(reverse(chars)))
-      end
-    '';
   };
 
   manual.html.enable = true;
