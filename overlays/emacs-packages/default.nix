@@ -111,13 +111,13 @@ self: pkgs:
 
     ejira = self.melpaBuild rec {
       pname   = "ejira";
-      version = "20191114.2121";
+      version = "20200206.2144";
       src = fetchFromGitHub {
         owner  = "nyyManni";
         repo   = "ejira";
-        rev    = "6f1c211a2a997187eecb90603c72f16eb6c6d77d";
-        sha256 = "1mz145nki5i8clnfmvc7ikk1jnq4058bhaxnjydbddnxk2c411ir";
-        # date = 2019-11-14T21:21:21+02:00;
+        rev    = "89f7c668caf0e46e929f2c9187b007eed6b5c229";
+        sha256 = "0a97gx016byiy5fri8jf3x3sfd2h2iw79s6nxv9jigpkgxrkjg7b";
+        # date = 2020-02-06T21:44:57+02:00;
       };
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
       packageRequires = [ self.s self.f self.ox-jira self.dash self.jiralib2 self.language-detection ];
