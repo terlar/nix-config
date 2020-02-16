@@ -83,6 +83,19 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
+    counsel-web = self.melpaBuild rec {
+      pname   = "counsel-web";
+      version = "20200213.1054";
+      src = fetchFromGitHub {
+        owner  = "mnewt";
+        repo   = "counsel-web";
+        rev    = "d4333caf2edd447b3f31c9c992d7b57f71f33979";
+        sha256 = "0g13kfqi106ypjyvzxs1hmq1i1m8mqk84rbv1ac77543rl5pydan";
+        # date = 2020-02-13T10:54:25-08:00;
+      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
+    };
+
     eglot-x = self.melpaBuild rec {
       pname   = "eglot-x";
       version = "20200104.1435";

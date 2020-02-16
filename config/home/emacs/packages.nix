@@ -36,6 +36,7 @@ with epkgs;
   counsel
   counsel-jq
   counsel-tramp
+  counsel-web
   coverlay
   crystal-mode
   csv-mode
