@@ -6,6 +6,9 @@
     ../config/nixos/battery.nix
 
     ../config/nixos/common.nix
+    ../config/nixos/fonts.nix
+    ../config/nixos/gui.nix
+    ../config/nixos/gui/i3.nix
   ];
 
   networking.networkmanager.enable = true;

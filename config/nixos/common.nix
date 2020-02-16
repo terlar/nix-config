@@ -6,10 +6,7 @@ in {
   imports = [
     ./caches.nix
     ./console.nix
-    ./fonts.nix
     ./gnupg.nix
-    ./gui.nix
-    ./gui/i3.nix
     ./yubikey.nix
   ];
 
@@ -53,7 +50,7 @@ in {
   };
 
   environment = {
-    systemPackages = import ../packages.nix { inherit pkgs; };
+    systemPackages = import ./packages.nix { inherit pkgs; };
 
     variables = {
       LC_CTYPE    = "en_US.UTF-8";
