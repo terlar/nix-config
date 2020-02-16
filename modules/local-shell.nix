@@ -9,7 +9,7 @@ in {
     enable = mkEnableOption "Enables shell.";
 
     package = mkOption {
-      type = types.package;
+      type = types.shellPackage;
       default = pkgs.fish;
       defaultText = "pkgs.fish";
       example = literalExample "pkgs.zsh";
