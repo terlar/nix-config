@@ -10,16 +10,8 @@
     # Start a DBus session.
     startDbusSession = true;
 
-    windowManager = {
-      i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-      };
-    };
-
-    desktopManager = {
-      xterm.enable = false;
-    };
+    desktopManager.xterm.enable = false;
+    windowManager.i3.enable = true;
 
     displayManager = {
       defaultSession = "none+i3";

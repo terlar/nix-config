@@ -92,6 +92,12 @@ in {
     ];
   };
 
+  # Shell.
+  local.shell = {
+    enable = true;
+    package = pkgs.fish;
+  };
+
   # Keyboard preferences.
   local.keyboard = {
     enable = true;

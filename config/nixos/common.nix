@@ -6,7 +6,6 @@ in {
   imports = [
     ./caches.nix
     ./console.nix
-    ./fish.nix
     ./fonts.nix
     ./gnupg.nix
     ./gui.nix
@@ -62,6 +61,4 @@ in {
       PAGER       = "less";
     };
   };
-
-  programs.bash.enableCompletion = true;
 }

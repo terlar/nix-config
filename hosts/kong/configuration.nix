@@ -108,6 +108,17 @@ in {
     ];
   };
 
+  # Earlier font size setup.
+  console.earlySetup = true;
+  # Font sizes for retina.
+  fonts.fontconfig.dpi = 144;
+
+  # Shell.
+  local.shell = {
+    enable = true;
+    package = pkgs.fish;
+  };
+
   # Keyboard preferences.
   local.keyboard = {
     enable = true;
@@ -116,9 +127,4 @@ in {
     xkbRepeatDelay = 500;
     xkbRepeatInterval = 33; # 30Hz
   };
-
-  # Earlier font size setup.
-  console.earlySetup = true;
-  # Font sizes for retina.
-  fonts.fontconfig.dpi = 144;
 }
