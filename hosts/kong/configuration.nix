@@ -119,8 +119,8 @@ in {
     enable = true;
     xkbVariant = "altgr-intl";
     xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
-    xkbRepeatDelay = 500;
-    xkbRepeatInterval = 33; # 30Hz
+    xkbRepeatDelay = 340;
+    xkbRepeatInterval = 170;
   };
 
   # Shell.

@@ -49,6 +49,11 @@ in {
     # Update support for firmware.
     fwupd.enable = true;
 
+    kmonad = {
+      enable = true;
+      extraConfig = builtins.readFile ./kmonad.kbd;
+    };
+
     printing = {
       enable = true;
       drivers = [ pkgs.gutenprint ];
@@ -98,8 +103,8 @@ in {
     enable = true;
     xkbVariant = "altgr-intl";
     xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
-    xkbRepeatDelay = 200;
-    xkbRepeatInterval = 33; # 30Hz
+    xkbRepeatDelay = 340;
+    xkbRepeatInterval = 170;
   };
 
   # Shell.
