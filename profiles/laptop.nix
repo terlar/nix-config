@@ -32,6 +32,16 @@
       nssmdns = true;
     };
 
+    # Improve touch-pad behavior.
+    xserver.libinput = {
+      disableWhileTyping = true;
+      tapping = false;
+      tappingDragLock = false;
+      middleEmulation = true;
+      naturalScrolling = true;
+      scrollMethod = "twofinger";
+    };
+
     # Monitor and control temperature.
     thermald.enable = true;
   };
