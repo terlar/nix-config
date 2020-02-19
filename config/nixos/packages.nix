@@ -6,6 +6,7 @@ with pkgs;
   # nix
   cachix
   home-manager
+  nix-index
   nix-prefetch-scripts
   nixStable
 
