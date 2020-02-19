@@ -1,4 +1,4 @@
-INPUT = LINUX_DEVICE L64 /dev/input/event0
+INPUT = LINUX_DEVICE L64 /dev/input/by-path/platform-i8042-serio-0-event-kbd
 OUTPUT = UINPUT_SINK
 
 @let = TH 170 ret lctl // Return when tapped, control when held
