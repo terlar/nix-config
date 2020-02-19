@@ -14,5 +14,6 @@ self: pkgs:
   gore = pkgs.callPackage ./gore { };
   hey = pkgs.callPackage ./hey { };
   kmonad-bin = pkgs.callPackage ./kmonad-bin { };
+  rufo = pkgs.callPackage ./rufo { };
   saw = pkgs.callPackage ./saw { };
 }
