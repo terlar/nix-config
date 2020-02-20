@@ -1,6 +1,6 @@
 [submodule "external/nixpkgs"]
 	path = external/nixpkgs
-	url = https://github.com/terlar/nixpkgs.git
+	url = https://github.com/nixos/nixpkgs.git
 [submodule "external/nixos-hardware"]
 	path = external/nixos-hardware
 	url = https://github.com/nixos/nixos-hardware.git
