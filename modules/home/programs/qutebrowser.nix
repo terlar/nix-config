@@ -6,14 +6,14 @@ let
   cfg = config.programs.qutebrowser;
 
   percOrInt = with types;
-    (either (strMatching "^(0|[1-9]\d?|100)%$") ints.positive);
+    (either (strMatching "^(0|[1-9]\d?|100)%$") ints.unsigned);
 
   boolAsk = types.enum [ "true" "false" "ask" ];
 
   autosaveSubmodule = types.submodule {
     options = {
       interval = mkOption {
-        type = types.nullOr types.ints.positive;
+        type = types.nullOr types.ints.unsigned;
         default = null;
         description = "Time interval (in milliseconds) between auto-saves of config/cookies/etc.";
       };
@@ -263,7 +263,7 @@ let
   webpageColorSubmodule = types.submodule {
     options = {
       bg = mkColorOption "Background color for webpages if unset (or empty to use the theme’s color).";
-      prefers_color_scheme_dark = mkOption {
+      prefersColorSchemeDark = mkOption {
         type = types.nullOr types.bool;
         default = null;
         example = true;
@@ -329,8 +329,13 @@ let
 
   completionSubmodule = types.submodule {
     options = {
+      cmdHistoryMaxItems = mkOption {
+        type = with types; nullOr (either (types.ints.between (-1) 0) types.ints.positive);
+        default = null;
+        description = "Maximum number of pages to hold in the global memory page cache.";
+      };
       delay = mkOption {
-        type = types.nullOr types.ints.positive;
+        type = types.nullOr types.ints.unsigned;
         default = null;
         description = "Delay (in milliseconds) before updating completions after typing a character.";
       };
@@ -340,7 +345,7 @@ let
         description = "Height (in pixels or as percentage of the window) of the completion.";
       };
       minChars = mkOption {
-        type = types.nullOr types.ints.positive;
+        type = types.nullOr types.ints.unsigned;
         default = null;
         description = "Minimum amount of characters needed to update completions.";
       };
@@ -363,12 +368,12 @@ let
         type = types.submodule {
           options = {
             padding = mkOption {
-              type = types.nullOr types.ints.positive;
+              type = types.nullOr types.ints.unsigned;
               default = null;
               description = "Padding (in pixels) of the scrollbar handle in the completion window.";
             };
             width = mkOption {
-              type = types.nullOr types.ints.positive;
+              type = types.nullOr types.ints.unsigned;
               default = null;
               description = "Width (in pixels) of the scrollbar in the completion window.";
             };
@@ -438,7 +443,7 @@ let
               description = "Enable support for the HTML 5 web application cache feature.";
             };
             maximumPages = mkOption {
-              type = types.nullOr types.ints.positive;
+              type = types.nullOr types.ints.unsigned;
               default = null;
               description = "Maximum number of pages to hold in the global memory page cache.";
             };
@@ -751,6 +756,8 @@ let
     };
   };
 
+  camelCaseToSnakeCase = replaceStrings upperChars (map (s: "_${s}") lowerChars);
+
   flattenAttrs = let
     recurse = path: value:
       if isAttrs value then
@@ -762,10 +769,10 @@ let
       };
   in attrs: foldl recursiveUpdate { } (flatten (recurse [ ] attrs));
 
-  mapAttrsToConfigLines = prefix: attrs:
-    concatStringsSep "\n" (mapAttrsToList (n: v: "c.${prefix}.${n} = ${coerceValue v}") (filterAttrs (n: v: v != null) attrs));
+  filterSettings = attrs:
+    filterAttrs (n: v: n != "_module" && v != null) attrs;
 
-  setDict = name: attrs:
+  toDictSetting = name: attrs:
     let
       attrList = mapAttrsToList
         (n: v: "    '${n}': ${coerceValue v}")
@@ -774,25 +781,28 @@ let
       (attrs != null)
       "c.${name} = {\n${concatStringsSep ",\n" attrList}\n}";
 
-  coerceValue = value:
-    if isBool value then (if value then "True" else "False")
-    else if isString value then "'${value}'"
-    else toString value;
+  coerceValue = let
+    recurse = value:
+      if isBool value then (if value then "True" else "False")
+      else if isString value then "'${value}'"
+      else if isList value then "[${concatStringsSep "," (map (s: recurse s) value)}]"
+      else toString value;
+  in recurse;
 
-  setOption = name: value:
-    optionalString (value != null) "c.${name} = ${coerceValue value}";
-
-  setOptions = name: attrs:
+  toSetting = name: value:
     optionalString
-      (attrs != null)
-      (concatStringsSep
-        "\n"
-        (mapAttrsToList
-          (n: v: setOption "${name}.${n}" v)
-          (filterAttrs (n: v: n != "_module") attrs)));
+      (value != null)
+      "c.${camelCaseToSnakeCase name} = ${coerceValue value}";
 
-  setColorScheme = colors:
-    optionalString (colors != null) mapAttrsToConfigLines "colors" (flattenAttrs colors);
+  toSettings = name: attrs:
+    let
+      flatAttrs = flattenAttrs attrs;
+      toSettings' = generators.toKeyValue {
+        mkKeyValue = key: value: toSetting "${name}.${key}" value;
+      };
+    in optionalString
+      (attrs != null)
+      (toSettings' (filterSettings flatAttrs));
 in {
   options.programs.qutebrowser = {
     enable = mkOption {
@@ -878,15 +888,14 @@ in {
     xdg.configFile."qutebrowser/config.py".text =
       ''
         # Generated by Home Manager
-        ${setDict "aliases" cfg.aliases}
-        ${setOptions "auto_save" cfg.autoSave}
-        ${setOption "backend" cfg.backend}
-        ${setDict "bindings.key_mappings" cfg.bindings.keyMappings}
-        ${setColorScheme cfg.colors}
-        ${setDict "completion" cfg.completion}
-        ${setOption "confirm_quit" cfg.confirmQuit}
-        ${setDict "content" cfg.content}
-
+        ${toDictSetting "aliases" cfg.aliases}
+        ${toSettings "auto_save" cfg.autoSave}
+        ${toSetting "backend" cfg.backend}
+        ${toDictSetting "bindings.key_mappings" cfg.bindings.keyMappings}
+        ${toSettings "colors" cfg.colors}
+        ${toSettings "completion" cfg.completion}
+        ${toSetting "confirm_quit" cfg.confirmQuit}
+        ${toDictSetting "content" cfg.content}
         ${cfg.extraConfig}
       '';
   };

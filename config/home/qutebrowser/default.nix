@@ -15,6 +15,8 @@ in {
       mpv = "spawn --userscript view_in_mpv";
     };
 
+    autoSave.session = true;
+
     bindings.keyMappings = {
       "<Ctrl-g>" = "<Escape>";
       "<Ctrl-[>" = "<Escape>";
