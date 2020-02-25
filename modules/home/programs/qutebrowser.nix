@@ -6,7 +6,7 @@ let
   cfg = config.programs.qutebrowser;
 
   percOrInt = with types;
-    (either (strMatching "^(0|[1-9]\d?|100)%$") ints.unsigned);
+    (either (strMatching "^(0|[1-9][0-9]?|100)%$") ints.unsigned);
 
   minusOneZeroOrPositive = with types;  either (ints.between (-1) 0) ints.positive;
 
@@ -953,7 +953,6 @@ let
 
   statusbarSubmodule = types.submodule {
     options = {
-
       hide = mkBoolOption "Hide the statusbar unless a message is shown.";
       padding = mkOption {
         type = with types; nullOr (attrsOf ints.unsigned);
@@ -970,6 +969,166 @@ let
         default = null;
         description = "List of widgets displayed in the statusbar.";
       };
+    };
+  };
+
+  tabsSubmodule = types.submodule {
+    options = {
+      background = mkBoolOption "Open new tabs (middleclick/ctrl+click) in the background.";
+      closeMouseButton = mkOption {
+        type = types.nullOr (types.enum [ "right" "middle" "none" ]);
+        default = null;
+        description = "Mouse button with which to close tabs.";
+      };
+      closeMouseButtonOnBar = mkOption {
+        type = types.nullOr (types.enum [ "new-tab" "close-current" "close-last" "ignore" ]);
+        default = null;
+        description = "How to behave when the close mouse button is pressed on the tab bar.";
+      };
+      favicons = mkOption {
+        type = types.submodule {
+          options = {
+            scale = mkOption {
+              type = types.nullOr types.float;
+              default = null;
+              description = "Scaling factor for favicons in the tab bar.";
+            };
+            show = mkOption {
+              type = types.nullOr (types.enum [ "always" "never" "pinned" ]);
+              default = null;
+              description = "When to show favicons in the tab bar.";
+            };
+          };
+        };
+        default = {};
+        description = "Favicon tabs settings.";
+      };
+      focusStackSize = mkOption {
+        type = types.nullOr minusOneZeroOrPositive;
+        default = null;
+        description = "Maximum stack size to remember for tab switches (-1 for no maximum).";
+      };
+      indicator = mkOption {
+        type = types.submodule {
+          options = {
+            padding = mkOption {
+              type = with types; nullOr (attrsOf ints.unsigned);
+              default = null;
+              description = "Padding (in pixels) for tab indicators.";
+            };
+            width = mkOption {
+              type = types.nullOr types.ints.unsigned;
+              default = null;
+              description = "Width (in pixels) of the progress indicator (0 to disable).";
+            };
+          };
+        };
+        default = {};
+        description = "Tab indicator settings.";
+      };
+      lastClose = mkOption {
+        type = types.nullOr (types.enum [ "ignore" "blank" "startpage" "default-page" "close" ]);
+        default = null;
+        description = "How to behave when the last tab is closed.";
+      };
+      maxWidth = mkOption {
+        type = types.nullOr minusOneZeroOrPositive;
+        default = null;
+        description = "Maximum width (in pixels) of tabs (-1 for no maximum).";
+      };
+      minWidth = mkOption {
+        type = types.nullOr minusOneZeroOrPositive;
+        default = null;
+        description = "Minimum width (in pixels) of tabs (-1 for the default minimum size behavior).";
+      };
+      modeOnChange = mkOption {
+        type = types.nullOr (types.enum [ "persist" "restore" "normal" ]);
+        default = null;
+        description = "When switching tabs, what input mode is applied.";
+      };
+      mousewheelSwitching = mkBoolOption "Switch between tabs using the mouse wheel.";
+      newPosition = mkOption {
+        type = types.submodule {
+          options = {
+            related = mkOption {
+              type = types.nullOr (types.enum [ "prev" "next" "first" "last" ]);
+              default = null;
+              description = "Position of new tabs opened from another tab.";
+            };
+            stacking = mkBoolOption "Stack related tabs on top of each other when opened consecutively.";
+            unrelated = mkOption {
+              type = types.nullOr (types.enum [ "prev" "next" "first" "last" ]);
+              default = null;
+              description = "Position of new tabs which are not opened from another tab.";
+            };
+          };
+        };
+        default = {};
+        description = "New tab position settings.";
+      };
+      padding = mkOption {
+        type = with types; nullOr (attrsOf ints.unsigned);
+        default = null;
+        description = "Padding (in pixels) around text for tabs.";
+      };
+      pinned = mkOption {
+        type = types.submodule {
+          options = {
+            frozen = mkBoolOption "Force pinned tabs to stay at fixed URL.";
+            shrink = mkBoolOption "Shrink pinned tabs down to their contents.";
+          };
+        };
+        default = {};
+        description = "Pinned tabs settings.";
+      };
+      position = mkOption {
+        type = types.nullOr (types.enum [ "top" "bottom" "left" "right" ]);
+        default = null;
+        description = "Position of the tab bar.";
+      };
+      selectOnRemove = mkOption {
+        type = types.nullOr (types.enum [ "prev" "next" "last-used" ]);
+        default = null;
+        description = "Which tab to select when the focused tab is removed.";
+      };
+      show = mkOption {
+        type = types.nullOr (types.enum [ "always" "never" "multiple" "switching" ]);
+        default = null;
+        description = "When to show the tab bar.";
+      };
+      showSwitchingDelay = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Duration (in milliseconds) to show the tab bar before hiding it when tabs.show is set to switching.";
+      };
+      tabsAreWindows = mkBoolOption "Open a new window for every tab.";
+      title = mkOption {
+        type = types.submodule {
+          options = {
+            alignment = mkOption {
+              type = types.nullOr (types.enum [ "left" "right" "center" ]);
+              default = null;
+              description = "Alignment of the text inside of tabs.";
+            };
+            format = mkStringOption "Format to use for the tab title.";
+            formatPinned = mkStringOption "Format to use for the tab title for pinned tabs.";
+          };
+        };
+        default = {};
+        description = "Tab title settings.";
+      };
+      tooltips = mkBoolOption "Show tooltips on tabs.";
+      undoStackSize = mkOption {
+        type = types.nullOr minusOneZeroOrPositive;
+        default = null;
+        description = "Number of close tab actions to remember, per window (-1 for no maximum).";
+      };
+      width = mkOption {
+        type = types.nullOr percOrInt;
+        default = null;
+        description = "Width (in pixels or as percentage of the window) of the tab bar if it’s vertical.";
+      };
+      wrap = mkBoolOption "Wrap when changing tabs.";
     };
   };
 
@@ -1189,6 +1348,12 @@ in {
       description = "Statusbar settings.";
     };
 
+    tabs = mkOption {
+      type = types.nullOr tabsSubmodule;
+      default = null;
+      description = "Tabs settings.";
+    };
+
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -1229,6 +1394,7 @@ in {
         ${toSettings "session" cfg.session}
         ${toSettings "spellcheck" cfg.spellcheck}
         ${toSettings "statusbar" cfg.statusbar}
+        ${toSettings "tabs" cfg.tabs}
         ${cfg.extraConfig}
       '';
   };
