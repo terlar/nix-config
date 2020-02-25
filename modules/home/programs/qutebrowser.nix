@@ -21,11 +21,7 @@ let
         default = null;
         description = "Time interval (in milliseconds) between auto-saves of config/cookies/etc.";
       };
-      session = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Always restore open sites when qutebrowser is reopened.";
-      };
+      session = mkBoolOption "Always restore open sites when qutebrowser is reopened.";
     };
   };
 
@@ -39,15 +35,18 @@ let
     };
   };
 
-  mkStringOption = description:
+  mkSimpleOption = type: description:
     mkOption {
-      type = types.nullOr types.str;
+      type = types.nullOr type;
       default = null;
       inherit description;
     };
 
-  mkColorOption = mkStringOption;
-  mkFontOption = mkStringOption;
+  mkBoolOption = mkSimpleOption types.bool;
+  mkStringOption = mkSimpleOption types.str;
+
+  mkColorOption = mkSimpleOption types.str;
+  mkFontOption = mkSimpleOption types.str;
 
   mkColorSystemOption = description:
     mkOption {
@@ -270,12 +269,7 @@ let
   webpageColorSubmodule = types.submodule {
     options = {
       bg = mkColorOption "Background color for webpages if unset (or empty to use the theme’s color).";
-      prefersColorSchemeDark = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        example = true;
-        description = "Force prefers-color-scheme: dark colors for websites.";
-      };
+      prefersColorSchemeDark = mkBoolOption "Force prefers-color-scheme: dark colors for websites.";
     };
   };
 
@@ -366,11 +360,7 @@ let
         default = null;
         description = "Which categories to show (in which order) in the :open completion.";
       };
-      quick = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Move on to the next part when there’s only one possible completion left.";
-      };
+      quick = mkBoolOption "Move on to the next part when there’s only one possible completion left.";
       scrollbar = mkOption {
         type = types.submodule {
           options = {
@@ -394,22 +384,14 @@ let
         default = null;
         description = "When to show the autocompletion window.";
       };
-      shrink = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Shrink the completion to be smaller than the configured size if there are no scrollbars.";
-      };
+      shrink = mkBoolOption "Shrink the completion to be smaller than the configured size if there are no scrollbars.";
       timestampFormat = mkOption {
         type = types.nullOr types.str;
         default = null;
         description = "Format of timestamps (e.g. for the history completion).";
         example = "%Y-%m-%d";
       };
-      useBestMatch = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Execute the best-matching command on a partial match.";
-      };
+      useBestMatch = mkBoolOption "Execute the best-matching command on a partial match.";
       webHistory = mkOption {
         type = types.submodule {
           options = {
@@ -437,19 +419,11 @@ let
 
   contentSubmodule = types.submodule {
     options = {
-      autoplay = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Automatically start playing <video> elements.";
-      };
+      autoplay = mkBoolOption "Automatically start playing <video> elements.";
       cache = mkOption {
         type = types.submodule {
           options = {
-            appcache = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Enable support for the HTML 5 web application cache feature.";
-            };
+            appcache = mkBoolOption "Enable support for the HTML 5 web application cache feature.";
             maximumPages = mkOption {
               type = types.nullOr types.ints.unsigned;
               default = null;
@@ -465,11 +439,7 @@ let
         default = {};
         description = "Content cache settings.";
       };
-      canvasReading = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Allow websites to read canvas elements.";
-      };
+      canvasReading = mkBoolOption "Allow websites to read canvas elements.";
       cookies = mkOption {
         type = types.submodule {
           options = {
@@ -483,11 +453,7 @@ let
               default = null;
               description = "Which cookies to accept.";
             };
-            store = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Store cookies.";
-            };
+            store = mkBoolOption "Store cookies.";
           };
         };
         default = {};
@@ -504,16 +470,8 @@ let
         default = null;
         description = "Allow websites to share screen content.";
       };
-      dnsPrefetch = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Try to pre-fetch DNS entries to speed up browsing.";
-      };
-      frameFlattening = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Expand each subframe to its contents.";
-      };
+      dnsPrefetch = mkBoolOption "Try to pre-fetch DNS entries to speed up browsing.";
+      frameFlattening = mkBoolOption "Expand each subframe to its contents.";
       geolocation = mkOption {
         type = types.nullOr boolAsk;
         default = null;
@@ -532,21 +490,13 @@ let
               default = null;
               description = "Custom headers for qutebrowser HTTP requests.";
             };
-            doNotTrack = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Value to send in the DNT header.";
-            };
+            doNotTrack = mkBoolOption "Value to send in the DNT header.";
             referer = mkOption {
               type = types.nullOr (types.enum [ "always" "never" "same-domain" ]);
               default = null;
               description = "When to send the Referer header.";
             };
-            userAgent = mkOption {
-              type = types.nullOr types.str;
-              default = null;
-              description = "User agent to send.";
-            };
+            userAgent = mkStringOption "User agent to send.";
           };
         };
         default = {};
@@ -555,11 +505,7 @@ let
       hostBlocking = mkOption {
         type = types.submodule {
           options = {
-            enabled = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Enable host blocking.";
-            };
+            enabled = mkBoolOption "Enable host blocking.";
             lists = mkOption {
               type = with types; nullOr (listOf str);
               default = null;
@@ -575,44 +521,16 @@ let
         default = {};
         description = "Content host blocking settings.";
       };
-      hyperlinkAuditing = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Enable hyperlink auditing (<a ping>).";
-      };
-      images = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Load images automatically in web pages.";
-      };
+      hyperlinkAuditing = mkBoolOption "Enable hyperlink auditing (<a ping>).";
+      images = mkBoolOption "Load images automatically in web pages.";
       javascript = mkOption {
         type = types.submodule {
           options = {
-            enabled = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Enable JavaScript.";
-            };
-            alert = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Show javascript alerts.";
-            };
-            canAccessClipboard = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Allow JavaScript to read from or write to the clipboard.";
-            };
-            canCloseTabs = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Allow JavaScript to close tabs.";
-            };
-            canOpenTabsAutomatically = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Allow JavaScript to open new tabs without user interaction.";
-            };
+            enabled = mkBoolOption "Enable JavaScript.";
+            alert = mkBoolOption "Show javascript alerts.";
+            canAccessClipboard = mkBoolOption "Allow JavaScript to read from or write to the clipboard.";
+            canCloseTabs = mkBoolOption "Allow JavaScript to close tabs.";
+            canOpenTabsAutomatically = mkBoolOption "Allow JavaScript to open new tabs without user interaction.";
             log = mkOption {
               type = with types; nullOr (attrsOf (enum [
                 "none"
@@ -624,51 +542,19 @@ let
               default = null;
               description = "Log levels to use for JavaScript console logging messages.";
             };
-            modalDialog = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Use the standard JavaScript modal dialog for alert() and confirm().";
-            };
-            prompt = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Show javascript prompts.";
-            };
+            modalDialog = mkBoolOption "Use the standard JavaScript modal dialog for alert() and confirm().";
+            prompt = mkBoolOption "Show javascript prompts.";
           };
         };
         default = {};
         description = "Content JavaScript settings.";
       };
-      localContentCanAccessFileUrls = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Allow locally loaded documents to access other local URLs.";
-      };
-      localContentCanAccessRemoteUrls = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Allow locally loaded documents to access remote URLs.";
-      };
-      localStorage = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Enable support for HTML 5 local storage and Web SQL.";
-      };
-      mediaCapture = mkOption {
-        type = types.nullOr boolAsk;
-        default = null;
-        description = "Allow websites to record audio/video.";
-      };
-      mouseLock = mkOption {
-        type = types.nullOr boolAsk;
-        default = null;
-        description = "Allow websites to lock your mouse pointer.";
-      };
-      mute = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Automatically mute tabs.";
-      };
+      localContentCanAccessFileUrls = mkBoolOption "Allow locally loaded documents to access other local URLs.";
+      localContentCanAccessRemoteUrls = mkBoolOption "Allow locally loaded documents to access remote URLs.";
+      localStorage = mkBoolOption "Enable support for HTML 5 local storage and Web SQL.";
+      mediaCapture = mkBoolOption "Allow websites to record audio/video.";
+      mouseLock = mkBoolOption "Allow websites to lock your mouse pointer.";
+      mute = mkBoolOption "Automatically mute tabs.";
       netrcFile = mkOption {
         type = with types; nullOr (either str path);
         default = null;
@@ -679,51 +565,23 @@ let
         default = null;
         description = "Allow websites to show notifications.";
       };
-      pdfjs = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Allow pdf.js to view PDF files in the browser.";
-      };
+      pdfjs = mkBoolOption "Allow pdf.js to view PDF files in the browser.";
       persistentStorage = mkOption {
         type = types.nullOr boolAsk;
         default = null;
         description = "Allow websites to request persistent storage quota via navigator.webkitPersistentStorage.requestQuota.";
       };
-      plugins = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Enable plugins in Web pages.";
-      };
-      printElementBackgrounds = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Draw the background color and images also when the page is printed.";
-      };
-      privateBrowsing = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Open new windows in private browsing mode which does not record visited pages.";
-      };
-      proxy = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "Proxy to use.";
-      };
-      proxyDnsRequests = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Send DNS requests over the configured proxy.";
-      };
+      plugins = mkBoolOption "Enable plugins in Web pages.";
+      printElementBackgrounds = mkBoolOption "Draw the background color and images also when the page is printed.";
+      privateBrowsing = mkBoolOption "Open new windows in private browsing mode which does not record visited pages.";
+      proxy = mkStringOption "Proxy to use.";
+      proxyDnsRequests = mkBoolOption "Send DNS requests over the configured proxy.";
       registerProtocolHandler = mkOption {
         type = types.nullOr boolAsk;
         default = null;
         description = "Allow websites to register protocol handlers via navigator.registerProtocolHandler.";
       };
-      siteSpecificQuirks = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Enable quirks (such as faked user agent headers) needed to get specific sites to work properly.";
-      };
+      siteSpecificQuirks = mkBoolOption "Enable quirks (such as faked user agent headers) needed to get specific sites to work properly.";
       sslStrict = mkOption {
         type = types.nullOr boolAsk;
         default = null;
@@ -751,16 +609,8 @@ let
         default = null;
         description = "Which interfaces to expose via WebRTC.";
       };
-      windowedFullscreen = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Limit fullscreen to the browser window (does not expand to fill the screen).";
-      };
-      xssAuditing = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Monitor load requests for cross-site scripting attempts.";
-      };
+      windowedFullscreen = mkBoolOption "Limit fullscreen to the browser window (does not expand to fill the screen).";
+      xssAuditing = mkBoolOption "Monitor load requests for cross-site scripting attempts.";
     };
   };
 
@@ -774,16 +624,8 @@ let
               default = null;
               description = "Directory to save downloads to.";
             };
-            prompt = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Prompt the user for the download location.";
-            };
-            remember = mkOption {
-              type = types.nullOr types.bool;
-              default = null;
-              description = "Remember the last used download directory.";
-            };
+            prompt = mkBoolOption "Prompt the user for the download location.";
+            remember = mkBoolOption "Remember the last used download directory.";
             suggestion = mkOption {
               type = types.nullOr (types.enum [ "path" "filename" "both" ]);
               default = null;
@@ -794,11 +636,7 @@ let
         default = {};
         description = "Download location settings.";
       };
-      openDispatcher = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "Default program used to open downloads.";
-      };
+      openDispatcher = mkStringOption "Default program used to open downloads.";
       position = mkOption {
         type = types.nullOr verticalPosition;
         default = null;
@@ -819,11 +657,7 @@ let
         default = null;
         description = "Editor (and arguments) to use for the open-editor command.";
       };
-      encoding = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "Encoding to use for the editor.";
-      };
+      encoding = mkStringOption "Encoding to use for the editor.";
     };
   };
 
@@ -945,16 +779,8 @@ let
         default = null;
         description = "Which implementation to use to find elements to hint.";
       };
-      hideUnmatchedRapidHints = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Hide unmatched hints in rapid mode.";
-      };
-      leaveOnLoad = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Leave hint mode when starting a new page load.";
-      };
+      hideUnmatchedRapidHints = mkBoolOption "Hide unmatched hints in rapid mode.";
+      leaveOnLoad = mkBoolOption "Leave hint mode when starting a new page load.";
       minChars = mkOption {
         type = types.nullOr types.ints.unsigned;
         default = null;
@@ -975,20 +801,174 @@ let
         default = null;
         description = "List of regular expressions to use for prev links.";
       };
-      scatter = mkOption {
-        type = types.nullOr types.bool;
-        default = null;
-        description = "Scatter hint key chains (like Vimium) or not (like dwb). Ignored for number hints.";
-      };
+      scatter = mkBoolOption "Scatter hint key chains (like Vimium) or not (like dwb). Ignored for number hints.";
       selectors = mkOption {
         type = with types; nullOr (attrsOf (listOf str));
         default = null;
         description = "CSS selectors used to determine which elements on a page should have hints.";
       };
-      uppercase = mkOption {
-        type = types.nullOr types.bool;
+      uppercase = mkBoolOption "Make characters in hint strings uppercase.";
+    };
+  };
+
+  inputSubmodule = types.submodule {
+    options = {
+      escapeQuitsReporter = mkBoolOption "Hide unmatched hints in rapid mode.";
+      forwardUnboundKeys = mkOption {
+        type = types.nullOr (types.enum [ "all" "auto" "none" ]);
         default = null;
-        description = "Make characters in hint strings uppercase.";
+        description = "Which unbound keys to forward to the webview in normal mode.";
+      };
+      insertMode = mkOption {
+        type = types.submodule {
+          options = {
+            autoEnter = mkBoolOption "Enter insert mode if an editable element is clicked.";
+            autoLeave = mkBoolOption "Leave insert mode if a non-editable element is clicked.";
+            autoLoad = mkBoolOption "Automatically enter insert mode if an editable element is focused after loading the page.";
+            leaveOnLoad = mkBoolOption "Leave insert mode when starting a new page load.";
+            plugins = mkBoolOption "Switch to insert mode when clicking flash and other plugins.";
+          };
+        };
+        default = {};
+        description = "Insert mode input settings.";
+      };
+      linksIncludedInFocusChain = mkBoolOption "Include hyperlinks in the keyboard focus chain when tabbing.";
+      partialTimeout = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Timeout (in milliseconds) for partially typed key bindings. If the current input forms only partial matches, the keystring will be cleared after this time.";
+      };
+      rockerGestures = mkBoolOption "Enable Opera-like mouse rocker gestures. This disables the context menu.";
+      spatialNavigation = mkBoolOption "Enable spatial navigation.";
+    };
+  };
+
+  keyhintSubmodule = types.submodule {
+    options = {
+      blacklist = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "Keychains that shouldn’t be shown in the keyhint dialog.";
+      };
+      delay = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Time (in milliseconds) from pressing a key to seeing the keyhint dialog.";
+      };
+      radius = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Rounding radius (in pixels) for the edges of the keyhint dialog.";
+      };
+    };
+  };
+
+  messagesSubmodule = types.submodule {
+    options = {
+      timeout = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Duration (in milliseconds) to show messages in the statusbar for. Set to 0 to never clear messages.";
+      };
+    };
+  };
+
+  promptSubmodule = types.submodule {
+    options = {
+      filebrowser = mkBoolOption "Show a filebrowser in upload/download prompts.";
+      radius = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Rounding radius (in pixels) for the edges of prompts.";
+      };
+    };
+  };
+
+  qtSubmodule = types.submodule {
+    options = {
+      args = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "Additional arguments to pass to Qt, without leading --.";
+      };
+      forcePlatform = mkStringOption "Force a Qt platform to use.";
+      forcePlatformtheme = mkStringOption "Force a Qt platformtheme to use.";
+      forceSoftwareRendering = mkOption {
+        type = types.nullOr (types.enum [ "software-opengl" "qt-quick" "chromium" "none" ]);
+        default = null;
+        description = "Force software rendering for QtWebEngine.";
+      };
+      highdpi = mkBoolOption "Turn on Qt HighDPI scaling.";
+      lowEndDeviceMode = mkOption {
+        type = types.nullOr (types.enum [ "always" "auto" "never" ]);
+        default = null;
+        description = "When to use Chromium’s low-end device mode.";
+      };
+      processModel = mkOption {
+        type = types.nullOr (types.enum [ "process-per-site-instance" "process-per-site" "single-process" ]);
+        default = null;
+        description = "Which Chromium process model to use.";
+      };
+    };
+  };
+
+  scrollingSubmodule = types.submodule {
+    options = {
+      bar = mkOption {
+        type = types.nullOr (types.enum [ "always" "never" "when-searching" ]);
+        default = null;
+        description = "When to show the scrollbar.";
+      };
+      smooth = mkBoolOption "Enable smooth scrolling for web pages.";
+    };
+  };
+
+  searchSubmodule = types.submodule {
+    options = {
+      ignoreCase = mkOption {
+        type = types.nullOr (types.enum [ "always" "never" "smart" ]);
+        default = null;
+        description = "When to find text on a page case-insensitively.";
+      };
+      incremental = mkBoolOption "Find text on a page incrementally, renewing the search for each typed character.";
+    };
+  };
+
+  sessionSubmodule = types.submodule {
+    options = {
+      defaultName = mkStringOption "Name of the session to save by default.";
+      lazyRestore = mkBoolOption "Load a restored tab as soon as it takes focus.";
+    };
+  };
+
+  spellcheckSubmodule = types.submodule {
+    options = {
+      languages = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "Languages to use for spell checking.";
+      };
+    };
+  };
+
+  statusbarSubmodule = types.submodule {
+    options = {
+
+      hide = mkBoolOption "Hide the statusbar unless a message is shown.";
+      padding = mkOption {
+        type = with types; nullOr (attrsOf ints.unsigned);
+        default = null;
+        description = "Padding (in pixels) for the statusbar.";
+      };
+      position = mkOption {
+        type = types.nullOr verticalPosition;
+        default = null;
+        description = "Position of the status bar.";
+      };
+      widgets = mkOption {
+        type = with types; nullOr (listOf (enum ["url" "scroll" "scroll_raw" "history" "tabs" "keypress" "progress"]));
+        default = null;
+        description = "List of widgets displayed in the statusbar.";
       };
     };
   };
@@ -1131,6 +1111,84 @@ in {
       description = "Hints settings.";
     };
 
+    historyGapInterval = mkOption {
+      type = types.nullOr minusOneZeroOrPositive;
+      default = null;
+      description = "Maximum time (in minutes) between two history items for them to be considered being from the same browsing session.";
+    };
+
+    input = mkOption {
+      type = types.nullOr inputSubmodule;
+      default = null;
+      description = "Input settings.";
+    };
+
+    keyhint = mkOption {
+      type = types.nullOr keyhintSubmodule;
+      default = null;
+      description = "Keyhint settings.";
+    };
+
+    messages = mkOption {
+      type = types.nullOr messagesSubmodule;
+      default = null;
+      description = "Messages settings.";
+    };
+
+    newInstanceOpenTarget = mkOption {
+      type = types.nullOr (types.enum [ "tab" "tab-bg" "tab-silent" "tab-bg-silent" "window" ]);
+      default = null;
+      description = "How to open links in an existing instance if a new one is launched.";
+    };
+
+    newInstanceOpenTargetWindow = mkOption {
+      type = types.nullOr (types.enum [ "first-opened" "last-opened" "last-focused" "last-visible" ]);
+      default = null;
+      description = "Which window to choose when opening links as new tabs.";
+    };
+
+    prompt = mkOption {
+      type = types.nullOr promptSubmodule;
+      default = null;
+      description = "Prompt settings.";
+    };
+
+    qt = mkOption {
+      type = types.nullOr qtSubmodule;
+      default = null;
+      description = "QT settings.";
+    };
+
+    scrolling = mkOption {
+      type = types.nullOr scrollingSubmodule;
+      default = null;
+      description = "Scrolling settings.";
+    };
+
+    search = mkOption {
+      type = types.nullOr searchSubmodule;
+      default = null;
+      description = "Search settings.";
+    };
+
+    session = mkOption {
+      type = types.nullOr sessionSubmodule;
+      default = null;
+      description = "Session settings.";
+    };
+
+    spellcheck = mkOption {
+      type = types.nullOr spellcheckSubmodule;
+      default = null;
+      description = "Spellcheck settings.";
+    };
+
+    statusbar = mkOption {
+      type = types.nullOr statusbarSubmodule;
+      default = null;
+      description = "Statusbar settings.";
+    };
+
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -1158,6 +1216,19 @@ in {
         ${toSettings "editor" cfg.editor}
         ${toSettings "fonts" cfg.fonts}
         ${toSettings "hints" cfg.hints}
+        ${toSetting "history_gap_interval" cfg.historyGapInterval}
+        ${toSettings "input" cfg.input}
+        ${toSettings "keyhint" cfg.keyhint}
+        ${toSettings "messages" cfg.messages}
+        ${toSetting "new_instance_open_target" cfg.newInstanceOpenTarget}
+        ${toSetting "new_instance_open_target_window" cfg.newInstanceOpenTargetWindow}
+        ${toSettings "prompt" cfg.prompt}
+        ${toSettings "qt" cfg.qt}
+        ${toSettings "scrolling" cfg.scrolling}
+        ${toSettings "search" cfg.search}
+        ${toSettings "session" cfg.session}
+        ${toSettings "spellcheck" cfg.spellcheck}
+        ${toSettings "statusbar" cfg.statusbar}
         ${cfg.extraConfig}
       '';
   };
