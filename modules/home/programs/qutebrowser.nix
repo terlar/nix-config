@@ -12,7 +12,6 @@ let
 
   verticalPosition = types.enum [ "top" "bottom"];
 
-
   boolAsk = types.enum [ "true" "false" "ask" ];
 
   autosaveSubmodule = types.submodule {
@@ -404,6 +403,7 @@ let
         type = types.nullOr types.str;
         default = null;
         description = "Format of timestamps (e.g. for the history completion).";
+        example = "%Y-%m-%d";
       };
       useBestMatch = mkOption {
         type = types.nullOr types.bool;
@@ -921,6 +921,78 @@ let
     };
   };
 
+  hintsSubmodule = types.submodule {
+    options = {
+      autoFollow = mkOption {
+        type = types.nullOr (types.enum [ "always" "unique-match" "full-match" "never" ]);
+        default = null;
+        description = "When a hint can be automatically followed without pressing Enter.";
+      };
+      autoFollowTimeout = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Duration (in milliseconds) to ignore normal-mode key bindings after a successful auto-follow.";
+      };
+      border = mkStringOption "CSS border value for hints.";
+      chars = mkStringOption "Characters used for hint strings.";
+      dictionary = mkOption {
+        type = with types; nullOr (either path str);
+        default = null;
+        description = "Dictionary file to be used by the word hints.";
+      };
+      findImplementation = mkOption {
+        type = types.nullOr (types.enum [ "javascript" "python" ]);
+        default = null;
+        description = "Which implementation to use to find elements to hint.";
+      };
+      hideUnmatchedRapidHints = mkOption {
+        type = types.nullOr types.bool;
+        default = null;
+        description = "Hide unmatched hints in rapid mode.";
+      };
+      leaveOnLoad = mkOption {
+        type = types.nullOr types.bool;
+        default = null;
+        description = "Leave hint mode when starting a new page load.";
+      };
+      minChars = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Minimum number of characters used for hint strings.";
+      };
+      mode = mkOption {
+        type = types.nullOr (types.enum [ "number" "letter" "word" ]);
+        default = null;
+        description = "Mode to use for hints.";
+      };
+      nextRegexes = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "List of regular expressions to use for next links.";
+      };
+      prevRegexes = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "List of regular expressions to use for prev links.";
+      };
+      scatter = mkOption {
+        type = types.nullOr types.bool;
+        default = null;
+        description = "Scatter hint key chains (like Vimium) or not (like dwb). Ignored for number hints.";
+      };
+      selectors = mkOption {
+        type = with types; nullOr (attrsOf (listOf str));
+        default = null;
+        description = "CSS selectors used to determine which elements on a page should have hints.";
+      };
+      uppercase = mkOption {
+        type = types.nullOr types.bool;
+        default = null;
+        description = "Make characters in hint strings uppercase.";
+      };
+    };
+  };
+
   camelCaseToSnakeCase = replaceStrings upperChars (map (s: "_${s}") lowerChars);
 
   flattenModuleAttrs = let
@@ -1053,6 +1125,12 @@ in {
       description = "Fonts settings.";
     };
 
+    hints = mkOption {
+      type = types.nullOr hintsSubmodule;
+      default = null;
+      description = "Hints settings.";
+    };
+
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -1079,6 +1157,7 @@ in {
         ${toSettings "downloads" cfg.downloads}
         ${toSettings "editor" cfg.editor}
         ${toSettings "fonts" cfg.fonts}
+        ${toSettings "hints" cfg.hints}
         ${cfg.extraConfig}
       '';
   };
