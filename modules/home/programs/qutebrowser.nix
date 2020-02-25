@@ -8,6 +8,11 @@ let
   percOrInt = with types;
     (either (strMatching "^(0|[1-9]\d?|100)%$") ints.unsigned);
 
+  minusOneZeroOrPositive = with types;  either (ints.between (-1) 0) ints.positive;
+
+  verticalPosition = types.enum [ "top" "bottom"];
+
+
   boolAsk = types.enum [ "true" "false" "ask" ];
 
   autosaveSubmodule = types.submodule {
@@ -35,12 +40,15 @@ let
     };
   };
 
-  mkColorOption = description:
+  mkStringOption = description:
     mkOption {
       type = types.nullOr types.str;
       default = null;
       inherit description;
     };
+
+  mkColorOption = mkStringOption;
+  mkFontOption = mkStringOption;
 
   mkColorSystemOption = description:
     mkOption {
@@ -330,7 +338,7 @@ let
   completionSubmodule = types.submodule {
     options = {
       cmdHistoryMaxItems = mkOption {
-        type = with types; nullOr (either (types.ints.between (-1) 0) types.ints.positive);
+        type = types.nullOr minusOneZeroOrPositive;
         default = null;
         description = "Maximum number of pages to hold in the global memory page cache.";
       };
@@ -411,7 +419,7 @@ let
               description = "A list of patterns which should not be shown in the history.";
             };
             maxItems = mkOption {
-              type = types.nullOr types.int;
+              type = types.nullOr minusOneZeroOrPositive;
               default = null;
               description = ''
                 Number of URLs to show in the web history.
@@ -756,6 +764,163 @@ let
     };
   };
 
+  downloadsSubmodule = types.submodule {
+    options = {
+      location = mkOption {
+        type = types.submodule {
+          options = {
+            directory = mkOption {
+              type = with types; nullOr (either path str);
+              default = null;
+              description = "Directory to save downloads to.";
+            };
+            prompt = mkOption {
+              type = types.nullOr types.bool;
+              default = null;
+              description = "Prompt the user for the download location.";
+            };
+            remember = mkOption {
+              type = types.nullOr types.bool;
+              default = null;
+              description = "Remember the last used download directory.";
+            };
+            suggestion = mkOption {
+              type = types.nullOr (types.enum [ "path" "filename" "both" ]);
+              default = null;
+              description = "What to display in the download filename input.";
+            };
+          };
+        };
+        default = {};
+        description = "Download location settings.";
+      };
+      openDispatcher = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Default program used to open downloads.";
+      };
+      position = mkOption {
+        type = types.nullOr verticalPosition;
+        default = null;
+        description = "Where to show the downloaded files.";
+      };
+      removeFinished = mkOption {
+        type = types.nullOr minusOneZeroOrPositive;
+        default = null;
+        description = "Duration (in milliseconds) to wait before removing finished downloads.";
+      };
+    };
+  };
+
+  editorSubmodule = types.submodule {
+    options = {
+      command = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "Editor (and arguments) to use for the open-editor command.";
+      };
+      encoding = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Encoding to use for the editor.";
+      };
+    };
+  };
+
+  fontsSubmodule = types.submodule {
+    options = {
+      completion = mkOption {
+        type = types.submodule {
+          options = {
+            category = mkFontOption "Font used in the completion categories.";
+            entry = mkFontOption "Font used in the completion widget.";
+          };
+        };
+        default = {};
+        description = "Completion font settings.";
+      };
+      contextmenu = mkFontOption "Font used for the context menu. If set to null, the Qt default is used.";
+      debugConsole = mkFontOption "Font used for the debugging console.";
+      defaultFamily = mkOption {
+        type = with types; nullOr (either str (listOf str));
+        default = null;
+        description = "Default font families to use. Whenever "default_family" is used in a font setting, it’s replaced with the fonts listed here. If set to an empty value, a system-specific monospace default is used.";
+      };
+      defaultSize = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Default font size to use. Whenever "default_size" is used in a font setting, it’s replaced with the size listed here. Valid values are either a float value with a "pt" suffix, or an integer value with a "px" suffix.";
+      };
+      downloads = mkFontOption "Font used for the downloadbar.";
+      hints = mkFontOption "Font used for the hints.";
+      keyhint = mkFontOption "Font used in the keyhint widget.";
+      messages = mkOption {
+        type = types.submodule {
+          options = {
+            error = mkFontOption "Font used for error messages.";
+            info = mkFontOption "Font used for error messages.";
+            warning = mkFontOption "Font used for warning messages.";
+          };
+        };
+        default = {};
+        description = "Message font settings.";
+      };
+      prompts = mkFontOption "Font used for prompts.";
+      statusbar = mkFontOption "Font used in the statusbar.";
+      tabs = mkFontOption "Font used in the tab bar.";
+      web = mkOption {
+        type = types.submodule {
+          options = {
+            family = mkOption {
+              type = types.submodule {
+                options = {
+                  cursive = mkFontOption "Font family for cursive fonts.";
+                  fantasy = mkFontOption "Font family for fantasy fonts.";
+                  fixed = mkFontOption "Font family for fixed fonts.";
+                  sansSerif = mkFontOption "Font family for sans-serif fonts.";
+                  serif = mkFontOption "Font family for serif fonts.";
+                  standard = mkFontOption "Font family for standard fonts.";
+                };
+              };
+              default = {};
+              description = "Web font family settings.";
+            };
+            size = mkOption {
+              type = types.submodule {
+                options = {
+                  default = mkOption {
+                    type = types.nullOr types.ints.unsigned;
+                    default = null;
+                    description = "Default font size (in pixels) for regular text.";
+                  };
+                  defaultFixed = mkOption {
+                    type = types.nullOr types.ints.unsigned;
+                    default = null;
+                    description = "Default font size (in pixels) for fixed-pitch text.";
+                  };
+                  minimum = mkOption {
+                    type = types.nullOr types.ints.unsigned;
+                    default = null;
+                    description = "Hard minimum font size (in pixels).";
+                  };
+                  minimumLogical = mkOption {
+                    type = types.nullOr types.ints.unsigned;
+                    default = null;
+                    description = "Minimum logical font size (in pixels) that is applied when zooming out.";
+                  };
+                };
+              };
+              default = {};
+              description = "Web font size settings.";
+            };
+          };
+        };
+        default = {};
+        description = "Web font settings.";
+      };
+    };
+  };
+
   camelCaseToSnakeCase = replaceStrings upperChars (map (s: "_${s}") lowerChars);
 
   flattenModuleAttrs = let
@@ -781,7 +946,7 @@ let
     recurse = value:
       if isBool value then (if value then "True" else "False")
       else if isString value then "'${value}'"
-      else if isList value then "[${concatStringsSep "," (map (s: recurse s) value)}]"
+      else if isList value then "[${concatStringsSep ", " (map (s: recurse s) value)}]"
       else if isAttrs value then "{\n${concatStringsSep ",\n" (toDictLines value)}\n}"
       else toString value;
   in recurse;
@@ -858,16 +1023,34 @@ in {
       description = "Completion settings.";
     };
 
+    confirmQuit = mkOption {
+      type = types.nullOr (types.enum [ "always" "multiple-tabs" "downloads" "never" ]);
+      default = null;
+      description = "Require a confirmation before quitting the application.";
+    };
+
     content = mkOption {
       type = types.nullOr contentSubmodule;
       default = null;
       description = "Content settings.";
     };
 
-    confirmQuit = mkOption {
-      type = types.nullOr (types.enum [ "always" "multiple-tabs" "downloads" "never" ]);
+    downloads = mkOption {
+      type = types.nullOr downloadsSubmodule;
       default = null;
-      description = "Require a confirmation before quitting the application.";
+      description = "Downloads settings.";
+    };
+
+    editor = mkOption {
+      type = types.nullOr editorSubmodule;
+      default = null;
+      description = "Editor settings.";
+    };
+
+    fonts = mkOption {
+      type = types.nullOr fontsSubmodule;
+      default = null;
+      description = "Fonts settings.";
     };
 
     extraConfig = mkOption {
@@ -893,6 +1076,9 @@ in {
         ${toSettings "completion" cfg.completion}
         ${toSetting "confirm_quit" cfg.confirmQuit}
         ${toSettings "content" cfg.content}
+        ${toSettings "downloads" cfg.downloads}
+        ${toSettings "editor" cfg.editor}
+        ${toSettings "fonts" cfg.fonts}
         ${cfg.extraConfig}
       '';
   };
