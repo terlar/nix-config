@@ -5,8 +5,8 @@ with lib;
 let
   cfg = config.programs.qutebrowser;
 
-  percOrInt = with types;
-    (either (strMatching "^(0|[1-9][0-9]?|100)%$") ints.unsigned);
+  perc = types.strMatching "^(0|[1-9][0-9]?|[1-9][0-9][0-9])%$";
+  percOrInt = with types; (either perc ints.unsigned);
 
   minusOneZeroOrPositive = with types;  either (ints.between (-1) 0) ints.positive;
 
@@ -965,7 +965,7 @@ let
         description = "Position of the status bar.";
       };
       widgets = mkOption {
-        type = with types; nullOr (listOf (enum ["url" "scroll" "scroll_raw" "history" "tabs" "keypress" "progress"]));
+        type = with types; nullOr (listOf (enum [ "url" "scroll" "scroll_raw" "history" "tabs" "keypress" "progress" ]));
         default = null;
         description = "List of widgets displayed in the statusbar.";
       };
@@ -1129,6 +1129,72 @@ let
         description = "Width (in pixels or as percentage of the window) of the tab bar if it’s vertical.";
       };
       wrap = mkBoolOption "Wrap when changing tabs.";
+    };
+  };
+
+  urlSubmodule = types.submodule {
+    options = {
+      autoSearch = mkOption {
+        type = types.nullOr (types.enum [ "naive" "dns" "never" ]);
+        default = null;
+        description = "What search to start when something else than a URL is entered.";
+      };
+      defaultPage = mkStringOption "https://start.duckduckgo.com/";
+      incdecSegments = mkOption {
+        type = with types; nullOr (listOf (enum [
+          "host"
+          "port"
+          "path"
+          "query"
+          "anchor"
+        ]));
+        default = null;
+        description = "URL segments where :navigate increment/decrement will search for a number.";
+      };
+      openBaseUrl = mkBoolOption "Open base URL of the searchengine if a searchengine shortcut is invoked without parameters.";
+      searchengines = mkOption {
+        type = with types; nullOr (attrsOf str);
+        default = null;
+        description = "Search engines which can be used via the address bar.";
+      };
+      startPages = mkOption {
+        type = with types; nullOr (either str (listOf str));
+        default = null;
+        description = "Page(s) to open at the start.";
+      };
+      yankIgnoredParameters = mkOption {
+        type = with types; nullOr (listOf str);
+        default = null;
+        description = "URL parameters to strip with :yank url.";
+      };
+    };
+  };
+
+  windowSubmodule = types.submodule {
+    options = {
+      hideDecoration = mkBoolOption "Hide the window decoration.";
+      titleFormat = mkStringOption "Format to use for the window title. The same placeholders like for tabs.title.format are defined.";
+    };
+  };
+
+  zoomSubmodule = types.submodule {
+    options = {
+      default = mkOption {
+        type = types.nullOr perc;
+        default = null;
+        description = "Default zoom level.";
+      };
+      levels = mkOption {
+        type = types.nullOr (types.listOf perc);
+        default = null;
+        description = "Available zoom levels.";
+      };
+      mouseDivider = mkOption {
+        type = types.nullOr types.ints.unsigned;
+        default = null;
+        description = "Number of zoom increments to divide the mouse wheel movements to.";
+      };
+      textOnly = mkBoolOption "Apply the zoom factor on a frame only to the text or to all content.";
     };
   };
 
@@ -1354,6 +1420,24 @@ in {
       description = "Tabs settings.";
     };
 
+    url = mkOption {
+      type = types.nullOr urlSubmodule;
+      default = null;
+      description = "URL settings.";
+    };
+
+    window = mkOption {
+      type = types.nullOr windowSubmodule;
+      default = null;
+      description = "Window settings.";
+    };
+
+    zoom = mkOption {
+      type = types.nullOr zoomSubmodule;
+      default = null;
+      description = "Zoom settings.";
+    };
+
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -1395,6 +1479,9 @@ in {
         ${toSettings "spellcheck" cfg.spellcheck}
         ${toSettings "statusbar" cfg.statusbar}
         ${toSettings "tabs" cfg.tabs}
+        ${toSettings "url" cfg.url}
+        ${toSettings "window" cfg.window}
+        ${toSettings "zoom" cfg.zoom}
         ${cfg.extraConfig}
       '';
   };
