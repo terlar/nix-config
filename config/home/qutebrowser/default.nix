@@ -50,6 +50,49 @@ in {
       };
     };
 
+    content = {
+      defaultEncoding = "utf-8";
+      javascript.log = {
+        unknown = "none";
+        info = "debug";
+        warning = "debug";
+        error = "debug";
+      };
+    };
+
+    downloads = {
+      position = "bottom";
+      removeFinished = 100;
+    };
+
+    editor.command = [ "emacsclient" "-c" "{}" ];
+
+    spellcheck.languages = [ "en-US" "sv-SE" ];
+
+    statusbar = {
+      hide = true;
+      padding = { top = 5; bottom = 5; left = 5; right = 5; };
+    };
+
+    tabs = {
+      background = true;
+      padding = { top = 5; bottom = 5; left = 0; right = 5; };
+      position = "left";
+      show = "switching";
+      width = "15%";
+    };
+
+    url.searchengines = {
+      DEFAULT = "https://duckduckgo.com/?q={}";
+      aw = "https://wiki.archlinux.org/index.php?search={}";
+      g = "https://google.com/search?q={}";
+      gh = "https://github.com/search?q={}";
+      h = "https://www.haskell.org/hoogle/?hoogle={}";
+      hackage = "https://hackage.haskell.org/packages/search?terms={}";
+      we = "https://en.wikipedia.org/w/index.php?search={}";
+      ws = "https://sv.wikipedia.org/w/index.php?search={}";
+    };
+
     extraConfig = builtins.readFile <dotfiles/qutebrowser/.config/qutebrowser/config.py> ;
   };
 
