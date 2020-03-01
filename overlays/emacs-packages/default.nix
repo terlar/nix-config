@@ -6,11 +6,6 @@ self: pkgs:
     inherit (pkgs) fetchurl fetchgit fetchFromGitHub;
     inherit (pkgs) writeText;
   in {
-    # Fix conflict with wdired.
-    all-the-icons-dired = all-the-icons-dired.overrideAttrs(attrs: {
-      patches = [ ./patches/all-the-icons-dired.patch ];
-    });
-
     # Fix code actions when using javascript-typescript-langserver.
     jsonrpc = let
       src = jsonrpc.src;
