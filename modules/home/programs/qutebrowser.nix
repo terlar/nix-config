@@ -587,10 +587,10 @@ let
         default = null;
         description = "Validate SSL handshakes.";
       };
-      userStylesheets = mkOption {
-        type = with types; nullOr
-          (either str (either (listOf str)
-            (either path (listOf path))));
+      userStylesheets = with types; let
+        primitive = either path str;
+      in mkOption {
+        type = nullOr (either primitive (listOf primitive));
         default = null;
         description = "List of user stylesheet filenames to use.";
       };
