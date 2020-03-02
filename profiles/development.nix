@@ -11,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     bat
+    curlie
     direnv
     docker
     docker-slim
@@ -18,7 +19,6 @@
     editorconfig-core-c
     gnumake
     hey
-    httpie
     jq
     nodePackages.jsonlint
     nodePackages.prettier
