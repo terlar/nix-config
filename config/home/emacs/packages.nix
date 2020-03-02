@@ -75,7 +75,6 @@ with epkgs;
   es-mode
   esh-autosuggest
   eshell-fringe-status
-  esup
   eval-in-repl
   exec-path-from-shell
   fish-completion
