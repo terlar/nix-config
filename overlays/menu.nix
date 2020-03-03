@@ -4,9 +4,9 @@ let
   drv = pkgs.fetchFromGitHub {
     owner = "terlar";
     repo = "menu";
-    rev = "a35743c7b6bcac7f829dc15678ee7e2385cb2330";
-    # date = 2019-12-04T00:39:29+01:00;
-    sha256 = "1s66wdnv8zbncyixc8dpz0zxj0xazkgdq3zj5hlg8xhgp0w56476";
+    rev = "77c6950e4728f9b5584936f2cbff7d92a5c64442";
+    # date = 2020-03-03T18:03:33+01:00;
+    sha256 = "1r4aibj94bhf9k4sg12ql7jc80g46qnz216kakcncknwfjc4wqq3";
   };
 in {
   menu = pkgs.callPackage drv { };
