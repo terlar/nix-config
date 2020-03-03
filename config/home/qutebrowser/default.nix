@@ -76,6 +76,7 @@ in {
 
     tabs = {
       background = true;
+      mousewheelSwitching = false;
       padding = { top = 5; bottom = 5; left = 0; right = 5; };
       position = "left";
       show = "switching";
