@@ -81,6 +81,8 @@ in {
   # Manage home.
   home-manager.users."${data.username}" = { ... }: {
     imports = [
+      ./autorandr.nix
+
       ../../config/home/common.nix
       ../../config/home/gui.nix
       ../../config/home/emacs
