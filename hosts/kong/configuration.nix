@@ -96,8 +96,9 @@ in {
 
       ../../config/home/common.nix
       ../../config/home/development.nix
-      ../../config/home/gui.nix
       ../../config/home/emacs
+      ../../config/home/gui.nix
+      ../../config/home/i3.nix
 
       # Import local modules.
       ../../modules/home

@@ -82,6 +82,7 @@ in {
       ../../config/home/development.nix
       ../../config/home/emacs
       ../../config/home/gui.nix
+      ../../config/home/i3.nix
 
       # Import local modules.
       ../../modules/home
