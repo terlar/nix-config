@@ -49,11 +49,6 @@ in {
     # Update support for firmware.
     fwupd.enable = true;
 
-    kmonad = {
-      enable = true;
-      extraConfig = builtins.readFile ./kmonad.kbd;
-    };
-
     printing = {
       enable = true;
       drivers = [ pkgs.gutenprint ];
