@@ -276,7 +276,7 @@ in {
     inherit config;
   };
 
-  # wayland.windowManager.sway = {
-  #   inherit config;
-  # };
+  wayland.windowManager.sway = {
+    inherit config;
+  };
 }
