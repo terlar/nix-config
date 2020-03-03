@@ -95,6 +95,7 @@ in {
       ./autorandr.nix
 
       ../../config/home/common.nix
+      ../../config/home/development.nix
       ../../config/home/gui.nix
       ../../config/home/emacs
 

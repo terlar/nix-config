@@ -84,8 +84,9 @@ in {
       ./autorandr.nix
 
       ../../config/home/common.nix
-      ../../config/home/gui.nix
+      ../../config/home/development.nix
       ../../config/home/emacs
+      ../../config/home/gui.nix
 
       # Import local modules.
       ../../modules/home
