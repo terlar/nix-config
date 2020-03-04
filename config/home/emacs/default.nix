@@ -13,7 +13,7 @@ in {
       enable = true;
       package = pkgs.emacsGit;
       extraPackages = emacsPackages;
-      overrides = pkgs.emacsPackagesOverrides;
+      overrides = pkgs.emacsPackageOverrides;
     };
 
     git = {

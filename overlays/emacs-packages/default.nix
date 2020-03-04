@@ -1,11 +1,10 @@
 self: pkgs:
 
-{
-  emacsPackagesOverrides = super: self: with self; let
-    inherit (pkgs.stdenv) mkDerivation lib;
-    inherit (pkgs) fetchurl fetchgit fetchFromGitHub;
-    inherit (pkgs) writeText;
-  in {
+let
+  inherit (pkgs.stdenv) mkDerivation lib;
+  inherit (pkgs) fetchurl fetchgit fetchFromGitHub writeText;
+in {
+  emacsPackageOverrides = eSelf: eSuper: with eSuper; {
     # Remove duplicate candidates
     ivy = ivy.overrideAttrs(attrs: {
       patches = [ ./patches/ivy-remove-duplicate-candidates.patch ];
@@ -21,10 +20,10 @@ self: pkgs:
         phases = [ "patchPhase" ];
         patchPhase = "patch $src -o $out < ${patch}";
       };
-    in self.elpaBuild rec {
+    in elpaBuild rec {
       inherit (jsonrpc) pname ename version meta;
       src = patchedSrc;
-      packageRequires = [ super.emacs ];
+      packageRequires = [ emacs ];
     };
 
     # Personal forks.
@@ -61,7 +60,7 @@ self: pkgs:
         perl -i -pe "s%/usr/share%$out%;" local.mk
       '';
 
-      buildInputs = [ super.emacs ] ++ (with pkgs; [ texinfo perl which ]);
+      buildInputs = [ emacs pkgs.texinfo pkgs.perl pkgs.which ];
 
       meta = {
         homepage = "https://elpa.gnu.org/packages/org.html";
@@ -70,7 +69,7 @@ self: pkgs:
     };
 
     # Packages not in MELPA.
-    apheleia = self.melpaBuild rec {
+    apheleia = melpaBuild rec {
       pname   = "apheleia";
       version = "20200209.1305";
       src = fetchFromGitHub {
@@ -83,7 +82,7 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
-    counsel-web = self.melpaBuild rec {
+    counsel-web = melpaBuild rec {
       pname   = "counsel-web";
       version = "20200213.1054";
       src = fetchFromGitHub {
@@ -96,7 +95,7 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
-    eglot-x = self.melpaBuild rec {
+    eglot-x = melpaBuild rec {
       pname   = "eglot-x";
       version = "20200104.1435";
       src = fetchFromGitHub {
@@ -109,7 +108,7 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
-    ejira = self.melpaBuild rec {
+    ejira = melpaBuild rec {
       pname   = "ejira";
       version = "20200206.2144";
       src = fetchFromGitHub {
@@ -120,10 +119,10 @@ self: pkgs:
         # date = 2020-02-06T21:44:57+02:00;
       };
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
-      packageRequires = [ self.s self.f self.ox-jira self.dash self.jiralib2 self.language-detection ];
+      packageRequires = [ org s f ox-jira dash jiralib2 language-detection ];
     };
 
-    eldoc-posframe = self.melpaBuild rec {
+    eldoc-posframe = melpaBuild rec {
       pname   = "eldoc-posframe";
       version = "20190209.1123";
       src = fetchFromGitHub {
@@ -136,7 +135,7 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
     };
 
-    ivy-ghq = self.melpaBuild rec {
+    ivy-ghq = melpaBuild rec {
       pname   = "ivy-ghq";
       version = "20191231.1957";
       src = fetchFromGitHub {
@@ -149,7 +148,7 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
-    org-pretty-table = self.melpaBuild rec {
+    org-pretty-table = melpaBuild rec {
       pname   = "org-pretty-table";
       version = "20131129.1610";
       src = fetchFromGitHub {
@@ -162,7 +161,7 @@ self: pkgs:
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
-    source-peek = self.melpaBuild rec {
+    source-peek = melpaBuild rec {
       pname   = "source-peek";
       version = "20170424.347";
       src = fetchFromGitHub {
