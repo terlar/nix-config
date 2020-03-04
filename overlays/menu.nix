@@ -1,7 +1,7 @@
-self: pkgs:
+self: super:
 
 let
-  drv = pkgs.fetchFromGitHub {
+  drv = super.fetchFromGitHub {
     owner = "terlar";
     repo = "menu";
     rev = "77c6950e4728f9b5584936f2cbff7d92a5c64442";
@@ -9,5 +9,5 @@ let
     sha256 = "1r4aibj94bhf9k4sg12ql7jc80g46qnz216kakcncknwfjc4wqq3";
   };
 in {
-  menu = pkgs.callPackage drv { };
+  menu = super.callPackage drv { };
 }

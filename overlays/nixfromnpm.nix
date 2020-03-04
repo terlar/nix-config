@@ -1,7 +1,7 @@
-self: pkgs:
+self: super:
 
 let
-  drv = pkgs.fetchFromGitHub {
+  drv = super.fetchFromGitHub {
     owner = "adnelson";
     repo = "nixfromnpm";
     rev = "4ab773cdead920d2312e864857fabaf5f739a80e";
@@ -9,5 +9,5 @@ let
     sha256 = "108qrfmv31xm22a1swrxzl5p0yfzzxf5hfhk9ih0ca07cyr8s2aw";
   };
 in {
-  nixfromnpm = pkgs.haskellPackages.callPackage drv {};
+  nixfromnpm = super.haskellPackages.callPackage drv {};
 }

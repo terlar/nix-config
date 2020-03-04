@@ -1,7 +1,7 @@
-self: pkgs:
+self: super:
 
 {
-  iosevka-slab = pkgs.iosevka.override {
+  iosevka-slab = super.iosevka.override {
     privateBuildPlan = {
       family = "Iosevka Slab";
       design = [
