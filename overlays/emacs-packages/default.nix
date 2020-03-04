@@ -6,6 +6,11 @@ self: pkgs:
     inherit (pkgs) fetchurl fetchgit fetchFromGitHub;
     inherit (pkgs) writeText;
   in {
+    # Remove duplicate candidates
+    ivy = ivy.overrideAttrs(attrs: {
+      patches = [ ./patches/ivy-remove-duplicate-candidates.patch ];
+    });
+
     # Fix code actions when using javascript-typescript-langserver.
     jsonrpc = let
       src = jsonrpc.src;
