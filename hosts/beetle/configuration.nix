@@ -91,6 +91,8 @@ in {
     ];
   };
 
+  nix.trustedUsers = [ "root" "@wheel" ];
+
   # Dictionaries.
   local.dictionaries = {
     enable = true;
