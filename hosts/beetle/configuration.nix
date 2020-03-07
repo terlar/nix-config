@@ -89,6 +89,11 @@ in {
     ] ++ lib.optionals (builtins.pathExists <private/home>) [
       <private/home>
     ];
+
+    local.defaultBrowser = {
+      enable = true;
+      package = pkgs.qutebrowser;
+    };
   };
 
   nix.trustedUsers = [ "root" "@wheel" ];

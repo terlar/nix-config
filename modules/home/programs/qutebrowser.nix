@@ -1244,14 +1244,7 @@ let
       (toSettings' (filterSettings flatAttrs));
 in {
   options.programs.qutebrowser = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      example = true;
-      description = ''
-        Whether to enable the qutebrowser web browser.
-      '';
-    };
+    enable = mkEnableOption "the qutebrowser web browser";
 
     package = mkOption {
       type = types.package;

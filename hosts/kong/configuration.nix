@@ -105,6 +105,11 @@ in {
     ] ++ lib.optionals (builtins.pathExists <private/home>) [
       <private/home>
     ];
+
+    local.defaultBrowser = {
+      enable = true;
+      package = pkgs.qutebrowser;
+    };
   };
 
   # Earlier font size setup.

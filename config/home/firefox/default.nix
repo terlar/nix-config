@@ -1,8 +1,8 @@
 { ... }:
 
-let
-  desktopFile = "firefox.desktop";
-in {
+with builtins;
+
+{
   programs.firefox = {
     enable = true;
 
@@ -14,18 +14,10 @@ in {
       };
 
       userChrome = ''
-        ${builtins.readFile ./hide-nav-bar.css}
-        ${builtins.readFile ./hide-tab-bar.css}
-        ${builtins.readFile ./sidebery.css}
+        ${readFile ./hide-nav-bar.css}
+        ${readFile ./hide-tab-bar.css}
+        ${readFile ./sidebery.css}
       '';
-    };
-  };
-
-  xdg.mimeApps = {
-    associations.added = {
-      "x-scheme-handler/http" = desktopFile;
-      "x-scheme-handler/https" = desktopFile;
-      "x-scheme-handler/ftp" = desktopFile;
     };
   };
 }
