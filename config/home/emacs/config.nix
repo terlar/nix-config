@@ -1,32 +1,63 @@
 { extraPackages ? (_: [])
 , overrides ? (_: _: {})
 , src
+, stdenv
 , emacs
 , emacsPackagesGen
-, which
 }:
 
 let
   emacsPackages = (emacsPackagesGen emacs).overrideScope' overrides;
   emacsEnv = emacsPackages.emacsWithPackages extraPackages;
-in emacsPackages.trivialBuild {
-  pname = "emacs-config";
-  version = "1";
+in stdenv.mkDerivation rec {
+  name = "emacs-config";
+
   inherit src;
+  dontUnpack = true;
 
   buildInputs = [ emacsEnv ];
 
-  preBuild = ''
-    find -type l -delete
+  init = emacsPackages.trivialBuild {
+    pname = "${name}-init";
+    version = "1";
+    inherit src buildInputs;
 
-    mkdir -p .xdg-config
-    ln -s $PWD .xdg-config/emacs
-    export XDG_CONFIG_HOME="$PWD/.xdg-config"
+    preBuild = ''
+      find -type l -delete
 
-    export PATH="${emacsEnv}/bin:$PATH"
+      mkdir -p .xdg-config
+      ln -s $PWD .xdg-config/emacs
+      export XDG_CONFIG_HOME="$PWD/.xdg-config"
 
-    emacs --batch -Q \
-      *.org \
-      -f org-babel-tangle
+      export PATH="${emacsEnv}/bin:$PATH"
+
+      emacs --batch -Q \
+        *.org \
+        -f org-babel-tangle
+    '';
+  };
+
+  lisp = emacsPackages.trivialBuild {
+    pname = "${name}-lisp";
+    version = "1";
+    src = "${src}/lisp";
+
+    inherit buildInputs;
+
+    preBuild = ''
+      export PATH="${emacsEnv}/bin:$PATH"
+    '';
+  };
+
+  installPhase = ''
+    lispDir=$out/lisp
+
+    install -d $out
+    install ${init}/share/emacs/site-lisp/*.el $out/.
+    install -d $lispDir
+    install ${lisp}/share/emacs/site-lisp/* $lispDir/.
+
+    cp -r $src/snippets $out/.
+    cp -r $src/templates $out/.
   '';
 }

@@ -14,7 +14,7 @@ let
     inherit (emacs) extraPackages overrides;
   };
 
-  setConfigFiles = with builtins; path:
+  mkEmacsConfigFiles = with builtins; path:
     foldl'
       (acc: file: acc // { "emacs/${file}".source = "${path}/${file}"; })
       { }
@@ -41,9 +41,5 @@ in {
     };
   };
 
-  xdg.configFile = {
-    "emacs/lisp".source = <emacs-config/lisp> ;
-    "emacs/snippets".source = <emacs-config/snippets> ;
-    "emacs/templates".source = <emacs-config/templates> ;
-  } // setConfigFiles "${config}/share/emacs/site-lisp";
+  xdg.configFile = mkEmacsConfigFiles config;
 }
