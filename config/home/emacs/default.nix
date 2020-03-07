@@ -3,9 +3,7 @@
 let
   emacsPackages = import ./packages.nix pkgs;
 in {
-  home.sessionVariables = {
-    EDITOR = "emacseditor";
-  };
+  home.sessionVariables.EDITOR = "emacseditor";
 
   services.emacs.enable = true;
   programs = {
@@ -21,12 +19,12 @@ in {
         diff.tool = "ediff";
 
         "difftool \"ediff\"".cmd = ''
-          emacsclient --eval '(ediff-files "'$LOCAL'" "'$REMOTE'")'
-        '';
+            emacsclient --eval '(ediff-files "'$LOCAL'" "'$REMOTE'")'
+            '';
 
         "mergetool \"ediff\"".cmd = ''
-          emacsclient --eval '(ediff-merge-files-with-ancestor "'$LOCAL'" "'$REMOTE'" "'$BASE'" nil "'$MERGED'")'
-        '';
+            emacsclient --eval '(ediff-merge-files-with-ancestor "'$LOCAL'" "'$REMOTE'" "'$BASE'" nil "'$MERGED'")'
+            '';
       };
     };
   };
@@ -41,34 +39,5 @@ in {
     configFile."emacs/lisp".source = <emacs-config/lisp> ;
     configFile."emacs/snippets".source = <emacs-config/snippets> ;
     configFile."emacs/templates".source = <emacs-config/templates> ;
-
-    dataFile."applications/emacsclient.desktop".text = ''
-      [Desktop Entry]
-      Name=Emacsclient
-      GenericName=Text Editor
-      Comment=Edit text
-      MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;application/pdf;
-      Exec=${pkgs.scripts.emacseditor}/bin/emacseditor %F
-      Icon=emacs
-      Type=Application
-      Terminal=false
-      Categories=Development;TextEditor;
-      StartupWMClass=Emacs
-      Keywords=Text;Editor;
-    '';
-
-    dataFile."applications/emacsmail.desktop".text = ''
-      [Desktop Entry]
-      Name=Emacsmail
-      GenericName=Mail/News Client
-      Comment=Mail/News Client
-      Encoding=UTF-8
-      MimeType=x-scheme-handler/mailto;
-      Exec=${pkgs.scripts.emacsmail}/bin/emacsmail %u
-      Icon=emacs
-      Type=Application
-      Terminal=false
-      StartupWMClass=Emacs
-    '';
   };
 }
