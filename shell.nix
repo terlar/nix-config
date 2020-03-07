@@ -69,7 +69,6 @@ let
 
   reloadEmacsConfig = writeShellScriptBin "reload-emacs-config" ''
     set -euo pipefail
-    ${switchHome}/bin/switch-home
     systemctl --user restart emacs.service
     while ! emacsclient -a false -e t 2>/dev/null
     do sleep 1; done
@@ -104,6 +103,7 @@ in mkShell {
   ];
 
   shellHook = ''
+    NIXPKGS_CONFIG=${./config/nixpkgs.nix}
     NIX_PATH=${nixPath}
     git submodule update --init
   '';
