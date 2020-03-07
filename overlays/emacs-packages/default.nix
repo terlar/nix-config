@@ -39,14 +39,14 @@ in {
     });
 
     org = mkDerivation rec {
-      name = "emacs-org-${version}";
-      version = "20200201.1122";
+      pname = "emacs-org";
+      version = "20200307.730";
 
       src = fetchgit {
-        url = https://code.orgmode.org/terlar/org-mode.git;
-        rev = "55953033962b72b49b974e2e58fc2063bf47ba71";
-        sha256 = "1wcbq5ah1dxy70ld8d2djfmr70986r875lyanp4d40rv3agxs4wd";
-        # date = 2020-02-01T11:22:03+01:00;
+        url = https://github.com/terlar/org-mode.git;
+        rev = "d2622db2aa7ec61850d167fde17d56af23455c83";
+        sha256 = "1yygls4r6p2v7dmbz91yf01fscww89g9idw9myk20r5vrcwj1p7s";
+        # date = 2020-03-07T07:30:09+01:00;
       };
 
       preBuild = ''
