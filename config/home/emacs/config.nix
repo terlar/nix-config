@@ -53,7 +53,7 @@ in stdenv.mkDerivation rec {
     lispDir=$out/lisp
 
     install -d $out
-    install ${init}/share/emacs/site-lisp/*.el $out/.
+    install ${init}/share/emacs/site-lisp/* $out/.
     install -d $lispDir
     install ${lisp}/share/emacs/site-lisp/* $lispDir/.
 
