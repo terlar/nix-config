@@ -21,7 +21,6 @@ in {
     };
   };
 
-  home.sessionVariables.BROWSER = "firefox";
   xdg.mimeApps = {
     associations.added = {
       "x-scheme-handler/http" = desktopFile;
