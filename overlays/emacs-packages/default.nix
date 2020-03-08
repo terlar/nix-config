@@ -42,8 +42,9 @@ in {
       pname = "emacs-org";
       version = "20200307.730";
 
-      src = fetchgit {
-        url = https://github.com/terlar/org-mode.git;
+      src = fetchFromGitHub {
+        owner = "terlar";
+        repo = "org-mode";
         rev = "d2622db2aa7ec61850d167fde17d56af23455c83";
         sha256 = "1yygls4r6p2v7dmbz91yf01fscww89g9idw9myk20r5vrcwj1p7s";
         # date = 2020-03-07T07:30:09+01:00;

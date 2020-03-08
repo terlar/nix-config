@@ -10,7 +10,8 @@ let
   emacsPackages = (emacsPackagesGen emacs).overrideScope' overrides;
   emacsEnv = emacsPackages.emacsWithPackages extraPackages;
 in stdenv.mkDerivation rec {
-  name = "emacs-config";
+  pname = "emacs-config";
+  version = "1";
 
   inherit src;
   dontUnpack = true;
@@ -18,9 +19,8 @@ in stdenv.mkDerivation rec {
   buildInputs = [ emacsEnv ];
 
   init = emacsPackages.trivialBuild {
-    pname = "${name}-init";
-    version = "1";
-    inherit src buildInputs;
+    pname = "config-init";
+    inherit version src buildInputs;
 
     preBuild = ''
       find -type l -delete
@@ -38,11 +38,10 @@ in stdenv.mkDerivation rec {
   };
 
   lisp = emacsPackages.trivialBuild {
-    pname = "${name}-lisp";
-    version = "1";
+    pname = "config-lisp";
     src = "${src}/lisp";
 
-    inherit buildInputs;
+    inherit version buildInputs;
 
     preBuild = ''
       export PATH="${emacsEnv}/bin:$PATH"
