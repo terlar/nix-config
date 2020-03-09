@@ -5,11 +5,6 @@ let
   inherit (pkgs) fetchurl fetchgit fetchFromGitHub writeText;
 in {
   emacsPackageOverrides = eSelf: eSuper: with eSuper; {
-    # Remove duplicate candidates
-    ivy = ivy.overrideAttrs(attrs: {
-      patches = [ ./patches/ivy-remove-duplicate-candidates.patch ];
-    });
-
     # Fix code actions when using javascript-typescript-langserver.
     jsonrpc = let
       src = jsonrpc.src;
