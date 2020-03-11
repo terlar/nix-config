@@ -72,6 +72,11 @@ in {
     resolved.enable = true;
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "12:12";
+  };
+
   # Add my user.
   users.users."${data.username}" = {
     description = data.name;

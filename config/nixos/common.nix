@@ -21,9 +21,6 @@ in {
       "nixos-config=${toString <nixos-config>}"
       "nixos-hardware=${toString <nixos-hardware>}"
     ];
-
-    gc.automatic = true;
-    gc.dates = "12:12";
   };
 
   nixpkgs = {
