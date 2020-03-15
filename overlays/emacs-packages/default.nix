@@ -78,13 +78,13 @@ in {
     # Packages not in MELPA.
     apheleia = melpaBuild rec {
       pname   = "apheleia";
-      version = "20200209.1305";
+      version = "20200219.2247";
       src = fetchFromGitHub {
         owner  = "raxod502";
         repo   = "apheleia";
-        rev    = "76f0d946e7c860dbd1382828c2858b36bd06d507";
-        sha256 = "181cip7nxv2hfm03rar1qm4fibh30b77jp6xz8q4jlgn31r3g9wc";
-        # date = 2020-02-09T13:05:32-08:00;
+        rev    = "8e99a67cc185db01298a282e0d24277249bcfab8";
+        sha256 = "02np55c32jy5j7s0qkmrb1qggh4r05y12k10pwd88hl8y64sp35c";
+        # date = 2020-02-19T22:47:09-08:00;
       };
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
