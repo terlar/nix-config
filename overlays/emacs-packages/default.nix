@@ -2,7 +2,7 @@ self: pkgs:
 
 let
   inherit (pkgs.stdenv) mkDerivation lib;
-  inherit (pkgs) fetchgit fetchpatch fetchurl fetchFromGitHub writeText;
+  inherit (pkgs) fetchpatch fetchFromGitHub fetchFromGitLab writeText;
 in {
   emacsPackageOverrides = eSelf: eSuper: with eSuper; {
     # Load direnv before dir-locals.
@@ -89,19 +89,6 @@ in {
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
 
-    counsel-web = melpaBuild rec {
-      pname   = "counsel-web";
-      version = "20200213.1054";
-      src = fetchFromGitHub {
-        owner  = "mnewt";
-        repo   = "counsel-web";
-        rev    = "d4333caf2edd447b3f31c9c992d7b57f71f33979";
-        sha256 = "0g13kfqi106ypjyvzxs1hmq1i1m8mqk84rbv1ac77543rl5pydan";
-        # date = 2020-02-13T10:54:25-08:00;
-      };
-      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
-    };
-
     eglot-x = melpaBuild rec {
       pname   = "eglot-x";
       version = "20200104.1435";
@@ -138,6 +125,18 @@ in {
         rev    = "2e012a097dfab66a05a858b1486bba9f70956823";
         sha256 = "1pn1g8mwcgxpavwj9z8rr244pak3n7jqbswjav5bni89s4wm9rhz";
         # date = 2019-02-09T11:23:21+01:00;
+      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
+    };
+
+    fit-text-scale = melpaBuild rec {
+      pname   = "fit-text-scale";
+      version = "20200218.1658";
+      src = fetchFromGitLab {
+        owner  = "marcowahl";
+        repo   = "fit-text-scale";
+        rev    = "cc570af6b8bda346028d070482f4cb30d438b867";
+        sha256 = "143mamvmgn4qyax3faknz77hgmkik0lbc48506kdvcg5mgcbzgn8";
       };
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
     };

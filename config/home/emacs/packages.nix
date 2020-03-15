@@ -79,6 +79,7 @@ with epkgs;
   exec-path-from-shell
   fish-completion
   fish-mode
+  fit-text-scale
   flymake-diagnostic-at-point
   flymake-eslint
   flymake-racket
@@ -213,6 +214,7 @@ with epkgs;
   undo-propose
   use-package
   vc-msg
+  virtual-auto-fill
   visual-fill-column
   visual-regexp
   vlf
