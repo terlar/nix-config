@@ -110,8 +110,8 @@ def move_window(verbose, direction):
 
     if direction == 'top':
         window_move_resize(
-            win_mon.x, win_mon.y,
-            win_mon.width, int(win_mon.height / 2))
+            win_mon.x + int((win_mon.width - dimension.width) / 2), win_mon.y + gap,
+            dimension.width, dimension.height)
 
     elif direction == 'top-right':
         window_move_resize(
@@ -120,8 +120,8 @@ def move_window(verbose, direction):
 
     elif direction == 'right':
         window_move_resize(
-            win_mon.x + int(win_mon.width / 2), win_mon.y,
-            int(win_mon.width / 2), win_mon.height)
+            win_mon.x + int(win_mon.width - dimension.width - gap), win_mon.y + int((win_mon.height - dimension.height) / 2),
+            dimension.width, dimension.height)
 
     elif direction == 'bottom-right':
         window_move_resize(
@@ -130,8 +130,8 @@ def move_window(verbose, direction):
 
     elif direction == 'bottom':
         window_move_resize(
-            win_mon.x, win_mon.y + int(win_mon.height / 2),
-            win_mon.width, int(win_mon.height / 2))
+            win_mon.x + int((win_mon.width - dimension.width) / 2), win_mon.y + int(win_mon.height - dimension.height - gap),
+            dimension.width, dimension.height)
 
     elif direction == 'bottom-left':
         window_move_resize(
@@ -140,8 +140,8 @@ def move_window(verbose, direction):
 
     elif direction == 'left':
         window_move_resize(
-            win_mon.x, win_mon.x,
-            int(win_mon.width / 2), win_mon.height)
+            win_mon.x + gap, win_mon.y + int((win_mon.height - dimension.height) / 2),
+            dimension.width, dimension.height)
 
     elif direction == 'top-left':
         window_move_resize(

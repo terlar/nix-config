@@ -201,6 +201,10 @@ let
       "${modifier}+Left" = "[con_mark=pip] focus,${tile} bottom-left && i3-msg 'focus tiling'";
       "${modifier}+Down" = "[con_mark=pip] focus,${tile} bottom-right && i3-msg 'focus tiling'";
       "${modifier}+Right" = "[con_mark=pip] focus,${tile} top-right && i3-msg 'focus tiling'";
+      "${modifier}+Shift+Up" = "[con_mark=pip] focus,${tile} top && i3-msg 'focus tiling'";
+      "${modifier}+Shift+Left" = "[con_mark=pip] focus,${tile} left && i3-msg 'focus tiling'";
+      "${modifier}+Shift+Down" = "[con_mark=pip] focus,${tile} bottom && i3-msg 'focus tiling'";
+      "${modifier}+Shift+Right" = "[con_mark=pip] focus,${tile} right && i3-msg 'focus tiling'";
 
       # Change focus between tiling / floating windows
       "${modifier}+space" = "focus mode_toggle";
