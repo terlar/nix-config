@@ -32,6 +32,17 @@ in {
       packageRequires = [ emacs ];
     };
 
+    # Add nix support.
+    separedit = separedit.overrideAttrs(attrs: {
+      patches = [
+        (fetchpatch {
+          name = "separedit-nix-mode-support.patch";
+          url = https://github.com/twlz0ne/separedit.el/commit/915a8f946d821e2f0eae2e8b5ee95f29085a6052.patch;
+          sha256 = "0wcnbyaqflqvpk0z63km93w5s5g7zq0zxpmrxcwkca1y92qmqizc";
+        })
+      ];
+    });
+
     # Personal forks.
     flymake-diagnostic-at-point = flymake-diagnostic-at-point.overrideAttrs(attrs: {
       version = "20190810.2232";
