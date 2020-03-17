@@ -192,6 +192,7 @@ with epkgs;
   salt-mode
   sbt-mode
   scala-mode
+  separedit
   slim-mode
   slime
   smart-jump
