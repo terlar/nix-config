@@ -71,6 +71,8 @@ in {
         makeFlagsArray=(
           prefix="$out/share"
           ORG_ADD_CONTRIB="org* ox*"
+          GITVERSION="${version}"
+          ORGVERSION="${version}"
         );
       '';
 
