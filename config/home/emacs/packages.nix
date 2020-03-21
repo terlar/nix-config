@@ -66,6 +66,7 @@ with epkgs;
   ejc-sql
   eldoc-overlay
   eldoc-posframe
+  elfeed
   elixir-mode
   elm-mode
   emmet-mode
