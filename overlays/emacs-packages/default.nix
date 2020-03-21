@@ -38,7 +38,7 @@ in {
         (fetchpatch {
           name = "fr3-preserve-string-indent.patch";
           url = https://github.com/twlz0ne/separedit.el/compare/fr3-preserve-string-indent.patch;
-          sha256 = "1sadgma5878h9b4ka22d3z56r40i2fsyrcy1qg2kpayh83cm726b";
+          sha256 = "1l6ani3kwqs86hrp3zfi43mrs7p59mm6jy8df852m7pqnrlqihwp";
         })
       ];
     });
