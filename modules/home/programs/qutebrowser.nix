@@ -1200,26 +1200,26 @@ let
 
   camelCaseToSnakeCase = replaceStrings upperChars (map (s: "_${s}") lowerChars);
 
-  flattenModuleAttrs = let
-    recurse = path: value:
-      # Recurse and gather path as long as attribute set is a module.
-      if isAttrs value && hasAttrByPath [ "_module" ] value then
+  flattenAttrs = ignoredPaths: let
+    recurse = path: value: let
+      name = concatStringsSep "." (reverseList path);
+    in
+      if isAttrs value && ! builtins.elem name ignoredPaths then
         mapAttrsToList
           (n: v: recurse ([n] ++ path) v)
-          (filterAttrs (n: v: n != "_module") value)
-      else {
-        ${concatStringsSep "." (reverseList path)} = value;
-      };
+          value
+      else
+        { ${name} = value; };
   in attrs: foldl recursiveUpdate { } (flatten (recurse [ ] attrs));
 
-  filterSettings = attrs:
-    filterAttrs (n: v: n != "_module" && v != null) attrs;
+  filterNullAttrs = attrs:
+    filterAttrs (n: v: v != null) attrs;
 
   coerceValue = let
     toDictLines = attrs:
       mapAttrsToList
         (n: v: "    '${n}': ${recurse v}")
-        (filterSettings attrs);
+        (filterNullAttrs attrs);
     recurse = value:
       if isBool value then (if value then "True" else "False")
       else if isString value then "'${value}'"
@@ -1233,16 +1233,18 @@ let
       (value != null)
       "c.${camelCaseToSnakeCase name} = ${coerceValue value}";
 
-  toSettings = name: attrs:
+  toSettingsWithDicts = name: attrs: dicts:
     let
-      flatAttrs = flattenModuleAttrs attrs;
-      toSettings' = generators.toKeyValue {
+      toKeyValue = generators.toKeyValue {
         mkKeyValue = key: value: toSetting "${name}.${key}" value;
       };
     in optionalString
       (attrs != null)
-      (toSettings' (filterSettings flatAttrs));
-in {
+      (toKeyValue (filterNullAttrs (flattenAttrs dicts attrs)));
+
+  toSettings = name: attrs:
+    toSettingsWithDicts name attrs [];
+in rec {
   options.programs.qutebrowser = {
     enable = mkEnableOption "the qutebrowser web browser";
 
@@ -1449,15 +1451,22 @@ in {
         ${toSetting "aliases" cfg.aliases}
         ${toSettings "auto_save" cfg.autoSave}
         ${toSetting "backend" cfg.backend}
-        ${toSettings "bindings" cfg.bindings}
+        ${toSettingsWithDicts "bindings" cfg.bindings [
+          "keyMappings"
+        ]}
         ${toSettings "colors" cfg.colors}
         ${toSettings "completion" cfg.completion}
         ${toSetting "confirm_quit" cfg.confirmQuit}
-        ${toSettings "content" cfg.content}
+        ${toSettingsWithDicts "content" cfg.content [
+          "headers.custom"
+          "javascript.log"
+        ]}
         ${toSettings "downloads" cfg.downloads}
         ${toSettings "editor" cfg.editor}
         ${toSettings "fonts" cfg.fonts}
-        ${toSettings "hints" cfg.hints}
+        ${toSettingsWithDicts "hints" cfg.hints [
+          "selectors"
+        ]}
         ${toSetting "history_gap_interval" cfg.historyGapInterval}
         ${toSettings "input" cfg.input}
         ${toSettings "keyhint" cfg.keyhint}
@@ -1470,9 +1479,16 @@ in {
         ${toSettings "search" cfg.search}
         ${toSettings "session" cfg.session}
         ${toSettings "spellcheck" cfg.spellcheck}
-        ${toSettings "statusbar" cfg.statusbar}
-        ${toSettings "tabs" cfg.tabs}
-        ${toSettings "url" cfg.url}
+        ${toSettingsWithDicts "statusbar" cfg.statusbar [
+          "padding"
+        ]}
+        ${toSettingsWithDicts "tabs" cfg.tabs [
+          "indicator.padding"
+          "padding"
+        ]}
+        ${toSettingsWithDicts "url" cfg.url [
+          "searchengines"
+        ]}
         ${toSettings "window" cfg.window}
         ${toSettings "zoom" cfg.zoom}
         ${cfg.extraConfig}
