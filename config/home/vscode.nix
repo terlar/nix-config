@@ -20,7 +20,7 @@ in {
     enable = true;
     userSettings = {
       "workbench.iconTheme" = "material-icon-theme";
-      "workbench.colorTheme" = "Kary Pro Colors － Light";
+      "workbench.colorTheme" = "Phantom";
       "[nix]"."editor.tabSize" = 2;
       "window.zoomlevel" = 0;
       "ActiveFileInStatusBar.enable" = true;
@@ -58,6 +58,12 @@ in {
         publisher = "karyfoundation";
         version = "20.0.3";
         sha256 = "1yd3ixbnssm1kjv0wn109wp6szjlc27k33b2cz1l3bkndmjzf69b";
+      }
+      {
+        name = "phantom";
+        publisher = "tourervit";
+        version = "1.1.1";
+        sha256 = "01bj1dlqrjrd7ngygzh3p5ghkxk5wzkbd3ai7g3s3xncmhx4vpbr";
       }
       {
         name = "vscode-direnv";
