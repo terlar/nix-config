@@ -32,17 +32,6 @@ in {
       packageRequires = [ emacs ];
     };
 
-    # Add support for docstring indent
-    separedit = separedit.overrideAttrs(attrs: {
-      patches = [
-        (fetchpatch {
-          name = "fr3-preserve-string-indent.patch";
-          url = https://github.com/twlz0ne/separedit.el/compare/fr3-preserve-string-indent.patch;
-          sha256 = "1l6ani3kwqs86hrp3zfi43mrs7p59mm6jy8df852m7pqnrlqihwp";
-        })
-      ];
-    });
-
     # Personal forks.
     flymake-diagnostic-at-point = flymake-diagnostic-at-point.overrideAttrs(attrs: {
       version = "20190810.2232";
