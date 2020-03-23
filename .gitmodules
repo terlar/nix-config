@@ -1,6 +1,7 @@
 [submodule "external/nixpkgs"]
 	path = external/nixpkgs
 	url = https://github.com/nixos/nixpkgs.git
+	branch = nixos-unstable
 [submodule "external/nixos-hardware"]
 	path = external/nixos-hardware
 	url = https://github.com/nixos/nixos-hardware.git
