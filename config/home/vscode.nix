@@ -16,18 +16,33 @@ in {
     nixpkgsPath = <nixpkgs> ;
   };
 
+  xdg.configFile."Code/User/keybindings.json".text = builtins.toJSON [
+    {
+      key = "ctrl+k";
+      command = "deleteAllRight";
+      when = "terminalFocus";
+    }
+  ];
+
   programs.vscode = {
     enable = true;
     userSettings = {
+      "update.channel" = "none";
+
       "workbench.iconTheme" = "material-icon-theme";
       "workbench.colorTheme" = "Phantom";
-      "[nix]"."editor.tabSize" = 2;
       "window.zoomlevel" = 0;
+
       "ActiveFileInStatusBar.enable" = true;
       "ActiveFileInStatusBar.fullpath" = false;
+
+      "[nix]"."editor.tabSize" = 2;
+      "python.formatting.provider" = "black";
     };
-    extensions = with pkgs; [
-      vscode-extensions.bbenoist.Nix
+    extensions = with pkgs; with vscode-extensions; [
+      bbenoist.Nix
+      ms-python.python
+      vscodevim.vim
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "activefileinstatusbar";
@@ -40,6 +55,12 @@ in {
         publisher = "editorconfig";
         version = "0.14.4";
         sha256 = "0580dsxhw78qgds9ljvzsqqkd2ndksppk7l9s5gnrddirn6fdk5i";
+      }
+      {
+        name = "emacs";
+        publisher = "vscodeemacs";
+        version = "0.1.2";
+        sha256 = "033c19ng6sr82lcdmkpwrp7c93b843q1csgyvg0yw4n3k6mv6chs";
       }
       {
         name = "material-icon-theme";
