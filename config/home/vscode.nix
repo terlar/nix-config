@@ -29,8 +29,10 @@ in {
     userSettings = {
       "update.channel" = "none";
 
-      "workbench.iconTheme" = "material-icon-theme";
       "workbench.colorTheme" = "Phantom";
+      "workbench.iconTheme" = "material-icon-theme";
+
+      "editor.minimap.enabled" = false;
       "window.zoomlevel" = 0;
 
       "ActiveFileInStatusBar.enable" = true;
