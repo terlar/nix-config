@@ -22,6 +22,26 @@ in {
       command = "deleteAllRight";
       when = "terminalFocus";
     }
+    {
+      key = "ctrl+o";
+      command = "editor.action.insertLineAfter";
+      when = "editorTextFocus && !editorReadonly";
+    }
+    {
+      key = "ctrl+w";
+      command = "editor.action.deleteLines";
+      when = "editorTextFocus && !editorHasSelection && !editorReadonly";
+    }
+    {
+      key = "alt+w";
+      command = "editor.action.clipboardCopyAction";
+      when = "editorTextFocus && !editorHasSelection && !editorReadonly";
+    }
+    {
+      key = "alt+shift+6";
+      command = "editor.action.joinLines";
+      when = "editorTextFocus && !editorReadonly";
+    }
   ];
 
   programs.vscode = {
@@ -32,7 +52,9 @@ in {
       "workbench.colorTheme" = "Phantom";
       "workbench.iconTheme" = "material-icon-theme";
 
+      "editor.formatOnSave" = true;
       "editor.minimap.enabled" = false;
+      "editor.wordWrap" = true;
       "window.zoomlevel" = 0;
 
       "ActiveFileInStatusBar.enable" = true;
@@ -44,7 +66,6 @@ in {
     extensions = with pkgs; with vscode-extensions; [
       bbenoist.Nix
       ms-python.python
-      vscodevim.vim
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "activefileinstatusbar";
@@ -71,6 +92,12 @@ in {
         sha256 = "04zv2blnrsy87c4n4sj0yg1s90aad754b6vg02gii3jvqhl5060h";
       }
       {
+        name = "nixfmt-vscode";
+        publisher = "brettm12345";
+        version = "0.0.1";
+        sha256 = "07w35c69vk1l6vipnq3qfack36qcszqxn8j3v332bl0w6m02aa7k";
+      }
+      {
         name = "prettier-vscode";
         publisher = "esbenp";
         version = "3.20.0";
@@ -93,6 +120,12 @@ in {
         publisher = "rubymaniac";
         version = "0.0.2";
         sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
+      }
+      {
+        name = "vscode-quick-select";
+        publisher = "dbankier";
+        version = "0.2.8";
+        sha256 = "0yaa4rkg80xf9aihchxigkac22syjicj5im1b1fw0i0brl254b27";
       }
     ];
   };
