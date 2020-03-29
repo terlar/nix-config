@@ -69,6 +69,7 @@ with pkgs;
   tldr
   tree
   units
+  unixtools.xxd
   xsv
 
   # file system
