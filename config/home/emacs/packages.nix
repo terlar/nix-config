@@ -23,6 +23,7 @@ with epkgs;
   awscli-capf
   bbdb
   bibliothek
+  browse-at-remote
   cakecrumbs
   caml
   cider parseedn
