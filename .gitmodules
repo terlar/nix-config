@@ -17,3 +17,6 @@
 [submodule "external/emacs.d"]
 	path = external/emacs.d
 	url = https://github.com/terlar/emacs.d.git
+[submodule "external/nixos-vsliveshare"]
+	path = external/nixos-vsliveshare
+	url = https://github.com/msteen/nixos-vsliveshare

@@ -1,10 +1,8 @@
 { pkgs, ... }:
 
-let
-  vsliveshare = builtins.fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/a54bfc74c5e7ae056f61abdb970c6cd6e8fb5e53";
-in {
+{
   imports = [
-    "${vsliveshare}/modules/vsliveshare/home.nix"
+    ../../external/nixos-vsliveshare/modules/vsliveshare/home.nix
   ];
 
   services.vsliveshare = {

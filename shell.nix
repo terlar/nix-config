@@ -61,9 +61,10 @@ let
 
   updateNixSources = writeShellScriptBin "update-nix-sources" ''
     set -euo pipefail
-    git submodule sync external/home-manager external/nixos-hardware external/nixpkgs
+    git submodule sync external/home-manager external/nixos-hardware external/nixos-vsliveshare external/nixpkgs
     git submodule update --remote external/home-manager
     git submodule update --remote external/nixos-hardware
+    git submodule update --remote external/nixos-vsliveshare
     git submodule update --remote external/nixpkgs
   '';
 
