@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 let
-  vsliveshare = builtins.fetchGit {
-    url = "https://github.com/msteen/nixos-vsliveshare.git";
-    ref = "refs/heads/master";
-  };
+  vsliveshare = builtins.fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/a54bfc74c5e7ae056f61abdb970c6cd6e8fb5e53";
 in {
   imports = [
     "${vsliveshare}/modules/vsliveshare/home.nix"
@@ -13,7 +10,6 @@ in {
   services.vsliveshare = {
     enable = true;
     extensionsDir = "$HOME/.vscode/extensions";
-    nixpkgsPath = <nixpkgs> ;
   };
 
   xdg.configFile."Code/User/keybindings.json".text = builtins.toJSON [
