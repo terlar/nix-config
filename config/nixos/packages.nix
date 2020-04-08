@@ -5,6 +5,7 @@ with pkgs;
 [
   # nix
   cachix
+  haskellPackages.nix-derivation
   home-manager
   nix-diff
   nix-index
