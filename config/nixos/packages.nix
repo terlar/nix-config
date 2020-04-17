@@ -41,6 +41,7 @@ with pkgs;
   # network
   curl
   dnsutils
+  ipcalc
   openssh
   traceroute
   wget
