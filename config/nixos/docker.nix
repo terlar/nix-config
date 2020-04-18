@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Docker support.
@@ -6,4 +6,8 @@
     enable = true;
     extraOptions = "--experimental=true";
   };
+
+  environment.systemPackages = with pkgs; [
+    arion
+  ];
 }
