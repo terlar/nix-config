@@ -1,10 +1,37 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
-{
-  programs.fish.enable = true;
-  xdg = {
-    configFile."fish/completions".source = <dotfiles/fish/.config/fish/completions> ;
-    configFile."fish/conf.d".source = <dotfiles/fish/.config/fish/conf.d> ;
-    configFile."fish/functions".source = <dotfiles/fish/.config/fish/functions> ;
+with lib;
+
+let
+  sourceDirFiles = attrRoot: destination: target:
+    with builtins; {
+      ${attrRoot} = foldl'
+        (attrs: file: attrs // {
+          "${destination}/${file}".source = "${toString target}/${file}";
+        })
+        {}
+        (attrNames (readDir target));
+    };
+in {
+  programs.fish = {
+    enable = true;
+    plugins = [
+      {
+        name = "kubectl-completions";
+        src = pkgs.fetchFromGitHub {
+          owner = "evanlucas";
+          repo = "fish-kubectl-completions";
+          rev = "09c1e7e4803bb5b3a16dd209d3663207579bf6de";
+          sha256 = "15k0khzfkms2bh4b4x3fa142wmmn6cfd044mclj3d12fvylr366f";
+          # date = 2019-11-08T09:25:50-06:00;
+        };
+      }
+    ];
   };
+
+  xdg = mkMerge [
+    (sourceDirFiles "configFile" "fish/completions" <dotfiles/fish/.config/fish/completions>)
+    (sourceDirFiles "configFile" "fish/conf.d" <dotfiles/fish/.config/fish/conf.d>)
+    (sourceDirFiles "configFile" "fish/functions" <dotfiles/fish/.config/fish/functions>)
+  ];
 }
