@@ -17,6 +17,16 @@ in {
     enable = true;
     plugins = [
       {
+        name = "aws";
+        src = pkgs.fetchFromGitHub {
+          owner = "terlar";
+          repo = "plugin-aws";
+          rev = "be5df956f75a49edcdee7e194aa3c18d91befe6a";
+          sha256 = "06zwl5rwvnbr8wz5vnkp3bnvkj2h3annrqj8yfspn0iyni5dk6vb";
+          # date = 2020-04-21T14:48:57+02:00;
+        };
+      }
+      {
         name = "kubectl-completions";
         src = pkgs.fetchFromGitHub {
           owner = "evanlucas";
