@@ -21,9 +21,9 @@ in {
         src = pkgs.fetchFromGitHub {
           owner = "terlar";
           repo = "plugin-aws";
-          rev = "be5df956f75a49edcdee7e194aa3c18d91befe6a";
-          sha256 = "06zwl5rwvnbr8wz5vnkp3bnvkj2h3annrqj8yfspn0iyni5dk6vb";
-          # date = 2020-04-21T14:48:57+02:00;
+          rev = "142c68b2828de93730d00b2b0421242df128e8fc";
+          sha256 = "1cgyhjdh29jfly875ly31cjsymi45b3qipydsd9mvb1ws0r6337c";
+          # date = 2020-04-22T09:47:07+02:00;
         };
       }
       {
