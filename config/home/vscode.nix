@@ -56,6 +56,7 @@
 
       "[nix]"."editor.tabSize" = 2;
       "python.formatting.provider" = "black";
+      "python.disableInstallationCheck" = true;
     };
     extensions = with pkgs; with vscode-extensions; [
       bbenoist.Nix
