@@ -83,6 +83,7 @@ in {
       ../../config/home/emacs
       ../../config/home/gui.nix
       ../../config/home/i3.nix
+      ../../config/home/vscode.nix
 
       # Import local modules.
       ../../modules/home
