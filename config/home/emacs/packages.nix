@@ -35,6 +35,7 @@ with epkgs;
   company-erlang
   company-terraform
   counsel
+  counsel-fd
   counsel-jq
   counsel-tramp
   counsel-web
