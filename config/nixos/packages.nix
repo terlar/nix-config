@@ -13,7 +13,6 @@ with pkgs;
   nixStable
 
   # compression/archive
-  p7zip
   unrar
   unzip
   zip
