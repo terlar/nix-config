@@ -9,7 +9,7 @@ let
   };
 
   config = pkgs.callPackage ./config.nix {
-    src = <emacs-config> ;
+    src = <emacs-config>;
     emacs = emacs.package;
     inherit (emacs) extraPackages overrides;
   };

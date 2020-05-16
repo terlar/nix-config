@@ -13,7 +13,7 @@
 
   services.lorri.enable = true;
 
-  home.file.".editorconfig".source = <dotfiles/editorconfig/.editorconfig> ;
+  home.file.".editorconfig".source = <dotfiles/editorconfig/.editorconfig>;
 
   programs = {
     home-manager = {

@@ -21,5 +21,5 @@
     package = pkgs.i3-gaps;
   };
 
-  xdg.configFile."i3status/config".source = <dotfiles/i3/.config/i3status/config> ;
+  xdg.configFile."i3status/config".source = <dotfiles/i3/.config/i3status/config>;
 }
