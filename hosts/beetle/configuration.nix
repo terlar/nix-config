@@ -35,7 +35,7 @@ in {
     loader.systemd-boot.configurationLimit = 25;
     loader.efi.canTouchEfiVariables = true;
 
-    kernelPackages = pkgs.linuxPackages_5_5;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelModules = [ "fuse" ];
   };
