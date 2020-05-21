@@ -146,13 +146,13 @@ in {
 
     org-pretty-table = melpaBuild rec {
       pname   = "org-pretty-table";
-      version = "20131129.1610";
+      version = "20200329.1831";
       src = fetchFromGitHub {
         owner  = "fuco1";
         repo   = "org-pretty-table";
-        rev    = "0dca6f3156dd1eb0a42f08ac2ad89259637a16b5";
-        sha256 = "09avbl1mmgs3b1ya0rvv9kswq2k7d133zgr18cazl3jkpvh35lxg";
-        # date = 2013-11-29T16:10:09+01:00;
+        rev    = "88380f865a79bba49e4f501b7fe73a7bfb03bd1a";
+        sha256 = "0kynnja58r9cwfrxxyycg6z4hz9s5rzgn47i9yki7rlr80nyn2bf";
+        # date = 2020-03-29T18:31:18+02:00;
       };
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
     };
