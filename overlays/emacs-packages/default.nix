@@ -131,6 +131,19 @@ in {
       recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github) '';
     };
 
+    explain-pause-mode = melpaBuild rec {
+      pname   = "explain-pause-mode";
+      version = "20200520.1657";
+      src = fetchFromGitHub {
+        owner  = "lastquestion";
+        repo   = "explain-pause-mode";
+        rev    = "5398439abe1f075f43bea1dfad6c56f8412d681a";
+        sha256 = "1f34pml5jsn0ihmxas5bj00mznx8wl12kpqmf9fc51jch1w5yyas";
+        # date = 2020-05-20T16:57:51-07:00;
+      };
+      recipe = writeText "recipe" ''(${pname} :repo "x" :fetcher github)'';
+    };
+
     ivy-ghq = melpaBuild rec {
       pname   = "ivy-ghq";
       version = "20191231.1957";

@@ -80,6 +80,7 @@ with epkgs;
   eshell-fringe-status
   eval-in-repl
   exec-path-from-shell
+  explain-pause-mode
   fish-completion
   fish-mode
   fit-text-scale
