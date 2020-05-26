@@ -5,17 +5,6 @@ let
   inherit (pkgs) fetchpatch fetchFromGitHub writeText;
 in {
   emacsPackageOverrides = eSelf: eSuper: with eSuper; {
-    # Load direnv before dir-locals.
-    direnv = direnv.overrideAttrs(attrs: {
-      patches = [
-        (fetchpatch {
-          name = "load-direnv-before-dir-locals.patch";
-          url = https://github.com/wbolster/emacs-direnv/commit/bb7dce0a7708b281ffbe30eed854a192c7f0ed78.patch;
-          sha256 = "1vwi2dnj9dyf057mjqisc0hn6n0diprbsp9d5pg8lc0fyn2g7sws";
-        })
-      ];
-    });
-
     # Fix code actions when using javascript-typescript-langserver.
     jsonrpc = let
       src = jsonrpc.src;
