@@ -10,7 +10,6 @@ with pkgs;
   nix-diff
   nix-index
   nix-prefetch-scripts
-  nixStable
 
   # compression/archive
   unrar

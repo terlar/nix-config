@@ -11,6 +11,11 @@ in {
   ];
 
   nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+
     nixPath = [
       "nixpkgs=${toString <nixpkgs>}"
       "nixpkgs-overlays=${toString <nixpkgs-overlays>}"
