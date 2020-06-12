@@ -11,18 +11,18 @@ buildPythonPackage rec {
 
   patches = [ ./fix-paths.patch ];
 
-  postPatch = let soext = stdenv.hostPlatform.extensions.sharedLibrary; in
-    ''
-      substituteInPlace "./screeninfo/screeninfo.py" \
-        --replace "@X11@" "${libX11}/lib/libX11${soext}"
-      substituteInPlace "./screeninfo/screeninfo.py" \
-      --replace "@Xinerama@" "${libXinerama}/lib/libXinerama${soext}"
-    '';
+  postPatch = let soext = stdenv.hostPlatform.extensions.sharedLibrary;
+  in ''
+    substituteInPlace "./screeninfo/screeninfo.py" \
+      --replace "@X11@" "${libX11}/lib/libX11${soext}"
+    substituteInPlace "./screeninfo/screeninfo.py" \
+    --replace "@Xinerama@" "${libXinerama}/lib/libXinerama${soext}"
+  '';
 
   buildInputs = [ libX11 libXinerama ];
 
   meta = with stdenv.lib; {
-    homepage = https://github.com/rr-/screeninfo;
+    homepage = "https://github.com/rr-/screeninfo";
     description = "Fetch location and size of physical screens";
     license = licenses.mit;
     platforms = platforms.all;

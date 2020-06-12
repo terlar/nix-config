@@ -12,7 +12,7 @@ buildGoPackage rec {
   allowGoReference = true;
 
   src = fetchgit {
-    url = https://github.com/motemen/gore;
+    url = "https://github.com/motemen/gore";
     rev = "v${version}";
     sha256 = "0kiqf0a2fg6759byk8qbzidc9nx13rajd3f5bx09n19qbgfyflgb";
   };
@@ -22,8 +22,9 @@ buildGoPackage rec {
   '';
 
   meta = with stdenv.lib; {
-    description = "Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.";
-    homepage = https://github.com/motemen/gore;
+    description =
+      "Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.";
+    homepage = "https://github.com/motemen/gore";
     license = licenses.mit;
     maintainers = with maintainers; [ terlar ];
   };

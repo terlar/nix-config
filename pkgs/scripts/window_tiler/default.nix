@@ -1,4 +1,5 @@
-{ stdenv, substituteAll, python3, libXinerama, libX11, wmctrl, xdotool, xwininfo }:
+{ stdenv, substituteAll, python3, libXinerama, libX11, wmctrl, xdotool, xwininfo
+}:
 
 stdenv.mkDerivation {
   name = "window_tiler";

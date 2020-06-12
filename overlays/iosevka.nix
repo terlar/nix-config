@@ -1,7 +1,7 @@
-self: super:
+final: prev:
 
 {
-  iosevka-slab = super.iosevka.override {
+  iosevka-slab = prev.iosevka.override {
     privateBuildPlan = {
       family = "Iosevka Slab";
       design = [

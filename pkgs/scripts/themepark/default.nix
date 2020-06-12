@@ -24,7 +24,7 @@ let
 in stdenv.mkDerivation {
   name = "themepark";
 
-  buildInputs = [brightsideScript darksideScript];
+  buildInputs = [ brightsideScript darksideScript ];
 
   phases = [ "installPhase" ];
 

@@ -1,53 +1,70 @@
 #+TITLE: nix-config
-Configuration for NixOS and user home (dot files).
+Configuration for NixOS and user home (dot files). It is provided via Nix flakes and
+includes the following components:
 
-* Setup
-Prepare your private data, by configuring the search path =<private/data>=.  The format is
-specified in [[file:load-data.nix]].
-
-You can also optionally provide extra private configuration for nixos and home-manager by
-providing =<private/nixos>= and =<private/home>= respectively.
+- devShell :: a shell with tools used for development
+- lib :: library functions to be used with flakes or within Nix.
+  - kebabCaseToCamelCase :: convert kebab case to camel case (hello-world -> helloWorld)
+  - importDirToAttrs :: given a directory import all files into a set corresponding to
+    each file name.
+- homeManagerModules :: modules that can be used together with [[https://github.com/rycee/home-manager][home-manager]].
+  - defaultBrowser :: configure a default browser.
+- nixosConfigurations :: host configurations for [[https://github.com/NixOS/nixpkgs][NixOS]].
+- nixosModules :: modules that can be used together with [[https://github.com/NixOS/nixpkgs][NixOS]].
+  - dictionaries :: configure dictionaries (both aspell and hunspell) via one setting.
+  - keyboard :: configure keyboard for console, kmscon and xserver via one setting.
+  - kmonad :: service for [[https://github.com/david-janssen/kmonad][kmonad]].
+  - shell :: configure shell environment.
+- overlay :: a package overlay including the mentioned packages.
+- overlays :: custom overlays.
+  - iosevka :: iosevka configured with the slab set.
+  - menu :: pulling my custom package [[https://github.com/terlar/menu][menu]].
+  - python-packages :: adding python packages not avilable in nixpkgs.
+- packages :: packages not in the default nixpkgs.
+  - [[https://github.com/motemen/gore][gore]]
+  - [[https://github.com/rakyll/hey][hey]]
+  - [[https://github.com/david-janssen/kmonad][kmonad-bin]]
+  - [[https://github.com/ruby-formatter/rufo][rufo]]
+  - [[https://github.com/TylerBrock/saw][saw]]
 
 * Usage
-Switch both system (NixOS) and home:
+Show what is provided:
 #+BEGIN_SRC sh
-nix-shell --run switch-nixos
+nix flake show
+#+END_SRC
+
+Switch both system (NixOS) and home:
+,#+BEGIN_SRC sh
+nix dev-shell -c switch-nixos
 #+end_src
 
 Switch home only:
 #+BEGIN_SRC sh
-nix-shell --run switch-home
+nix dev-shell -c switch-home
 #+end_src
 
-Update the upstream sources:
+Update all inputs:
 #+BEGIN_SRC sh
-nix-shell --run update-all-sources
+nix flake update --recreate-lock-file
+#+end_src
 
-nix-shell --run update-dotfile-sources
-nix-shell --run update-emacs-sources
-nix-shell --run update-nix-sources
+Update a single input:
+#+BEGIN_SRC sh
+nix flake update --update-input nixpkgs
 #+end_src
 
 * Development
-The available search paths (=$NIX_PATH=) and their defaults are:
-- =nixpkgs= :: =./external/nixpkgs=
-- =overlays= :: =./overlays=
-- =nixos-config= :: =./hosts/{hostname}/configuration.nix=
-- =nixos-hardware= :: =./external/nixos-hardware=
-- =home-manager= :: =./external/home-manager=
-- =dotfiles= :: =./external/dotfiles=
-- =emacs-config= :: =./external/emacs.d=
-- =private= :: =../nix-config-private=
-
-Run with local version of search paths:
+Use a local input during development:
 #+begin_src sh
-nix-shell --argstr dotfiles ../dotfiles
+nix flake update --override-input nixpkgs path:../nixpkgs
 #+end_src
 
 * Tasks
 ** TODO Extract some inline stuff into external files
-** TODO Ability to pin nixpkgs? as alternative to the submodule
 ** TODO GC helpers?
 ** TODO Home manager config for qutebrowser + dicts
 ** TODO Look into if more PA config is needed:
 - [[https://github.com/dejanr/dotfiles/blob/ef9c27cf93a17e0af4bdf5cc378d2808b5326afa/nix/config/nixpkgs/roles/multimedia.nix#L35][Sample]]
+** TODO Nest/group modules
+** TODO Script to regenerate hardware-config for current host
+** TODO Split profiles and "profiles" and at the same time populate the attrset profiles

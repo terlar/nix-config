@@ -13,8 +13,9 @@ buildPythonPackage rec {
   checkInputs = [ mock ];
 
   meta = with lib; {
-    homepage = https://github.com/DavidMuller/aws-requests-auth;
-    description = "AWS signature version 4 signing process for the python requests module.";
+    homepage = "https://github.com/DavidMuller/aws-requests-auth";
+    description =
+      "AWS signature version 4 signing process for the python requests module.";
     license = licenses.bsd3;
     platforms = platforms.all;
   };

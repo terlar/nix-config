@@ -1,1 +1,0 @@
-../pkgs/all-packages.nix

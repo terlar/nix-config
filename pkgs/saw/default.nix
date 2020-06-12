@@ -8,14 +8,14 @@ buildGoPackage rec {
   goDeps = ./deps.nix;
 
   src = fetchgit {
-    url = https://github.com/TylerBrock/saw;
+    url = "https://github.com/TylerBrock/saw";
     rev = "v${version}";
     sha256 = "0hf4dzlkcxl09xvhpg1h0hp51cnq10396plyb518m9lrpr8x6l4z";
   };
 
   meta = with stdenv.lib; {
     description = "Fast, multi-purpose tool for AWS CloudWatch Logs.";
-    homepage = https://github.com/TylerBrock/saw;
+    homepage = "https://github.com/TylerBrock/saw";
     license = licenses.mit;
     maintainers = with maintainers; [ terlar ];
   };

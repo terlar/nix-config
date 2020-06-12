@@ -5,7 +5,8 @@ let
 
   srcs = {
     x86_64-linux = fetchurl {
-      url = "https://github.com/david-janssen/kmonad/releases/download/${version}/kmonad-${version}-linux";
+      url =
+        "https://github.com/david-janssen/kmonad/releases/download/${version}/kmonad-${version}-linux";
       sha256 = "02zwp841g5slvqvwha5q1ynww34ayfk1cfb1y32f1zzw7n1b0ia5";
     };
   };
@@ -13,7 +14,8 @@ in stdenv.mkDerivation rec {
   pname = "kmonad-bin";
   inherit version;
 
-  src = srcs.${stdenv.hostPlatform.system} or (throw "unsupported system: ${stdenv.hostPlatform.system}");
+  src = srcs.${stdenv.hostPlatform.system} or (throw
+    "unsupported system: ${stdenv.hostPlatform.system}");
 
   buildCommand = ''
     mkdir -p $out/bin
