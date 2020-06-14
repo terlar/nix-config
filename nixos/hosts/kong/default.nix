@@ -21,7 +21,7 @@ in {
     ../../profiles/development/docker.nix
     ../../profiles/development/sysdig.nix
     ../../profiles/input/ibus.nix
-    ../../profiles/wm/i3.nix
+    ../../profiles/wm/paperwm.nix
   ];
 
   system.stateVersion = "19.09";

@@ -20,8 +20,6 @@
   xdg.enable = true;
   xdg.mimeApps.enable = true;
 
-  gtk.enable = true;
-
   manual.html.enable = true;
 
   home.packages = with pkgs; [

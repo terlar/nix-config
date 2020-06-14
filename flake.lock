@@ -20,8 +20,8 @@
     },
     "emacs-config": {
       "info": {
-        "lastModified": 1591946385,
-        "narHash": "sha256-Kpf6olQ1SHKjEGrX8QADemGj9rck3C4Nnp8Z1dN3PNI="
+        "lastModified": 1592076222,
+        "narHash": "sha256-5uZvYaZAeb3XoFMUK4jA/VvECN9D9BFHoLSdANjOaeI="
       },
       "inputs": {
         "emacs-overlay": "emacs-overlay",
@@ -32,7 +32,7 @@
       "locked": {
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "d5c003726c10651e6b612722c0e1cde2936d041e",
+        "rev": "88b43b4ca48650d20a23604f9bd16b754379825f",
         "type": "github"
       },
       "original": {

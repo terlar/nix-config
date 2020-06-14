@@ -19,8 +19,8 @@ in {
 
     ../../profiles/appearance/high-contrast.nix
     ../../profiles/development/docker.nix
-    ../../profiles/input/ibus.nix
-    ../../profiles/wm/i3.nix
+    # ../../profiles/input/ibus.nix
+    ../../profiles/wm/paperwm.nix
   ];
 
   networking.hostName = "beetle";

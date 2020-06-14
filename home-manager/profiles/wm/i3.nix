@@ -1,7 +1,7 @@
 { dotfiles, pkgs, ... }:
 
 {
-  imports = [ ./i3-sway.nix ];
+  imports = [ ./i3-sway.nix ../programs/rofi.nix ];
 
   services = {
     screen-locker = {
@@ -18,6 +18,8 @@
     enable = true;
     package = pkgs.i3-gaps;
   };
+
+  gtk.enable = true;
 
   xdg.configFile."i3status/config".source =
     "${dotfiles}/i3/.config/i3status/config";

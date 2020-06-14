@@ -10,13 +10,12 @@ with builtins;
     ../../../../home-manager/profiles/development.nix
     ../../../../home-manager/profiles/graphical.nix
 
-    ../../../../home-manager/profiles/wm/i3.nix
-
     ../../../../home-manager/profiles/appearance/high-contrast.nix
     ../../../../home-manager/profiles/keybindings/emacs.nix
+    ../../../../home-manager/profiles/wm/paperwm.nix
 
     ../../../../home-manager/profiles/programs/vscode.nix
-  ] ++ lib.optional (pathExists ./private) ./private;
+  ];
 
   # Custom module config:
   custom = {

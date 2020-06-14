@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ ./programs/kitty.nix ./programs/qutebrowser.nix ./programs/rofi.nix ];
+    [ ./programs/kitty.nix ./programs/qutebrowser.nix ];
 
   home.packages = with pkgs; [
     scripts.lock
