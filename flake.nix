@@ -52,25 +52,15 @@
             name = kebabCaseToCamelCase (lib.removeSuffix ".nix" name);
             value = import (dir + "/${name}");
           }) (attrNames (readDir dir)));
-      };
 
-      overlay = self.overlays.pkgs;
-      overlays = {
-        pkgs = import ./pkgs;
-      } // self.lib.importDirToAttrs ./overlays;
-
-      packages.${system} = { inherit (pkgs) gore hey kmonad-bin rufo saw; };
-
-      nixosConfigurations = let
-        specialArgs = {
-          inherit (inputs) dotfiles hardware;
-          # profiles = self.lib.importDirToAttrs ./nixos/profiles;
-        };
-      in mapAttrs (host: _:
-        let
-          users = let path = ./nixos/hosts + "/${host}/home-manager/users";
-          in if pathExists path then attrNames (readDir path) else [ ];
-        in lib.nixosSystem {
+        nixosSystemFor = let
+          specialArgs = {
+            inherit (inputs) dotfiles hardware;
+            # profiles = self.lib.importDirToAttrs ./nixos/profiles;
+          };
+        in host:
+        { extraModules ? [ ], ... }@args:
+        lib.nixosSystem {
           inherit system specialArgs;
 
           modules = let
@@ -94,7 +84,6 @@
             common = {
               system.stateVersion = "19.09";
               system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-
               nixpkgs = { inherit pkgs; };
             };
             local = import (./nixos/hosts + "/${host}");
@@ -104,8 +93,19 @@
             home
             common
             local
-          ] ++ (attrValues self.nixosModules);
-        }) (readDir ./nixos/hosts);
+          ] ++ (attrValues self.nixosModules) ++ extraModules;
+        };
+      };
+
+      overlay = self.overlays.pkgs;
+      overlays = {
+        pkgs = import ./pkgs;
+      } // self.lib.importDirToAttrs ./overlays;
+
+      packages.${system} = { inherit (pkgs) gore hey kmonad-bin rufo saw; };
+
+      nixosConfigurations = mapAttrs (host: _: self.lib.nixosSystemFor host { })
+        (readDir ./nixos/hosts);
 
       nixosModules = self.lib.importDirToAttrs ./nixos/modules;
       homeManagerModules = self.lib.importDirToAttrs ./home-manager/modules;

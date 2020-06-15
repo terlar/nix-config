@@ -1,8 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ ./programs/kitty.nix ./programs/qutebrowser.nix ];
+  imports = [ ./programs/kitty.nix ./programs/qutebrowser.nix ];
 
   home.packages = with pkgs; [
     scripts.lock

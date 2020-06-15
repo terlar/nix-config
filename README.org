@@ -7,6 +7,9 @@ includes the following components:
   - kebabCaseToCamelCase :: convert kebab case to camel case (hello-world -> helloWorld)
   - importDirToAttrs :: given a directory import all files into a set corresponding to
     each file name.
+  - nixosSystemFor :: a helper function to build configuration for target host, this can
+    be an input for another flake where you can extend the host configuration (e.g. I use
+    it for my private configuration additions).
 - homeManagerModules :: modules that can be used together with [[https://github.com/rycee/home-manager][home-manager]].
   - defaultBrowser :: configure a default browser.
 - nixosConfigurations :: host configurations for [[https://github.com/NixOS/nixpkgs][NixOS]].
