@@ -85,13 +85,13 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "owner": "rissson",
+        "owner": "rycee",
         "repo": "home-manager",
         "rev": "b3fee796fcd5531693d9b84ece76ad6836bb1cfa",
         "type": "github"
       },
       "original": {
-        "owner": "rissson",
+        "owner": "rycee",
         "ref": "bqv-flakes",
         "repo": "home-manager",
         "type": "github"
