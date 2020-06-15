@@ -24,8 +24,6 @@ includes the following components:
   - menu :: pulling my custom package [[https://github.com/terlar/menu][menu]].
   - python-packages :: adding python packages not avilable in nixpkgs.
 - packages :: packages not in the default nixpkgs.
-  - [[https://github.com/motemen/gore][gore]]
-  - [[https://github.com/rakyll/hey][hey]]
   - [[https://github.com/david-janssen/kmonad][kmonad-bin]]
   - [[https://github.com/ruby-formatter/rufo][rufo]]
   - [[https://github.com/TylerBrock/saw][saw]]

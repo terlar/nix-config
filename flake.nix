@@ -102,7 +102,7 @@
         pkgs = import ./pkgs;
       } // self.lib.importDirToAttrs ./overlays;
 
-      packages.${system} = { inherit (pkgs) gore hey kmonad-bin rufo saw; };
+      packages.${system} = { inherit (pkgs) kmonad-bin rufo saw; };
 
       nixosConfigurations = mapAttrs (host: _: self.lib.nixosSystemFor host { })
         (readDir ./nixos/hosts);
