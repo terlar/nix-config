@@ -5,7 +5,7 @@ with lib;
 let cfg = config.custom.keyboard;
 in {
   options.custom.keyboard = {
-    enable = mkEnableOption "Enables keyboard.";
+    enable = mkEnableOption "keyboard customization";
 
     layout = mkOption {
       type = types.str;

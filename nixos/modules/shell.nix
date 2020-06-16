@@ -5,7 +5,7 @@ with lib;
 let cfg = config.custom.shell;
 in {
   options.custom.shell = {
-    enable = mkEnableOption "Enables shell.";
+    enable = mkEnableOption "shell customization";
 
     package = mkOption {
       type = types.shellPackage;

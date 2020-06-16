@@ -14,13 +14,7 @@ let
 in {
   options = {
     services.kmonad = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = ''
-          Whether to enable the KMonad advanced keyboard manager.
-        '';
-      };
+      enable = mkEnableOption "KMonad advanced keyboard manager";
 
       extraConfig = mkOption {
         default = "";

@@ -5,7 +5,7 @@ with lib;
 let cfg = config.custom.dictionaries;
 in {
   options.custom.dictionaries = {
-    enable = mkEnableOption "Enables dictionaries.";
+    enable = mkEnableOption "dictionaries customization";
 
     useAspell = mkOption {
       type = types.bool;
