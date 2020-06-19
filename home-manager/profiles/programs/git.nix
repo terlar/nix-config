@@ -1,12 +1,6 @@
 { pkgs, ... }:
 
-let
-  data = {
-    name = "Terje Larsen";
-    email = "terlar@gmail.com";
-    keys.gpg = "D036E3ACB86EB592";
-  };
-in {
+{
   home.packages = with pkgs;
     with gitAndTools; [
       git-lfs
@@ -20,13 +14,6 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
-
-    userName = data.name;
-    userEmail = data.email;
-    signing = {
-      signByDefault = if data.keys.gpg != "" then true else false;
-      key = data.keys.gpg;
-    };
 
     ignores = [ ".dir-locals.el" ".direnv/" ".envrc" ];
 
