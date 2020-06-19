@@ -12,6 +12,7 @@
   home.file.".editorconfig".source = "${dotfiles}/editorconfig/.editorconfig";
 
   home.packages = with pkgs; [
+    awscli
     curlie
     editorconfig-core-c
     hey
