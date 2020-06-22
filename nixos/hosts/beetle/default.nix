@@ -53,6 +53,12 @@ in {
       enable = true;
       drivers = [ pkgs.gutenprint ];
     };
+
+    # Limit storage space of journald.
+    journald.extraConfig = ''
+      SystemMaxUse=100M
+      RuntimeMaxUse=100M
+    '';
   };
 
   # System user.
