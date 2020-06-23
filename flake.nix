@@ -5,13 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:rycee/home-manager/bqv-flakes";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "/nixpkgs";
     };
     emacs-config = {
       url = "github:terlar/emacs-config";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
+        nixpkgs.follows = "/nixpkgs";
+        home-manager.follows = "/home-manager";
       };
     };
 
