@@ -28,10 +28,14 @@
       url = "github:terlar/dotfiles";
       flake = false;
     };
+    menu = {
+      url = "github:terlar/menu";
+      inputs.nixpkgs.follows = "/nixpkgs";
+    };
   };
 
   outputs =
-    inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare, ... }:
+    inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare, menu, ... }:
     with builtins;
     with nixpkgs;
 
@@ -40,7 +44,7 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ emacs-config.overlay ] ++ attrValues self.overlays;
+        overlays = [ emacs-config.overlay menu.overlay ] ++ attrValues self.overlays;
         config.allowUnfree = true;
       };
     in {
