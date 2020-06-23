@@ -5,7 +5,7 @@ let
   drv = builtins.fetchGit {
     name = "menu-${version}";
     url = "https://github.com/terlar/menu.git";
-    ref = version;
+    ref = "refs/tags/${version}";
     rev = "788606203fb7661e00580ef4a84057cebceede7d";
   };
 in { menu = prev.callPackage drv { }; }
