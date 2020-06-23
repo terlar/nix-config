@@ -2,11 +2,9 @@
   "nodes": {
     "dotfiles": {
       "flake": false,
-      "info": {
-        "lastModified": 1587472907,
-        "narHash": "sha256-2DK+laMyZmEn0p5BxiUzOzs7Ot8cO1WBfP0TTw1vjOU="
-      },
       "locked": {
+        "lastModified": 1587472907,
+        "narHash": "sha256-2DK+laMyZmEn0p5BxiUzOzs7Ot8cO1WBfP0TTw1vjOU=",
         "owner": "terlar",
         "repo": "dotfiles",
         "rev": "42ca8fa5d6b00d07856c0fe60a8f37e5254f5fad",
@@ -19,20 +17,22 @@
       }
     },
     "emacs-config": {
-      "info": {
-        "lastModified": 1592684235,
-        "narHash": "sha256-mieL4BMD91fHPkddxmI8cGG1sPNMp2l0/HCYH7xTGYY="
-      },
       "inputs": {
         "emacs-overlay": "emacs-overlay",
-        "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "utils": "utils"
       },
       "locked": {
+        "lastModified": 1592914976,
+        "narHash": "sha256-l5L5qq+r/oxglUf/wXlZGmj8xNMkxwVc+++tEPPF+qY=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "a766b72dfd40ffda0a1c575c4ccc591c06abcb4c",
+        "rev": "f8ac1d93542d0ba1bea871be33314d758c5748b2",
         "type": "github"
       },
       "original": {
@@ -42,14 +42,12 @@
       }
     },
     "emacs-overlay": {
-      "info": {
-        "lastModified": 1592569336,
-        "narHash": "sha256-5BYut0TJ9PEqMTnvj1snUzGETxQ47Df+tFhJAjcDt6k="
-      },
       "locked": {
+        "lastModified": 1592900363,
+        "narHash": "sha256-yrMqWWyXr4ku7JvdSYNKp8TfI7ET87Jq4mg1JPfSy2E=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "e41c9d6033f04acb8907f8d7fed23a5f02d5421b",
+        "rev": "cdcbe7fba14a2996b33684100bb32cdcf9fa1e4f",
         "type": "github"
       },
       "original": {
@@ -60,11 +58,9 @@
     },
     "hardware": {
       "flake": false,
-      "info": {
-        "lastModified": 1592746519,
-        "narHash": "sha256-gMjpYbw30/lsIw0AH7eiIIiKBN43MGe2PYrExVGQjlE="
-      },
       "locked": {
+        "lastModified": 1592746519,
+        "narHash": "sha256-gMjpYbw30/lsIw0AH7eiIIiKBN43MGe2PYrExVGQjlE=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
         "rev": "a78b8b647692919fe871f5726b7b5e01dd725a88",
@@ -77,14 +73,14 @@
       }
     },
     "home-manager": {
-      "info": {
-        "lastModified": 1591751635,
-        "narHash": "sha256-KgGtyFlkI/fsp+j8VEgJ/ynY9B91aX35Xp04HlDLRTo="
-      },
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
+        "lastModified": 1591751635,
+        "narHash": "sha256-KgGtyFlkI/fsp+j8VEgJ/ynY9B91aX35Xp04HlDLRTo=",
         "owner": "rycee",
         "repo": "home-manager",
         "rev": "b3fee796fcd5531693d9b84ece76ad6836bb1cfa",
@@ -98,11 +94,9 @@
       }
     },
     "nixpkgs": {
-      "info": {
-        "lastModified": 1592463993,
-        "narHash": "sha256-QoZ0hhU6uNl9ev6iNkqHg4d+j94yNWTcBIYXqrK1q9g="
-      },
       "locked": {
+        "lastModified": 1592463993,
+        "narHash": "sha256-QoZ0hhU6uNl9ev6iNkqHg4d+j94yNWTcBIYXqrK1q9g=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "9480bae337095fd24f61380bce3174fdfe926a00",
@@ -126,11 +120,9 @@
       }
     },
     "utils": {
-      "info": {
-        "lastModified": 1590791977,
-        "narHash": "sha256-l26u9vRsdV9jkoBGlzFxTKLKtrZ38xCMZIG9h9ibFjQ="
-      },
       "locked": {
+        "lastModified": 1590791977,
+        "narHash": "sha256-l26u9vRsdV9jkoBGlzFxTKLKtrZ38xCMZIG9h9ibFjQ=",
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "4fbce19a7a9647154a35f0e856d52171c41e14a4",
@@ -144,11 +136,9 @@
     },
     "vsliveshare": {
       "flake": false,
-      "info": {
-        "lastModified": 1585828976,
-        "narHash": "sha256-/c7CJ2TDwgsKEidwxgIOqyTx1YcPgYRqzS1AV6a4b2c="
-      },
       "locked": {
+        "lastModified": 1585828976,
+        "narHash": "sha256-/c7CJ2TDwgsKEidwxgIOqyTx1YcPgYRqzS1AV6a4b2c=",
         "owner": "msteen",
         "repo": "nixos-vsliveshare",
         "rev": "a54bfc74c5e7ae056f61abdb970c6cd6e8fb5e53",
@@ -162,5 +152,5 @@
     }
   },
   "root": "root",
-  "version": 5
+  "version": 7
 }
