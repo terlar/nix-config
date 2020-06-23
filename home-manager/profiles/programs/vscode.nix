@@ -77,6 +77,12 @@
           sha256 = "033c19ng6sr82lcdmkpwrp7c93b843q1csgyvg0yw4n3k6mv6chs";
         }
         {
+          name = "magit";
+          publisher = "kahole";
+          version = "0.2.3";
+          sha256 = "sha256-T8prgIIwhHBZC+wDBD5UPP3Uk1at8MmZ1CEZJ9eYvxY=";
+        }
+        {
           name = "material-icon-theme";
           publisher = "pkief";
           version = "4.0.1";
