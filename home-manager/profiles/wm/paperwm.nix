@@ -35,7 +35,7 @@
     "org/gnome/shell/extensions/switcher" = {
       activate-immediately = false;
       never-show-onboarding = true;
-      show-switcher = [ "<Super>w" ];
+      show-switcher = [ "<Super>w" "<Super>slash" ];
     };
   };
 }
