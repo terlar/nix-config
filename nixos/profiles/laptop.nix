@@ -9,6 +9,7 @@
     bluetooth.enable = true;
     pulseaudio = {
       enable = true;
+      zeroconf.discovery.enable = true;
       extraModules = [ pkgs.pulseaudio-modules-bt ];
       package = pkgs.pulseaudioFull;
       extraConfig = ''
