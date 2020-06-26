@@ -2,8 +2,6 @@
 
 {
   dconf.settings = {
-    "org/gnome/mutter" = { overlay-key = ""; };
-
     "org/gnome/desktop/wm/keybindings" = { activate-window-menu = [ "" ]; };
 
     "org/gnome/desktop/interface" = { gtk-key-theme = "Emacs"; };
@@ -13,10 +11,11 @@
         [ ] ++ map (p: p.uuid) [ gtktitlebar paperwm switcher ];
     };
 
-    "org/gnome/shell/overrides" = {
+    "org/gnome/mutter" = {
       attach-modal-dialogs = false;
       edge-tiling = false;
       workspaces-only-on-primary = false;
+      overlay-key = "";
     };
 
     "org/gnome/shell/extensions/paperwm" = {
