@@ -34,8 +34,8 @@
     };
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare, menu, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare
+    , menu, ... }:
     with builtins;
     with nixpkgs;
 
@@ -44,7 +44,8 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ emacs-config.overlay menu.overlay ] ++ attrValues self.overlays;
+        overlays = [ emacs-config.overlay menu.overlay ]
+          ++ attrValues self.overlays;
         config.allowUnfree = true;
       };
     in {
@@ -106,7 +107,11 @@
         pkgs = import ./pkgs;
       } // self.lib.importDirToAttrs ./overlays;
 
-      packages.${system} = { inherit (pkgs) kmonad-bin rufo saw; };
+      packages.${system} = {
+        inherit (pkgs)
+          google-chrome-beta-with-pipewire google-chrome-dev-with-pipewire
+          kmonad-bin rufo saw;
+      };
 
       nixosConfigurations = mapAttrs (host: _: self.lib.nixosSystemFor host { })
         (readDir ./nixos/hosts);

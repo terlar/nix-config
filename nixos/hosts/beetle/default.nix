@@ -21,6 +21,7 @@ in {
     ../../profiles/development/docker.nix
     # ../../profiles/input/ibus.nix
     ../../profiles/wm/paperwm.nix
+    ../../profiles/wayland/screen-share.nix
   ];
 
   networking.hostName = "beetle";
