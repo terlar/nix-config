@@ -17,6 +17,16 @@ with builtins;
     ../../../../home-manager/profiles/programs/vscode.nix
   ];
 
+  dconf.settings = with lib.hm.gvariant; {
+    "org/gnome/desktop/input-sources" = {
+      sources = map mkTuple [
+        [ "xkb" "us+altgr-intl" ]
+        [ "xkb" "se" ]
+        [ "ibus" "libpinyin" ]
+      ];
+    };
+  };
+
   # Custom module config:
   custom = {
     defaultBrowser = {

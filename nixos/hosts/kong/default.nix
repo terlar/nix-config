@@ -20,7 +20,6 @@ in {
     ../../profiles/appearance/high-contrast.nix
     ../../profiles/development/docker.nix
     ../../profiles/development/sysdig.nix
-    ../../profiles/input/ibus.nix
     ../../profiles/wm/paperwm.nix
   ];
 
@@ -107,6 +106,11 @@ in {
       xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
       xkbRepeatDelay = 500;
       xkbRepeatInterval = 33; # 30Hz
+    };
+
+    language = {
+      enable = true;
+      chinese = true;
     };
 
     shell = {

@@ -19,7 +19,6 @@ in {
 
     ../../profiles/appearance/high-contrast.nix
     ../../profiles/development/docker.nix
-    # ../../profiles/input/ibus.nix
     ../../profiles/wm/paperwm.nix
     ../../profiles/wayland/screen-share.nix
   ];
@@ -97,6 +96,11 @@ in {
       xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
       xkbRepeatDelay = 500;
       xkbRepeatInterval = 33; # 30Hz
+    };
+
+    i18n = {
+      enable = true;
+      languages = [ "chinese" ];
     };
 
     shell = {
