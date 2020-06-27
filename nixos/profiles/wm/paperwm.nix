@@ -13,6 +13,7 @@
   # Extensions
   environment.systemPackages = with pkgs.gnomeExtensions; [
     gtktitlebar
+    invert-window
     paperwm
     switcher
   ];

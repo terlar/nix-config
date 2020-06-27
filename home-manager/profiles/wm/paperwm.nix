@@ -8,7 +8,7 @@
 
     "org/gnome/shell" = {
       enabled-extensions = with pkgs.gnomeExtensions;
-        [ ] ++ map (p: p.uuid) [ gtktitlebar paperwm switcher ];
+        [ ] ++ map (p: p.uuid) [ gtktitlebar invert-window paperwm switcher ];
     };
 
     "org/gnome/mutter" = {
@@ -31,10 +31,15 @@
       restrict-to-primary-screen = false;
     };
 
+    "org/gnome/shell/extensions/invert-window" = {
+      "invert-window-shortcut" = [ "<Super>exclam" ];
+    };
+
     "org/gnome/shell/extensions/switcher" = {
       activate-immediately = false;
       never-show-onboarding = true;
       show-switcher = [ "<Super>w" "<Super>slash" ];
+      show-launcher = [ "<Super>x" "<Super>question" ];
     };
   };
 }
