@@ -46,7 +46,7 @@
 
       spellcheck.languages = [ "en-US" "sv-SE" ];
 
-      statusbar.hide = true;
+      statusbar.show = "in_mode";
 
       tabs = {
         background = true;
