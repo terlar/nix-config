@@ -3,10 +3,11 @@
 {
   home.packages = with pkgs;
     with gitAndTools; [
-      git-lfs
+      delta
       ghq
       git-crypt
       git-imerge
+      git-lfs
       hub
       tig
     ];
