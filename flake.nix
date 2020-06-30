@@ -84,7 +84,12 @@
                   });
               };
 
-              config = { home-manager.useGlobalPkgs = true; };
+              config = {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  backupFileExtension = "bak";
+                };
+              };
             };
             common = {
               system.stateVersion = "19.09";
