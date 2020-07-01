@@ -46,7 +46,7 @@
 
       spellcheck.languages = [ "en-US" "sv-SE" ];
 
-      statusbar.show = "in_mode";
+      statusbar.show = "in-mode";
 
       tabs = {
         background = true;
@@ -67,12 +67,12 @@
         "gt" = "tab-next";
         "gT" = "tab-prev";
         "t" = "set-cmd-text -s :open -t";
-        "xb" = "config-cycle statusbar.hide";
+        "xb" = "config-cycle statusbar.show always in-mode";
         "xt" = "config-cycle tabs.show multiple switching";
         "xv" = "spawn --userscript view_in_mpv";
         "xV" = "hint links spawn mpv {hint-url}";
         "xx" =
-          "config-cycle statusbar.hide ;; config-cycle tabs.show multiple switching";
+          "config-cycle statusbar.show always in-mode ;; config-cycle tabs.show multiple switching";
       };
       insert = {
         "<Alt-v>" = "fake-key <PgUp>";
