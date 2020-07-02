@@ -32,10 +32,14 @@
       url = "github:terlar/menu";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
+    nixdu = {
+      url = "github:utdemir/nixdu";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare
-    , menu, ... }:
+    , menu, nixdu, ... }:
     with builtins;
     with nixpkgs;
 
@@ -44,7 +48,8 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ emacs-config.overlay menu.overlay ]
+        overlays =
+          [ emacs-config.overlay menu.overlay (import "${nixdu}/overlay.nix") ]
           ++ attrValues self.overlays;
         config.allowUnfree = true;
       };

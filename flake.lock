@@ -114,6 +114,22 @@
         "type": "github"
       }
     },
+    "nixdu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1593653637,
+        "narHash": "sha256-J6uevfPv7Tg8iR6yEkKN72kDIjnTVTiaFzl5Or+qWXk=",
+        "owner": "utdemir",
+        "repo": "nixdu",
+        "rev": "71b9a13e1725aa6f1a80e78c50ad79d02a62bb90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "utdemir",
+        "repo": "nixdu",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1593540764,
@@ -137,6 +153,7 @@
         "hardware": "hardware",
         "home-manager": "home-manager",
         "menu": "menu",
+        "nixdu": "nixdu",
         "nixpkgs": "nixpkgs",
         "vsliveshare": "vsliveshare"
       }
