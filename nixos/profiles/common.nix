@@ -31,7 +31,7 @@
     nix-diff
     nix-index
     nix-prefetch-scripts
-    nixdu
+    nix-tree
 
     # compression/archive
     unrar

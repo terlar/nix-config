@@ -114,19 +114,19 @@
         "type": "github"
       }
     },
-    "nixdu": {
+    "nix-tree": {
       "flake": false,
       "locked": {
-        "lastModified": 1593653637,
-        "narHash": "sha256-J6uevfPv7Tg8iR6yEkKN72kDIjnTVTiaFzl5Or+qWXk=",
+        "lastModified": 1593681171,
+        "narHash": "sha256-UQF6caO6coGBZQTClxyyC9BVIZS4wHbTZQ0v31my1Fs=",
         "owner": "utdemir",
-        "repo": "nixdu",
-        "rev": "71b9a13e1725aa6f1a80e78c50ad79d02a62bb90",
+        "repo": "nix-tree",
+        "rev": "c3c77ede124e91c3275a994f9e57cab360e6a13a",
         "type": "github"
       },
       "original": {
         "owner": "utdemir",
-        "repo": "nixdu",
+        "repo": "nix-tree",
         "type": "github"
       }
     },
@@ -153,7 +153,7 @@
         "hardware": "hardware",
         "home-manager": "home-manager",
         "menu": "menu",
-        "nixdu": "nixdu",
+        "nix-tree": "nix-tree",
         "nixpkgs": "nixpkgs",
         "vsliveshare": "vsliveshare"
       }
