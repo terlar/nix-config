@@ -5,7 +5,7 @@ with pkgs;
 {
   switchNixos = writeShellScriptBin "switch-nixos" ''
     set -euo pipefail
-    sudo -E nixos-rebuild switch --flake . $@
+    sudo nixos-rebuild switch --flake . $@
   '';
 
   switchHome = writeShellScriptBin "switch-home" ''
