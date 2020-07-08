@@ -19,6 +19,7 @@
     };
 
     "org/gnome/shell/extensions/paperwm" = {
+      animation-time = 0.1;
       horizontal-margin = 8;
       use-default-background = false;
       vertical-margin = 0;
