@@ -1,14 +1,27 @@
 { pkgs, ... }:
 
 {
+  imports = [ ../programs/rofi.nix ];
+
   dconf.settings = {
     "org/gnome/desktop/wm/keybindings" = { activate-window-menu = [ "" ]; };
+
+    "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/rofi/"
+    ];
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/rofi" = {
+      binding = "<Super>w";
+      command =
+        "${pkgs.rofi}/bin/rofi -combi-modi drun,window,run -show combi -modi combi";
+      name = "Rofi";
+    };
 
     "org/gnome/desktop/interface" = { gtk-key-theme = "Emacs"; };
 
     "org/gnome/shell" = {
       enabled-extensions = with pkgs.gnomeExtensions;
-        [ ] ++ map (p: p.uuid) [ gtktitlebar invert-window paperwm switcher ];
+        [ ] ++ map (p: p.uuid) [ gtktitlebar invert-window paperwm ];
     };
 
     "org/gnome/mutter" = {
@@ -35,13 +48,6 @@
     "org/gnome/shell/extensions/invert-window" = {
       "invert-window-shortcut" = [ "<Super>exclam" ];
     };
-
-    "org/gnome/shell/extensions/switcher" = {
-      activate-immediately = false;
-      never-show-onboarding = true;
-      show-switcher = [ "<Super>w" "<Super>slash" ];
-      show-launcher = [ "<Super>x" "<Super>question" ];
-    };
   };
 
   xdg.configFile."paperwm/user.js".text = ''
@@ -66,9 +72,15 @@
         Keybindings = Extension.imports.keybindings;
         Examples = Extension.imports.examples;
         App = Extension.imports.app;
+        Settings = Extension.imports.settings;
 
         App.customHandlers['emacs.desktop'] =
             () => imports.misc.util.spawn(['emacsclient', '--eval', '(make-frame)']);
+
+        Settings.defwinprop({
+            wm_class: "Rofi",
+            focus: true,
+        });
     }
 
     function enable() {

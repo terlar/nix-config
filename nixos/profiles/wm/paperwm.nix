@@ -15,6 +15,5 @@
     gtktitlebar
     invert-window
     paperwm
-    switcher
   ];
 }
