@@ -27,7 +27,6 @@
   environment.systemPackages = with pkgs; [
     # nix
     cachix
-    haskellPackages.nix-derivation
     nix-diff
     nix-index
     nix-prefetch-scripts
