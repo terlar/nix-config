@@ -44,6 +44,8 @@
         remove_finished = 100;
       };
 
+      fonts.default_family = "Iosevka Slab Light";
+
       spellcheck.languages = [ "en-US" "sv-SE" ];
 
       statusbar.show = "in-mode";
