@@ -5,7 +5,7 @@
     [ ../caches.nix ./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
