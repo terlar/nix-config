@@ -11,6 +11,8 @@ let
         }) { } (attrNames (readDir target));
     };
 in {
+  home.packages = [ pkgs.any-nix-shell ];
+
   programs.fish = {
     enable = true;
     plugins = [
@@ -42,6 +44,8 @@ in {
          fish_user_abbreviations
          set -U __fish_universal_config_done 1
       end
+
+      any-nix-shell fish --info-right | source
     '';
   };
 
