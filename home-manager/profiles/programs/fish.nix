@@ -46,6 +46,12 @@ in {
       end
 
       any-nix-shell fish --info-right | source
+
+      if set -q IN_NIX_SHELL
+        function __direnv_export_eval
+          # Don't trigger within nix-shell
+        end
+      end
     '';
   };
 
