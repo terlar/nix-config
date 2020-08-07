@@ -122,7 +122,7 @@
       packages.${system} = {
         inherit (pkgs)
           google-chrome-beta-with-pipewire google-chrome-dev-with-pipewire
-          kmonad-bin rufo saw;
+          httpfs kmonad-bin rufo saw;
       };
 
       nixosConfigurations = mapAttrs (host: _: self.lib.nixosSystemFor host { })

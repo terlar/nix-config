@@ -69,7 +69,8 @@
     xsv
 
     # file system
-    nfs-utils
     cifs-utils
+    httpfs
+    nfs-utils
   ];
 }

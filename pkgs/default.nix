@@ -19,6 +19,7 @@ final: prev:
       google-chrome = final.google-chrome-dev;
       pipewire = final.pipewire_0_2;
     };
+  httpfs = prev.callPackage ./httpfs { };
   kmonad-bin = prev.callPackage ./kmonad-bin { };
   rufo = prev.callPackage ./rufo { };
   saw = prev.callPackage ./saw { };
