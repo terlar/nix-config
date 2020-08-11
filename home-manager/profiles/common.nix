@@ -32,6 +32,7 @@
     youtube-dl
 
     # utility
+    bashInteractive_5
     browsh
     fzy
     htop
