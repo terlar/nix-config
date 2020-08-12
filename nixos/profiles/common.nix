@@ -17,9 +17,6 @@
   security.sudo.enable = true;
 
   services = {
-    # Time management.
-    ntp.enable = true;
-
     # Auto-mount disks.
     udisks2.enable = true;
   };
