@@ -45,6 +45,7 @@
     dnsutils
     ipcalc
     openssh
+    rclone
     traceroute
     wget
 
