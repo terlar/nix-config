@@ -1,7 +1,7 @@
 { dotfiles, pkgs, ... }:
 
 {
-  imports = [ ./programs/fish.nix ./programs/git.nix ];
+  imports = [ ./programs/bash.nix ./programs/fish.nix ./programs/git.nix ];
 
   services.lorri.enable = true;
 
