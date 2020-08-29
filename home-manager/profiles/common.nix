@@ -37,6 +37,7 @@
     htop
     menu
     pdfgrep
+    pywal
     tldr
     units
     xsv
