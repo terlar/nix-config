@@ -3,7 +3,7 @@
 let
   brightsideScript = writeShellScriptBin "brightside" ''
     if command -v emacsclient >/dev/null; then
-      emacsclient -n -e "(mapc #'disable-theme custom-enabled-themes)" -e "(load-theme init-default-light-theme t)" >/dev/null
+      emacsclient -n -e "(customize-set-variable 'frame-background-mode 'light)" -e "(customize-set-variable 'custom-enabled-themes custom-enabled-themes)" >/dev/null
     fi
     if command -v kitty >/dev/null; then
       colors_file="$XDG_CONFIG_HOME/kitty/colors-light.conf"
@@ -13,7 +13,7 @@ let
   '';
   darksideScript = writeShellScriptBin "darkside" ''
     if command -v emacsclient >/dev/null; then
-      emacsclient -n -e "(mapc #'disable-theme custom-enabled-themes)" -e "(load-theme init-default-dark-theme t)" >/dev/null
+      emacsclient -n -e "(customize-set-variable 'frame-background-mode 'dark)" -e "(customize-set-variable 'custom-enabled-themes custom-enabled-themes)" >/dev/null
     fi
     if command -v kitty >/dev/null; then
       colors_file="$XDG_CONFIG_HOME/kitty/colors-dark.conf"
