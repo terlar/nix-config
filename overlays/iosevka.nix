@@ -6,8 +6,10 @@ final: prev:
       family = "Iosevka Slab";
       design = [
         "slab"
-        "ligset-coq"
-        "termlig"
+        "ligset-hskl"
+        "calt-exeq-alt-1"
+        "calt-html-comment"
+        "calt-tildeeq"
         "v-asterisk-low"
         "v-at-long"
         "v-caret-low"
