@@ -59,6 +59,9 @@
 
       push = { default = "simple"; };
 
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+
       diff = {
         submodule = "log";
         tool = "ediff";
@@ -89,6 +92,11 @@
       rerere = {
         enabled = "true";
         autoUpdate = "true";
+      };
+
+      delta = {
+        features = "side-by-side line-numbers decorations";
+        syntax-theme = "ansi-light";
       };
 
       ghq = {
