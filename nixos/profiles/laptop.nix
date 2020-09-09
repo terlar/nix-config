@@ -5,18 +5,7 @@
 
   networking.networkmanager.enable = true;
 
-  hardware = {
-    bluetooth.enable = true;
-    pulseaudio = {
-      enable = true;
-      zeroconf.discovery.enable = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
-      package = pkgs.pulseaudioFull;
-      extraConfig = ''
-        load-module module-switch-on-connect
-      '';
-    };
-  };
+  hardware = { bluetooth.enable = true; };
 
   services = {
     # Enable zero-configuration networking and service discorvery.
