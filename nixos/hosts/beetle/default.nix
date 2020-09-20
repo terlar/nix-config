@@ -43,6 +43,10 @@ in {
   hardware = {
     enableRedistributableFirmware = true;
     opengl.enable = true;
+    pulseaudio.extraConfig = ''
+      # Apple Cinema Display (crashes PulseAudio now and then)
+      set-card-profile alsa_card.usb-Apple_Inc._Display_Audio_153418EC-00 off
+    '';
   };
 
   services = {
