@@ -13,8 +13,6 @@ with builtins;
     ../../../../home-manager/profiles/appearance/high-contrast.nix
     ../../../../home-manager/profiles/keybindings/emacs.nix
     ../../../../home-manager/profiles/wm/paperwm.nix
-
-    ../../../../home-manager/profiles/programs/vscode.nix
   ];
 
   dconf.settings = with lib.hm.gvariant; {
