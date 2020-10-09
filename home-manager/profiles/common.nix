@@ -3,12 +3,13 @@
 {
   imports = [ ./programs/bash.nix ./programs/fish.nix ./programs/git.nix ];
 
-  services.lorri.enable = true;
-
   programs = {
     home-manager.enable = true;
 
-    direnv.enable = true;
+    direnv = {
+      enable = true;
+      enableNixDirenvIntegration = true;
+    };
 
     gpg.enable = true;
     ssh = {
