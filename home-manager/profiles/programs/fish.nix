@@ -45,7 +45,9 @@ in {
          set -U __fish_universal_config_done 1
       end
 
-      any-nix-shell fish --info-right | source
+      any-nix-shell fish | source
+
+      set -x DIRENV_LOG_FORMAT ""
 
       if set -q IN_NIX_SHELL
         function __direnv_export_eval
