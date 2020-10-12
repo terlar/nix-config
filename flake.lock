@@ -56,6 +56,21 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1598466101,
+        "narHash": "sha256-JPhv+Ay98KMWRVRFlLEK9+eLpvNjhTBGWdFKZsE97ck=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "a586a6b966d59f53f45a04f8891fbc017dc09dbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "hardware": {
       "flake": false,
       "locked": {
@@ -89,6 +104,27 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "manix": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1600615040,
+        "narHash": "sha256-+j72HR7PaZ8NhX2cwwuAMhR6I5K/vaxgRex71zZgu9c=",
+        "owner": "mlvzk",
+        "repo": "manix",
+        "rev": "5d033e12798d4f29e43042467025a256b63f0f71",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mlvzk",
+        "repo": "manix",
         "type": "github"
       }
     },
@@ -151,6 +187,7 @@
         "emacs-config": "emacs-config",
         "hardware": "hardware",
         "home-manager": "home-manager",
+        "manix": "manix",
         "menu": "menu",
         "nix-tree": "nix-tree",
         "nixpkgs": "nixpkgs",

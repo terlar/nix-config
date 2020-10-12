@@ -15,6 +15,7 @@
       };
     };
 
+    # Modules
     hardware = {
       url = "github:NixOS/nixos-hardware";
       flake = false;
@@ -24,9 +25,10 @@
       flake = false;
     };
 
-    dotfiles = {
-      url = "github:terlar/dotfiles";
-      flake = false;
+    # Packages
+    manix = {
+      url = "github:mlvzk/manix";
+      inputs.nixpkgs.follows = "/nixpkgs";
     };
     menu = {
       url = "github:terlar/menu";
@@ -36,10 +38,16 @@
       url = "github:utdemir/nix-tree";
       flake = false;
     };
+
+    # Sources
+    dotfiles = {
+      url = "github:terlar/dotfiles";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare
-    , menu, nix-tree, ... }:
+    , manix, menu, nix-tree, ... }:
     with builtins;
     with nixpkgs;
 
@@ -52,6 +60,7 @@
           emacs-config.overlay
           menu.overlay
           (import "${nix-tree}/overlay.nix")
+          (self: super: { manix = manix.defaultPackage.${system}; })
         ] ++ attrValues self.overlays;
         config.allowUnfree = true;
       };

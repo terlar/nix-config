@@ -24,6 +24,7 @@
   environment.systemPackages = with pkgs; [
     # nix
     cachix
+    manix
     nix-diff
     nix-index
     nix-prefetch-scripts
