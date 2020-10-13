@@ -57,7 +57,7 @@
 
       pull = { rebase = "true"; };
 
-      push = { default = "simple"; };
+      push = { default = "current"; };
 
       core.pager = "delta";
       interactive.diffFilter = "delta --color-only";
