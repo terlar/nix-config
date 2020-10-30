@@ -111,6 +111,7 @@
               system.stateVersion = "19.09";
               system.configurationRevision = lib.mkIf (self ? rev) self.rev;
               nixpkgs = { inherit pkgs; };
+              nix.registry.nixpkgs.flake = nixpkgs;
             };
             local = import (./nixos/hosts + "/${host}");
           in [
