@@ -54,7 +54,6 @@
     var Meta = imports.gi.Meta;
     var Clutter = imports.gi.Clutter;
     var St = imports.gi.St;
-    var Tweener = imports.ui.tweener;
     var Main = imports.ui.main;
     var Shell = imports.gi.Shell;
 
