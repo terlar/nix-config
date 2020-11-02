@@ -36,7 +36,7 @@
     };
     nix-tree = {
       url = "github:utdemir/nix-tree";
-      flake = false;
+      inputs.nixpkgs.follows = "/nixpkgs";
     };
 
     # Sources
@@ -59,7 +59,7 @@
         overlays = [
           emacs-config.overlay
           menu.overlay
-          (import "${nix-tree}/overlay.nix")
+          nix-tree.overlay
           (self: super: { manix = manix.defaultPackage.${system}; })
         ] ++ attrValues self.overlays;
         config.allowUnfree = true;
