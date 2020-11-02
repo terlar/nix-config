@@ -26,6 +26,7 @@
     cachix
     manix
     nix-diff
+    nix-du
     nix-index
     nix-prefetch-scripts
     nix-tree
@@ -60,6 +61,7 @@
     coreutils
     fd
     file
+    graphviz
     moreutils
     most
     procs
