@@ -85,6 +85,22 @@
           inherit system specialArgs;
 
           modules = let
+            nixosConfig = ./nixos/hosts + "/${host}";
+            nixos = import nixosConfig;
+
+            common = {
+              system.stateVersion = "19.09";
+              system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+              nixpkgs = { inherit pkgs; };
+              nix.nixPath = [
+                "nixpkgs=${nixpkgs}"
+                "nixos-config=${nixosConfig}"
+                "nixos-hardware=${inputs.hardware}"
+                "dotfiles=${inputs.dotfiles}"
+              ];
+              nix.registry.nixpkgs.flake = nixpkgs;
+            };
+
             home = { config, ... }: {
               options.home-manager.users = lib.mkOption {
                 type = with lib.types;
@@ -107,19 +123,12 @@
                 };
               };
             };
-            common = {
-              system.stateVersion = "19.09";
-              system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-              nixpkgs = { inherit pkgs; };
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
-            local = import (./nixos/hosts + "/${host}");
           in [
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
             home
             common
-            local
+            nixos
           ] ++ (attrValues self.nixosModules) ++ extraModules;
         };
       };
