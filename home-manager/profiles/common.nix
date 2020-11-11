@@ -11,11 +11,16 @@
       enableNixDirenvIntegration = true;
     };
 
-    gpg.enable = true;
     ssh = {
       enable = true;
       compression = true;
     };
+  };
+
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
   };
 
   xdg.enable = true;
