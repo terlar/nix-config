@@ -7,7 +7,6 @@ with builtins;
     ./autorandr.nix
 
     ../../../../home-manager/profiles/common.nix
-    ../../../../home-manager/profiles/development.nix
     ../../../../home-manager/profiles/graphical.nix
 
     ../../../../home-manager/profiles/appearance/high-contrast.nix
@@ -22,6 +21,18 @@ with builtins;
         [ "xkb" "se" ]
         [ "ibus" "libpinyin" ]
       ];
+    };
+  };
+
+  # Profiles:
+  profiles = {
+    gnome.enable = true;
+    development = {
+      enable = true;
+      aws.enable = true;
+      javascript.enable = true;
+      python.enable = true;
+      shell.enable = true;
     };
   };
 

@@ -68,69 +68,87 @@
       lib = rec {
         kebabCaseToCamelCase =
           replaceStrings (map (s: "-${s}") lib.lowerChars) lib.upperChars;
+
+        recursiveReadDir = let
+          recurse = rootPath:
+            let
+              contents = readDir rootPath;
+              list = lib.mapAttrsToList (name: type:
+                let path = rootPath + "/${name}";
+                in if type == "directory" then recurse path else [ path ])
+                contents;
+            in lib.flatten list;
+        in recurse;
+
         importDirToAttrs = dir:
-          listToAttrs (map (name: {
-            name = kebabCaseToCamelCase (lib.removeSuffix ".nix" name);
-            value = import (dir + "/${name}");
-          }) (attrNames (readDir dir)));
-
-        nixosSystemFor = let
-          specialArgs = {
-            inherit (inputs) dotfiles hardware;
-            # profiles = self.lib.importDirToAttrs ./nixos/profiles;
-          };
-        in host:
-        { extraModules ? [ ], ... }@args:
-        lib.nixosSystem {
-          inherit system specialArgs;
-
-          modules = let
-            nixosConfig = ./nixos/hosts + "/${host}";
-            nixos = import nixosConfig;
-
-            common = {
-              system.stateVersion = "19.09";
-              system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-              nixpkgs = { inherit pkgs; };
-              nix.nixPath = [
-                "nixpkgs=${nixpkgs}"
-                "nixos-config=${nixosConfig}"
-                "nixos-hardware=${inputs.hardware}"
-                "dotfiles=${inputs.dotfiles}"
+          lib.pipe dir [
+            recursiveReadDir
+            (filter (lib.hasSuffix ".nix"))
+            (map (path: {
+              name = lib.pipe path [
+                toString
+                (lib.removePrefix "${toString dir}/")
+                (lib.removeSuffix "/default.nix")
+                (lib.removeSuffix ".nix")
+                kebabCaseToCamelCase
+                (replaceStrings [ "/" ] [ "-" ])
               ];
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
+              value = import path;
+            }))
+            listToAttrs
+          ];
 
-            home = { config, ... }: {
-              options.home-manager.users = lib.mkOption {
-                type = with lib.types;
-                  attrsOf (submoduleWith {
-                    specialArgs = specialArgs // {
-                      super = config;
-                      # profiles = self.lib.importDirToAttrs ./home-manager/profiles;
-                    };
-                    modules = [
-                      emacs-config.homeManagerModules.emacsConfig
-                      "${vsliveshare}/modules/vsliveshare/home.nix"
-                    ] ++ (attrValues self.homeManagerModules);
-                  });
+        nixosSystemFor =
+          let specialArgs = { inherit (inputs) dotfiles hardware; };
+          in host:
+          { extraModules ? [ ], ... }@args:
+          lib.nixosSystem {
+            inherit system specialArgs;
+
+            modules = let
+              nixosConfig = ./nixos/hosts + "/${host}";
+              nixos = import nixosConfig;
+
+              common = {
+                system.stateVersion = "19.09";
+                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+                nixpkgs = { inherit pkgs; };
+                nix.nixPath = [
+                  "nixpkgs=${nixpkgs}"
+                  "nixos-config=${nixosConfig}"
+                  "nixos-hardware=${inputs.hardware}"
+                  "dotfiles=${inputs.dotfiles}"
+                ];
+                nix.registry.nixpkgs.flake = nixpkgs;
               };
 
-              config = {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  backupFileExtension = "bak";
+              home = { config, ... }: {
+                options.home-manager.users = lib.mkOption {
+                  type = with lib.types;
+                    attrsOf (submoduleWith {
+                      specialArgs = specialArgs // { super = config; };
+                      modules = [
+                        emacs-config.homeManagerModules.emacsConfig
+                        "${vsliveshare}/modules/vsliveshare/home.nix"
+                      ] ++ (attrValues self.homeManagerModules);
+                    });
+                };
+
+                config = {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    backupFileExtension = "bak";
+                  };
                 };
               };
-            };
-          in [
-            nixpkgs.nixosModules.notDetected
-            home-manager.nixosModules.home-manager
-            home
-            common
-            nixos
-          ] ++ (attrValues self.nixosModules) ++ extraModules;
-        };
+            in [
+              nixpkgs.nixosModules.notDetected
+              home-manager.nixosModules.home-manager
+              home
+              common
+              nixos
+            ] ++ (attrValues self.nixosModules) ++ extraModules;
+          };
       };
 
       overlay = self.overlays.pkgs;
