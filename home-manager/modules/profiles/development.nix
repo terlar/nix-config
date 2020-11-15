@@ -58,7 +58,13 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = with pkgs; [ curlie hey jq plantuml ];
+      home.packages = with pkgs; [
+        curlie
+        hey
+        jq
+        nodePackages.json-diff
+        plantuml
+      ];
 
       programs.bat = {
         enable = true;
