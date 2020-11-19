@@ -60,6 +60,7 @@ in {
     {
       home.packages = with pkgs; [
         curlie
+        gron
         hey
         jq
         nodePackages.json-diff
