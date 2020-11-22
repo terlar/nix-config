@@ -6,7 +6,6 @@ final: prev:
     lock = prev.callPackage ./scripts/lock { };
     logout = prev.callPackage ./scripts/logout { };
     themepark = prev.callPackage ./scripts/themepark { };
-    window_tiler = prev.callPackage ./scripts/window_tiler { };
   };
 
   google-chrome-beta-with-pipewire =

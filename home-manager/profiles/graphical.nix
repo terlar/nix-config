@@ -6,7 +6,6 @@
   home.packages = with pkgs; [
     scripts.lock
     scripts.logout
-    scripts.window_tiler
 
     # application
     krita
