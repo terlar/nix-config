@@ -9,7 +9,6 @@
 
   # Docker related packages.
   environment.systemPackages = with pkgs; [
-    arion
     docker
     docker-slim
     docker_compose
