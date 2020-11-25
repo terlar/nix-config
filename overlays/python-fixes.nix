@@ -21,15 +21,6 @@ with builtins;
         };
       });
 
-      greenlet = pyPrev.greenlet.overridePythonAttrs (oldAttrs: rec {
-        version = "0.4.16";
-        src = oldAttrs.src.override {
-          inherit version;
-          sha256 =
-            "6e06eac722676797e8fce4adb8ad3dc57a1bb3adfb0dd3fdf8306c055a38456c";
-        };
-      });
-
       rsa = pyPrev.rsa.overridePythonAttrs (oldAttrs: rec {
         version = "4.1.1";
         src = oldAttrs.src.override {
