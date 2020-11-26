@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1604956382,
-        "narHash": "sha256-KpRFX/zL3QSn4vzHxPIqp/xGqe3gqeGBeh+Uh7ni/tg=",
+        "lastModified": 1606398571,
+        "narHash": "sha256-NkBpd6YTNa+R/q+o+5ijXdb8qYSENiX+xz7yejZqIQs=",
         "owner": "terlar",
         "repo": "dotfiles",
-        "rev": "42611d2e908af2705ade1dd77390be051b8aa27e",
+        "rev": "aaa300eec7e8f35b1e22b7f7758c590b41aacb16",
         "type": "github"
       },
       "original": {
