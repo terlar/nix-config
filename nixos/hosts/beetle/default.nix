@@ -35,8 +35,10 @@ in {
     loader.systemd-boot.configurationLimit = 25;
     loader.efi.canTouchEfiVariables = true;
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Mount tmpfs on /tmp.
+    tmpOnTmpfs = true;
 
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "fuse" ];
   };
 
