@@ -3,6 +3,8 @@
 {
   imports = [ ./programs/bash.nix ./programs/fish.nix ./programs/git.nix ];
 
+  systemd.user.startServices = "sd-switch";
+
   programs = {
     home-manager.enable = true;
 
