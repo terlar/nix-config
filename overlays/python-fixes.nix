@@ -29,6 +29,14 @@ with builtins;
             "1a7245638fa914ed6196b5e88fa5064cd95c7e65df800ec5d4f288e2b19fb4af";
         };
       });
+
+      tldextract = pyPrev.tldextract.overridePythonAttrs (oldAttrs: rec {
+        propagatedBuildInputs = oldAttrs.propagatedBuildInputs
+          ++ [ pyFinal.filelock ];
+
+        doCheck = false;
+        pythonImportsCheck = [ "tldextract" ];
+      });
     };
   };
 
