@@ -28,11 +28,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1608548512,
-        "narHash": "sha256-U1VH3J+WAHeREg940YIZDcb2JlUHMOwhvf+kg3Ea9aE=",
+        "lastModified": 1608556465,
+        "narHash": "sha256-NMHQBK7aQw1YvznrcU/A2u8V0f4eWjsrn/pyS7OmzkM=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "4446d8a9bcbf65cddc2e07eb6a46705fa21d1b56",
+        "rev": "d53b3e5cae9fc3d036cbbf631d1f20dee1ef89b6",
         "type": "github"
       },
       "original": {
