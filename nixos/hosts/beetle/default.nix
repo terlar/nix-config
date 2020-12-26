@@ -20,7 +20,6 @@ in {
     ../../profiles/appearance/high-contrast.nix
     ../../profiles/development/docker.nix
     ../../profiles/wm/paperwm.nix
-    ../../profiles/wayland/screen-share.nix
   ];
 
   networking.hostName = "beetle";

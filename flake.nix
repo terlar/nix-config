@@ -156,11 +156,7 @@
         pkgs = import ./pkgs;
       } // self.lib.importDirToAttrs ./overlays;
 
-      packages.${system} = {
-        inherit (pkgs)
-          google-chrome-beta-with-pipewire google-chrome-dev-with-pipewire
-          httpfs kmonad-bin rufo saw;
-      };
+      packages.${system} = { inherit (pkgs) httpfs kmonad-bin rufo saw; };
 
       nixosConfigurations = mapAttrs (host: _: self.lib.nixosSystemFor host { })
         (readDir ./nixos/hosts);
