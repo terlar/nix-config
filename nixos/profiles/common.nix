@@ -1,8 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ ../caches.nix ./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix ];
+  imports = [ ./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix ];
 
   nix = {
     package = pkgs.nixUnstable;
