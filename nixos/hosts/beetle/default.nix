@@ -44,7 +44,12 @@ in {
   hardware = {
     enableRedistributableFirmware = true;
     opengl.enable = true;
-    pulseaudio.enable = false;
+    pulseaudio.extraConfig = ''
+      .nofail
+      # Apple Cinema Display (crashes PulseAudio now and then)
+      set-card-profile alsa_card.usb-Apple_Inc._Display_Audio_153418EC-00 off
+      .fail
+    '';
   };
 
   services = {
@@ -54,12 +59,6 @@ in {
     printing = {
       enable = true;
       drivers = [ pkgs.gutenprint ];
-    };
-
-    # Pipewire
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
     };
 
     # Limit storage space of journald.
