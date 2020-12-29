@@ -172,12 +172,18 @@
           nativeBuildInputs = [
             git
             nixfmt
+            cachix
 
             backup
             installQutebrowserDicts
             switchHome
             switchNixos
+            useCaches
           ];
+
+          shellHook = ''
+            export NIX_USER_CONF_FILES=${toString ./.}/nix.conf
+          '';
         };
     };
 }

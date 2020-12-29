@@ -19,6 +19,11 @@ with pkgs;
     ${qutebrowser}/share/qutebrowser/scripts/dictcli.py install $@
   '';
 
+  useCaches = writeShellScriptBin "use-caches" ''
+    cachix use -O . nix-community
+    cachix use -O . terlar
+  '';
+
   backup = writeShellScriptBin "backup" ''
     set -euo pipefail
     TIMESTAMP="$(date +%Y%m%d%H%M%S)"
