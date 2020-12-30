@@ -1,0 +1,29 @@
+---
+name: Build
+on:
+  pull_request:
+  push:
+jobs:
+  builds:
+    strategy:
+      matrix:
+        host:
+          - beetle
+          - kong
+    runs-on: ubuntu-latest
+    name: Build configuration for ${{ matrix.host }}
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: cachix/install-nix-action@v12
+      with:
+        install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - uses: cachix/cachix-action@v8
+      with:
+        name: terlar
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+        extraPullNames: nix-community
+    - run: nix build --print-build-logs .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
