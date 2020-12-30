@@ -7,14 +7,34 @@ with builtins;
     ./autorandr.nix
 
     ../../../../home-manager/profiles/common.nix
-    ../../../../home-manager/profiles/development.nix
     ../../../../home-manager/profiles/graphical.nix
-
-    ../../../../home-manager/profiles/wm/paperwm.nix
 
     ../../../../home-manager/profiles/appearance/high-contrast.nix
     ../../../../home-manager/profiles/keybindings/emacs.nix
+    ../../../../home-manager/profiles/wm/paperwm.nix
   ];
+
+  dconf.settings = with lib.hm.gvariant; {
+    "org/gnome/desktop/input-sources" = {
+      sources = map mkTuple [
+        [ "xkb" "us+altgr-intl" ]
+        [ "xkb" "se" ]
+        [ "ibus" "libpinyin" ]
+      ];
+    };
+  };
+
+  # Profiles:
+  profiles = {
+    gnome.enable = true;
+    development = {
+      enable = true;
+      aws.enable = true;
+      javascript.enable = true;
+      python.enable = true;
+      shell.enable = true;
+    };
+  };
 
   # Custom module config:
   custom = {

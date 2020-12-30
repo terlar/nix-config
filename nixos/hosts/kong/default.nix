@@ -108,9 +108,9 @@ in {
       xkbRepeatInterval = 33; # 30Hz
     };
 
-    language = {
+    i18n = {
       enable = true;
-      chinese = true;
+      languages = [ "chinese" ];
     };
 
     shell = {
