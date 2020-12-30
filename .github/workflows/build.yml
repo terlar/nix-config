@@ -26,4 +26,4 @@ jobs:
         name: terlar
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         extraPullNames: nix-community
-    - run: nix build -vvvv .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
+    - run: nix build --print-build-logs .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
