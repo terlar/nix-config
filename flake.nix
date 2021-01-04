@@ -34,10 +34,6 @@
       url = "github:terlar/menu";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
-    nix-tree = {
-      url = "github:utdemir/nix-tree";
-      inputs.nixpkgs.follows = "/nixpkgs";
-    };
 
     # Sources
     dotfiles = {
@@ -47,7 +43,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare
-    , manix, menu, nix-tree, ... }:
+    , manix, menu, ... }:
     with builtins;
     with nixpkgs;
 
@@ -59,7 +55,6 @@
         overlays = [
           emacs-config.overlay
           menu.overlay
-          nix-tree.overlay
           (self: super: { manix = manix.defaultPackage.${system}; })
         ] ++ attrValues self.overlays;
         config.allowUnfree = true;

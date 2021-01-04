@@ -71,22 +71,6 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "locked": {
-        "lastModified": 1605370193,
-        "narHash": "sha256-YyMTf3URDL/otKdKgtoMChu4vfVL3vCMkRqpGifhUn0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5021eac20303a61fafe17224c087f5519baed54d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "ref": "master",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "hardware": {
       "flake": false,
       "locked": {
@@ -165,27 +149,6 @@
         "type": "github"
       }
     },
-    "nix-tree": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1608588071,
-        "narHash": "sha256-NKlgejnX5XZmd7mcgUlHy9gLZ1+C8aU81vF9jZydq68=",
-        "owner": "utdemir",
-        "repo": "nix-tree",
-        "rev": "498b3f9be4301abdc0cad1edf86521f8066a6451",
-        "type": "github"
-      },
-      "original": {
-        "owner": "utdemir",
-        "repo": "nix-tree",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1609580981,
@@ -210,7 +173,6 @@
         "home-manager": "home-manager",
         "manix": "manix",
         "menu": "menu",
-        "nix-tree": "nix-tree",
         "nixpkgs": "nixpkgs",
         "vsliveshare": "vsliveshare"
       }
