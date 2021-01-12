@@ -27,6 +27,9 @@ in {
   time.timeZone = "Europe/Stockholm";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # Temporary fix for tmpfs.
+  systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
+
   boot = rec {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
