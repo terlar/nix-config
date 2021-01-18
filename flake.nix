@@ -165,9 +165,11 @@
         with scripts;
         mkShell {
           nativeBuildInputs = [
-            git
-            nixfmt
             cachix
+            git
+            nixFlakes
+            nixfmt
+            nixos-rebuild
 
             backup
             installQutebrowserDicts
