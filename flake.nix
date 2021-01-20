@@ -153,8 +153,38 @@
 
       packages.${system} = { inherit (pkgs) httpfs kmonad-bin rufo saw; };
 
-      nixosConfigurations = mapAttrs (host: _: self.lib.nixosSystemFor host { })
-        (readDir ./nixos/hosts);
+      nixosConfigurations = let
+        hosts = mapAttrs (host: _: self.lib.nixosSystemFor host { })
+          (readDir ./nixos/hosts);
+
+        installers = {
+          yubikey-installer = lib.nixosSystem {
+            inherit system;
+
+            modules = [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+              ({ pkgs, ... }: {
+                services.pcscd.enable = true;
+                services.udev.packages = [ pkgs.yubikey-personalization ];
+                environment.systemPackages = with pkgs; [
+                  gnupg
+                  pinentry-curses
+                  paperkey
+                  wget
+                ];
+
+                programs = {
+                  ssh.startAgent = false;
+                  gnupg.agent = {
+                    enable = true;
+                    enableSSHSupport = true;
+                  };
+                };
+              })
+            ];
+          };
+        };
+      in hosts // installers;
 
       nixosModules = self.lib.importDirToAttrs ./nixos/modules;
       homeManagerModules = self.lib.importDirToAttrs ./home-manager/modules;
