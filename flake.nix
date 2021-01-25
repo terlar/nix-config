@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix.url = "github:NixOS/nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "/nixpkgs";
@@ -38,7 +39,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare
+  outputs = inputs@{ self, nix, nixpkgs, home-manager, emacs-config, vsliveshare
     , menu, ... }:
     with builtins;
     with nixpkgs;
@@ -48,8 +49,11 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ emacs-config.overlay menu.overlay ]
-          ++ attrValues self.overlays;
+        overlays = [
+          (self: super: { nixUnstable = nix.defaultPackage.${system}; })
+          emacs-config.overlay
+          menu.overlay
+        ] ++ attrValues self.overlays;
         config.allowUnfree = true;
       };
     in {
