@@ -29,6 +29,7 @@
     nix-index
     nix-prefetch-scripts
     nix-tree
+    rnix-lsp
 
     # compression/archive
     unrar
