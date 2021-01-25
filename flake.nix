@@ -26,10 +26,6 @@
     };
 
     # Packages
-    manix = {
-      url = "github:mlvzk/manix";
-      inputs.nixpkgs.follows = "/nixpkgs";
-    };
     menu = {
       url = "github:terlar/menu";
       inputs.nixpkgs.follows = "/nixpkgs";
@@ -43,7 +39,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, vsliveshare
-    , manix, menu, ... }:
+    , menu, ... }:
     with builtins;
     with nixpkgs;
 
@@ -52,11 +48,8 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [
-          emacs-config.overlay
-          menu.overlay
-          (self: super: { manix = manix.defaultPackage.${system}; })
-        ] ++ attrValues self.overlays;
+        overlays = [ emacs-config.overlay menu.overlay ]
+          ++ attrValues self.overlays;
         config.allowUnfree = true;
       };
     in {
