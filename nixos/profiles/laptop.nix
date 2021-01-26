@@ -15,7 +15,7 @@
     };
 
     # Improve touch-pad behavior.
-    xserver.libinput = {
+    xserver.libinput.touchpad = {
       disableWhileTyping = true;
       tapping = false;
       tappingDragLock = false;
