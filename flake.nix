@@ -194,7 +194,7 @@
           nativeBuildInputs = [
             cachix
             git
-            nixFlakes
+            nixUnstable
             nixfmt
             nixos-rebuild
 
