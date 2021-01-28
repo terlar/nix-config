@@ -196,7 +196,6 @@
             git
             nixUnstable
             nixfmt
-            nixos-rebuild
 
             backup
             installQutebrowserDicts
