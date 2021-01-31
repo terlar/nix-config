@@ -26,10 +26,7 @@ in {
   system.stateVersion = "19.09";
   networking.hostName = "kong";
 
-  time.timeZone = "Europe/Stockholm";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  boot = rec {
+  boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     # Prevent small EFI partition filling up.
@@ -55,11 +52,6 @@ in {
   services = {
     # Update support for firmware.
     fwupd.enable = true;
-
-    kmonad = {
-      enable = true;
-      extraConfig = builtins.readFile ./kmonad.kbd;
-    };
 
     printing = {
       enable = true;
@@ -92,30 +84,4 @@ in {
   console.earlySetup = true;
   # Font sizes for retina.
   fonts.fontconfig.dpi = 144;
-
-  # Custom module config:
-  custom = {
-    dictionaries = {
-      enable = true;
-      languages = [ "en-us" "sv-se" ];
-    };
-
-    keyboard = {
-      enable = true;
-      xkbVariant = "altgr-intl";
-      xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
-      xkbRepeatDelay = 500;
-      xkbRepeatInterval = 33; # 30Hz
-    };
-
-    i18n = {
-      enable = true;
-      languages = [ "chinese" ];
-    };
-
-    shell = {
-      enable = true;
-      package = pkgs.fish;
-    };
-  };
 }

@@ -1,11 +1,15 @@
-{ pkgs, ... }:
+{ config, dotfiles, lib, pkgs, ... }:
+
+with lib;
 
 let
+  cfg = config.profiles.user.terje.i3Sway;
+
   modifier = "Mod4";
   fonts = [ "sans-serif 9" ];
   bgMode = "tile";
 
-  config = {
+  wmConfig = {
     # Autostart
     startup = [
       {
@@ -270,7 +274,46 @@ let
     };
   };
 in {
-  xsession.windowManager.i3 = { inherit config; };
+  options.profiles.user.terje.i3Sway = {
+    enable = mkEnableOption "i3/Sway profile for terje";
+    wm = mkOption {
+      type = types.enum [ "i3" "sway" ];
+      default = "sway";
+      example = "i3";
+      description = "The WM to use.";
+    };
+  };
 
-  wayland.windowManager.sway = { inherit config; };
+  config = mkIf cfg.enable (mkMerge [
+    (mkIf (cfg.wm == "i3") {
+      xsession.enable = true;
+      xsession.windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+        config = wmConfig;
+      };
+
+      services = {
+        screen-locker = {
+          enable = true;
+          lockCmd =
+            "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
+          inactiveInterval = 10;
+        };
+
+        pasystray.enable = true;
+      };
+
+      xdg.configFile."i3status/config".source =
+        "${dotfiles}/i3/.config/i3status/config";
+    })
+
+    (mkIf (cfg.wm == "sway") {
+      wayland.windowManager.sway = {
+        enable = true;
+        systemdIntegration = true;
+        config = wmConfig;
+      };
+    })
+  ]);
 }

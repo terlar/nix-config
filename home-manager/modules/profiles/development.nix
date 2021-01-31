@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 
+with builtins;
 with lib;
 
 let
@@ -24,12 +25,65 @@ in {
 
     aws = { enable = mkEnableOption "AWS Development profile"; };
 
+    sourceDirectory = mkOption {
+      type = with types; either path str;
+      default = "${config.home.homeDirectory}/src";
+      defaultText = "$HOME/src";
+      apply = toString; # Prevent copies to Nix store.
+      description = "The directory where source code is stored.";
+    };
+
+    git = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Whether to enable Git Development profile";
+      };
+
+      enableDelta = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Whether to use <command>delta</command> for diff outputs.
+          See <link xlink:href="https://github.com/dandavison/delta"/>.
+        '';
+      };
+
+      enableGhq = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Whether to use <command>ghq</command> for remote repository management.
+          See <link xlink:href="https://github.com/x-motemen/ghq"/>.
+        '';
+      };
+
+      gitHub = {
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Whether to enable GitHub Development profile";
+        };
+
+        reuseSshConnection = mkOption {
+          type = types.bool;
+          default = true;
+          description = ''
+            Whether to reuse the GitHub SSH connection.
+
+            Make git actions significantly faster by using the <command>ssh</command> option
+            ControlMaster and ControlPath.
+          '';
+        };
+      };
+    };
+
     javascript = {
       enable = mkEnableOption "JavaScript Development profile";
 
       ignoreScripts = mkOption {
-        default = true;
         type = types.bool;
+        default = true;
         description = ''
           Ignore scripts.
 
@@ -67,12 +121,11 @@ in {
         plantuml
       ];
 
-      programs.bat = {
+      programs.bat.enable = true;
+
+      programs.direnv = {
         enable = true;
-        config = {
-          theme = "GitHub";
-          pager = "less -FR";
-        };
+        enableNixDirenvIntegration = true;
       };
 
       programs.editorConfig = {
@@ -99,6 +152,109 @@ in {
     }
 
     (mkIf cfg.aws.enable { home.packages = with pkgs; [ awscli saw ]; })
+
+    (mkIf cfg.git.enable (mkMerge [
+      {
+        home.packages = with pkgs; [ git-imerge ];
+
+        programs.git = {
+          enable = true;
+          package = pkgs.gitFull;
+
+          aliases = {
+            unstage = "reset HEAD";
+            uncommit = "reset --soft HEAD^";
+            unpush = "push --force-with-lease origin HEAD^:master";
+            recommit = "commit --amend";
+            ignore = "update-index --assume-unchanged";
+            unignore = "update-index --no-assume-unchanged";
+            ignored = "!git ls-files -v | grep '^[[:lower:]]'";
+
+            fup =
+              "!git log --stat --since '1 day ago' --author $(git config user.email)";
+            tags = "tag -l";
+            remotes = "remote -v";
+            branches = concatStringsSep " " [
+              "!git"
+              "for-each-ref"
+              "--sort=-committerdate"
+              "--format='${
+                concatStringsSep "|" [
+                  "%(color:blue)%(authordate:relative)"
+                  "%(color:red)%(authorname)"
+                  "%(color:black)%(color:bold)%(refname:short)"
+                ]
+              }'"
+              "refs/remotes"
+              "|"
+              "column -ts'|'"
+            ];
+          };
+
+          extraConfig = {
+            branch = {
+              # Automatic remote tracking.
+              autoSetupMerge = "always";
+              # Automatically use rebase for new branches.
+              autoSetupRebase = "always";
+            };
+
+            fetch = { prune = "true"; };
+            pull = { rebase = "true"; };
+            push = { default = "current"; };
+
+            rebase = {
+              # Support fixup and squash commits.
+              autoSquash = "true";
+              # Stash dirty worktree before rebase.
+              autoStash = "true";
+            };
+
+            merge = {
+              ff = "only";
+              log = "true";
+              conflictStyle = "diff3";
+            };
+
+            # Reuse recorded resolutions.
+            rerere = {
+              enabled = "true";
+              autoUpdate = "true";
+            };
+          };
+        };
+      }
+      (mkIf cfg.git.enableDelta {
+        home.packages = [ pkgs.delta ];
+        programs.git.extraConfig = {
+          core.pager = "delta";
+          interactive.diffFilter = "delta --color-only";
+        };
+      })
+      (mkIf cfg.git.enableGhq {
+        home.packages = [ pkgs.ghq ];
+        programs.git.extraConfig = { ghq = { root = cfg.sourceDirectory; }; };
+      })
+      (mkIf cfg.git.gitHub.enable (mkMerge [
+        { home.packages = [ pkgs.gh ]; }
+        (mkIf cfg.git.gitHub.reuseSshConnection {
+          programs.ssh = {
+            enable = true;
+            matchBlocks = {
+              "github.com" = {
+                hostname = "ssh.github.com";
+                port = 443;
+                serverAliveInterval = 60;
+                extraOptions = {
+                  ControlMaster = "auto";
+                  ControlPersist = "yes";
+                };
+              };
+            };
+          };
+        })
+      ]))
+    ]))
 
     (mkIf cfg.javascript.enable {
       home.packages = with pkgs; [

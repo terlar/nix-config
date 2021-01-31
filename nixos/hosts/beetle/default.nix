@@ -24,13 +24,10 @@ in {
 
   networking.hostName = "beetle";
 
-  time.timeZone = "Europe/Stockholm";
-  i18n.defaultLocale = "en_US.UTF-8";
-
   # Temporary fix for tmpfs.
   systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
 
-  boot = rec {
+  boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     # Prevent small EFI partition filling up.
@@ -63,12 +60,6 @@ in {
       enable = true;
       drivers = [ pkgs.gutenprint ];
     };
-
-    # Limit storage space of journald.
-    journald.extraConfig = ''
-      SystemMaxUse=100M
-      RuntimeMaxUse=100M
-    '';
   };
 
   # System user.
@@ -92,30 +83,4 @@ in {
     min-free = ${toString (100 * 1024 * 1024)}
     max-free = ${toString (1024 * 1024 * 1024)}
   '';
-
-  # Custom module config:
-  custom = {
-    dictionaries = {
-      enable = true;
-      languages = [ "en-us" "sv-se" ];
-    };
-
-    keyboard = {
-      enable = true;
-      xkbVariant = "altgr-intl";
-      xkbOptions = "lv3:ralt_switch,ctrl:nocaps";
-      xkbRepeatDelay = 500;
-      xkbRepeatInterval = 33; # 30Hz
-    };
-
-    i18n = {
-      enable = true;
-      languages = [ "chinese" ];
-    };
-
-    shell = {
-      enable = true;
-      package = pkgs.fish;
-    };
-  };
 }

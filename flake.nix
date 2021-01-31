@@ -56,6 +56,11 @@
         ] ++ attrValues self.overlays;
         config.allowUnfree = true;
       };
+
+      homeManagerExtraModules = [
+        emacs-config.homeManagerModules.emacsConfig
+        "${vsliveshare}/modules/vsliveshare/home.nix"
+      ] ++ (attrValues self.homeManagerModules);
     in {
       lib = rec {
         kebabCaseToCamelCase =
@@ -119,10 +124,7 @@
                   type = with lib.types;
                     attrsOf (submoduleWith {
                       specialArgs = specialArgs // { super = config; };
-                      modules = [
-                        emacs-config.homeManagerModules.emacsConfig
-                        "${vsliveshare}/modules/vsliveshare/home.nix"
-                      ] ++ (attrValues self.homeManagerModules);
+                      modules = homeManagerExtraModules;
                     });
                 };
 
@@ -182,6 +184,25 @@
           };
         };
       in hosts // installers;
+
+      homeManagerConfigurations = {
+        terje = home-manager.lib.homeManagerConfiguration {
+          username = "terje";
+          homeDirectory = "/home/terje";
+
+          inherit system pkgs;
+
+          extraSpecialArgs = {
+            inherit pkgs;
+            inherit (inputs) dotfiles hardware;
+          };
+
+          configuration = {
+            imports = homeManagerExtraModules;
+            profiles.user.terje.graphical.enable = true;
+          };
+        };
+      };
 
       nixosModules = self.lib.importDirToAttrs ./nixos/modules;
       homeManagerModules = self.lib.importDirToAttrs ./home-manager/modules;

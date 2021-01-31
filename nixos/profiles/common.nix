@@ -18,7 +18,40 @@
   services = {
     # Auto-mount disks.
     udisks2.enable = true;
+
+    # Limit storage space of journald.
+    journald.extraConfig = ''
+      SystemMaxUse=100M
+      RuntimeMaxUse=100M
+    '';
   };
+
+  custom = {
+    dictionaries = {
+      enable = true;
+      languages = [ "en-us" "sv-se" ];
+    };
+
+    keyboard = {
+      enable = true;
+      xkbOptions = "ctrl:nocaps";
+      xkbRepeatDelay = 500;
+      xkbRepeatInterval = 33; # 30Hz
+    };
+
+    i18n = {
+      enable = true;
+      languages = [ "chinese" ];
+    };
+
+    shell = {
+      enable = true;
+      package = pkgs.fish;
+    };
+  };
+
+  time.timeZone = "Europe/Stockholm";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   environment.systemPackages = with pkgs; [
     # nix
