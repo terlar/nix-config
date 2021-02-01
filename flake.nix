@@ -200,6 +200,7 @@
           configuration = {
             imports = homeManagerExtraModules;
             profiles.user.terje.graphical.enable = true;
+            targets.genericLinux.enable = pkgs.stdenv.hostPlatform.isLinux;
           };
         };
       };
