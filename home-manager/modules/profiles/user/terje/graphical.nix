@@ -17,6 +17,19 @@ in {
       gtk.enable = true;
     }
 
+    # Fonts
+    {
+      fonts.fontconfig.enable = true;
+
+      home.packages = with pkgs; [
+        iosevka-slab
+        noto-fonts
+        noto-fonts-cjk
+        noto-fonts-emoji
+        noto-fonts-extra
+      ];
+    }
+
     # Kitty
     {
       home.packages = [ pkgs.kitty ];
