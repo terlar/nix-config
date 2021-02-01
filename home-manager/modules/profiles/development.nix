@@ -114,11 +114,13 @@ in {
     {
       home.packages = with pkgs; [
         curlie
+        fd
         gron
         hey
         jq
         nodePackages.json-diff
         plantuml
+        tree
       ];
 
       programs.bat.enable = true;

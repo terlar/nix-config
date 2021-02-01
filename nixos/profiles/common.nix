@@ -92,13 +92,11 @@
 
     # utility
     coreutils
-    fd
     file
     graphviz
     moreutils
     most
     procs
-    tree
     unixtools.xxd
     xsv
 
