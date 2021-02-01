@@ -155,7 +155,7 @@ in {
     {
       programs.gpg = {
         enable = true;
-        settings = { keyserver = "https://keys.openpgp.org"; };
+        settings = { keyserver = "hkps://keys.openpgp.org"; };
       };
 
       services.gpg-agent = {
