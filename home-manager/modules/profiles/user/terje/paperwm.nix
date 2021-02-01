@@ -11,6 +11,15 @@ in {
   config = mkIf cfg.enable {
     profiles.gnome.enable = true;
 
+    programs.gnome-shell = {
+      enable = true;
+      extensions = with pkgs.gnomeExtensions; [
+        { package = gtktitlebar; }
+        { package = invert-window; }
+        { package = paperwm; }
+      ];
+    };
+
     dconf.settings = with lib.hm.gvariant; {
       "org/gnome/desktop/input-sources" = {
         sources = map mkTuple [
@@ -26,11 +35,6 @@ in {
         attach-modal-dialogs = false;
         edge-tiling = false;
         workspaces-only-on-primary = false;
-      };
-
-      "org/gnome/shell" = {
-        enabled-extensions = with pkgs.gnomeExtensions;
-          [ ] ++ map (p: p.uuid) [ gtktitlebar invert-window paperwm ];
       };
 
       "org/gnome/shell/extensions/paperwm" = {

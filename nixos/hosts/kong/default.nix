@@ -20,7 +20,7 @@ in {
     ../../profiles/appearance/high-contrast.nix
     ../../profiles/development/docker.nix
     ../../profiles/development/sysdig.nix
-    ../../profiles/wm/paperwm.nix
+    ../../profiles/wm/gnome3.nix
   ];
 
   system.stateVersion = "19.09";
