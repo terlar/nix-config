@@ -90,8 +90,10 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf (cfg.extensions != { }) {
-      dconf.settings."org/gnome/shell".enabled-extensions =
-        catAttrs "id" cfg.extensions;
+      dconf.settings."org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = catAttrs "id" cfg.extensions;
+      };
       home.packages = filter (p: p != null) (catAttrs "package" cfg.extensions);
 
       xdg.dataFile = listToAttrs (map ({ id, package }: {
