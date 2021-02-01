@@ -2,8 +2,17 @@
 
 with lib;
 
-{
+let profileDirectory = config.home.profileDirectory;
+in {
   config = mkIf config.targets.genericLinux.enable {
+    systemd.user.sessionVariables = let
+      profiles =
+        [ "\${NIX_STATE_DIR:-/nix/var/nix}/profiles/default" profileDirectory ];
+      dataDirs = concatStringsSep ":"
+        (map (profile: "${profile}/share") profiles
+          ++ config.targets.genericLinux.extraXdgDataDirs);
+    in { XDG_DATA_DIRS = "${dataDirs}\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS"; };
+
     programs.fish.shellInit = ''
       set --prepend fish_function_path ${
         if pkgs ? fishPlugins && pkgs.fishPlugins ? foreign-env then
