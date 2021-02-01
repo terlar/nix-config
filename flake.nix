@@ -143,6 +143,24 @@
               nixos
             ] ++ (attrValues self.nixosModules) ++ extraModules;
           };
+
+        homeManagerConfiguration = { username, configuration
+          , extraSpecialArgs ? { }, homeDirectory ? "/home/${username}"
+          , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux }:
+
+          home-manager.lib.homeManagerConfiguration {
+            inherit username homeDirectory system pkgs;
+
+            extraSpecialArgs = extraSpecialArgs // {
+              inherit pkgs;
+              inherit (inputs) dotfiles hardware;
+            };
+
+            configuration = {
+              imports = homeManagerExtraModules ++ [ configuration ];
+              targets.genericLinux.enable = isGenericLinux;
+            };
+          };
       };
 
       overlay = self.overlays.pkgs;
@@ -186,22 +204,9 @@
       in hosts // installers;
 
       homeManagerConfigurations = {
-        terje = home-manager.lib.homeManagerConfiguration {
+        terje = self.lib.homeManagerConfiguration {
           username = "terje";
-          homeDirectory = "/home/terje";
-
-          inherit system pkgs;
-
-          extraSpecialArgs = {
-            inherit pkgs;
-            inherit (inputs) dotfiles hardware;
-          };
-
-          configuration = {
-            imports = homeManagerExtraModules;
-            profiles.user.terje.graphical.enable = true;
-            targets.genericLinux.enable = pkgs.stdenv.hostPlatform.isLinux;
-          };
+          configuration.profiles.user.terje.graphical.enable = true;
         };
       };
 
