@@ -35,7 +35,7 @@ nix flake show
 #+END_SRC
 
 Switch both system (NixOS) and home:
-,#+BEGIN_SRC sh
+#+BEGIN_SRC sh
 nix dev-shell -c switch-nixos
 #+end_src
 
@@ -46,12 +46,12 @@ nix dev-shell -c switch-home
 
 Update all inputs:
 #+BEGIN_SRC sh
-nix flake update --recreate-lock-file
+nix flake update --recreate-lock-file --commit-lock-file
 #+end_src
 
 Update a single input:
 #+BEGIN_SRC sh
-nix flake update --update-input nixpkgs
+nix flake update --update-input nixpkgs --commit-lock-file
 #+end_src
 
 * Development
@@ -59,6 +59,14 @@ Use a local input during development:
 #+begin_src sh
 nix flake update --override-input nixpkgs path:../nixpkgs
 #+end_src
+
+* Non-NixOS
+** Default shell
+If you use a custom shell, you need to manually set the default shell, this is done by:
+#+BEGIN_SRC sh
+echo $HOME/.nix-profile/bin/fish | sudo tee -a /etc/shells
+chsh -s $HOME/.nix-profile/bin/fish
+#+END_SRC
 
 * Tasks
 ** TODO Extract some inline stuff into external files
@@ -68,4 +76,3 @@ nix flake update --override-input nixpkgs path:../nixpkgs
 - [[https://github.com/dejanr/dotfiles/blob/ef9c27cf93a17e0af4bdf5cc378d2808b5326afa/nix/config/nixpkgs/roles/multimedia.nix#L35][Sample]]
 ** TODO Nest/group modules
 ** TODO Script to regenerate hardware-config for current host
-** TODO Split profiles and "profiles" and at the same time populate the attrset profiles
