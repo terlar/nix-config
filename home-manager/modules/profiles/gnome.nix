@@ -21,8 +21,7 @@ in {
     }
     (mkIf cfg.disableKeyringSshAgent {
       xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = ''
-        ${fileContents
-        "${pkgs.gnome3.gnome-keyring}/etc/xdg/autostart/gnome-keyring-ssh.desktop"}
+        [Desktop Entry]
         Hidden=true
       '';
     })
