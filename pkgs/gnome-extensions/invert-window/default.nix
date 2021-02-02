@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub }:
+{ lib, stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-invert-window";
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     cp -r . $out/share/gnome-shell/extensions/${uuid}
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Inverts the color of individual windows.";
     homepage = "https://github.com/maiself/gnome-shell-extension-invert-color";
     license = licenses.mit;

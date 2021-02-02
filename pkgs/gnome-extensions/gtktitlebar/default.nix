@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub }:
+{ lib, stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-gtktitlebar";
@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     cp -r ${uuid} $out/share/gnome-shell/extensions/.
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description =
       "Remove title bars for non-GTK apps with minimal interference with the default workflow";
     homepage = "https://github.com/velitasali/GTKTitleBar";

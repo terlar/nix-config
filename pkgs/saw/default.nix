@@ -1,4 +1,4 @@
-{ stdenv, buildGoPackage, fetchgit }:
+{ lib, buildGoPackage, fetchFromGitHub }:
 
 buildGoPackage rec {
   pname = "saw";
@@ -7,13 +7,14 @@ buildGoPackage rec {
   goPackagePath = "github.com/TylerBrock/saw";
   goDeps = ./deps.nix;
 
-  src = fetchgit {
-    url = "https://github.com/TylerBrock/saw";
+  src = fetchFromGitHub {
+    owner = "TylerBrock";
+    repo = "saw";
     rev = "v${version}";
     sha256 = "0hf4dzlkcxl09xvhpg1h0hp51cnq10396plyb518m9lrpr8x6l4z";
   };
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Fast, multi-purpose tool for AWS CloudWatch Logs.";
     homepage = "https://github.com/TylerBrock/saw";
     license = licenses.mit;

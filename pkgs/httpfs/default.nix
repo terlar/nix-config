@@ -1,4 +1,4 @@
-{ fetchurl, pkgconfig, stdenv, fuse, openssl, asciidoc, docbook_xml_dtd_45
+{ lib, stdenv, fetchurl, pkgconfig, fuse, openssl, asciidoc, docbook_xml_dtd_45
 , docbook_xsl, gnutls, libxml2, libxslt }:
 
 stdenv.mkDerivation rec {
@@ -29,14 +29,11 @@ stdenv.mkDerivation rec {
     cp -v *.1 "$out/share/man/man1"
   '';
 
-  meta = {
+  meta = with lib; {
     description = "HTTPFS2, a FUSE-based HTTP file system for Linux";
-
     homepage = "http://httpfs.sourceforge.net/";
-
-    license = stdenv.lib.licenses.gpl2Plus;
-
-    platforms = stdenv.lib.platforms.linux;
-    maintainers = [ ];
+    license = licenses.gpl2Plus;
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ terlar ];
   };
 }
