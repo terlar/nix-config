@@ -6,6 +6,9 @@ let
   name = "Terje Larsen";
   username = "terje.larsen";
 in {
+  system.stateVersion = "19.09";
+  networking.hostName = "beetle";
+
   imports = [
     # Hardware.
     ./hardware-configuration.nix
@@ -21,8 +24,6 @@ in {
     ../../profiles/development/docker.nix
     ../../profiles/wm/gnome3.nix
   ];
-
-  networking.hostName = "beetle";
 
   # Temporary fix for tmpfs.
   systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];

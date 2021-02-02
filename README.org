@@ -4,27 +4,43 @@ includes the following components:
 
 - devShell :: a shell with tools used for development
 - lib :: library functions to be used with flakes or within Nix.
-  - kebabCaseToCamelCase :: convert kebab case to camel case (hello-world -> helloWorld)
-  - importDirToAttrs :: given a directory import all files into a set corresponding to
+  - ~kebabCaseToCamelCase~ :: convert kebab case to camel case (hello-world -> helloWorld)
+  - ~importDirToAttrs~ :: given a directory import all files into a set corresponding to
     each file name.
-  - nixosSystemFor :: a helper function to build configuration for target host, this can
+  - ~pkgsForSystem~ :: import the input nixpkgs with overlays provided by this flake for a system.
+  - ~forAllSystem~ :: create an attrset by all the supported systems and runs a function
+    which receives the packages for that system.
+  - ~nixosSystem~ :: wrapper around the corresponding function in nixpkgs which integrates
+    packages, overlays, NixOS modules, Home Manager modules from this flake.
+  - ~nixosSystemFor~ :: helper function to build configuration for target host, this can
     be an input for another flake where you can extend the host configuration (e.g. I use
     it for my private configuration additions).
-- homeManagerModules :: modules that can be used together with [[https://github.com/rycee/home-manager][home-manager]].
-  - defaultBrowser :: configure a default browser.
+  - ~homeManagerConfiguration~ :: wrapper around the corresponding function in Home Manager
+    that adds modules from this flake and enables generic Linux support in case it is a
+    Linux machine (assuming NixOS users would use the NixOS intergarion instead.)
+- homeManagerConfigurations :: user configuration for [[https://github.com/nix-community/home-manager][Home Manager]].
+- homeManagerModules :: modules that can be used together with [[https://github.com/nix-community/home-manager][Home Manager]].
+  - custom-defaultBrowser :: configure a default browser.
+  - custom-keybindings :: enable vi/emacs keybindings across the system.
+  - profiles-development :: development profile module.
+  - profiles-gnome :: configure gnome (e.g. disable gnome-keyring-ssh).
+  - profiles-highContrast :: enable high contrast where possible.
+  - programs-editorconfig :: configure [[https://editorconfig.org][editorconfig]].
+  - programs-gnomeShell :: gnome-shell configuration module.
+  - programs-ripgrep :: configure ripgrep.
+  - targets-genericLinux :: fixes for generic Linux module.
 - nixosConfigurations :: host configurations for [[https://github.com/NixOS/nixpkgs][NixOS]].
 - nixosModules :: modules that can be used together with [[https://github.com/NixOS/nixpkgs][NixOS]].
-  - dictionaries :: configure dictionaries (both aspell and hunspell) via one setting.
-  - keyboard :: configure keyboard for console, kmscon and xserver via one setting.
-  - kmonad :: service for [[https://github.com/david-janssen/kmonad][kmonad]].
-  - shell :: configure shell environment.
+  - custom-dictionaries :: configure dictionaries (both aspell and hunspell) via one setting.
+  - custom-i18n :: configure internationalization.
+  - custom-keyboard :: configure keyboard for console, kmscon and xserver via one setting.
+  - custom-shell :: configure shell environment.
 - overlay :: a package overlay including the mentioned packages.
 - overlays :: custom overlays.
   - iosevka :: iosevka configured with the slab set.
   - menu :: pulling my custom package [[https://github.com/terlar/menu][menu]].
   - python-packages :: adding python packages not avilable in nixpkgs.
 - packages :: packages not in the default nixpkgs.
-  - [[https://github.com/david-janssen/kmonad][kmonad-bin]]
   - [[https://github.com/ruby-formatter/rufo][rufo]]
   - [[https://github.com/TylerBrock/saw][saw]]
 

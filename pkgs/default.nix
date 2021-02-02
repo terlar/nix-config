@@ -9,7 +9,6 @@ final: prev:
   };
 
   httpfs = prev.callPackage ./httpfs { };
-  kmonad-bin = prev.callPackage ./kmonad-bin { };
   rufo = prev.callPackage ./rufo { };
   saw = prev.callPackage ./saw { };
 }

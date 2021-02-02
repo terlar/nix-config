@@ -6,6 +6,9 @@ let
   name = "Terje Larsen";
   username = "terje";
 in {
+  system.stateVersion = "19.09";
+  networking.hostName = "kong";
+
   imports = [
     # Hardware.
     ./hardware-configuration.nix
@@ -22,9 +25,6 @@ in {
     ../../profiles/development/sysdig.nix
     ../../profiles/wm/gnome3.nix
   ];
-
-  system.stateVersion = "19.09";
-  networking.hostName = "kong";
 
   boot = {
     # Use the systemd-boot EFI boot loader.

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix.url = "github:NixOS/nix";
+    nix.url = "github:NixOS/nix/b19aec7eeb8353be6c59b2967a511a5072612d99";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "/nixpkgs";
@@ -39,30 +39,17 @@
     };
   };
 
-  outputs = inputs@{ self, nix, nixpkgs, home-manager, emacs-config, vsliveshare
-    , menu, ... }:
+  outputs = inputs@{ self, nix, nixpkgs, home-manager, emacs-config, ... }:
     with builtins;
-    with nixpkgs;
-
     let
-      system = "x86_64-linux";
-
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          (self: super: { nixUnstable = nix.defaultPackage.${system}; })
-          emacs-config.overlay
-          menu.overlay
-        ] ++ attrValues self.overlays;
-        config.allowUnfree = true;
-      };
+      inherit (nixpkgs) lib;
 
       homeManagerExtraModules = [
         emacs-config.homeManagerModules.emacsConfig
-        "${vsliveshare}/modules/vsliveshare/home.nix"
+        "${inputs.vsliveshare}/modules/vsliveshare/home.nix"
       ] ++ (attrValues self.homeManagerModules);
     in {
-      lib = rec {
+      lib = {
         kebabCaseToCamelCase =
           replaceStrings (map (s: "-${s}") lib.lowerChars) lib.upperChars;
 
@@ -79,7 +66,7 @@
 
         importDirToAttrs = dir:
           lib.pipe dir [
-            recursiveReadDir
+            self.lib.recursiveReadDir
             (filter (lib.hasSuffix ".nix"))
             (map (path: {
               name = lib.pipe path [
@@ -87,7 +74,7 @@
                 (lib.removePrefix "${toString dir}/")
                 (lib.removeSuffix "/default.nix")
                 (lib.removeSuffix ".nix")
-                kebabCaseToCamelCase
+                self.lib.kebabCaseToCamelCase
                 (replaceStrings [ "/" ] [ "-" ])
               ];
               value = import path;
@@ -95,65 +82,91 @@
             listToAttrs
           ];
 
-        nixosSystemFor =
-          let specialArgs = { inherit (inputs) dotfiles hardware; };
-          in host:
-          { extraModules ? [ ], ... }@args:
-          lib.nixosSystem {
+        pkgsForSystem = { system, extraOverlays ? [ ] }:
+          let
+            nixOverlay = self: super: {
+              nixUnstable = nix.defaultPackage.${system};
+            };
+            inputOverlays =
+              [ nixOverlay emacs-config.overlay inputs.menu.overlay ];
+            selfOverlays = attrValues self.overlays;
+          in import nixpkgs {
+            inherit system;
+            overlays = inputOverlays ++ selfOverlays ++ extraOverlays;
+            config.allowUnfree = true;
+          };
+
+        forAllSystems = f:
+          lib.genAttrs [ "x86_64-linux" ]
+          (system: f (self.lib.pkgsForSystem { inherit system; }));
+
+        nixosSystem = { system ? "x86_64-linux", configuration ? { }
+          , extraModules ? [ ], extraOverlays ? [ ], specialArgs ? { }, ... }:
+          let
+            pkgs = self.lib.pkgsForSystem { inherit system extraOverlays; };
+
+            baseNixosModule = {
+              system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+              nixpkgs = { inherit pkgs; };
+              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
+              nix.registry.nixpkgs.flake = nixpkgs;
+            };
+
+            homeNixosModule = { config, ... }: {
+              options.home-manager.users = lib.mkOption {
+                type = with lib.types;
+                  attrsOf (submoduleWith {
+                    specialArgs = specialArgs // { super = config; };
+                    modules = homeManagerExtraModules;
+                  });
+              };
+
+              config.home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "bak";
+              };
+            };
+          in lib.nixosSystem {
             inherit system specialArgs;
 
-            modules = let
-              nixosConfig = ./nixos/hosts + "/${host}";
-              nixos = import nixosConfig;
+            modules = [ baseNixosModule homeNixosModule configuration ];
 
-              common = {
-                system.stateVersion = "19.09";
-                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-                nixpkgs = { inherit pkgs; };
-                nix.nixPath = [
-                  "nixpkgs=${nixpkgs}"
-                  "nixos-config=${nixosConfig}"
-                  "nixos-hardware=${inputs.hardware}"
-                  "dotfiles=${inputs.dotfiles}"
-                ];
-                nix.registry.nixpkgs.flake = nixpkgs;
-              };
-
-              home = { config, ... }: {
-                options.home-manager.users = lib.mkOption {
-                  type = with lib.types;
-                    attrsOf (submoduleWith {
-                      specialArgs = specialArgs // { super = config; };
-                      modules = homeManagerExtraModules;
-                    });
-                };
-
-                config = {
-                  home-manager = {
-                    useGlobalPkgs = true;
-                    backupFileExtension = "bak";
-                  };
-                };
-              };
-            in [
+            extraModules = [
               nixpkgs.nixosModules.notDetected
               home-manager.nixosModules.home-manager
-              home
-              common
-              nixos
             ] ++ (attrValues self.nixosModules) ++ extraModules;
           };
 
-        homeManagerConfiguration = { username, configuration
-          , extraSpecialArgs ? { }, homeDirectory ? "/home/${username}"
-          , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux }:
+        nixosSystemFor = args@{ host, extraConfiguration ? { }, ... }:
+          self.lib.nixosSystem ({
+            configuration = {
+              imports = [ (./nixos/hosts + "/${host}") extraConfiguration ];
+            };
 
+            specialArgs = { inherit (inputs) dotfiles hardware; };
+          } // args);
+
+        nixosInstaller = args@{ extraModules ? [ ], ... }:
+          self.lib.nixosSystem (args // {
+            extraModules = [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+            ] ++ extraModules;
+          });
+
+        homeManagerConfiguration = { username, configuration
+          # Optional arguments
+          , extraSpecialArgs ? { }, homeDirectory ? "/home/${username}"
+          , system ? "x86_64-linux"
+          , pkgs ? (self.lib.pkgsForSystem { inherit system; })
+          , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux }:
           home-manager.lib.homeManagerConfiguration {
             inherit username homeDirectory system pkgs;
 
-            extraSpecialArgs = extraSpecialArgs // {
-              inherit pkgs;
+            extraSpecialArgs = {
               inherit (inputs) dotfiles hardware;
+            } // extraSpecialArgs // {
+              inherit pkgs;
             };
 
             configuration = {
@@ -168,39 +181,19 @@
         pkgs = import ./pkgs;
       } // self.lib.importDirToAttrs ./overlays;
 
-      packages.${system} = { inherit (pkgs) httpfs kmonad-bin rufo saw; };
+      packages =
+        self.lib.forAllSystems (pkgs: { inherit (pkgs) httpfs rufo saw; });
 
       nixosConfigurations = let
-        hosts = mapAttrs (host: _: self.lib.nixosSystemFor host { })
+        hosts = mapAttrs (host: _: self.lib.nixosSystemFor { inherit host; })
           (readDir ./nixos/hosts);
 
-        installers = {
-          yubikey-installer = lib.nixosSystem {
-            inherit system;
-
-            modules = [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-              ({ pkgs, ... }: {
-                services.pcscd.enable = true;
-                services.udev.packages = [ pkgs.yubikey-personalization ];
-                environment.systemPackages = with pkgs; [
-                  gnupg
-                  pinentry-curses
-                  paperkey
-                  wget
-                ];
-
-                programs = {
-                  ssh.startAgent = false;
-                  gnupg.agent = {
-                    enable = true;
-                    enableSSHSupport = true;
-                  };
-                };
-              })
-            ];
+        installers = lib.mapAttrs' (name: _: {
+          name = "${name}-installer";
+          value = self.lib.nixosInstaller {
+            configuration = ./nixos/installer + "/${name}";
           };
-        };
+        }) (readDir ./nixos/installer);
       in hosts // installers;
 
       homeManagerConfigurations = {
@@ -213,10 +206,11 @@
       nixosModules = self.lib.importDirToAttrs ./nixos/modules;
       homeManagerModules = self.lib.importDirToAttrs ./home-manager/modules;
 
-      devShell.${system} =
+      devShell = self.lib.forAllSystems (pkgs:
         let scripts = import ./lib/scripts.nix { inherit pkgs; };
         in with pkgs;
         with scripts;
+
         mkShell {
           nativeBuildInputs = [
             cachix
@@ -234,6 +228,6 @@
           shellHook = ''
             export NIX_USER_CONF_FILES=${toString ./.}/nix.conf
           '';
-        };
+        });
     };
 }
