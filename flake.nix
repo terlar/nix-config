@@ -21,6 +21,10 @@
       url = "github:NixOS/nixos-hardware";
       flake = false;
     };
+    nixGL = {
+      url = "github:guibou/nixGL";
+      flake = false;
+    };
     vsliveshare = {
       url = "github:msteen/nixos-vsliveshare";
       flake = false;
@@ -87,8 +91,17 @@
             nixOverlay = self: super: {
               nixUnstable = nix.defaultPackage.${system};
             };
-            inputOverlays =
-              [ nixOverlay emacs-config.overlay inputs.menu.overlay ];
+
+            nixGLOverlay = self: super:
+              let nixGL = import inputs.nixGL { pkgs = self; };
+              in { inherit (nixGL) nixGLNvidia nixGLIntel nixGLDefault; };
+
+            inputOverlays = [
+              nixOverlay
+              nixGLOverlay
+              emacs-config.overlay
+              inputs.menu.overlay
+            ];
             selfOverlays = attrValues self.overlays;
           in import nixpkgs {
             inherit system;
