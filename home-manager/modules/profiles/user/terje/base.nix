@@ -37,11 +37,6 @@ in {
       };
 
       custom = {
-        defaultBrowser = {
-          enable = true;
-          package = pkgs.qutebrowser;
-        };
-
         keybindings = {
           enable = true;
           mode = "emacs";

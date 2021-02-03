@@ -15,6 +15,11 @@ in {
       profiles.highContrast.enable = true;
 
       gtk.enable = true;
+
+      custom.defaultBrowser = {
+        enable = true;
+        package = pkgs.qutebrowser;
+      };
     }
 
     # Fonts
