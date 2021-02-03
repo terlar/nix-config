@@ -5,8 +5,12 @@ with lib;
 
 let
   cfg = config.custom.defaultBrowser;
-  bin = head (filter (n: match "^\\..*" n == null)
-    (attrNames (readDir "${cfg.package}/bin")));
+  bin = pipe "${getBin cfg.package}/bin" [
+    readDir
+    attrNames
+    (filter (n: match "^\\..*" n == null))
+    head
+  ];
   desktopFile = head (attrNames (readDir "${cfg.package}/share/applications"));
 in {
   options.custom.defaultBrowser = {
