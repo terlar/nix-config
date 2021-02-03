@@ -227,6 +227,8 @@ in {
         };
 
         extraConfig = ''
+          config.load_autoconfig(False)
+
           # Appearance
           c.statusbar.padding['bottom'] = 5
           c.statusbar.padding['left'] = 5
