@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix.url = "github:NixOS/nix/b19aec7eeb8353be6c59b2967a511a5072612d99";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:terlar/home-manager/improve-flake-homeManagerConfiguration";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
     emacs-config = {
@@ -205,26 +205,28 @@
             ] ++ extraModules;
           });
 
-        homeManagerConfiguration = { username, configuration
-          # Optional arguments
-          , extraSpecialArgs ? { }, homeDirectory ? "/home/${username}"
-          , system ? "x86_64-linux"
-          , pkgs ? (self.lib.pkgsForSystem { inherit system; })
-          , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux }:
-          home-manager.lib.homeManagerConfiguration {
-            inherit username homeDirectory system pkgs;
+        homeManagerConfiguration = let
+          homeDirectoryPrefix = pkgs:
+            if pkgs.stdenv.hostPlatform.isDarwin then "/Users" else "/home";
+        in { username, configuration
+        # Optional arguments
+        , system ? "x86_64-linux", extraModules ? [ ], extraSpecialArgs ? { }
+        , pkgs ? (self.lib.pkgsForSystem { inherit system; })
+        , homeDirectory ? "${homeDirectoryPrefix pkgs}/${username}"
+        , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit username homeDirectory system pkgs;
 
-            extraSpecialArgs = {
-              inherit (inputs) dotfiles hardware;
-            } // extraSpecialArgs // {
-              inherit pkgs;
-            };
+          extraSpecialArgs = {
+            inherit (inputs) dotfiles hardware;
+          } // extraSpecialArgs;
 
-            configuration = {
-              imports = homeManagerExtraModules ++ [ configuration ];
-              targets.genericLinux.enable = isGenericLinux;
-            };
+          extraModules = homeManagerExtraModules ++ extraModules;
+          configuration = {
+            imports = [ configuration ];
+            targets.genericLinux.enable = isGenericLinux;
           };
+        };
       };
 
       overlay = self.overlays.pkgs;
