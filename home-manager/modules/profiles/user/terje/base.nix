@@ -142,6 +142,11 @@ in {
             features = "side-by-side line-numbers decorations";
             syntax-theme = "ansi-light";
           };
+
+          url = {
+            "ssh://git@github.com/terlar" = { insteadOf = "gh:terlar"; };
+            "https://github.com/" = { insteadOf = "gh:"; };
+          };
         };
       };
     }
