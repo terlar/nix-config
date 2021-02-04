@@ -18,6 +18,8 @@ in {
     {
       # Declaratively manage gsettings.
       dconf.enable = true;
+
+      services.gpg-agent.pinentryFlavor = "gnome3";
     }
     (mkIf cfg.disableKeyringSshAgent {
       xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = ''
