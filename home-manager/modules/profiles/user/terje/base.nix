@@ -32,6 +32,7 @@ in {
           aws.enable = true;
           javascript.enable = true;
           python.enable = true;
+          nix.enable = true;
           shell.enable = true;
         };
       };

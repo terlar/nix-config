@@ -97,6 +97,8 @@ in {
       indentSize = mkIndentSizeOption "JavaScript" 2;
     };
 
+    nix = { enable = mkEnableOption "Nix Development profile"; };
+
     python = {
       enable = mkEnableOption "Python Development profile";
       indentStyle = mkIndentStyleOption "Python" "space";
@@ -293,6 +295,20 @@ in {
         indent_style = cfg.python.indentStyle;
         indent_size = cfg.python.indentSize;
       };
+    })
+
+    (mkIf cfg.nix.enable {
+      home.packages = with pkgs; [
+        cachix
+        manix
+        nix-diff
+        nix-du
+        nix-index
+        nix-prefetch-scripts
+        nix-tree
+        nixfmt
+        rnix-lsp
+      ];
     })
 
     (mkIf cfg.shell.enable {

@@ -54,16 +54,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   environment.systemPackages = with pkgs; [
-    # nix
-    cachix
-    manix
-    nix-diff
-    nix-du
-    nix-index
-    nix-prefetch-scripts
-    nix-tree
-    rnix-lsp
-
     # compression/archive
     unrar
     unzip
