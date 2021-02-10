@@ -28,11 +28,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1612344346,
-        "narHash": "sha256-e2+/1LiZw55h0qM7onUF+ZQZQGP/KrBOUxQ9sLpxWRM=",
+        "lastModified": 1612994134,
+        "narHash": "sha256-jJVMy40mCalpchcA16P8nERfF22tNpX9NadaSCuGRms=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "ba70b032b5c6e9864a3f517ac4197d4f485a4c7d",
+        "rev": "c0b269c86b8405c51f7c118553ae2fecc9932810",
         "type": "github"
       },
       "original": {
@@ -43,11 +43,11 @@
     },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1612340343,
-        "narHash": "sha256-uZH4HS+5Nl7rsVa8G7LhxYOYtdTLU/OEbbr9+dc1sag=",
+        "lastModified": 1612988789,
+        "narHash": "sha256-4CoU4hKpPVsE9x8Xgnx/Q0C6UgeINUONTkm6wMBlhME=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "e86a02048c791be90a61f69b083c5b4a3837f951",
+        "rev": "817c7e1e6149ba96225f2e75792b0b09efde6171",
         "type": "github"
       },
       "original": {
@@ -59,11 +59,11 @@
     "hardware": {
       "flake": false,
       "locked": {
-        "lastModified": 1612300919,
-        "narHash": "sha256-+R4qzU4y/pK7LAg+MSd6JxHxbEqCXOuk8Y3xhOWWmmE=",
+        "lastModified": 1612981022,
+        "narHash": "sha256-NKw0ntMPQw0cfNj0KzjF6QIguREEk79r6h5FMz8xbRQ=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "d6a123118152f766cb87983ed60b9a0094fa4306",
+        "rev": "0cb5491af9da8d6f16540ffc4db24e2361852e46",
         "type": "github"
       },
       "original": {
@@ -79,15 +79,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1612191125,
-        "narHash": "sha256-sqeVW5mIpxcbGL5od8kGxH5gAkimOEJjss2ZvsW9mLQ=",
-        "owner": "nix-community",
+        "lastModified": 1612444418,
+        "narHash": "sha256-GObbpMSUtoJrvfFcIRC2Cw9rzMdSdAusvS7cRTmJfSk=",
+        "owner": "terlar",
         "repo": "home-manager",
-        "rev": "0fa2b16a0714e35f472d17dc707ee130a269123f",
+        "rev": "163dbbd016889e8bba748a1f87085b272ac938b6",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "terlar",
+        "ref": "improve-flake-homeManagerConfiguration",
         "repo": "home-manager",
         "type": "github"
       }
@@ -165,11 +166,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1612194028,
-        "narHash": "sha256-AFPVC9gNDHnx52FGD1IWRvM3S3D1AgEbEaOkxDerlyU=",
+        "lastModified": 1612813619,
+        "narHash": "sha256-8yGqFXo426Vg4u0L8yXfS/WrgDV4ytMGZQb7SopoZCo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "65211f5afcc3637c55423b327157a5eae05dff67",
+        "rev": "8c8731330b53ba0061686f36f10f101e662a4717",
         "type": "github"
       },
       "original": {
