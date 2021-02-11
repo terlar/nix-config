@@ -95,11 +95,6 @@ in {
         enabled-extensions = catAttrs "id" cfg.extensions;
       };
       home.packages = filter (p: p != null) (catAttrs "package" cfg.extensions);
-
-      xdg.dataFile = listToAttrs (map ({ id, package }: {
-        name = "gnome-shell/extensions/${id}";
-        value = { source = package; };
-      }) cfg.extensions);
     })
 
     (mkIf (cfg.theme != null) {
