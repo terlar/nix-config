@@ -99,6 +99,11 @@ in {
 
     nix = { enable = mkEnableOption "Nix Development profile"; };
 
+    plantuml = {
+      indentStyle = mkIndentStyleOption "PlantUML" "space";
+      indentSize = mkIndentSizeOption "PlantUML" 2;
+    };
+
     python = {
       enable = mkEnableOption "Python Development profile";
       indentStyle = mkIndentStyleOption "Python" "space";
@@ -134,11 +139,17 @@ in {
 
       programs.editorConfig = {
         enable = true;
-        settings."*" = {
-          end_of_line = "lf";
-          charset = "utf-8";
-          trim_trailing_whitespace = true;
-          insert_final_newline = true;
+        settings = {
+          "*" = {
+            end_of_line = "lf";
+            charset = "utf-8";
+            trim_trailing_whitespace = true;
+            insert_final_newline = true;
+          };
+          "*.plantuml" = {
+            indent_style = cfg.plantuml.indentStyle;
+            indent_size = cfg.plantuml.indentSize;
+          };
         };
       };
 
