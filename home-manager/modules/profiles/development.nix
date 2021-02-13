@@ -323,7 +323,7 @@ in {
     })
 
     (mkIf cfg.shell.enable {
-      home.packages = with pkgs; [ shellcheck termtosvg ];
+      home.packages = with pkgs; [ shellcheck shfmt termtosvg ];
 
       programs.editorConfig.settings."*.{bash,sh}" = {
         indent_style = cfg.shell.indentStyle;
