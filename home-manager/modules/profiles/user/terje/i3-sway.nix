@@ -1,7 +1,6 @@
 { config, dotfiles, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.profiles.user.terje.i3Sway;
 
@@ -82,7 +81,7 @@ let
 
     # Desktops
     assigns = {
-      "2" = [ { class = "^Firefox$"; } { class = "^qutebrowser$"; } ];
+      "2" = [{ class = "^Firefox$"; } { class = "^qutebrowser$"; }];
       "7" = [{ class = "^krita$"; }];
       "9" = [{ class = "^Slack$"; }];
     };
@@ -273,7 +272,8 @@ let
       '';
     };
   };
-in {
+in
+{
   options.profiles.user.terje.i3Sway = {
     enable = mkEnableOption "i3/Sway profile for terje";
     wm = mkOption {

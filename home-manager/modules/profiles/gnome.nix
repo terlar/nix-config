@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.profiles.gnome;
-in {
+in
+{
   options.profiles.gnome = {
     enable = mkEnableOption "GNOME Desktop profile";
 

@@ -2,9 +2,9 @@
 
 with builtins;
 with lib;
-
 let cfg = config.custom.i18n;
-in {
+in
+{
   options.custom.i18n = {
     enable = mkEnableOption "internationalization customization";
 
@@ -16,7 +16,7 @@ in {
 
     languages = mkOption {
       type = types.listOf (types.enum [ "chinese" ]);
-      default = [];
+      default = [ ];
       description = "Used languages.";
     };
   };

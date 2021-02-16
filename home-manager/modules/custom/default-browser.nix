@@ -2,7 +2,6 @@
 
 with builtins;
 with lib;
-
 let
   cfg = config.custom.defaultBrowser;
   bin = pipe "${getBin cfg.package}/bin" [
@@ -12,7 +11,8 @@ let
     head
   ];
   desktopFile = head (attrNames (readDir "${cfg.package}/share/applications"));
-in {
+in
+{
   options.custom.defaultBrowser = {
     enable = mkEnableOption "default browser configuration";
 

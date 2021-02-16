@@ -3,7 +3,6 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.programs.gnome-shell;
 
@@ -52,7 +51,8 @@ let
     };
   };
 
-in {
+in
+{
   options.programs.gnome-shell = {
     enable = mkEnableOption "gnome-shell";
 

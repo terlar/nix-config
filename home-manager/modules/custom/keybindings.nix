@@ -1,9 +1,9 @@
 { config, lib, ... }:
 
 with lib;
-
 let cfg = config.custom.keybindings;
-in {
+in
+{
   options.custom.keybindings = {
     enable = mkEnableOption "keybinding configuration";
     mode = mkOption {

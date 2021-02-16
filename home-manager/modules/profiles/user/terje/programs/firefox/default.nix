@@ -2,9 +2,9 @@
 
 with lib;
 with builtins;
-
 let cfg = config.profiles.user.terje.programs.firefox;
-in {
+in
+{
   options.profiles.user.terje.programs.firefox = {
     enable = mkEnableOption "Firefox config for terje";
   };

@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.programs.editorConfig;
   toINI = generators.toINI { };
-in {
+in
+{
   options.programs.editorConfig = {
     enable = mkEnableOption "EditorConfig";
     settings = mkOption {

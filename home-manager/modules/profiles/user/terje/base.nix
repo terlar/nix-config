@@ -2,17 +2,20 @@
 
 with builtins;
 with lib;
-
 let
   cfg = config.profiles.user.terje.base;
 
   sourceDirFiles = attrRoot: destination: target: {
-    ${attrRoot} = foldl' (attrs: file:
-      attrs // {
-        "${destination}/${file}".source = "${toString target}/${file}";
-      }) { } (attrNames (readDir target));
+    ${attrRoot} = foldl'
+      (attrs: file:
+        attrs // {
+          "${destination}/${file}".source = "${toString target}/${file}";
+        })
+      { }
+      (attrNames (readDir target));
   };
-in {
+in
+{
   options.profiles.user.terje.base = {
     enable = mkEnableOption "Base profile for terje";
   };

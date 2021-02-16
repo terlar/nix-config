@@ -1,5 +1,4 @@
 { stdenv, writeShellScriptBin }:
-
 let
   brightsideScript = writeShellScriptBin "brightside" ''
     if command -v emacsclient >/dev/null; then
@@ -21,7 +20,8 @@ let
       ln -fs "$colors_file" "$XDG_CONFIG_HOME/kitty/colors.conf"
     fi
   '';
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "themepark";
 
   buildInputs = [ brightsideScript darksideScript ];

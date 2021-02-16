@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.custom.shell;
-in {
+in
+{
   options.custom.shell = {
     enable = mkEnableOption "shell customization";
 

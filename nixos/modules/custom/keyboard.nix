@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.custom.keyboard;
-in {
+in
+{
   options.custom.keyboard = {
     enable = mkEnableOption "keyboard customization";
 

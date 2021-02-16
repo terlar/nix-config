@@ -1,11 +1,11 @@
 { hardware, lib, pkgs, ... }:
 
 with builtins;
-
 let
   name = "Terje Larsen";
   username = "terje.larsen";
-in {
+in
+{
   system.stateVersion = "19.09";
   networking.hostName = "beetle";
 

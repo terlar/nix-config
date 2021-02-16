@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.profiles.user.terje.paperwm;
-in {
+in
+{
   options.profiles.user.terje.paperwm = {
     enable = mkEnableOption "PaperWM profile for terje";
   };

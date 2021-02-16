@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.custom.dictionaries;
-in {
+in
+{
   options.custom.dictionaries = {
     enable = mkEnableOption "dictionaries customization";
 
@@ -31,14 +31,17 @@ in {
     (mkIf cfg.useAspell {
       environment.systemPackages =
         let dicts = map (substring 0 2) cfg.languages;
-        in with pkgs;
+        in
+        with pkgs;
         [ (aspellWithDicts (ps: map (dict: ps."${dict}") dicts)) ];
     })
 
     (mkIf cfg.useHunspell {
-      environment.systemPackages = let dicts = cfg.languages;
-      in with pkgs;
-      [ (hunspellWithDicts (map (dict: hunspellDicts."${dict}") dicts)) ];
+      environment.systemPackages =
+        let dicts = cfg.languages;
+        in
+        with pkgs;
+        [ (hunspellWithDicts (map (dict: hunspellDicts."${dict}") dicts)) ];
     })
   ]);
 }

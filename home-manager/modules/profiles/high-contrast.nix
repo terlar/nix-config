@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.profiles.highContrast;
-in {
+in
+{
   options.profiles.highContrast = {
     enable = mkEnableOption "High contrast profile";
   };

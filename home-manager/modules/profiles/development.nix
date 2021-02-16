@@ -2,7 +2,6 @@
 
 with builtins;
 with lib;
-
 let
   cfg = config.profiles.development;
 
@@ -19,7 +18,8 @@ let
       inherit default;
       description = "Indentation size for ${lang}";
     };
-in {
+in
+{
   options.profiles.development = {
     enable = mkEnableOption "Development profile";
 

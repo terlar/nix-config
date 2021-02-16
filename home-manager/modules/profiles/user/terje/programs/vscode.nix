@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let cfg = config.profiles.user.terje.programs.vscode;
-in {
+in
+{
   options.profiles.user.terje.programs.vscode = {
     enable = mkEnableOption "Visual Studio Code config for terje";
   };
