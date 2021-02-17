@@ -19,6 +19,7 @@
     "emacs-config": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
+        "flake-compat": "flake-compat",
         "home-manager": [
           "home-manager"
         ],
@@ -28,11 +29,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1613516174,
-        "narHash": "sha256-suolfXDt6EaxQf7LfmXvUEwqd2kDCcnw/IY1QcIfmpg=",
+        "lastModified": 1613552937,
+        "narHash": "sha256-NN+Vd/R9HT8eTo0maJVNJ/GkODJW0KWTMb5SlU2xibI=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "6b5a2317031f949bb03681ee7c550c4d1633902a",
+        "rev": "3aa96954c50de8833482445042d3dbe0634a5c48",
         "type": "github"
       },
       "original": {
@@ -43,11 +44,11 @@
     },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1613507235,
-        "narHash": "sha256-0s5Y0oq8aK6B4qnGH9vTEMQLFTXw+s02mvgDHjQGyTU=",
+        "lastModified": 1613549984,
+        "narHash": "sha256-ysq+arPdCsr9JNrzon8VZz8FBd9JHHNDOGplPz9+Lig=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "4f22dc30db6717640a3baf65ef2a4d2a96621b24",
+        "rev": "41d5f51c742b4f9ff6dd30ce9665c93eae3c214c",
         "type": "github"
       },
       "original": {
@@ -57,6 +58,22 @@
       }
     },
     "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606424373,
+        "narHash": "sha256-oq8d4//CJOrVj+EcOaSXvMebvuTkmBJuT5tzlfewUnQ=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_2": {
       "flake": false,
       "locked": {
         "lastModified": 1606424373,
@@ -182,11 +199,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1613226215,
-        "narHash": "sha256-3rA5cGIrBHD6yeKhNhsF7/t461ww25oJY8KyBb0IhjU=",
+        "lastModified": 1613495094,
+        "narHash": "sha256-nCM0DOMzxObrXkpGBBTFUCfKOQbdm908z2rv9julGO8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ff96a0fa5635770390b184ae74debea75c3fd534",
+        "rev": "64b4617883844efe0cc20163e007ee636462eb18",
         "type": "github"
       },
       "original": {
@@ -200,7 +217,7 @@
       "inputs": {
         "dotfiles": "dotfiles",
         "emacs-config": "emacs-config",
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "hardware": "hardware",
         "home-manager": "home-manager",
         "menu": "menu",
