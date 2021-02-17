@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix.url = "github:NixOS/nix/b19aec7eeb8353be6c59b2967a511a5072612d99";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
     home-manager = {
       url = "github:terlar/home-manager/improve-flake-homeManagerConfiguration";
       inputs.nixpkgs.follows = "/nixpkgs";
