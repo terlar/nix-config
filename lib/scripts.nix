@@ -16,15 +16,14 @@ with pkgs;
 
     1>&2 echo "Switching Home Manager configuration for: $user"
 
+    configExists() {
+      nix eval --json .#homeManagerConfigurations --apply "x: (builtins.any (n: n == \"$config\") (builtins.attrNames x))" 2>/dev/null
+    }
+
     config="$user@$host"
-    configExists="$(nix eval --json .#homeManagerConfigurations --apply 'x: (builtins.any (n: n == "'$config'") (builtins.attrNames x))' 2>/dev/null)"
+    [ "$(configExists)" = "true" ] || config="$user"
 
-    if [ "$configExists" != "true" ]; then
-      config="$user"
-      configExists="$(nix eval --json .#homeManagerConfigurations --apply 'x: (builtins.any (n: n == "'$config'") (builtins.attrNames x))' 2>/dev/null)"
-    fi
-
-    if [ "$configExists" != "true" ]; then
+    if [ "$(configExists)" != "true" ]; then
       1>&2 echo "No configuration found, aborting..."
       exit 1
     fi
