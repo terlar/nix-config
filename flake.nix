@@ -62,24 +62,9 @@
         kebabCaseToCamelCase =
           replaceStrings (map (s: "-${s}") lib.lowerChars) lib.upperChars;
 
-        recursiveReadDir =
-          let
-            recurse = rootPath:
-              let
-                contents = readDir rootPath;
-                list = lib.mapAttrsToList
-                  (name: type:
-                    let path = rootPath + "/${name}";
-                    in if type == "directory" then recurse path else [ path ])
-                  contents;
-              in
-              lib.flatten list;
-          in
-          recurse;
-
         importDirToAttrs = dir:
           lib.pipe dir [
-            self.lib.recursiveReadDir
+            lib.filesystem.listFilesRecursive
             (filter (lib.hasSuffix ".nix"))
             (map (path: {
               name = lib.pipe path [
