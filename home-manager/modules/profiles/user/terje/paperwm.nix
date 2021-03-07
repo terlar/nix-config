@@ -16,6 +16,7 @@ in
       extensions = with pkgs.gnomeExtensions; [
         { package = gtktitlebar; }
         { package = invert-window; }
+        { package = miniview; }
         { package = paperwm; }
       ];
     };
