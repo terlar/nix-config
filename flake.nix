@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix.url = "github:NixOS/nix/b19aec7eeb8353be6c59b2967a511a5072612d99";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -47,7 +46,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix, nixpkgs, home-manager, emacs-config, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, ... }:
     with builtins;
     let
       inherit (nixpkgs) lib;
@@ -82,10 +81,6 @@
 
         pkgsForSystem = { system, extraOverlays ? [ ] }:
           let
-            nixOverlay = final: prev: {
-              nixUnstable = nix.defaultPackage.${system};
-            };
-
             nixGLOverlay = final: prev:
               let
                 nixGL = import inputs.nixGL { pkgs = final; };
@@ -134,7 +129,6 @@
               } // wrappers;
 
             inputOverlays = [
-              nixOverlay
               nixGLOverlay
               emacs-config.overlay
               inputs.menu.overlay
