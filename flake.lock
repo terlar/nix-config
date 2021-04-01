@@ -112,11 +112,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1612444418,
-        "narHash": "sha256-GObbpMSUtoJrvfFcIRC2Cw9rzMdSdAusvS7cRTmJfSk=",
+        "lastModified": 1617277521,
+        "narHash": "sha256-w29IhxlY1I1qCmxRy/6SQYO7ixMUoLNi9yuMOOsKx7A=",
         "owner": "terlar",
         "repo": "home-manager",
-        "rev": "163dbbd016889e8bba748a1f87085b272ac938b6",
+        "rev": "761f282493560979e5b3163f69a9f08660b80666",
         "type": "github"
       },
       "original": {
