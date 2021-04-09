@@ -1,0 +1,44 @@
+---
+name: Update inputs
+
+on:
+  schedule:
+    - cron: '0 */8 * * *'
+  workflow_dispatch:
+
+jobs:
+  update_inputs:
+    name: Update inputs
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v13
+      with:
+        install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210207_fd6eaa1/install
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+
+    - name: Configure Git
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+    - name: Update inputs
+      run: |
+        nix flake update --recreate-lock-file --commit-lock-file
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        title: "Update flake inputs"
+        branch: "update-flake-inputs"
+        delete-branch: true
+        labels: |
+          chore
+          inputs
+          automated
