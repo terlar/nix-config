@@ -1,52 +1,75 @@
 ---
 name: Build
+
 on:
-  pull_request:
   push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types: [opened, reopened]
+
 jobs:
   build_home_manager_configurations:
+    name: Build Home Manager configuration for ${{ matrix.user }}
     strategy:
       matrix:
         user:
           - terje
     runs-on: ubuntu-latest
-    name: Build Home Manager configuration for ${{ matrix.user }}
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: cachix/install-nix-action@v13
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v13
       with:
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210207_fd6eaa1/install
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: cachix/cachix-action@v10
+
+    - name: Use cachix
+      uses: cachix/cachix-action@v10
       with:
         name: terlar
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         extraPullNames: nix-community
-    - run: nix build --print-build-logs .#homeManagerConfigurations.${{ matrix.user }}.activationPackage
+
+    - name: Build activation package
+      run: |
+        nix build --print-build-logs .#homeManagerConfigurations.${{ matrix.user }}.activationPackage
 
   build_nixos_configurations:
+    name: Build NixOS configuration for ${{ matrix.host }}
     strategy:
       matrix:
         host:
           - beetle
           - kong
     runs-on: ubuntu-latest
-    name: Build NixOS configuration for ${{ matrix.host }}
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: cachix/install-nix-action@v13
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v13
       with:
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210207_fd6eaa1/install
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: cachix/cachix-action@v10
+
+    - name: Use cachix
+      uses: cachix/cachix-action@v10
       with:
         name: terlar
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         extraPullNames: nix-community
-    - run: nix build --print-build-logs .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
+
+    - name: Build system
+      run: |
+        nix build --print-build-logs .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
