@@ -8,7 +8,7 @@
       flake = false;
     };
     home-manager = {
-      url = "github:terlar/home-manager/improve-flake-homeManagerConfiguration";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
     emacs-config = {
