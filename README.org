@@ -38,8 +38,11 @@ includes the following components:
 - overlay :: a package overlay including the mentioned packages.
 - overlays :: custom overlays.
   - iosevka :: iosevka configured with the slab set.
-  - menu :: pulling my custom package [[https://github.com/terlar/menu][menu]].
-  - python-packages :: adding python packages not avilable in nixpkgs.
+  - gnome-extensions :: a couple of gnome-extensions:
+    - gtktitlebar
+    - invert-window
+    - miniview
+    - switcher
 - packages :: packages not in the default nixpkgs.
   - [[https://github.com/ruby-formatter/rufo][rufo]]
   - [[https://github.com/TylerBrock/saw][saw]]

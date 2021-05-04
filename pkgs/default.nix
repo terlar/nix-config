@@ -8,7 +8,6 @@ final: prev:
     themepark = prev.callPackage ./scripts/themepark { };
   };
 
-  httpfs = prev.callPackage ./httpfs { };
   rufo = prev.callPackage ./rufo { };
   saw = prev.callPackage ./saw { };
 }

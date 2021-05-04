@@ -92,7 +92,6 @@
 
     # file system
     cifs-utils
-    httpfs
     nfs-utils
   ];
 }

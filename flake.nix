@@ -246,7 +246,7 @@
       } // self.lib.importDirToAttrs ./overlays;
 
       packages =
-        self.lib.forAllSystems (pkgs: { inherit (pkgs) httpfs rufo saw; });
+        self.lib.forAllSystems (pkgs: { inherit (pkgs) rufo saw; });
 
       nixosConfigurations =
         let
