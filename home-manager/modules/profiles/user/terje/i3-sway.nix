@@ -5,7 +5,10 @@ let
   cfg = config.profiles.user.terje.i3Sway;
 
   modifier = "Mod4";
-  fonts = [ "sans-serif 9" ];
+  fonts = {
+    names = [ "sans-serif" ];
+    size = 9.0;
+  };
   bgMode = "tile";
 
   wmConfig = {
