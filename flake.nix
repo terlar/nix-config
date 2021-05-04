@@ -81,6 +81,9 @@
 
         pkgsForSystem = { system, extraOverlays ? [ ] }:
           let
+            homeManagerOverlay = final: prev:
+              { home-manager = home-manager.defaultPackage.${system}; };
+
             nixGLOverlay = final: prev:
               let
                 nixGL = import inputs.nixGL { pkgs = final; };
@@ -130,6 +133,7 @@
 
             inputOverlays = [
               nixGLOverlay
+              homeManagerOverlay
               emacs-config.overlay
               inputs.menu.overlay
             ];
@@ -260,7 +264,7 @@
         in
         hosts // installers;
 
-      homeManagerConfigurations = {
+      homeConfigurations = {
         terje = self.lib.homeManagerConfiguration {
           username = "terje";
           configuration.profiles.user.terje.graphical.enable = true;

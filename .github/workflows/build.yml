@@ -40,7 +40,7 @@ jobs:
 
     - name: Build activation package
       run: |
-        nix build --print-build-logs .#homeManagerConfigurations.${{ matrix.user }}.activationPackage
+        nix build --print-build-logs .#homeConfigurations.${{ matrix.user }}.activationPackage
 
   build_nixos_configurations:
     name: Build NixOS configuration for ${{ matrix.host }}

@@ -18,7 +18,7 @@ includes the following components:
   - ~homeManagerConfiguration~ :: wrapper around the corresponding function in Home Manager
     that adds modules from this flake and enables generic Linux support in case it is a
     Linux machine (assuming NixOS users would use the NixOS intergarion instead.)
-- homeManagerConfigurations :: user configuration for [[https://github.com/nix-community/home-manager][Home Manager]].
+- homeConfigurations :: user configuration for [[https://github.com/nix-community/home-manager][Home Manager]].
 - homeManagerModules :: modules that can be used together with [[https://github.com/nix-community/home-manager][Home Manager]].
   - custom-defaultBrowser :: configure a default browser.
   - custom-keybindings :: enable vi/emacs keybindings across the system.
