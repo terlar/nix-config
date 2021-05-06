@@ -168,18 +168,13 @@
             };
 
             homeNixosModule = { config, ... }: {
-              options.home-manager.users = lib.mkOption {
-                type = with lib.types;
-                  attrsOf (submoduleWith {
-                    specialArgs = specialArgs // { super = config; };
-                    modules = homeManagerExtraModules;
-                  });
-              };
-
               config.home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "bak";
+
+                extraSpecialArgs = specialArgs;
+                sharedModules = homeManagerExtraModules;
               };
             };
           in
