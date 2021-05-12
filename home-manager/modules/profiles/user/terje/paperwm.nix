@@ -53,7 +53,11 @@ in
       };
 
       "org/gnome/shell/extensions/invert-window" = {
-        "invert-window-shortcut" = [ "<Super>exclam" ];
+        invert-window-shortcut = [ "<Super>exclam" ];
+      };
+
+      "org/gnome/shell/extensions/miniview" = {
+        showme = false;
       };
     };
 
