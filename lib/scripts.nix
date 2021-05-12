@@ -4,7 +4,7 @@ with pkgs;
 
 {
   switchNixos = writeShellScriptBin "switch-nixos" ''
-    sudo ${nixos-rebuild}/bin/nixos-rebuild switch --flake . $@
+    sudo PATH=${lib.makeBinPath [ gitMinimal nixUnstable nixos-rebuild ]} nixos-rebuild switch --flake . $@
   '';
 
   switchHome = writeShellScriptBin "switch-home" ''
