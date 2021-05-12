@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./hardware/backlight.nix ./hardware/battery.nix ];
+  imports = [ ./hardware/backlight.nix ];
 
   networking.networkmanager.enable = true;
 
@@ -27,4 +27,6 @@
     # Monitor and control temperature.
     thermald.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [ powertop ];
 }
