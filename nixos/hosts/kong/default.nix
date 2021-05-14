@@ -23,7 +23,7 @@ in
     ../../profiles/appearance/high-contrast.nix
     ../../profiles/development/docker.nix
     ../../profiles/development/sysdig.nix
-    ../../profiles/wm/gnome3.nix
+    ../../profiles/wm/gnome.nix
   ];
 
   boot = {
