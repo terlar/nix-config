@@ -35,6 +35,24 @@ in
       ];
     }
 
+    # Foot
+    {
+      programs.foot = {
+        enable = true;
+        server.enable = true;
+        settings = {
+          main = {
+            # term = "xterm-256color";
+            font = "Iosevka Slab Light:size=11";
+            dpi-aware = "yes";
+          };
+          mouse = {
+            hide-when-typing = "yes";
+          };
+        };
+      };
+    }
+
     # Kitty
     {
       home.packages = [ pkgs.kitty ];
