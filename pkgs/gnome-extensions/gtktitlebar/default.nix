@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-gtktitlebar";
-  version = "5.0";
+  version = "8.0";
 
   src = fetchFromGitHub {
     owner = "velitasali";
-    repo = "GTKTitleBar";
+    repo = "gtktitlebar";
     rev = version;
-    sha256 = "0bg9xz77m6dw6cygnb26slrdhdmr76jmpgp17bcw7rn2rz7ma652";
+    sha256 = "19hp0hjlzgb67bvbhipf9w4p115i002szvwndm6ym6ch0rdjhh8j";
   };
 
   uuid = "gtktitlebar@velitasali.github.io";
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description =
       "Remove title bars for non-GTK apps with minimal interference with the default workflow";
-    homepage = "https://github.com/velitasali/GTKTitleBar";
+    homepage = "https://github.com/velitasali/gtktitlebar";
     license = licenses.gpl3;
     maintainers = with maintainers; [ terlar ];
   };
