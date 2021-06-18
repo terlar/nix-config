@@ -37,20 +37,41 @@ in
 
     # Foot
     {
-      programs.foot = {
-        enable = true;
-        server.enable = true;
-        settings = {
-          main = {
-            # term = "xterm-256color";
-            font = "Iosevka Slab Light:size=11";
-            dpi-aware = "yes";
-          };
-          mouse = {
-            hide-when-typing = "yes";
+      programs.foot =
+        {
+          enable = true;
+          server.enable = true;
+          settings = {
+            main = {
+              # term = "xterm-256color";
+              font = "Iosevka Slab Light:size=11";
+              dpi-aware = "yes";
+            };
+            mouse = {
+              hide-when-typing = "yes";
+            };
+            colors = {
+              foreground = "4e4b3d";
+              background = "fffff8";
+              regular0 = "1b1809"; # black
+              regular1 = "ef5350"; # red
+              regular2 = "171405"; # green
+              regular3 = "b0ada2"; # yellow
+              regular4 = "4e4b3d"; # blue
+              regular5 = "4e4b3d"; # magenta
+              regular6 = "1b1809"; # cyan
+              regular7 = "737063"; # white
+              bright0 = "737063"; # bright black
+              bright1 = "ee6d52"; # bright red
+              bright2 = "4e4b3d"; # bright green
+              bright3 = "b0ada2"; # bright yellow
+              bright4 = "737063"; # bright blue
+              bright5 = "737063"; # bright magenta
+              bright6 = "737063"; # bright cyan
+              bright7 = "fffff8"; # bright white
+            };
           };
         };
-      };
     }
 
     # Kitty
