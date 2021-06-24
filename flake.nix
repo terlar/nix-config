@@ -20,10 +20,7 @@
     };
 
     # Modules
-    hardware = {
-      url = "github:NixOS/nixos-hardware";
-      flake = false;
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixGL = {
       url = "github:guibou/nixGL";
       flake = false;
@@ -46,7 +43,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, emacs-config, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, emacs-config, ... }:
     with builtins;
     let
       inherit (nixpkgs) lib;
@@ -152,6 +149,7 @@
         nixosSystem =
           { system ? "x86_64-linux"
           , configuration ? { }
+          , modules ? [ ]
           , extraModules ? [ ]
           , extraOverlays ? [ ]
           , specialArgs ? { }
@@ -181,22 +179,13 @@
           lib.nixosSystem {
             inherit system specialArgs;
 
-            modules = [ baseNixosModule homeNixosModule configuration ];
+            modules = [ baseNixosModule homeNixosModule configuration ] ++ modules;
 
             extraModules = [
               nixpkgs.nixosModules.notDetected
               home-manager.nixosModules.home-manager
             ] ++ (attrValues self.nixosModules) ++ extraModules;
           };
-
-        nixosSystemFor = args@{ host, extraConfiguration ? { }, ... }:
-          self.lib.nixosSystem ({
-            configuration = {
-              imports = [ (./nixos/hosts + "/${host}") extraConfiguration ];
-            };
-
-            specialArgs = { inherit (inputs) dotfiles hardware; };
-          } // args);
 
         nixosInstaller = args@{ extraModules ? [ ], ... }:
           self.lib.nixosSystem (args // {
@@ -224,7 +213,7 @@
             inherit username homeDirectory system pkgs;
 
             extraSpecialArgs = {
-              inherit (inputs) dotfiles hardware;
+              inherit (inputs) dotfiles;
             } // extraSpecialArgs;
 
             extraModules = homeManagerExtraModules ++ extraModules;
@@ -233,6 +222,28 @@
               targets.genericLinux.enable = isGenericLinux;
             };
           };
+
+        nixosHosts = {
+          beetle = {
+            configuration = ./nixos/hosts/beetle;
+            modules = [
+              nixos-hardware.nixosModules.common-cpu-intel
+              nixos-hardware.nixosModules.common-pc-laptop
+              nixos-hardware.nixosModules.common-pc-ssd
+            ];
+            specialArgs = { inherit (inputs) dotfiles; };
+          };
+
+          kong = {
+            configuration = ./nixos/hosts/kong;
+            modules = [
+              nixos-hardware.nixosModules.common-cpu-intel
+              nixos-hardware.nixosModules.common-pc-laptop
+              nixos-hardware.nixosModules.common-pc-ssd
+            ];
+            specialArgs = { inherit (inputs) dotfiles; };
+          };
+        };
       };
 
       overlay = self.overlays.pkgs;
@@ -243,21 +254,13 @@
       packages =
         self.lib.forAllSystems (pkgs: { inherit (pkgs) rufo saw; });
 
-      nixosConfigurations =
-        let
-          hosts = mapAttrs (host: _: self.lib.nixosSystemFor { inherit host; })
-            (readDir ./nixos/hosts);
-
-          installers = lib.mapAttrs'
-            (name: _: {
-              name = "${name}-installer";
-              value = self.lib.nixosInstaller {
-                configuration = ./nixos/installer + "/${name}";
-              };
-            })
-            (readDir ./nixos/installer);
-        in
-        hosts // installers;
+      nixosConfigurations = {
+        beetle = self.lib.nixosSystem self.lib.nixosHosts.beetle;
+        kong = self.lib.nixosSystem self.lib.nixosHosts.kong;
+        yubikey-installer = self.lib.nixosInstaller {
+          configuration = ./nixos/installer/yubikey;
+        };
+      };
 
       homeConfigurations = {
         terje = self.lib.homeManagerConfiguration {

@@ -1,4 +1,4 @@
-{ hardware, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 with builtins;
 let
@@ -10,11 +10,7 @@ in
   networking.hostName = "kong";
 
   imports = [
-    # Hardware.
     ./hardware-configuration.nix
-    "${hardware}/common/cpu/intel"
-    "${hardware}/common/pc/laptop"
-    "${hardware}/common/pc/ssd"
 
     ../../profiles/common.nix
     ../../profiles/graphical.nix

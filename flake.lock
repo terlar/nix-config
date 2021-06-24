@@ -89,22 +89,6 @@
         "type": "github"
       }
     },
-    "hardware": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1623569835,
-        "narHash": "sha256-Mg+FN1JkEQ91Zff0+ot/ndRgD9BB+uDBLN12AcBYkSA=",
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "rev": "7305b276c90cfd3ad0a2452101a49c0b52c784c0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -163,6 +147,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1623569835,
+        "narHash": "sha256-Mg+FN1JkEQ91Zff0+ot/ndRgD9BB+uDBLN12AcBYkSA=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "7305b276c90cfd3ad0a2452101a49c0b52c784c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1624024598,
@@ -184,10 +183,10 @@
         "dotfiles": "dotfiles",
         "emacs-config": "emacs-config",
         "flake-compat": "flake-compat_2",
-        "hardware": "hardware",
         "home-manager": "home-manager",
         "menu": "menu",
         "nixGL": "nixGL",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "vsliveshare": "vsliveshare"
       }
