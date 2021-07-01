@@ -164,6 +164,13 @@ in
       };
     }
 
+    # Firefox
+    {
+      programs.firefox = {
+        enable = true;
+      };
+    }
+
     # Qutebrowser
     {
       programs.qutebrowser = {
