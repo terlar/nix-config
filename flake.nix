@@ -305,7 +305,10 @@
       } // self.lib.importDirToAttrs ./overlays;
 
       packages =
-        self.lib.forAllSystems (pkgs: { inherit (pkgs) rufo saw; });
+        self.lib.forAllSystems (pkgs: {
+          inherit (pkgs) rufo saw;
+          inherit (pkgs.gnomeExtensions) gtktitlebar invert-window miniview switcher;
+        });
 
       nixosConfigurations = {
         beetle = self.lib.nixosSystem self.lib.nixosHosts.beetle;

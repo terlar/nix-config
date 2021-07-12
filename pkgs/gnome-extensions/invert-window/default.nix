@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   patches = [
     (fetchpatch {
       url = "https://github.com/maiself/gnome-shell-extension-invert-color/commit/dfe3c18153de1663bf084a9c62cd2673c59d3ce4.patch";
-      sha256 = "05rc5gg2b8r3amfk8v2c3jyf9kmnkbcjqjm7w011rk7kd94r4wwa";
+      sha256 = "sha256-x5mhtkYZvdHoL9W2nbsCOwN2TPKu8AVAWIf44gDsock=";
     })
   ];
 
