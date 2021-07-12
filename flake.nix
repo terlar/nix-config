@@ -307,7 +307,7 @@
       packages =
         self.lib.forAllSystems (pkgs: {
           inherit (pkgs) rufo saw;
-          inherit (pkgs.gnomeExtensions) gtktitlebar invert-window miniview switcher;
+          inherit (pkgs.gnomeExtensions) gtktitlebar invert-window miniview switcher paperwm;
         });
 
       nixosConfigurations = {

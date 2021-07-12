@@ -2,15 +2,19 @@ final: prev:
 
 {
   gnomeExtensions = prev.gnomeExtensions // (with prev.gnome3; {
-    paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: {
-      version = "pre-40.0";
-      src = prev.fetchFromGitHub {
-        owner = "paperwm";
-        repo = "paperwm";
-        rev = "10215f57e8b34a044e10b7407cac8fac4b93bbbc";
-        sha256 = "0g335rcj6nq40kn9nklyv12arv7c4ds9l4q3id56c72ib5hfawfk";
-      };
-    });
+    paperwm = prev.gnomeExtensions.paperwm.overrideDerivation
+      (old:
+        let version = "pre-40.0"; in
+        {
+          inherit version;
+          name = "${old.pname}-${version}";
+          src = prev.fetchFromGitHub {
+            owner = "paperwm";
+            repo = "paperwm";
+            rev = "e9f714846b9eac8bdd5b33c3d33f1a9d2fbdecd4";
+            sha256 = "sha256-gZbS2Xy+CuQfzzZ5IwMahr3VLtyTiLxJTJVawml9sXE=";
+          };
+        });
 
     gtktitlebar = callPackage ../../pkgs/gnome-extensions/gtktitlebar { };
     invert-window = callPackage ../../pkgs/gnome-extensions/invert-window { };
