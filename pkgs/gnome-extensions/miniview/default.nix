@@ -2,14 +2,14 @@
 
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-miniview";
-  version = "1";
+  version = "20210626.2102";
 
   src = fetchFromGitHub {
     owner = "iamlemec";
     repo = "miniview";
-    rev = "860186aa99a7ffb55cfd3d5b2c1719633a14af53";
-    sha256 = "0ikg16bhbd357vpm4k9wgv3ygjpvbfysf2rr7p0h0mqg54fhpl7b";
-    # date = 2020-06-04T23:27:28-04:00;
+    rev = "e41beb9e74193d5174c5fd52a7e52199027a998a";
+    sha256 = "1qh4n5aakwaw17fkcjn10lm2v7ckfm2p4r7jc4bm0bfsmibpws3b";
+    # date = 2021-06-26T21:02:05-04:00;
   };
 
   uuid = "miniview@thesecretaryofwar.com";

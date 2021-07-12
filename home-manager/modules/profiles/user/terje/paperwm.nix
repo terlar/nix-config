@@ -14,10 +14,13 @@ in
     programs.gnome-shell = {
       enable = true;
       extensions = with pkgs.gnomeExtensions; [
-        { package = gtktitlebar; }
         { package = invert-window; }
         { package = miniview; }
+
         { package = paperwm; }
+        { package = gtktitlebar; }
+        { id = "overview_cleaner@gonza.com"; package = cleaner-overview; }
+        { id = "vertical-overview@RensAlthuis.github.com"; package = vertical-overview; }
       ];
     };
 

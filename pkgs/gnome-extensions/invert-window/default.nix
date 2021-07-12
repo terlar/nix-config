@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub }:
+{ lib, stdenv, fetchpatch, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-invert-window";
@@ -11,6 +11,13 @@ stdenv.mkDerivation rec {
     sha256 = "12z9f1kc5376713chd21fj96c1gr9bil56fxjbqkql2v1qx2fqw3";
     # date = 2020-03-25T00:19:16-04:00;
   };
+
+  patches = [
+    (fetchpatch {
+      url = "https://github.com/maiself/gnome-shell-extension-invert-color/commit/dfe3c18153de1663bf084a9c62cd2673c59d3ce4.patch";
+      sha256 = "05rc5gg2b8r3amfk8v2c3jyf9kmnkbcjqjm7w011rk7kd94r4wwa";
+    })
+  ];
 
   uuid = "invert-window@maiself";
 
