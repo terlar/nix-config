@@ -9,13 +9,13 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-config = {
       url = "github:terlar/emacs-config";
       inputs = {
-        nixpkgs.follows = "/nixpkgs";
-        home-manager.follows = "/home-manager";
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
       };
     };
 
@@ -33,7 +33,7 @@
     # Packages
     menu = {
       url = "github:terlar/menu";
-      inputs.nixpkgs.follows = "/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Sources
