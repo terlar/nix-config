@@ -19,8 +19,8 @@ in
 
         { package = paperwm; }
         { package = gtktitlebar; }
-        { id = "overview_cleaner@gonza.com"; package = cleaner-overview; }
-        { id = "vertical-overview@RensAlthuis.github.com"; package = vertical-overview; }
+        { package = cleaner-overview; }
+        { package = vertical-overview; }
       ];
     };
 

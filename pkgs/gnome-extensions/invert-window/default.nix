@@ -1,6 +1,7 @@
 { lib, stdenv, fetchpatch, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+let extensionUuid = "invert-window@maiself"; in
+stdenv.mkDerivation {
   pname = "gnome-shell-extension-invert-window";
   version = "5";
 
@@ -19,13 +20,13 @@ stdenv.mkDerivation rec {
     })
   ];
 
-  uuid = "invert-window@maiself";
+  passthru.extensionUuid = extensionUuid;
 
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p $out/share/gnome-shell/extensions/${uuid}
-    cp -r . $out/share/gnome-shell/extensions/${uuid}
+    mkdir -p $out/share/gnome-shell/extensions/${extensionUuid}
+    cp -r . $out/share/gnome-shell/extensions/${extensionUuid}
   '';
 
   meta = with lib; {
