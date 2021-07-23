@@ -1,5 +1,6 @@
 { lib, stdenv, fetchFromGitHub }:
 
+let extensionUuid = "gtktitlebar@velitasali.github.io"; in
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-gtktitlebar";
   version = "8.0";
@@ -11,13 +12,13 @@ stdenv.mkDerivation rec {
     sha256 = "19hp0hjlzgb67bvbhipf9w4p115i002szvwndm6ym6ch0rdjhh8j";
   };
 
-  uuid = "gtktitlebar@velitasali.github.io";
+  passthru.extensionUuid = extensionUuid;
 
   dontBuild = true;
 
   installPhase = ''
     mkdir -p $out/share/gnome-shell/extensions
-    cp -r ${uuid} $out/share/gnome-shell/extensions/.
+    cp -r ${extensionUuid} $out/share/gnome-shell/extensions/.
   '';
 
   meta = with lib; {

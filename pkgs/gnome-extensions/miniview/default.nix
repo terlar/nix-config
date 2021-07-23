@@ -1,6 +1,7 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+let extensionUuid = "miniview@thesecretaryofwar.com"; in
+stdenv.mkDerivation {
   pname = "gnome-shell-extension-miniview";
   version = "20210626.2102";
 
@@ -12,13 +13,13 @@ stdenv.mkDerivation rec {
     # date = 2021-06-26T21:02:05-04:00;
   };
 
-  uuid = "miniview@thesecretaryofwar.com";
+  passthru.extensionUuid = extensionUuid;
 
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p $out/share/gnome-shell/extensions/${uuid}
-    cp -r . $out/share/gnome-shell/extensions/${uuid}
+    mkdir -p $out/share/gnome-shell/extensions/${extensionUuid}
+    cp -r . $out/share/gnome-shell/extensions/${extensionUuid}
   '';
 
   meta = with lib; {

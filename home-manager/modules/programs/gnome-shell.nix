@@ -14,7 +14,8 @@ let
         example = "user-theme@gnome-shell-extensions.gcampax.github.com";
         description = ''
           ID of the gnome-shell extension. If not provided, it
-          will be obtained from <varname>package.uuid</varname>.
+          will be obtained from <varname>package.uuid</varname> or
+          <varname>package.extensionUuid</varname>.
         '';
       };
 
@@ -28,7 +29,7 @@ let
       };
     };
 
-    config = { id = mkDefault config.package.uuid or null; };
+    config = { id = mkDefault config.package.uuid or config.package.extensionUuid or null; };
   };
 
   themeOpts = {

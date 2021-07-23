@@ -1,5 +1,6 @@
 { lib, stdenv, fetchFromGitHub }:
 
+let extensionUuid = "switcher@landau.fi"; in
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-switcher";
   version = "28";
@@ -12,13 +13,13 @@ stdenv.mkDerivation rec {
     # date = 2020-04-07T22:53:59+03:00;
   };
 
-  uuid = "switcher@landau.fi";
+  passthru.extensionUuid = extensionUuid;
 
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p $out/share/gnome-shell/extensions/${uuid}
-    cp -r . $out/share/gnome-shell/extensions/${uuid}
+    mkdir -p $out/share/gnome-shell/extensions/${extensionUuid}
+    cp -r . $out/share/gnome-shell/extensions/${extensionUuid}
   '';
 
   meta = with lib; {
