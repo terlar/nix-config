@@ -18,7 +18,7 @@ in
         { package = miniview; }
 
         { package = paperwm; }
-        { package = gtktitlebar; }
+        { package = unite; }
         { package = cleaner-overview; }
         { package = vertical-overview; }
       ];
@@ -50,9 +50,16 @@ in
         window-gap = 8;
       };
 
-      "org/gnome/shell/extensions/gtktitlebar" = {
+      "org/gnome/shell/extensions/unite" = {
+        enable-titlebar-actions = true;
+        extend-left-box = true;
+        greyscale-tray-icons = true;
         hide-window-titlebars = "always";
         restrict-to-primary-screen = false;
+        show-desktop-name = true;
+        show-legacy-tray = true;
+        show-window-buttons = "never";
+        show-window-title = "maximized";
       };
 
       "org/gnome/shell/extensions/invert-window" = {
