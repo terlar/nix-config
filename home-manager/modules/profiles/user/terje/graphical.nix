@@ -44,7 +44,7 @@ in
           settings = {
             main = {
               # term = "xterm-256color";
-              font = "Iosevka Slab Light:size=11";
+              font = "Iosevka Slab Light:size=7.5";
               dpi-aware = "yes";
             };
             mouse = {
