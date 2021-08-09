@@ -47,28 +47,34 @@ in
               font = "Iosevka Slab Light:size=7.5";
               dpi-aware = "yes";
             };
+
+            scrollback = {
+              lines = 1000000;
+            };
+
             mouse = {
               hide-when-typing = "yes";
             };
+
             colors = {
-              foreground = "4e4b3d";
-              background = "fffff8";
-              regular0 = "1b1809"; # black
-              regular1 = "ef5350"; # red
-              regular2 = "171405"; # green
-              regular3 = "b0ada2"; # yellow
-              regular4 = "4e4b3d"; # blue
-              regular5 = "4e4b3d"; # magenta
-              regular6 = "1b1809"; # cyan
-              regular7 = "737063"; # white
-              bright0 = "737063"; # bright black
-              bright1 = "ee6d52"; # bright red
-              bright2 = "4e4b3d"; # bright green
-              bright3 = "b0ada2"; # bright yellow
-              bright4 = "737063"; # bright blue
-              bright5 = "737063"; # bright magenta
-              bright6 = "737063"; # bright cyan
-              bright7 = "fffff8"; # bright white
+              foreground = "596e76";
+              background = "fffce9";
+              regular0 = "596e76"; # black
+              regular1 = "bb3e06"; # red
+              regular2 = "596e76"; # green
+              regular3 = "98a6a6"; # yellow
+              regular4 = "596e76"; # blue
+              regular5 = "596e76"; # magenta
+              regular6 = "596e76"; # cyan
+              regular7 = "f4eedb"; # white
+              bright0 = "002b37"; # bright black
+              bright1 = "cc1f24"; # bright red
+              bright2 = "002b37"; # bright green
+              bright3 = "596e76"; # bright yellow
+              bright4 = "002b37"; # bright blue
+              bright5 = "002b37"; # bright magenta
+              bright6 = "002b37"; # bright cyan
+              bright7 = "fffce9"; # bright white
             };
           };
         };
