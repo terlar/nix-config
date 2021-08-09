@@ -131,6 +131,22 @@
         "type": "github"
       }
     },
+    "nixGL": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627220550,
+        "narHash": "sha256-Jg/Hdy+gKytIMrgPFaJVVRE5BUss4NsT1vHSCHMr1fM=",
+        "owner": "guibou",
+        "repo": "nixGL",
+        "rev": "804f1989b3f0bb3347c02ce136060e29f9fc3340",
+        "type": "github"
+      },
+      "original": {
+        "owner": "guibou",
+        "repo": "nixGL",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1628440507,
@@ -169,6 +185,7 @@
         "flake-compat": "flake-compat_2",
         "home-manager": "home-manager",
         "menu": "menu",
+        "nixGL": "nixGL",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "vsliveshare": "vsliveshare"
