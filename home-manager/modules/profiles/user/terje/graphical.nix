@@ -66,7 +66,7 @@ in
               regular4 = "596e76"; # blue
               regular5 = "596e76"; # magenta
               regular6 = "596e76"; # cyan
-              regular7 = "f4eedb"; # white
+              regular7 = "98a6a6"; # white
               bright0 = "002b37"; # bright black
               bright1 = "cc1f24"; # bright red
               bright2 = "002b37"; # bright green
@@ -74,7 +74,7 @@ in
               bright4 = "002b37"; # bright blue
               bright5 = "002b37"; # bright magenta
               bright6 = "002b37"; # bright cyan
-              bright7 = "fffce9"; # bright white
+              bright7 = "f4eedb"; # bright white
             };
           };
         };
