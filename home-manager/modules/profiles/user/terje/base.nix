@@ -189,7 +189,6 @@ in
         # utility
         browsh
         fzy
-        htop
         menu
         pdfgrep
         pywal
