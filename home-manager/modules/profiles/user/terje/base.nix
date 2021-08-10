@@ -144,7 +144,14 @@ in
 
           delta = {
             features = "side-by-side line-numbers decorations";
-            syntax-theme = "ansi-light";
+
+            syntax-theme = "none";
+            minus-emph-style = "strike bold";
+            minus-style = "strike";
+            plus-emph-style = "bold italic";
+            plus-style = "bold";
+            line-numbers-minus-style = "red";
+            line-numbers-plus-style = "bold";
           };
 
           url = {
