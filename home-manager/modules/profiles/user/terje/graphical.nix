@@ -241,7 +241,7 @@ in
           normal = {
             "<Alt-9>" = "tab-focus 9";
             "<Alt-0>" = "tab-focus -1";
-            "<Space>" = "set-cmd-text -s :buffer";
+            "<Space>" = "set-cmd-text -s :tab-select";
             "O" = "set-cmd-text -s :open {url:pretty}";
             "T" = "set-cmd-text :open -t -r {url:pretty}";
             "gt" = "tab-next";
@@ -258,7 +258,7 @@ in
             "<Alt-v>" = "fake-key <PgUp>";
             "<Ctrl-v>" = "fake-key <PgDown>";
             "<Ctrl-k>" = "fake-key <Shift-End> ;; fake-key <Delete>";
-            "<Ctrl-c>'" = "open-editor";
+            "<Ctrl-c>'" = "edit-text";
             "<Ctrl-i>" = "inspector";
           };
         };
