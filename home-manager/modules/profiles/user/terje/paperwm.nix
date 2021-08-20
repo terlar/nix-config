@@ -33,7 +33,15 @@ in
         ];
       };
 
-      "org/gnome/desktop/wm/keybindings" = { activate-window-menu = [ "" ]; };
+      "org/gnome/desktop/wm/keybindings" = {
+        activate-window-menu = [ ];
+        switch-applications = [ ];
+        switch-applications-backward = [ ];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        screensaver = [ "<Super>q" ];
+      };
 
       "org/gnome/mutter" = {
         attach-modal-dialogs = false;
@@ -48,6 +56,51 @@ in
         vertical-margin = 0;
         vertical-margin-bottom = 8;
         window-gap = 8;
+      };
+
+      "org/gnome/shell/extensions/paperwm/keybindings" = {
+        new-window = [ "<Super>Return" ];
+        close-window = [ "<Super>BackSpace" ];
+
+        toggle-scratch = [ "<Shift><Super>s" ];
+        toggle-scratch-layer = [ "<Super>s" ];
+
+        slurp-in = [ "<Super>i" ];
+        barf-out = [ "<Super>o" ];
+
+        previous-workspace = [ "<Super>Tab" ];
+        move-previous-workspace = [ "<Control><Super>Tab" ];
+        previous-workspace-backward = [ "<Shift><Super>Tab" ];
+        move-previous-workspace-backward = [ "<Control><Shift><Super>Tab" ];
+
+        switch-first = [ "<Super>Home" ];
+        switch-last = [ "<Super>End" ];
+
+        switch-left = [ "<Super>Left" "<Super>h" ];
+        move-left = [ "<Shift><Super>Left" "<Shift><Super>comma" "<Shift><Super>h" ];
+
+        switch-right = [ "<Super>Right" "<Super>l" ];
+        move-right = [ "<Shift><Super>Right" "<Shift><Super>period" "<Shift><Super>l" ];
+
+        switch-previous = [ "<Super>Up" "<Super>comma" "<Super>k" ];
+        move-up = [ "<Shift><Super>Up" "<Shift><Super>k" ];
+
+        switch-next = [ "<Super>Down" "<Super>period" "<Super>j" ];
+        move-down = [ "<Shift><Super>Down" "<Shift><Super>j" ];
+
+        switch-monitor-left = [ ];
+        move-monitor-left = [ ];
+        switch-monitor-right = [ ];
+        move-monitor-right = [ ];
+
+        switch-up = [ ];
+        switch-down = [ ];
+        switch-up-workspace = [ ];
+        move-up-workspace = [ ];
+        switch-down-workspace = [ ];
+        move-down-workspace = [ ];
+        live-alt-tab = [ ];
+        live-alt-tab-backward = [ ];
       };
 
       "org/gnome/shell/extensions/unite" = {
