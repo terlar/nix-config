@@ -30,6 +30,8 @@ in
       xdg.mimeApps.enable = true;
 
       profiles = {
+        user.terje.keyboards.enable = true;
+
         development = {
           enable = true;
           aws.enable = true;
