@@ -109,6 +109,23 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1629403964,
+        "narHash": "sha256-Mwvi7KTBS6hyMULDT7Z/AJElqalMQ+mcSoqGWXdalHY=",
+        "owner": "terlar",
+        "repo": "kmonad",
+        "rev": "0abd3603e25674fcd6d28fdd40273a868466b0e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "terlar",
+        "ref": "update-nix-derivation",
+        "repo": "kmonad",
+        "type": "github"
+      }
+    },
     "menu": {
       "inputs": {
         "nixpkgs": [
@@ -183,6 +200,7 @@
         "emacs-config": "emacs-config",
         "flake-compat": "flake-compat_2",
         "home-manager": "home-manager",
+        "kmonad": "kmonad",
         "menu": "menu",
         "nixGL": "nixGL",
         "nixos-hardware": "nixos-hardware",
