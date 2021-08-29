@@ -85,6 +85,4 @@ in
 
   # Earlier font size setup.
   console.earlySetup = true;
-  # Font sizes for retina.
-  fonts.fontconfig.dpi = 144;
 }
