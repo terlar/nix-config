@@ -187,6 +187,7 @@ in
             ignore = "update-index --assume-unchanged";
             unignore = "update-index --no-assume-unchanged";
             ignored = "!git ls-files -v | grep '^[[:lower:]]'";
+            wip = "!git add -Ap && git commit --amend --no-edit && git push --force-with-lease";
 
             fup =
               "!git log --stat --since '1 day ago' --author $(git config user.email)";
