@@ -22,7 +22,7 @@
     # Modules
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixGL = {
-      url = "github:guibou/nixGL";
+      url = "github:guibou/nixGL?rev=8687d0ea4c08893b47f7c727e1ef8284bc54c142";
       flake = false;
     };
     vsliveshare = {
