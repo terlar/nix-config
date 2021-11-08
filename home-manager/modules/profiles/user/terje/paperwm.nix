@@ -9,14 +9,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    profiles.gnome.enable = true;
+    profiles.user.terje.gnome = true;
 
     programs.gnome-shell = {
-      enable = true;
       extensions = with pkgs.gnomeExtensions; [
-        { package = true-color-invert; }
-        { package = miniview; }
-
         { package = paperwm; }
         { package = unite; }
         { package = cleaner-overview; }
@@ -25,24 +21,6 @@ in
     };
 
     dconf.settings = with lib.hm.gvariant; {
-      "org/gnome/desktop/input-sources" = {
-        sources = map mkTuple [
-          [ "xkb" "us+altgr-intl" ]
-          [ "xkb" "se" ]
-          [ "ibus" "libpinyin" ]
-        ];
-      };
-
-      "org/gnome/desktop/wm/keybindings" = {
-        activate-window-menu = [ ];
-        switch-applications = [ ];
-        switch-applications-backward = [ ];
-      };
-
-      "org/gnome/settings-daemon/plugins/media-keys" = {
-        screensaver = [ "<Super>q" ];
-      };
-
       "org/gnome/mutter" = {
         attach-modal-dialogs = false;
         edge-tiling = false;
@@ -113,10 +91,6 @@ in
         show-legacy-tray = true;
         show-window-buttons = "never";
         show-window-title = "maximized";
-      };
-
-      "org/gnome/shell/extensions/miniview" = {
-        showme = false;
       };
     };
 
