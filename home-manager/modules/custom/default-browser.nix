@@ -18,7 +18,7 @@ in
 
     package = mkOption {
       type = types.package;
-      defaultText = literalExample "pkgs.firefox";
+      defaultText = literalExpression "pkgs.firefox";
       description = "The default browser derivation to use.";
     };
   };

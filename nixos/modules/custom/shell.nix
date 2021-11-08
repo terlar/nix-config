@@ -11,7 +11,7 @@ in
       type = types.shellPackage;
       default = pkgs.fish;
       defaultText = "pkgs.fish";
-      example = literalExample "pkgs.zsh";
+      example = literalExpression "pkgs.zsh";
       description = "The Shell derivation to use.";
     };
 

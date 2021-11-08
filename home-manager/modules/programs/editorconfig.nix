@@ -20,7 +20,7 @@ in
         </citerefentry>
         for options.
       '';
-      example = literalExample ''
+      example = literalExpression ''
         {
           "*" = {
             end_of_line = "lf";

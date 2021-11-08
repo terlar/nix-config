@@ -21,7 +21,7 @@ in
 
     languages = mkOption {
       type = types.listOf (types.strMatching "[a-z]{2}-[a-z]{2}");
-      example = literalExample ''[ "en-us" ]'';
+      example = literalExpression ''[ "en-us" ]'';
       description =
         "List of languages in format of lowercase IETF language tag including country code.";
     };

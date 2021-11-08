@@ -44,7 +44,7 @@ let
       package = mkOption {
         type = types.nullOr types.package;
         default = null;
-        example = literalExample "pkgs.plata-theme";
+        example = literalExpression "pkgs.plata-theme";
         description = ''
           Package providing a gnome-shell theme named <varname>name</varname>.
         '';
@@ -60,7 +60,7 @@ in
     extensions = mkOption {
       type = types.listOf (types.submodule extensionOpts);
       default = [ ];
-      example = literalExample ''
+      example = literalExpression ''
         [
           { package = pkgs.gnomeExtensions.dash-to-panel; }
           {
@@ -77,7 +77,7 @@ in
     theme = mkOption {
       type = types.nullOr (types.submodule themeOpts);
       default = null;
-      example = literalExample ''
+      example = literalExpression ''
         {
           name = "Plata-Noir";
           package = [ pkgs.plata-theme ];
