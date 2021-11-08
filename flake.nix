@@ -344,7 +344,7 @@
           nativeBuildInputs = [
             cachix
             git
-            nixUnstable
+            nix_2_4
             nixpkgs-fmt
 
             backup

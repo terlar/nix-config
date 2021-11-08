@@ -181,6 +181,13 @@ in
       '';
     }
 
+    # Nix
+    {
+      home.packages = [ pkgs.nix_2_4 ];
+
+      xdg.configFile."nix/nix.conf".source = ../../../../../nix.conf;
+    }
+
     # Packages
     {
       home.packages = with pkgs; [
