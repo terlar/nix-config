@@ -45,6 +45,10 @@ in
         "org/gnome/shell/extensions/miniview" = {
           showme = false;
         };
+
+        "org/gnome/shell/extensions/true-color-invert" = {
+          invert-window-shortcut = [ "<Super>exclam" ];
+        };
       };
     }
 
