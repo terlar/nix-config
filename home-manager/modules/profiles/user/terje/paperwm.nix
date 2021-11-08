@@ -14,7 +14,7 @@ in
     programs.gnome-shell = {
       enable = true;
       extensions = with pkgs.gnomeExtensions; [
-        { package = invert-window; }
+        { package = true-color-invert; }
         { package = miniview; }
 
         { package = paperwm; }
@@ -113,10 +113,6 @@ in
         show-legacy-tray = true;
         show-window-buttons = "never";
         show-window-title = "maximized";
-      };
-
-      "org/gnome/shell/extensions/invert-window" = {
-        invert-window-shortcut = [ "<Super>exclam" ];
       };
 
       "org/gnome/shell/extensions/miniview" = {
