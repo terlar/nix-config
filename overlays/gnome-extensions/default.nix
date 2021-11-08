@@ -15,7 +15,5 @@ final: prev:
             sha256 = "sha256-gZbS2Xy+CuQfzzZ5IwMahr3VLtyTiLxJTJVawml9sXE=";
           };
         });
-
-    invert-window = callPackage ../../pkgs/gnome-extensions/invert-window { };
   });
 }
