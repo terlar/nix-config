@@ -16,9 +16,6 @@ final: prev:
           };
         });
 
-    gtktitlebar = callPackage ../../pkgs/gnome-extensions/gtktitlebar { };
     invert-window = callPackage ../../pkgs/gnome-extensions/invert-window { };
-    miniview = callPackage ../../pkgs/gnome-extensions/miniview { };
-    switcher = callPackage ../../pkgs/gnome-extensions/switcher { };
   });
 }
