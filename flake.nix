@@ -32,8 +32,8 @@
 
     # Packages
     kmonad = {
-      url = "github:terlar/kmonad/update-nix-derivation";
-      flake = false;
+      url = "github:kmonad/kmonad?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     menu = {
       url = "github:terlar/menu";
@@ -136,8 +136,8 @@
               nixGLOverlay
               homeManagerOverlay
               emacs-config.overlay
+              inputs.kmonad.overlay
               inputs.menu.overlay
-              (final: prev: { kmonad = prev.haskellPackages.callPackage "${inputs.kmonad}/nix/kmonad.nix" { }; })
             ];
             selfOverlays = attrValues self.overlays;
           in

@@ -89,6 +89,21 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1631561581,
+        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -110,18 +125,24 @@
       }
     },
     "kmonad": {
-      "flake": false,
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1629403964,
-        "narHash": "sha256-Mwvi7KTBS6hyMULDT7Z/AJElqalMQ+mcSoqGWXdalHY=",
-        "owner": "terlar",
+        "dir": "nix",
+        "lastModified": 1635430461,
+        "narHash": "sha256-oNdiGZqs2uYH+VoJWk6j9JxJXcK9eFLnOGWR/QDW2ak=",
+        "owner": "kmonad",
         "repo": "kmonad",
-        "rev": "0abd3603e25674fcd6d28fdd40273a868466b0e6",
+        "rev": "a984c088a1fbecb76d3f3394e4897fd7d125b269",
         "type": "github"
       },
       "original": {
-        "owner": "terlar",
-        "ref": "update-nix-derivation",
+        "dir": "nix",
+        "owner": "kmonad",
         "repo": "kmonad",
         "type": "github"
       }
