@@ -11,7 +11,8 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       profiles.user.terje.base.enable = true;
-      profiles.user.terje.paperwm.enable = true;
+      profiles.user.terje.gnome.enable = true;
+      profiles.user.terje.gnome.paperwm.enable = true;
       profiles.highContrast.enable = true;
 
       gtk.enable = true;
