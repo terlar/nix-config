@@ -322,6 +322,7 @@ in
         nix-prefetch-scripts
         nix-tree
         nixfmt
+        nixpkgs-fmt
         rnix-lsp
       ];
     })
