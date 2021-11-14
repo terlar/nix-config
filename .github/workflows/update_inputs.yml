@@ -36,7 +36,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         title: "Update flake inputs"
-        branch: "update-flake-inputs"
+        branch: "automation/update-flake-inputs"
         delete-branch: true
         labels: |
           chore
