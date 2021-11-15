@@ -7,4 +7,4 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "automation/"
+      prefix: "github:"
