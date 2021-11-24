@@ -11,6 +11,15 @@ on:
     types: [opened, reopened]
 
 jobs:
+  check:
+    name: Flake check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v16
+      - name: Check
+        run: nix flake check
+
   build_home_manager_configurations:
     name: Build Home Manager configuration for ${{ matrix.user }}
     strategy:
