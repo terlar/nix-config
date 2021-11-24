@@ -310,10 +310,15 @@
       } // self.lib.importDirToAttrs ./overlays;
 
       packages =
-        self.lib.forAllSystems (pkgs: {
-          inherit (pkgs) rufo saw;
-          inherit (pkgs.gnomeExtensions) paperwm;
-        });
+        let homePackages = builtins.mapAttrs (_: lib.getAttr "activationPackage") self.homeConfigurations; in
+        self.lib.forAllSystems
+          (pkgs: {
+            inherit (pkgs) rufo saw;
+            inherit (pkgs.gnomeExtensions) paperwm;
+          } // lib.pipe homePackages [
+            (lib.filterAttrs (_: p: pkgs.system == p.system))
+            (lib.mapAttrs' (username: p: lib.nameValuePair "${username}-home" p))
+          ]);
 
       nixosConfigurations = {
         beetle = self.lib.nixosSystem self.lib.nixosHosts.beetle;
