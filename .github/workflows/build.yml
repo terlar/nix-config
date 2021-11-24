@@ -12,46 +12,46 @@ on:
 
 jobs:
   check:
-    name: Flake check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v16
-      - name: Check
-        run: nix flake check
 
-  build_home_manager_configurations:
-    name: Build Home Manager configuration for ${{ matrix.user }}
-    strategy:
-      matrix:
-        user:
-          - terje
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v16
-
-      - name: Use cachix
-        uses: cachix/cachix-action@v10
+      - uses: cachix/cachix-action@v10
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           extraPullNames: nix-community
+      - name: Enable incremental cache upload
+        run: cachix watch-store terlar &
 
+      - name: Check flake
+        run: nix flake check
+
+  build-home-configuration:
+    strategy:
+      matrix:
+        include:
+          - username: terje
+            os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v16
+
+      - uses: cachix/cachix-action@v10
+        with:
+          name: terlar
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          extraPullNames: nix-community
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
       - name: Build activation package
         run: |
-          nix build --print-build-logs .#homeConfigurations.${{ matrix.user }}.activationPackage
+          nix build --print-build-logs .#homeConfigurations.${{ matrix.username }}.activationPackage
 
-  build_nixos_configurations:
-    name: Build NixOS configuration for ${{ matrix.host }}
+  build-nixos-configuration:
     strategy:
       matrix:
         host:
@@ -59,21 +59,14 @@ jobs:
           - kong
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v16
 
-      - name: Install Nix
-        uses: cachix/install-nix-action@v16
-
-      - name: Use cachix
-        uses: cachix/cachix-action@v10
+      - uses: cachix/cachix-action@v10
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           extraPullNames: nix-community
-
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
