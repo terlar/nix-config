@@ -318,7 +318,7 @@
       nixosConfigurations = {
         beetle = self.lib.nixosSystem self.lib.nixosHosts.beetle;
         kong = self.lib.nixosSystem self.lib.nixosHosts.kong;
-        snail = self.lib.nixosSystem self.lib.nixosHosts.snail;
+        # snail = self.lib.nixosSystem self.lib.nixosHosts.snail;
         yubikey-installer = self.lib.nixosInstaller {
           configuration = ./nixos/installer/yubikey;
         };
