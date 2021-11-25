@@ -25,15 +25,14 @@
         ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "utils": "utils"
+        ]
       },
       "locked": {
-        "lastModified": 1637790704,
-        "narHash": "sha256-CxdjCT1RDCF/9s97BadwGbmyI1A4LtySoOzG1Iwlx1A=",
+        "lastModified": 1637837918,
+        "narHash": "sha256-5dJKs1N83IuHlwKaUpmL9CelvOT4kOVwwuKMtIm/6TI=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "4d42ae6e4c1c150f23c007aa82d165c2da0ffca4",
+        "rev": "107f5d492425680da1eddb453dbc164f709842e9",
         "type": "github"
       },
       "original": {
@@ -152,7 +151,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": "utils"
       },
       "locked": {
         "lastModified": 1623322877,
@@ -231,21 +230,6 @@
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1637014545,
-        "narHash": "sha256-26IZAc5yzlD9FlDT54io1oqG/bBoyka+FJk5guaX4x4=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "bba5dcc8e0b20ab664967ad83d24d64cb64ec4f4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "locked": {
         "lastModified": 1590791977,
         "narHash": "sha256-l26u9vRsdV9jkoBGlzFxTKLKtrZ38xCMZIG9h9ibFjQ=",
