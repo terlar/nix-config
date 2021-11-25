@@ -211,6 +211,7 @@
           , extraModules ? [ ]
           , extraSpecialArgs ? { }
           , pkgs ? (self.lib.pkgsForSystem { inherit system; })
+          , nixPath ? "nixpkgs=${pkgs.path}"
           , homeDirectory ? "${homeDirectoryPrefix pkgs}/${username}"
           , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux
           }:
@@ -225,6 +226,9 @@
             configuration = {
               imports = [ configuration ];
               targets.genericLinux.enable = isGenericLinux;
+
+              home.sessionVariables.NIX_PATH = nixPath;
+              systemd.user.sessionVariables.NIX_PATH = lib.mkForce nixPath;
             };
           };
 
