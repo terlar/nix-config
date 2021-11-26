@@ -2,7 +2,13 @@
 Configuration for NixOS and user home (dot files). It is provided via Nix flakes and
 includes the following components:
 
-- devShell :: a shell with tools used for development
+- apps :: commands to run to utilize the flake or for development.
+  - ~home-switch~ :: run the =home-manager= switch command for this flake.
+  - ~nixos-switch~ :: run the =nixos-rebuild= switch command for this flake.
+  - ~use-caches~ :: add caches to project =nix.conf=. Only needed when modifying the caches.
+  - ~install-qutebrowser-dicts~ :: install dictionaries to be used within qutebrowser.
+  - ~backup~ :: backup fish history and GnuPG sshcontrol.
+- devShell :: a shell with tools used for development and required setup for flakes.
 - lib :: library functions to be used with flakes or within Nix.
   - ~kebabCaseToCamelCase~ :: convert kebab case to camel case (hello-world -> helloWorld)
   - ~importDirToAttrs~ :: given a directory import all files into a set corresponding to
@@ -37,6 +43,7 @@ includes the following components:
   - custom-shell :: configure shell environment.
 - overlay :: a package overlay including the mentioned packages.
 - overlays :: custom overlays.
+  - pkgs :: package overlay including the mentioned packages.
   - iosevka :: iosevka configured with the slab set.
 - packages :: packages not in the default nixpkgs.
   - [[https://github.com/ruby-formatter/rufo][rufo]]
@@ -50,28 +57,28 @@ nix flake show
 
 Switch both system (NixOS) and home:
 #+BEGIN_SRC sh
-nix dev-shell -c switch-nixos
+nix run .#nixos-switch
 #+end_src
 
 Switch home only:
 #+BEGIN_SRC sh
-nix dev-shell -c switch-home
+nix run .#home-switch
 #+end_src
 
 Update all inputs:
 #+BEGIN_SRC sh
-nix flake update --recreate-lock-file --commit-lock-file
+nix flake update --commit-lock-file
 #+end_src
 
 Update a single input:
 #+BEGIN_SRC sh
-nix flake update --update-input nixpkgs --commit-lock-file
+nix flake lock --update-input nixpkgs --commit-lock-file
 #+end_src
 
 * Development
 Use a local input during development:
 #+begin_src sh
-nix flake update --override-input nixpkgs path:../nixpkgs
+nix flake lock --override-input nixpkgs path:../nixpkgs
 #+end_src
 
 * Non-NixOS

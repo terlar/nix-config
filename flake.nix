@@ -343,24 +343,48 @@
       nixosModules = self.lib.importDirToAttrs ./nixos/modules;
       homeManagerModules = self.lib.importDirToAttrs ./home-manager/modules;
 
+      apps = self.lib.forAllSystems
+        (pkgs:
+          mapAttrs
+            (bin: drv: {
+              type = "app";
+              program = "${drv}/bin/${bin}";
+            })
+            {
+              use-caches = pkgs.writers.writeBashBin "use-caches" ''
+                ${pkgs.cachix}/bin/cachix use -O . nix-community
+                ${pkgs.cachix}/bin/cachix use -O . terlar
+              '';
+
+              home-switch = pkgs.writers.writeBashBin "home-switch" ''
+                ${home-manager.defaultApp.${pkgs.system}.program} switch --flake . "$@"
+              '';
+
+              nixos-switch = pkgs.writers.writeBashBin "switch-nixos" ''
+                sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nixUnstable pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . $@
+              '';
+
+              install-qutebrowser-dicts = pkgs.writers.writeBashBin "install-qutebrowser-dicts" ''
+                set -euo pipefail
+                ${pkgs.qutebrowser}/share/qutebrowser/scripts/dictcli.py install $@
+              '';
+
+              backup = pkgs.writers.writeBashBin "backup" ''
+                set -euo pipefail
+                TIMESTAMP="$(date +%Y%m%d%H%M%S)"
+                BACKUP_DIR="backup/$TIMESTAMP"
+                mkdir -p "$BACKUP_DIR/fish" "$BACKUP_DIR/gnupg"
+                cp "$HOME"/.local/share/fish/fish_history* "$BACKUP_DIR/fish"
+                cp "$HOME"/.gnupg/sshcontrol "$BACKUP_DIR/gnupg"
+              '';
+            });
+
       devShell = self.lib.forAllSystems (pkgs:
-        let scripts = import ./lib/scripts.nix { inherit pkgs; };
-        in
-        with pkgs;
-        with scripts;
-
-        mkShell {
+        pkgs.mkShell {
           nativeBuildInputs = [
-            cachix
-            git
-            nix_2_4
-            nixpkgs-fmt
-
-            backup
-            installQutebrowserDicts
-            switchHome
-            switchNixos
-            useCaches
+            pkgs.git
+            pkgs.nix_2_4
+            pkgs.nixpkgs-fmt
           ];
 
           shellHook = ''
