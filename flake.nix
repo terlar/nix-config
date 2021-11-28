@@ -3,6 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix = {
+      url = "github:NixOS/nix/2.4-maintenance";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -47,7 +52,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, emacs-config, ... }:
+  outputs = inputs@{ self, nixpkgs, nix, home-manager, nixos-hardware, emacs-config, ... }:
     with builtins;
     let
       inherit (nixpkgs) lib;
@@ -133,6 +138,7 @@
               } // wrappers;
 
             inputOverlays = [
+              nix.overlay
               nixGLOverlay
               homeManagerOverlay
               emacs-config.overlay
@@ -383,7 +389,7 @@
         pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.git
-            pkgs.nix_2_4
+            pkgs.nix
             pkgs.nixpkgs-fmt
           ];
 
