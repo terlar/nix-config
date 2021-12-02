@@ -366,7 +366,7 @@
                 ${home-manager.defaultApp.${pkgs.system}.program} switch --flake . "$@"
               '';
 
-              nixos-switch = pkgs.writers.writeBashBin "switch-nixos" ''
+              nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
                 sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nixUnstable pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . $@
               '';
 
