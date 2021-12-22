@@ -146,22 +146,6 @@
         "type": "github"
       }
     },
-    "lowdown-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1633514407,
-        "narHash": "sha256-Dw32tiMjdK9t3ETl5fzGrutQTzh2rufgZV4A/BbxuD4=",
-        "owner": "kristapsdz",
-        "repo": "lowdown",
-        "rev": "d2c2b44ff6c27b936ec27358a2653caaef8f73b8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kristapsdz",
-        "repo": "lowdown",
-        "type": "github"
-      }
-    },
     "menu": {
       "inputs": {
         "nixpkgs": [
@@ -180,28 +164,6 @@
       "original": {
         "owner": "terlar",
         "repo": "menu",
-        "type": "github"
-      }
-    },
-    "nix": {
-      "inputs": {
-        "lowdown-src": "lowdown-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1640010008,
-        "narHash": "sha256-p7HhyK//9eXvD2HIlTC1eEPNxH/ULe9bhGZmWcLE/YM=",
-        "owner": "NixOS",
-        "repo": "nix",
-        "rev": "d2002de610014fa4439dcb8d2f97ccfd354f2f79",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "2.4-maintenance",
-        "repo": "nix",
         "type": "github"
       }
     },
@@ -261,7 +223,6 @@
         "home-manager": "home-manager",
         "kmonad": "kmonad",
         "menu": "menu",
-        "nix": "nix",
         "nixGL": "nixGL",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix = {
-      url = "github:NixOS/nix/2.4-maintenance";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -52,7 +48,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix, home-manager, nixos-hardware, emacs-config, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, emacs-config, ... }:
     with builtins;
     let
       inherit (nixpkgs) lib;
@@ -138,7 +134,6 @@
               } // wrappers;
 
             inputOverlays = [
-              nix.overlay
               nixGLOverlay
               homeManagerOverlay
               emacs-config.overlay
@@ -367,7 +362,7 @@
               '';
 
               nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
-                sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nixUnstable pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . $@
+                sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nix pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . $@
               '';
 
               install-qutebrowser-dicts = pkgs.writers.writeBashBin "install-qutebrowser-dicts" ''
