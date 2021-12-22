@@ -183,7 +183,7 @@ in
 
     # Nix
     {
-      home.packages = [ pkgs.nix_2_4 ];
+      home.packages = [ pkgs.nix ];
 
       xdg.configFile."nix/nix.conf".source = ../../../../../nix.conf;
     }
