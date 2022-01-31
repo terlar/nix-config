@@ -73,7 +73,7 @@ in
   # Managed home.
   home-manager.users.${username} = import ./home-manager;
 
-  nix.trustedUsers = [ "root" "@wheel" ];
+  nix.settings.trusted-users = [ "root" "@wheel" ];
 
   # Free up to 1GiB whenever there is less than 100MiB left.
   nix.extraOptions = ''

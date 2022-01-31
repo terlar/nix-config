@@ -8,7 +8,7 @@
 
   # Desktop manager
   services.xserver.desktopManager.gnome.enable = true;
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
+  services.dbus.packages = [ pkgs.dconf ];
 
   # Gnome 3 enables power-profiles-daemon which conflicts with TLP.
   services.tlp.enable = false;

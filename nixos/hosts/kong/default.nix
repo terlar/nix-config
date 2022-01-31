@@ -76,7 +76,7 @@ in
   # Managed home.
   home-manager.users.${username} = import ./home-manager;
 
-  nix.trustedUsers = [ "root" username ];
+  nix.settings.trusted-users = [ "root" username ];
 
   nix.gc = {
     automatic = true;
