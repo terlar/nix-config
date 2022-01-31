@@ -89,6 +89,20 @@ echo $HOME/.nix-profile/bin/fish | sudo tee -a /etc/shells
 chsh -s $HOME/.nix-profile/bin/fish
 #+END_SRC
 
+* YubiKey ISO
+Used to create a safe environment for YubiKey operations having all the necessary tools.
+
+Build the ISO:
+#+begin_src sh
+nix build -L .#nixosConfigurations.yubikey-installer.config.system.build.isoImage
+#+end_src
+
+Copy the ISO to a USB-key/storage device:
+#+begin_src sh
+sudo dd if=result/iso/*.iso of=/dev/sda status=progress
+sync
+#+end_src
+
 * Tasks
 ** TODO Extract some inline stuff into external files
 ** TODO GC helpers?
