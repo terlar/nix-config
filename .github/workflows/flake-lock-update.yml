@@ -1,0 +1,29 @@
+---
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+
+jobs:
+  flake-lock-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v16
+
+      - uses: tibdex/github-app-token@v1.5.1
+        id: generate-app-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v8
+        with:
+          token: ${{ steps.generate-app-token.outputs.token }}
+          pr-labels: |
+            chore
+            flake
+            automation
