@@ -8,6 +8,7 @@ final: prev:
     themepark = prev.callPackage ./scripts/themepark { };
   };
 
+  project-init = prev.callPackage ./project-init { };
   rufo = prev.callPackage ./rufo { };
   saw = prev.callPackage ./saw { };
 }
