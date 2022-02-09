@@ -1,6 +1,11 @@
 {
   description = "Nix Config of Terje";
 
+  nixConfig = {
+    extra-substituters = "https://terlar.cachix.org";
+    extra-trusted-public-keys = "terlar.cachix.org-1:M8CXTOaJib7CP/jEfpNJAyrgW4qECnOUI02q7cnmh8U=";
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
