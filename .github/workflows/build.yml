@@ -21,7 +21,6 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          extraPullNames: nix-community
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
@@ -43,7 +42,6 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          extraPullNames: nix-community
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
@@ -66,7 +64,6 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          extraPullNames: nix-community
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
