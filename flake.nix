@@ -9,48 +9,36 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    emacs-config = {
-      url = "github:terlar/emacs-config";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+
+    emacs-config.url = "github:terlar/emacs-config";
+    emacs-config.inputs.flake-compat.follows = "flake-compat";
+    emacs-config.inputs.home-manager.follows = "home-manager";
+    emacs-config.inputs.nixpkgs.follows = "nixpkgs";
 
     # Modules
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixGL = {
-      url = "github:guibou/nixGL?rev=8687d0ea4c08893b47f7c727e1ef8284bc54c142";
-      flake = false;
-    };
-    vsliveshare = {
-      url = "github:msteen/nixos-vsliveshare";
-      flake = false;
-    };
+
+    nixGL.url = "github:guibou/nixGL?rev=8687d0ea4c08893b47f7c727e1ef8284bc54c142";
+    nixGL.flake = false;
+
+    vsliveshare.url = "github:msteen/nixos-vsliveshare";
+    vsliveshare.flake = false;
 
     # Packages
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    menu = {
-      url = "github:terlar/menu";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    kmonad.url = "github:kmonad/kmonad?dir=nix";
+    kmonad.inputs.nixpkgs.follows = "nixpkgs";
+
+    menu.url = "github:terlar/menu";
+    menu.inputs.nixpkgs.follows = "nixpkgs";
 
     # Sources
-    dotfiles = {
-      url = "github:terlar/dotfiles";
-      flake = false;
-    };
+    dotfiles.url = "github:terlar/dotfiles";
+    dotfiles.flake = false;
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, emacs-config, ... }:
