@@ -10,8 +10,8 @@
   # Docker related packages.
   environment.systemPackages = with pkgs; [
     docker
+    docker-compose
     docker-slim
-    docker_compose
     kubectl
   ];
 }

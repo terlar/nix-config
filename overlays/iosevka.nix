@@ -10,10 +10,10 @@ final: prev:
 
       variants.design = {
         asterisk = "hex-low";
-        at = "threefold";
+        at = "fourfold";
         caret = "low";
         dollar = "open";
-        paragraph-sign = "low";
+        pilcrow = "low";
         underscore = "low";
         zero = "dotted";
       };
