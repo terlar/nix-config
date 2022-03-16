@@ -132,27 +132,6 @@
         "type": "github"
       }
     },
-    "menu": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1623322877,
-        "narHash": "sha256-e8K8YstBEU5vhZA3sWcFMnagBXODaFGyERQTzWcyyzY=",
-        "owner": "terlar",
-        "repo": "menu",
-        "rev": "a1b60f6d520494dd2711abceaa7f75a545653397",
-        "type": "github"
-      },
-      "original": {
-        "owner": "terlar",
-        "repo": "menu",
-        "type": "github"
-      }
-    },
     "nixGL": {
       "flake": false,
       "locked": {
@@ -208,26 +187,10 @@
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
         "kmonad": "kmonad",
-        "menu": "menu",
         "nixGL": "nixGL",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "vsliveshare": "vsliveshare"
-      }
-    },
-    "utils": {
-      "locked": {
-        "lastModified": 1590791977,
-        "narHash": "sha256-l26u9vRsdV9jkoBGlzFxTKLKtrZ38xCMZIG9h9ibFjQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "4fbce19a7a9647154a35f0e856d52171c41e14a4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
       }
     },
     "vsliveshare": {

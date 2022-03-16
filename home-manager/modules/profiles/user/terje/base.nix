@@ -205,7 +205,6 @@ in
         # utility
         browsh
         fzy
-        menu
         pdfgrep
         pywal
         tldr

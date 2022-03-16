@@ -33,9 +33,6 @@
     kmonad.url = "github:kmonad/kmonad?dir=nix";
     kmonad.inputs.nixpkgs.follows = "nixpkgs";
 
-    menu.url = "github:terlar/menu";
-    menu.inputs.nixpkgs.follows = "nixpkgs";
-
     # Sources
     dotfiles.url = "github:terlar/dotfiles";
     dotfiles.flake = false;
@@ -131,7 +128,6 @@
               homeManagerOverlay
               emacs-config.overlay
               inputs.kmonad.overlay
-              inputs.menu.overlay
             ];
             selfOverlays = attrValues self.overlays;
           in
