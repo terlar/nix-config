@@ -347,11 +347,11 @@
               '';
 
               home-switch = pkgs.writers.writeBashBin "home-switch" ''
-                ${home-manager.defaultApp.${pkgs.system}.program} switch --flake . "$@"
+                ${home-manager.defaultApp.${pkgs.system}.program} switch -b backup --flake . "$@"
               '';
 
               nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
-                sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nix pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . $@
+                sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nix pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . "$@"
               '';
 
               install-qutebrowser-dicts = pkgs.writers.writeBashBin "install-qutebrowser-dicts" ''
