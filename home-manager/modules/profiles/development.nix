@@ -122,6 +122,7 @@ in
       home.packages = with pkgs; [
         curlie
         fd
+        glow
         gron
         hey
         jq
