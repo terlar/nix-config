@@ -24,14 +24,6 @@ in
       };
 
       dconf.settings = with lib.hm.gvariant; {
-        "org/gnome/desktop/input-sources" = {
-          sources = map mkTuple [
-            [ "xkb" "us+altgr-intl" ]
-            [ "xkb" "se" ]
-            [ "ibus" "libpinyin" ]
-          ];
-        };
-
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = [ ];
           switch-applications = [ ];

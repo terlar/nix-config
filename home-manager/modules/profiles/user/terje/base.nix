@@ -43,6 +43,14 @@ in
       };
 
       custom = {
+        keyboard = {
+          enable = true;
+          layouts = [{ layout = "us"; } { layout = "se"; }];
+          xkbOptions = [ "ctrl:nocaps" ];
+          repeatDelay = 500;
+          repeatInterval = 33; # 30Hz
+        };
+
         keybindings = {
           enable = true;
           mode = "emacs";
