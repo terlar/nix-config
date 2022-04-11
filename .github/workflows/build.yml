@@ -21,6 +21,7 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
@@ -42,6 +43,7 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
@@ -64,6 +66,7 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
@@ -85,8 +88,7 @@ jobs:
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Enable incremental cache upload
-        run: cachix watch-store terlar &
+          skipPush: true
 
       - name: Build ISO
         run: |
