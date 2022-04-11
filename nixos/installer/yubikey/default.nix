@@ -2,6 +2,7 @@
 
 let
   drduh-gpg-conf = pkgs.callPackage ./drduh-gpg-conf.nix { };
+  drduh-yubikey-guide = pkgs.callPackage ./drduh-yubikey-guide.nix { };
   gpg-agent-conf = pkgs.writeText "gpg-agent.conf" ''
     pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
   '';
@@ -15,6 +16,8 @@ in
     pkgs.pinentry-curses
     pkgs.paperkey
     pkgs.wget
+
+    drduh-yubikey-guide
   ];
 
   programs = {
