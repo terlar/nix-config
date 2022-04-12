@@ -17,7 +17,8 @@ in
     pkgs.paperkey
     pkgs.wget
 
-    pkgs.haskellPackages.hopenpgp-tools
+    # Disable due to broken dependencies.
+    # pkgs.haskellPackages.hopenpgp-tools
     pkgs.yubikey-manager
 
     drduh-yubikey-guide
