@@ -55,4 +55,21 @@ in
     cp ${gpg-agent-conf}  $GNUPGHOME/gpg-agent.conf
     echo "\$GNUPGHOME is $GNUPGHOME"
   '';
+
+  # Console.
+  fonts.fonts = [ pkgs.roboto-mono ];
+  services.kmscon = {
+    enable = true;
+    autologinUser = "nixos";
+    hwRender = true;
+    extraConfig = ''
+      palette=solarized
+      font-name=Roboto Mono
+      font-size=24
+      xkb-layout=us
+      xkb-options=ctrl:nocaps
+      xkb-repeat-delay=500
+      xkb-repeat-rate=33
+    '';
+  };
 }
