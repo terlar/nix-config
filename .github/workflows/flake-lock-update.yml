@@ -20,7 +20,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v8
+        uses: DeterminateSystems/update-flake-lock@v9
         with:
           token: ${{ steps.generate-app-token.outputs.token }}
           pr-labels: |
