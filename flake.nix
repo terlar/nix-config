@@ -127,7 +127,7 @@
               nixGLOverlay
               homeManagerOverlay
               emacs-config.overlay
-              inputs.kmonad.overlay
+              inputs.kmonad.overlays.default
             ];
             selfOverlays = attrValues self.overlays;
           in
