@@ -127,7 +127,7 @@
               nixGLOverlay
               homeManagerOverlay
               emacs-config.overlay
-              inputs.kmonad.overlay
+              inputs.kmonad.overlays.default
             ];
             selfOverlays = attrValues self.overlays;
           in
@@ -236,7 +236,7 @@
           kong = {
             configuration = ./nixos/hosts/kong;
             modules = [
-              nixos-hardware.nixosModules.common-cpu-intel
+              nixos-hardware.nixosModules.dell-xps-15-9560-intel
               nixos-hardware.nixosModules.common-pc-laptop
               nixos-hardware.nixosModules.common-pc-ssd
             ];
