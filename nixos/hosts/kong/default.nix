@@ -29,20 +29,16 @@ in
     loader.systemd-boot.configurationLimit = 25;
     loader.efi.canTouchEfiVariables = true;
 
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    # Prevent system freezes.
-    kernelParams =
-      [ "acpi_rev_override=1" "nouveau.modeset=0" "pcie_aspm=off" ];
-
     kernelModules = [ "fuse" ];
-    blacklistedKernelModules = [ "nouveau" ];
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   hardware = {
     enableRedistributableFirmware = true;
-    nvidiaOptimus.disable = true;
     opengl.enable = true;
+
+    # Disable the disable, as this enables the broken bbswitch.
+    nvidiaOptimus.disable = false;
   };
 
   services = {
