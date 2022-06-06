@@ -9,13 +9,22 @@ final: prev:
       serifs = "slab";
 
       variants.design = {
+        zero = "dotted-oval";
         asterisk = "hex-low";
-        at = "fourfold";
-        caret = "low";
-        dollar = "open";
-        pilcrow = "low";
         underscore = "low";
-        zero = "dotted";
+        pilcrow = "low";
+        caret = "low";
+        paren = "large-contour";
+        brace = "straight";
+        number-sign = "upright-tall";
+        at = "fourfold-tall";
+        dollar = "interrupted";
+        percent = "rings-continuous-slash";
+        question = "corner";
+      };
+
+      ligations = {
+        inherits = "dlig";
       };
     };
   }).overrideAttrs (oldAttrs: {
