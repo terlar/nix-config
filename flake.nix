@@ -307,7 +307,7 @@
         let homePackages = builtins.mapAttrs (_: lib.getAttr "activationPackage") self.homeConfigurations; in
         self.lib.forAllSystems
           (pkgs: {
-            inherit (pkgs) project-init rufo saw;
+            inherit (pkgs) project-init rufo saw iosevka-slab;
             inherit (pkgs.gnomeExtensions) paperwm;
           } // lib.pipe homePackages [
             (lib.filterAttrs (_: p: pkgs.system == p.system))
