@@ -1,7 +1,7 @@
 final: prev:
 
 {
-  iosevka-slab = prev.iosevka.override {
+  iosevka-slab = (prev.iosevka.override {
     set = "slab";
     privateBuildPlan = {
       family = "Iosevka Slab";
@@ -18,5 +18,9 @@ final: prev:
         zero = "dotted";
       };
     };
-  };
+  }).overrideAttrs (oldAttrs: {
+    preBuild = ''
+      export HOME=$PWD
+    '';
+  });
 }
