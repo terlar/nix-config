@@ -9,7 +9,7 @@ final: prev:
       serifs = "slab";
 
       variants.design = {
-        zero = "dotted-oval";
+        zero = "dotted";
         asterisk = "hex-low";
         underscore = "low";
         pilcrow = "low";
