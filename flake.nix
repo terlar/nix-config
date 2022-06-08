@@ -74,7 +74,7 @@
         pkgsForSystem = { system, extraOverlays ? [ ] }:
           let
             homeManagerOverlay = final: prev:
-              { home-manager = home-manager.defaultPackage.${system}; };
+              { inherit (home-manager.packages.${system}) home-manager; };
 
             nixGLOverlay = final: prev:
               let
@@ -347,7 +347,7 @@
               '';
 
               home-switch = pkgs.writers.writeBashBin "home-switch" ''
-                ${home-manager.packages.${pkgs.system}.home-manager}/bin/home-manager switch -b backup --flake . "$@"
+                ${pkgs.home-manager}/bin/home-manager switch -b backup --flake . "$@"
               '';
 
               nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
