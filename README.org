@@ -8,7 +8,8 @@ includes the following components:
   - ~use-caches~ :: add caches to project =nix.conf=. Only needed when modifying the caches.
   - ~install-qutebrowser-dicts~ :: install dictionaries to be used within qutebrowser.
   - ~backup~ :: backup fish history and GnuPG sshcontrol.
-- devShell :: a shell with tools used for development and required setup for flakes.
+- devShells :: developer shells
+  - default :: a shell with tools used for development and required setup for flakes.
 - lib :: library functions to be used with flakes or within Nix.
   - ~kebabCaseToCamelCase~ :: convert kebab case to camel case (hello-world -> helloWorld)
   - ~importDirToAttrs~ :: given a directory import all files into a set corresponding to
@@ -41,9 +42,8 @@ includes the following components:
   - custom-i18n :: configure internationalization.
   - custom-keyboard :: configure keyboard for console, kmscon and xserver via one setting.
   - custom-shell :: configure shell environment.
-- overlay :: a package overlay including the mentioned packages.
 - overlays :: custom overlays.
-  - pkgs :: package overlay including the mentioned packages.
+  - default :: package overlay including the mentioned packages.
   - iosevka :: iosevka configured with the slab set.
 - packages :: packages not in the default nixpkgs.
   - [[https://github.com/ruby-formatter/rufo][rufo]]
