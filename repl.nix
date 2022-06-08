@@ -6,6 +6,6 @@ let flake = builtins.getFlake (toString ./.); in
   inherit (flake.inputs.nixpkgs) lib;
   pkgs = import flake.inputs.nixpkgs {
     inherit system;
-    overlays = [ flake.overlay ];
+    overlays = [ flake.overlays.default ];
   };
 }

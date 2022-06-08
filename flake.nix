@@ -298,9 +298,8 @@
         };
       };
 
-      overlay = self.overlays.pkgs;
       overlays = {
-        pkgs = import ./pkgs;
+        default = import ./pkgs;
       } // self.lib.importDirToAttrs ./overlays;
 
       packages =
@@ -369,8 +368,8 @@
               '';
             });
 
-      devShell = self.lib.forAllSystems (pkgs:
-        pkgs.mkShell {
+      devShells = self.lib.forAllSystems (pkgs: {
+        default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.git
             pkgs.nix
@@ -380,6 +379,7 @@
           shellHook = ''
             export NIX_USER_CONF_FILES=${toString ./.}/nix.conf
           '';
-        });
+        };
+      });
     };
 }
