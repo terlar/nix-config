@@ -347,7 +347,7 @@
               '';
 
               home-switch = pkgs.writers.writeBashBin "home-switch" ''
-                ${home-manager.defaultApp.${pkgs.system}.program} switch -b backup --flake . "$@"
+                ${home-manager.packages.${pkgs.system}.home-manager}/bin/home-manager switch -b backup --flake . "$@"
               '';
 
               nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
