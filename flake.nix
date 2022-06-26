@@ -206,20 +206,21 @@
           , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux
           }:
           home-manager.lib.homeManagerConfiguration {
-            inherit username homeDirectory system pkgs;
+            inherit pkgs;
 
             extraSpecialArgs = {
               inherit (inputs) dotfiles;
             } // extraSpecialArgs;
 
-            extraModules = homeManagerExtraModules ++ extraModules;
-            configuration = {
-              imports = [ configuration ];
-              targets.genericLinux.enable = isGenericLinux;
-
-              home.sessionVariables.NIX_PATH = nixPath;
-              systemd.user.sessionVariables.NIX_PATH = lib.mkForce nixPath;
-            };
+            modules = homeManagerExtraModules ++ extraModules ++ [
+              {
+                home = { inherit username homeDirectory; };
+                targets.genericLinux.enable = isGenericLinux;
+                home.sessionVariables.NIX_PATH = nixPath;
+                systemd.user.sessionVariables.NIX_PATH = lib.mkForce nixPath;
+              }
+              configuration
+            ];
           };
 
         nixosHosts = {
