@@ -22,6 +22,8 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
+      home.stateVersion = "20.09";
+
       programs.home-manager.enable = true;
       systemd.user.startServices = "sd-switch";
       manual.html.enable = true;
