@@ -218,6 +218,7 @@
                 targets.genericLinux.enable = isGenericLinux;
                 home.sessionVariables.NIX_PATH = nixPath;
                 systemd.user.sessionVariables.NIX_PATH = lib.mkForce nixPath;
+                nix.registry.nixpkgs.flake = nixpkgs;
               }
               configuration
             ];
