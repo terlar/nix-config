@@ -38,17 +38,24 @@
     dotfiles.flake = false;
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, emacs-config, ... }:
-    with builtins;
-    let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    nixos-hardware,
+    emacs-config,
+    ...
+  }:
+    with builtins; let
       inherit (nixpkgs) lib;
 
-      homeManagerExtraModules = [
-        emacs-config.homeManagerModules.emacsConfig
-        "${inputs.vsliveshare}/modules/vsliveshare/home.nix"
-      ] ++ (attrValues self.homeManagerModules);
-    in
-    {
+      homeManagerExtraModules =
+        [
+          emacs-config.homeManagerModules.emacsConfig
+          "${inputs.vsliveshare}/modules/vsliveshare/home.nix"
+        ]
+        ++ (attrValues self.homeManagerModules);
+    in {
       lib = {
         kebabCaseToCamelCase =
           replaceStrings (map (s: "-${s}") lib.lowerChars) lib.upperChars;
@@ -64,73 +71,72 @@
                 (lib.removeSuffix "/default.nix")
                 (lib.removeSuffix ".nix")
                 self.lib.kebabCaseToCamelCase
-                (replaceStrings [ "/" ] [ "-" ])
+                (replaceStrings ["/"] ["-"])
               ];
               value = import path;
             }))
             listToAttrs
           ];
 
-        pkgsForSystem = { system, extraOverlays ? [ ] }:
-          let
-            homeManagerOverlay = final: prev:
-              { inherit (home-manager.packages.${system}) home-manager; };
+        pkgsForSystem = {
+          system,
+          extraOverlays ? [],
+        }: let
+          homeManagerOverlay = final: prev: {inherit (home-manager.packages.${system}) home-manager;};
 
-            nixGLOverlay = final: prev:
-              let
-                nixGL = import inputs.nixGL { pkgs = final; };
-                wrapWithNixGL = wrapper: package:
-                  let
-                    getBinFiles = pkg:
-                      lib.pipe "${lib.getBin pkg}/bin" [
-                        readDir
-                        attrNames
-                        (filter (n: match "^\\..*" n == null))
-                      ];
+          nixGLOverlay = final: prev: let
+            nixGL = import inputs.nixGL {pkgs = final;};
+            wrapWithNixGL = wrapper: package: let
+              getBinFiles = pkg:
+                lib.pipe "${lib.getBin pkg}/bin" [
+                  readDir
+                  attrNames
+                  (filter (n: match "^\\..*" n == null))
+                ];
 
-                    wrapperBin = lib.pipe wrapper [
-                      getBinFiles
-                      (filter (n: n == (lib.getName wrapper)))
-                      head
-                      (x: "${wrapper}/bin/${x}")
-                    ];
+              wrapperBin = lib.pipe wrapper [
+                getBinFiles
+                (filter (n: n == (lib.getName wrapper)))
+                head
+                (x: "${wrapper}/bin/${x}")
+              ];
 
-                    binFiles = getBinFiles package;
-                    wrapBin = name:
-                      final.writeShellScriptBin name ''
-                        exec ${wrapperBin} ${package}/bin/${name} "$@"
-                      '';
-                  in
-                  final.symlinkJoin {
-                    name = "${package.name}-nixgl";
-                    paths = (map wrapBin binFiles) ++ [ package ];
-                  };
+              binFiles = getBinFiles package;
+              wrapBin = name:
+                final.writeShellScriptBin name ''
+                  exec ${wrapperBin} ${package}/bin/${name} "$@"
+                '';
+            in
+              final.symlinkJoin {
+                name = "${package.name}-nixgl";
+                paths = (map wrapBin binFiles) ++ [package];
+              };
 
-                wrappers =
-                  let
-                    replacePrefix =
-                      replaceStrings [ "wrapWithNixGL" ] [ "nixGL" ];
-                  in
-                  lib.genAttrs [
-                    "wrapWithNixGLNvidia"
-                    "wrapWithNixGLIntel"
-                    "wrapWithNixGLDefault"
-                  ]
-                    (name: wrapWithNixGL final.${replacePrefix name});
-              in
-              {
-                inherit (nixGL) nixGLNvidia nixGLIntel nixGLDefault;
-                inherit wrapWithNixGL;
-              } // wrappers;
-
-            inputOverlays = [
-              nixGLOverlay
-              homeManagerOverlay
-              emacs-config.overlay
-              inputs.kmonad.overlays.default
-            ];
-            selfOverlays = attrValues self.overlays;
+            wrappers = let
+              replacePrefix =
+                replaceStrings ["wrapWithNixGL"] ["nixGL"];
+            in
+              lib.genAttrs [
+                "wrapWithNixGLNvidia"
+                "wrapWithNixGLIntel"
+                "wrapWithNixGLDefault"
+              ]
+              (name: wrapWithNixGL final.${replacePrefix name});
           in
+            {
+              inherit (nixGL) nixGLNvidia nixGLIntel nixGLDefault;
+              inherit wrapWithNixGL;
+            }
+            // wrappers;
+
+          inputOverlays = [
+            nixGLOverlay
+            homeManagerOverlay
+            emacs-config.overlay
+            inputs.kmonad.overlays.default
+          ];
+          selfOverlays = attrValues self.overlays;
+        in
           import nixpkgs {
             inherit system;
             overlays = inputOverlays ++ selfOverlays ++ extraOverlays;
@@ -138,91 +144,103 @@
           };
 
         forAllSystems = f:
-          lib.genAttrs [ "x86_64-linux" ]
-            (system: f (self.lib.pkgsForSystem { inherit system; }));
+          lib.genAttrs ["x86_64-linux"]
+          (system: f (self.lib.pkgsForSystem {inherit system;}));
 
-        nixosSystem =
-          { system ? "x86_64-linux"
-          , configuration ? { }
-          , modules ? [ ]
-          , extraModules ? [ ]
-          , extraOverlays ? [ ]
-          , specialArgs ? { }
-          , ...
-          }:
-          let
-            pkgs = self.lib.pkgsForSystem { inherit system extraOverlays; };
+        nixosSystem = {
+          system ? "x86_64-linux",
+          configuration ? {},
+          modules ? [],
+          extraModules ? [],
+          extraOverlays ? [],
+          specialArgs ? {},
+          ...
+        }: let
+          pkgs = self.lib.pkgsForSystem {inherit system extraOverlays;};
 
-            baseNixosModule = {
-              system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-              nixpkgs = { inherit pkgs; };
-              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
-              nix.registry.nixpkgs.flake = nixpkgs;
+          baseNixosModule = {
+            system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+            nixpkgs = {inherit pkgs;};
+            nix.nixPath = ["nixpkgs=${nixpkgs}"];
+            nix.registry.nixpkgs.flake = nixpkgs;
+          };
+
+          homeNixosModule = {config, ...}: {
+            config.home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "bak";
+
+              extraSpecialArgs = specialArgs;
+              sharedModules = homeManagerExtraModules;
             };
-
-            homeNixosModule = { config, ... }: {
-              config.home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "bak";
-
-                extraSpecialArgs = specialArgs;
-                sharedModules = homeManagerExtraModules;
-              };
-            };
-          in
+          };
+        in
           lib.nixosSystem {
             inherit system specialArgs;
 
-            modules = [ baseNixosModule homeNixosModule configuration ] ++ modules;
+            modules = [baseNixosModule homeNixosModule configuration] ++ modules;
 
-            extraModules = [
-              nixpkgs.nixosModules.notDetected
-              home-manager.nixosModules.home-manager
-            ] ++ (attrValues self.nixosModules) ++ extraModules;
+            extraModules =
+              [
+                nixpkgs.nixosModules.notDetected
+                home-manager.nixosModules.home-manager
+              ]
+              ++ (attrValues self.nixosModules)
+              ++ extraModules;
           };
 
-        nixosInstaller = args@{ extraModules ? [ ], ... }:
-          self.lib.nixosSystem (args // {
-            extraModules = [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-            ] ++ extraModules;
-          });
+        nixosInstaller = args @ {extraModules ? [], ...}:
+          self.lib.nixosSystem (args
+            // {
+              extraModules =
+                [
+                  "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+                ]
+                ++ extraModules;
+            });
 
-        homeManagerConfiguration =
-          let
-            homeDirectoryPrefix = pkgs:
-              if pkgs.stdenv.hostPlatform.isDarwin then "/Users" else "/home";
-          in
-          { username
-          , configuration
+        homeManagerConfiguration = let
+          homeDirectoryPrefix = pkgs:
+            if pkgs.stdenv.hostPlatform.isDarwin
+            then "/Users"
+            else "/home";
+        in
+          {
+            username,
+            configuration,
             # Optional arguments
-          , system ? "x86_64-linux"
-          , extraModules ? [ ]
-          , extraSpecialArgs ? { }
-          , pkgs ? (self.lib.pkgsForSystem { inherit system; })
-          , nixPath ? "nixpkgs=${pkgs.path}"
-          , homeDirectory ? "${homeDirectoryPrefix pkgs}/${username}"
-          , isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux
+            system ? "x86_64-linux",
+            extraModules ? [],
+            extraSpecialArgs ? {},
+            pkgs ? (self.lib.pkgsForSystem {inherit system;}),
+            nixPath ? "nixpkgs=${pkgs.path}",
+            homeDirectory ? "${homeDirectoryPrefix pkgs}/${username}",
+            isGenericLinux ? pkgs.stdenv.hostPlatform.isLinux,
           }:
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
 
-            extraSpecialArgs = {
-              inherit (inputs) dotfiles;
-            } // extraSpecialArgs;
+              extraSpecialArgs =
+                {
+                  inherit (inputs) dotfiles;
+                }
+                // extraSpecialArgs;
 
-            modules = homeManagerExtraModules ++ extraModules ++ [
-              {
-                home = { inherit username homeDirectory; };
-                targets.genericLinux.enable = isGenericLinux;
-                home.sessionVariables.NIX_PATH = nixPath;
-                systemd.user.sessionVariables.NIX_PATH = lib.mkForce nixPath;
-                nix.registry.nixpkgs.flake = nixpkgs;
-              }
-              configuration
-            ];
-          };
+              modules =
+                homeManagerExtraModules
+                ++ extraModules
+                ++ [
+                  {
+                    home = {inherit username homeDirectory;};
+                    targets.genericLinux.enable = isGenericLinux;
+                    home.sessionVariables.NIX_PATH = nixPath;
+                    systemd.user.sessionVariables.NIX_PATH = lib.mkForce nixPath;
+                    nix.registry.nixpkgs.flake = nixpkgs;
+                  }
+                  configuration
+                ];
+            };
 
         nixosHosts = {
           beetle = {
@@ -232,7 +250,7 @@
               nixos-hardware.nixosModules.common-pc-laptop
               nixos-hardware.nixosModules.common-pc-ssd
             ];
-            specialArgs = { inherit (inputs) dotfiles; };
+            specialArgs = {inherit (inputs) dotfiles;};
           };
 
           kong = {
@@ -242,13 +260,13 @@
               nixos-hardware.nixosModules.common-pc-laptop
               nixos-hardware.nixosModules.common-pc-ssd
             ];
-            specialArgs = { inherit (inputs) dotfiles; };
+            specialArgs = {inherit (inputs) dotfiles;};
           };
 
           snail = {
             system = "aarch64-linux";
 
-            configuration = { pkgs, ... }: {
+            configuration = {pkgs, ...}: {
               hardware.enableRedistributableFirmware = true;
 
               networking = {
@@ -284,9 +302,9 @@
               ];
 
               systemd.services.btattach = {
-                before = [ "bluetooth.service" ];
-                after = [ "dev-ttyAMA0.device" ];
-                wantedBy = [ "multi-user.target" ];
+                before = ["bluetooth.service"];
+                after = ["dev-ttyAMA0.device"];
+                wantedBy = ["multi-user.target"];
                 serviceConfig = {
                   ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
                 };
@@ -300,17 +318,22 @@
         };
       };
 
-      overlays = {
-        default = import ./pkgs;
-      } // self.lib.importDirToAttrs ./overlays;
+      overlays =
+        {
+          default = import ./pkgs;
+        }
+        // self.lib.importDirToAttrs ./overlays;
 
-      packages =
-        let homePackages = builtins.mapAttrs (_: lib.getAttr "activationPackage") self.homeConfigurations; in
+      packages = let
+        homePackages = builtins.mapAttrs (_: lib.getAttr "activationPackage") self.homeConfigurations;
+      in
         self.lib.forAllSystems
-          (pkgs: {
+        (pkgs:
+          {
             inherit (pkgs) project-init rufo saw iosevka-slab;
             inherit (pkgs.gnomeExtensions) paperwm;
-          } // lib.pipe homePackages [
+          }
+          // lib.pipe homePackages [
             (lib.filterAttrs (_: p: pkgs.system == p.system))
             (lib.mapAttrs' (username: p: lib.nameValuePair "${username}-home" p))
           ]);
@@ -334,48 +357,50 @@
       nixosModules = self.lib.importDirToAttrs ./nixos/modules;
       homeManagerModules = self.lib.importDirToAttrs ./home-manager/modules;
 
-      apps = self.lib.forAllSystems
+      apps =
+        self.lib.forAllSystems
         (pkgs:
           mapAttrs
-            (bin: drv: {
-              type = "app";
-              program = "${drv}/bin/${bin}";
-            })
-            {
-              use-caches = pkgs.writers.writeBashBin "use-caches" ''
-                ${pkgs.cachix}/bin/cachix use -O . nix-community
-                ${pkgs.cachix}/bin/cachix use -O . terlar
-              '';
+          (bin: drv: {
+            type = "app";
+            program = "${drv}/bin/${bin}";
+          })
+          {
+            use-caches = pkgs.writers.writeBashBin "use-caches" ''
+              ${pkgs.cachix}/bin/cachix use -O . nix-community
+              ${pkgs.cachix}/bin/cachix use -O . terlar
+            '';
 
-              home-switch = pkgs.writers.writeBashBin "home-switch" ''
-                ${pkgs.home-manager}/bin/home-manager switch -b backup --flake . "$@"
-              '';
+            home-switch = pkgs.writers.writeBashBin "home-switch" ''
+              ${pkgs.home-manager}/bin/home-manager switch -b backup --flake . "$@"
+            '';
 
-              nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
-                sudo PATH=${lib.makeBinPath [ pkgs.gitMinimal pkgs.nix pkgs.nixos-rebuild ]}:$PATH nixos-rebuild switch --flake . "$@"
-              '';
+            nixos-switch = pkgs.writers.writeBashBin "nixos-switch" ''
+              sudo PATH=${lib.makeBinPath [pkgs.gitMinimal pkgs.nix pkgs.nixos-rebuild]}:$PATH nixos-rebuild switch --flake . "$@"
+            '';
 
-              install-qutebrowser-dicts = pkgs.writers.writeBashBin "install-qutebrowser-dicts" ''
-                set -euo pipefail
-                ${pkgs.qutebrowser}/share/qutebrowser/scripts/dictcli.py install $@
-              '';
+            install-qutebrowser-dicts = pkgs.writers.writeBashBin "install-qutebrowser-dicts" ''
+              set -euo pipefail
+              ${pkgs.qutebrowser}/share/qutebrowser/scripts/dictcli.py install $@
+            '';
 
-              backup = pkgs.writers.writeBashBin "backup" ''
-                set -euo pipefail
-                TIMESTAMP="$(date +%Y%m%d%H%M%S)"
-                BACKUP_DIR="backup/$TIMESTAMP"
-                mkdir -p "$BACKUP_DIR/fish" "$BACKUP_DIR/gnupg"
-                cp "$HOME"/.local/share/fish/fish_history* "$BACKUP_DIR/fish"
-                cp "$HOME"/.gnupg/sshcontrol "$BACKUP_DIR/gnupg"
-              '';
-            });
+            backup = pkgs.writers.writeBashBin "backup" ''
+              set -euo pipefail
+              TIMESTAMP="$(date +%Y%m%d%H%M%S)"
+              BACKUP_DIR="backup/$TIMESTAMP"
+              mkdir -p "$BACKUP_DIR/fish" "$BACKUP_DIR/gnupg"
+              cp "$HOME"/.local/share/fish/fish_history* "$BACKUP_DIR/fish"
+              cp "$HOME"/.gnupg/sshcontrol "$BACKUP_DIR/gnupg"
+            '';
+          });
+
+      formatter = self.lib.forAllSystems (pkgs: pkgs.alejandra);
 
       devShells = self.lib.forAllSystems (pkgs: {
         default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.git
             pkgs.nix
-            pkgs.nixpkgs-fmt
           ];
 
           shellHook = ''

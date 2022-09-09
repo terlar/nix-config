@@ -1,6 +1,4 @@
-final: prev:
-
-{
+final: prev: {
   iosevka-slab = prev.iosevka.override {
     set = "slab";
     privateBuildPlan = {

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let cfg = config.profiles.user.terje.keyboards;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.profiles.user.terje.keyboards;
+in {
   options.profiles.user.terje.keyboards = {
     enable = mkEnableOption "Keyboards profile for terje";
   };

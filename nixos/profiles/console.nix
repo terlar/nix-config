@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   # Virtual terminal.
   services.kmscon = {
     enable = true;

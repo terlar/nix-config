@@ -1,5 +1,7 @@
-{ writeShellScriptBin, systemd }:
-
+{
+  writeShellScriptBin,
+  systemd,
+}:
 writeShellScriptBin "insomnia" ''
   ${systemd}/bin/systemctl --user stop xautolock-session.service
   ${systemd}/bin/systemd-inhibit sleep "$@"

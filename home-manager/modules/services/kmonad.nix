@@ -1,12 +1,14 @@
 # Code copied with slight modifications from @splintah at:
 # https://github.com/splintah/configuration/blob/master/modules/home/kmonad.nix
-{ config, lib, ... }:
-
-with lib;
-let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.services.kmonad;
 
-  keyboardOpts = { name, ... }: {
+  keyboardOpts = {name, ...}: {
     options = {
       name = mkOption {
         type = types.str;
@@ -34,14 +36,13 @@ let
       };
     };
 
-    config = { name = mkDefault name; };
+    config = {name = mkDefault name;};
   };
-in
-{
+in {
   options.services.kmonad = {
     keyboards = mkOption {
       type = types.attrsOf (types.submodule keyboardOpts);
-      default = { };
+      default = {};
       description = "List of keyboard configurations.";
     };
 
@@ -57,20 +58,22 @@ in
   # NOTE: the top-level attrs assigned to config cannot be created by a fold or
   # merge over cfg.keyboards, it seems, as that results in an infinite
   # recursion.
-  config =
-    let enabledKeyboards = filterAttrs (name: kb: kb.enable) cfg.keyboards;
-    in
-    mkIf (cfg.keyboards != { }) {
-      xdg.configFile = mapAttrs'
+  config = let
+    enabledKeyboards = filterAttrs (name: kb: kb.enable) cfg.keyboards;
+  in
+    mkIf (cfg.keyboards != {}) {
+      xdg.configFile =
+        mapAttrs'
         (name: kb:
-          nameValuePair "kmonad/kmonad-${name}.kbd" { text = kb.config; })
+          nameValuePair "kmonad/kmonad-${name}.kbd" {text = kb.config;})
         enabledKeyboards;
 
-      systemd.user.services = mapAttrs'
+      systemd.user.services =
+        mapAttrs'
         (name: kb:
           nameValuePair "kmonad-${name}" {
-            Unit = { Description = "KMonad for ${name}"; };
-            Install = { WantedBy = [ "default.target" ]; };
+            Unit = {Description = "KMonad for ${name}";};
+            Install = {WantedBy = ["default.target"];};
             Service = {
               Type = "simple";
               ExecStart = "${cfg.package}/bin/kmonad ${

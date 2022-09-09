@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Docker support.
   virtualisation.docker = {
     enable = true;

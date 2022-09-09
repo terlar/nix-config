@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   fonts = {
     fonts = with pkgs; [
       iosevka-slab
@@ -13,10 +11,9 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace =
-          [ "Iosevka Slab" "Noto Sans Mono CJK SC" "Noto Sans Symbols" ];
-        sansSerif = [ "Noto Sans" "Noto Sans CJK SC" "Noto Sans Symbols" ];
-        serif = [ "Noto Serif" "Noto Sans CJK SC" "Noto Sans Symbols" ];
+        monospace = ["Iosevka Slab" "Noto Sans Mono CJK SC" "Noto Sans Symbols"];
+        sansSerif = ["Noto Sans" "Noto Sans CJK SC" "Noto Sans Symbols"];
+        serif = ["Noto Serif" "Noto Sans CJK SC" "Noto Sans Symbols"];
       };
     };
   };

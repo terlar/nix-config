@@ -1,16 +1,13 @@
-{ pkgs, ... }:
-
-let
-  drduh-gpg-conf = pkgs.callPackage ./drduh-gpg-conf.nix { };
-  drduh-yubikey-guide = pkgs.callPackage ./drduh-yubikey-guide.nix { };
+{pkgs, ...}: let
+  drduh-gpg-conf = pkgs.callPackage ./drduh-gpg-conf.nix {};
+  drduh-yubikey-guide = pkgs.callPackage ./drduh-yubikey-guide.nix {};
   gpg-agent-conf = pkgs.writeText "gpg-agent.conf" ''
     pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
   '';
-in
-{
+in {
   # Required packages and services.
   services.pcscd.enable = true;
-  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.udev.packages = [pkgs.yubikey-personalization];
   environment.systemPackages = [
     pkgs.gnupg
     pkgs.pinentry-curses
@@ -33,12 +30,12 @@ in
   };
 
   # Avoid accidental persistence to USB-drive
-  boot.kernelParams = [ "copytoram" ];
+  boot.kernelParams = ["copytoram"];
 
   # Disable networking
   boot.initrd.network.enable = false;
   networking.dhcpcd.enable = false;
-  networking.dhcpcd.allowInterfaces = [ ];
+  networking.dhcpcd.allowInterfaces = [];
   networking.firewall.enable = true;
   networking.useDHCP = false;
   networking.useNetworkd = false;
@@ -61,7 +58,7 @@ in
   '';
 
   # Console.
-  fonts.fonts = [ pkgs.roboto-mono ];
+  fonts.fonts = [pkgs.roboto-mono];
   services.kmscon = {
     enable = true;
     autologinUser = "nixos";

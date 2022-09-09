@@ -1,15 +1,20 @@
-{ config, dotfiles, lib, pkgs, ... }:
-
+{
+  config,
+  dotfiles,
+  lib,
+  pkgs,
+  ...
+}:
 with builtins;
-with lib;
-let
+with lib; let
   cfg = config.profiles.user.terje.base;
 
   sourceDirFiles = attrRoot: destination: target: {
     ${attrRoot} = foldl' (attrs: file:
-      attrs // {
+      attrs
+      // {
         "${destination}/${file}".source = "${toString target}/${file}";
-      }) { } (attrNames (readDir target));
+      }) {} (attrNames (readDir target));
   };
 in {
   options.profiles.user.terje.base = {
@@ -43,8 +48,8 @@ in {
       custom = {
         keyboard = {
           enable = true;
-          layouts = [ { layout = "us"; } { layout = "se"; } ];
-          xkbOptions = [ "ctrl:nocaps" ];
+          layouts = [{layout = "us";} {layout = "se";}];
+          xkbOptions = ["ctrl:nocaps"];
           repeatDelay = 500;
           repeatInterval = 33; # 30Hz
         };
@@ -79,7 +84,6 @@ in {
       programs.bash.enable = true;
       home.packages = [
         pkgs.bashInteractive
-
       ];
     }
 
@@ -142,12 +146,12 @@ in {
     # Git
     {
       programs.git = {
-        ignores = [ ".dir-locals.el" ".direnv/" ".envrc" ];
+        ignores = [".dir-locals.el" ".direnv/" ".envrc"];
 
         extraConfig = {
           ghq = {
-            "git@code.orgmode.org:" = { vcs = "git"; };
-            "https://git.savannah.gnu.org/git/" = { vcs = "git"; };
+            "git@code.orgmode.org:" = {vcs = "git";};
+            "https://git.savannah.gnu.org/git/" = {vcs = "git";};
           };
 
           delta = {
@@ -163,8 +167,8 @@ in {
           };
 
           url = {
-            "ssh://git@github.com/terlar" = { insteadOf = "gh:terlar"; };
-            "https://github.com/" = { insteadOf = "gh:"; };
+            "ssh://git@github.com/terlar" = {insteadOf = "gh:terlar";};
+            "https://github.com/" = {insteadOf = "gh:";};
           };
         };
       };
@@ -175,19 +179,21 @@ in {
       programs.gpg = {
         enable = true;
         package = pkgs.gnupg.overrideAttrs (old:
-          if old.version == "2.3.7" then {
-            patches = old.patches ++ [
-              (pkgs.fetchpatch {
-                name = "fix-yubikey.patch";
-                url =
-                  "https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=patch;h=f34b9147eb3070bce80d53febaa564164cd6c977;hp=95651d1a4fec9bc5e36f623b2cdcc6a35e0c30bb";
-                sha256 = "sha256-KD8H6N9oGx+85SetHx1OJku28J2dmsj/JkJudknCueU=";
-              })
-            ];
-          } else
-            { });
+          if old.version == "2.3.7"
+          then {
+            patches =
+              old.patches
+              ++ [
+                (pkgs.fetchpatch {
+                  name = "fix-yubikey.patch";
+                  url = "https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=patch;h=f34b9147eb3070bce80d53febaa564164cd6c977;hp=95651d1a4fec9bc5e36f623b2cdcc6a35e0c30bb";
+                  sha256 = "sha256-KD8H6N9oGx+85SetHx1OJku28J2dmsj/JkJudknCueU=";
+                })
+              ];
+          }
+          else {});
 
-        settings = { keyserver = "hkps://keys.openpgp.org"; };
+        settings = {keyserver = "hkps://keys.openpgp.org";};
       };
 
       services.gpg-agent = {
@@ -202,7 +208,7 @@ in {
 
     # Nix
     {
-      home.packages = [ pkgs.nix ];
+      home.packages = [pkgs.nix];
 
       xdg.configFile."nix/nix.conf".source = ../../../../../nix.conf;
     }

@@ -1,9 +1,13 @@
-{ config, dotfiles, lib, pkgs, ... }:
-
-with lib;
-let cfg = config.profiles.user.terje.graphical;
-in
 {
+  config,
+  dotfiles,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.profiles.user.terje.graphical;
+in {
   options.profiles.user.terje.graphical = {
     enable = mkEnableOption "Graphical profile for terje";
   };
@@ -38,64 +42,59 @@ in
 
     # Foot
     {
-      programs.foot =
-        {
-          enable = true;
-          server.enable = true;
-          settings = {
-            main = {
-              # term = "xterm-256color";
-              font = "Iosevka Slab Light:size=10";
-              dpi-aware = "yes";
-            };
+      programs.foot = {
+        enable = true;
+        server.enable = true;
+        settings = {
+          main = {
+            # term = "xterm-256color";
+            font = "Iosevka Slab Light:size=10";
+            dpi-aware = "yes";
+          };
 
-            scrollback = {
-              lines = 1000000;
-            };
+          scrollback = {
+            lines = 1000000;
+          };
 
-            mouse = {
-              hide-when-typing = "yes";
-            };
+          mouse = {
+            hide-when-typing = "yes";
+          };
 
-            colors = {
-              foreground = "596e76";
-              background = "fffce9";
-              regular0 = "596e76"; # black
-              regular1 = "bb3e06"; # red
-              regular2 = "596e76"; # green
-              regular3 = "98a6a6"; # yellow
-              regular4 = "596e76"; # blue
-              regular5 = "596e76"; # magenta
-              regular6 = "596e76"; # cyan
-              regular7 = "98a6a6"; # white
-              bright0 = "002b37"; # bright black
-              bright1 = "cc1f24"; # bright red
-              bright2 = "002b37"; # bright green
-              bright3 = "596e76"; # bright yellow
-              bright4 = "002b37"; # bright blue
-              bright5 = "002b37"; # bright magenta
-              bright6 = "002b37"; # bright cyan
-              bright7 = "f4eedb"; # bright white
-            };
+          colors = {
+            foreground = "596e76";
+            background = "fffce9";
+            regular0 = "596e76"; # black
+            regular1 = "bb3e06"; # red
+            regular2 = "596e76"; # green
+            regular3 = "98a6a6"; # yellow
+            regular4 = "596e76"; # blue
+            regular5 = "596e76"; # magenta
+            regular6 = "596e76"; # cyan
+            regular7 = "98a6a6"; # white
+            bright0 = "002b37"; # bright black
+            bright1 = "cc1f24"; # bright red
+            bright2 = "002b37"; # bright green
+            bright3 = "596e76"; # bright yellow
+            bright4 = "002b37"; # bright blue
+            bright5 = "002b37"; # bright magenta
+            bright6 = "002b37"; # bright cyan
+            bright7 = "f4eedb"; # bright white
           };
         };
+      };
     }
 
     # Kitty
     {
-      home.packages = [ pkgs.kitty ];
+      home.packages = [pkgs.kitty];
 
       home.sessionVariables.TERMINAL = "kitty";
 
       xdg = {
-        configFile."kitty/kitty.conf".source =
-          "${dotfiles}/kitty/.config/kitty/kitty.conf";
-        configFile."kitty/diff.conf".source =
-          "${dotfiles}/kitty/.config/kitty/diff.conf";
-        configFile."kitty/colors-dark.conf".source =
-          "${dotfiles}/kitty/.config/kitty/colors-dark.conf";
-        configFile."kitty/colors-light.conf".source =
-          "${dotfiles}/kitty/.config/kitty/colors-light.conf";
+        configFile."kitty/kitty.conf".source = "${dotfiles}/kitty/.config/kitty/kitty.conf";
+        configFile."kitty/diff.conf".source = "${dotfiles}/kitty/.config/kitty/diff.conf";
+        configFile."kitty/colors-dark.conf".source = "${dotfiles}/kitty/.config/kitty/colors-dark.conf";
+        configFile."kitty/colors-light.conf".source = "${dotfiles}/kitty/.config/kitty/colors-light.conf";
       };
     }
 
@@ -177,7 +176,7 @@ in
 
           fonts.default_family = "Iosevka Slab Light";
 
-          spellcheck.languages = [ "en-US" "sv-SE" ];
+          spellcheck.languages = ["en-US" "sv-SE"];
 
           statusbar.show = "in-mode";
 
@@ -204,8 +203,7 @@ in
             "xt" = "config-cycle tabs.show multiple switching";
             "xv" = "spawn --userscript view_in_mpv";
             "xV" = "hint links spawn mpv {hint-url}";
-            "xx" =
-              "config-cycle statusbar.show always in-mode ;; config-cycle tabs.show multiple switching";
+            "xx" = "config-cycle statusbar.show always in-mode ;; config-cycle tabs.show multiple switching";
           };
           insert = {
             "<Alt-v>" = "fake-key <PgUp>";

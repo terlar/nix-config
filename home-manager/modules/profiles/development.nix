@@ -1,13 +1,16 @@
-{ config, lib, pkgs, ... }:
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with builtins;
-with lib;
-let
+with lib; let
   cfg = config.profiles.development;
 
   mkIndentStyleOption = lang: default:
     mkOption {
-      type = types.enum [ "space" "tab" ];
+      type = types.enum ["space" "tab"];
       inherit default;
       description = "Indentation style for ${lang}";
     };
@@ -18,12 +21,11 @@ let
       inherit default;
       description = "Indentation size for ${lang}";
     };
-in
-{
+in {
   options.profiles.development = {
     enable = mkEnableOption "Development profile";
 
-    aws = { enable = mkEnableOption "AWS Development profile"; };
+    aws = {enable = mkEnableOption "AWS Development profile";};
 
     sourceDirectory = mkOption {
       type = with types; either path str;
@@ -97,7 +99,7 @@ in
       indentSize = mkIndentSizeOption "JavaScript" 2;
     };
 
-    nix = { enable = mkEnableOption "Nix Development profile"; };
+    nix = {enable = mkEnableOption "Nix Development profile";};
 
     plantuml = {
       indentStyle = mkIndentStyleOption "PlantUML" "space";
@@ -167,11 +169,11 @@ in
       };
     }
 
-    (mkIf cfg.aws.enable { home.packages = with pkgs; [ awscli saw ]; })
+    (mkIf cfg.aws.enable {home.packages = with pkgs; [awscli saw];})
 
     (mkIf cfg.git.enable (mkMerge [
       {
-        home.packages = with pkgs; [ git-imerge ];
+        home.packages = with pkgs; [git-imerge];
 
         programs.git = {
           enable = true;
@@ -187,8 +189,7 @@ in
             ignored = "!git ls-files -v | grep '^[[:lower:]]'";
             wip = "!git add -Ap && git commit --amend --no-edit && git push --force-with-lease";
 
-            fup =
-              "!git log --stat --since '1 day ago' --author $(git config user.email)";
+            fup = "!git log --stat --since '1 day ago' --author $(git config user.email)";
             tags = "tag -l";
             remotes = "remote -v";
             branches = concatStringsSep " " [
@@ -216,9 +217,9 @@ in
               autoSetupRebase = "always";
             };
 
-            fetch = { prune = "true"; };
-            pull = { rebase = "true"; };
-            push = { default = "current"; };
+            fetch = {prune = "true";};
+            pull = {rebase = "true";};
+            push = {default = "current";};
 
             rebase = {
               # Support fixup and squash commits.
@@ -242,18 +243,18 @@ in
         };
       }
       (mkIf cfg.git.enableDelta {
-        home.packages = [ pkgs.delta ];
+        home.packages = [pkgs.delta];
         programs.git.extraConfig = {
           core.pager = "delta";
           interactive.diffFilter = "delta --color-only";
         };
       })
       (mkIf cfg.git.enableGhq {
-        home.packages = [ pkgs.ghq ];
-        programs.git.extraConfig = { ghq = { root = cfg.sourceDirectory; }; };
+        home.packages = [pkgs.ghq];
+        programs.git.extraConfig = {ghq = {root = cfg.sourceDirectory;};};
       })
       (mkIf cfg.git.gitHub.enable (mkMerge [
-        { home.packages = [ pkgs.gh ]; }
+        {home.packages = [pkgs.gh];}
         (mkIf cfg.git.gitHub.reuseSshConnection {
           programs.ssh = {
             enable = true;
@@ -326,7 +327,7 @@ in
     })
 
     (mkIf cfg.shell.enable {
-      home.packages = with pkgs; [ shellcheck shfmt termtosvg ];
+      home.packages = with pkgs; [shellcheck shfmt termtosvg];
 
       programs.editorConfig.settings."*.{bash,sh}" = {
         indent_style = cfg.shell.indentStyle;

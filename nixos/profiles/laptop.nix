@@ -1,11 +1,9 @@
-{ pkgs, ... }:
-
-{
-  imports = [ ./hardware/backlight.nix ];
+{pkgs, ...}: {
+  imports = [./hardware/backlight.nix];
 
   networking.networkmanager.enable = true;
 
-  hardware = { bluetooth.enable = true; };
+  hardware = {bluetooth.enable = true;};
 
   services = {
     # Enable zero-configuration networking and service discorvery.
@@ -28,5 +26,5 @@
     thermald.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ powertop ];
+  environment.systemPackages = with pkgs; [powertop];
 }

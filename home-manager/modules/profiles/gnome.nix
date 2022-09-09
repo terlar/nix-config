@@ -1,14 +1,16 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.profiles.gnome;
   installGnomeSessionScript = pkgs.writeShellScriptBin "install-gnome-session" ''
     sudo ln -fs ${pkgs.gnome.gnome-session.sessions}/share/wayland-sessions/gnome.desktop /usr/share/wayland-sessions/gnome.desktop
     sudo ln -fs ${pkgs.gnome.gnome-session.sessions}/share/xsessions/gnome.desktop /usr/share/xsessions/gnome.desktop
   '';
-in
-{
+in {
   options.profiles.gnome = {
     enable = mkEnableOption "GNOME Desktop profile";
 
@@ -26,7 +28,7 @@ in
 
       services.gpg-agent.pinentryFlavor = "gnome3";
 
-      home.packages = [ installGnomeSessionScript ];
+      home.packages = [installGnomeSessionScript];
     }
     (mkIf cfg.disableKeyringSshAgent {
       xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = ''

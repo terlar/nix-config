@@ -1,6 +1,10 @@
-{ stdenv, lib, fetchFromGitHub, writeShellApplication, glow }:
-
-let
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  writeShellApplication,
+  glow,
+}: let
   version = "20210410";
 
   guide = stdenv.mkDerivation {
@@ -27,11 +31,11 @@ let
     };
   };
 in
-writeShellApplication
-{
-  name = "drduh-yubikey-guide-reader";
-  runtimeInputs = [ glow ];
-  text = ''
-    glow --pager ${guide}
-  '';
-}
+  writeShellApplication
+  {
+    name = "drduh-yubikey-guide-reader";
+    runtimeInputs = [glow];
+    text = ''
+      glow --pager ${guide}
+    '';
+  }

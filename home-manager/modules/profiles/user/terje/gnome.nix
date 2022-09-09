@@ -1,14 +1,17 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let cfg = config.profiles.user.terje.gnome;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.profiles.user.terje.gnome;
+in {
   options.profiles.user.terje.gnome = {
     enable = mkEnableOption "GNOME profile for terje";
 
-    materialShell = { enable = mkEnableOption "Use Material Shell"; };
-    paperwm = { enable = mkEnableOption "Use PaperWM"; };
+    materialShell = {enable = mkEnableOption "Use Material Shell";};
+    paperwm = {enable = mkEnableOption "Use PaperWM";};
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -18,20 +21,20 @@ in
       programs.gnome-shell = {
         enable = true;
         extensions = with pkgs.gnomeExtensions; [
-          { package = true-color-invert; }
-          { package = miniview; }
+          {package = true-color-invert;}
+          {package = miniview;}
         ];
       };
 
       dconf.settings = with lib.hm.gvariant; {
         "org/gnome/desktop/wm/keybindings" = {
-          activate-window-menu = [ ];
-          switch-applications = [ ];
-          switch-applications-backward = [ ];
+          activate-window-menu = [];
+          switch-applications = [];
+          switch-applications-backward = [];
         };
 
         "org/gnome/settings-daemon/plugins/media-keys" = {
-          screensaver = [ "<Super>q" ];
+          screensaver = ["<Super>q"];
         };
 
         "org/gnome/shell/extensions/miniview" = {
@@ -39,7 +42,7 @@ in
         };
 
         "org/gnome/shell/extensions/true-color-invert" = {
-          invert-window-shortcut = [ "<Super>exclam" ];
+          invert-window-shortcut = ["<Super>exclam"];
         };
       };
     }
@@ -47,7 +50,7 @@ in
     (mkIf cfg.materialShell.enable {
       programs.gnome-shell = {
         extensions = with pkgs.gnomeExtensions; [
-          { package = material-shell; }
+          {package = material-shell;}
         ];
       };
     })
@@ -55,10 +58,10 @@ in
     (mkIf cfg.paperwm.enable {
       programs.gnome-shell = {
         extensions = with pkgs.gnomeExtensions; [
-          { package = paperwm; }
-          { package = unite; }
-          { package = cleaner-overview; }
-          { package = vertical-overview; }
+          {package = paperwm;}
+          {package = unite;}
+          {package = cleaner-overview;}
+          {package = vertical-overview;}
         ];
       };
 
@@ -79,48 +82,48 @@ in
         };
 
         "org/gnome/shell/extensions/paperwm/keybindings" = {
-          new-window = [ "<Super>Return" ];
-          close-window = [ "<Super>BackSpace" ];
+          new-window = ["<Super>Return"];
+          close-window = ["<Super>BackSpace"];
 
-          toggle-scratch = [ "<Shift><Super>s" ];
-          toggle-scratch-layer = [ "<Super>s" ];
+          toggle-scratch = ["<Shift><Super>s"];
+          toggle-scratch-layer = ["<Super>s"];
 
-          slurp-in = [ "<Super>i" ];
-          barf-out = [ "<Super>o" ];
+          slurp-in = ["<Super>i"];
+          barf-out = ["<Super>o"];
 
-          previous-workspace = [ "<Super>Tab" ];
-          move-previous-workspace = [ "<Control><Super>Tab" ];
-          previous-workspace-backward = [ "<Shift><Super>Tab" ];
-          move-previous-workspace-backward = [ "<Control><Shift><Super>Tab" ];
+          previous-workspace = ["<Super>Tab"];
+          move-previous-workspace = ["<Control><Super>Tab"];
+          previous-workspace-backward = ["<Shift><Super>Tab"];
+          move-previous-workspace-backward = ["<Control><Shift><Super>Tab"];
 
-          switch-first = [ "<Super>Home" ];
-          switch-last = [ "<Super>End" ];
+          switch-first = ["<Super>Home"];
+          switch-last = ["<Super>End"];
 
-          switch-left = [ "<Super>Left" "<Super>h" ];
-          move-left = [ "<Shift><Super>Left" "<Shift><Super>comma" "<Shift><Super>h" ];
+          switch-left = ["<Super>Left" "<Super>h"];
+          move-left = ["<Shift><Super>Left" "<Shift><Super>comma" "<Shift><Super>h"];
 
-          switch-right = [ "<Super>Right" "<Super>l" ];
-          move-right = [ "<Shift><Super>Right" "<Shift><Super>period" "<Shift><Super>l" ];
+          switch-right = ["<Super>Right" "<Super>l"];
+          move-right = ["<Shift><Super>Right" "<Shift><Super>period" "<Shift><Super>l"];
 
-          switch-previous = [ "<Super>Up" "<Super>comma" "<Super>k" ];
-          move-up = [ "<Shift><Super>Up" "<Shift><Super>k" ];
+          switch-previous = ["<Super>Up" "<Super>comma" "<Super>k"];
+          move-up = ["<Shift><Super>Up" "<Shift><Super>k"];
 
-          switch-next = [ "<Super>Down" "<Super>period" "<Super>j" ];
-          move-down = [ "<Shift><Super>Down" "<Shift><Super>j" ];
+          switch-next = ["<Super>Down" "<Super>period" "<Super>j"];
+          move-down = ["<Shift><Super>Down" "<Shift><Super>j"];
 
-          switch-monitor-left = [ ];
-          move-monitor-left = [ ];
-          switch-monitor-right = [ ];
-          move-monitor-right = [ ];
+          switch-monitor-left = [];
+          move-monitor-left = [];
+          switch-monitor-right = [];
+          move-monitor-right = [];
 
-          switch-up = [ ];
-          switch-down = [ ];
-          switch-up-workspace = [ ];
-          move-up-workspace = [ ];
-          switch-down-workspace = [ ];
-          move-down-workspace = [ ];
-          live-alt-tab = [ ];
-          live-alt-tab-backward = [ ];
+          switch-up = [];
+          switch-down = [];
+          switch-up-workspace = [];
+          move-up-workspace = [];
+          switch-down-workspace = [];
+          move-down-workspace = [];
+          live-alt-tab = [];
+          live-alt-tab-backward = [];
         };
 
         "org/gnome/shell/extensions/unite" = {

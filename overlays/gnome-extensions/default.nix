@@ -1,10 +1,10 @@
-final: prev:
-
-{
-  gnomeExtensions = prev.gnomeExtensions // (with prev.gnome3; {
-    material-shell = prev.gnomeExtensions.material-shell.overrideDerivation (old:
-      let version = "40.a"; in
-      {
+final: prev: {
+  gnomeExtensions =
+    prev.gnomeExtensions
+    // (with prev.gnome3; {
+      material-shell = prev.gnomeExtensions.material-shell.overrideDerivation (old: let
+        version = "40.a";
+      in {
         inherit version;
         name = "${old.pname}-${version}";
         src = prev.fetchFromGitHub {
@@ -15,9 +15,9 @@ final: prev:
         };
       });
 
-    paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old:
-      let version = "pre-40.0"; in
-      {
+      paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: let
+        version = "pre-40.0";
+      in {
         inherit version;
         name = "${old.pname}-${version}";
         src = prev.fetchFromGitHub {
@@ -27,5 +27,5 @@ final: prev:
           sha256 = "sha256-gZbS2Xy+CuQfzzZ5IwMahr3VLtyTiLxJTJVawml9sXE=";
         };
       });
-  });
+    });
 }

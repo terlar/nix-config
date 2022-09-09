@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let cfg = config.programs.ripgrep;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.programs.ripgrep;
+in {
   options.programs.ripgrep = {
     enable = mkEnableOption "ripgrep";
 
@@ -36,7 +39,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.ripgrep ]
+    home.packages =
+      [pkgs.ripgrep]
       ++ optional cfg.enableRipgrepAll pkgs.ripgrep-all;
 
     home.sessionVariables.RIPGREP_CONFIG_PATH = cfg.configPath;

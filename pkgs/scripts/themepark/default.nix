@@ -1,5 +1,7 @@
-{ stdenv, writeShellScriptBin }:
-let
+{
+  stdenv,
+  writeShellScriptBin,
+}: let
   brightsideScript = writeShellScriptBin "brightside" ''
     if command -v emacsclient >/dev/null; then
       emacsclient -n -e "(customize-set-variable 'frame-background-mode 'light)" -e "(customize-set-variable 'custom-enabled-themes custom-enabled-themes)" >/dev/null
@@ -21,16 +23,16 @@ let
     fi
   '';
 in
-stdenv.mkDerivation {
-  name = "themepark";
+  stdenv.mkDerivation {
+    name = "themepark";
 
-  buildInputs = [ brightsideScript darksideScript ];
+    buildInputs = [brightsideScript darksideScript];
 
-  phases = [ "installPhase" ];
+    phases = ["installPhase"];
 
-  installPhase = ''
-    mkdir -p $out/bin
-    ln -s ${brightsideScript}/bin/brightside $out/bin
-    ln -s ${darksideScript}/bin/darkside $out/bin
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      ln -s ${brightsideScript}/bin/brightside $out/bin
+      ln -s ${darksideScript}/bin/darkside $out/bin
+    '';
+  }

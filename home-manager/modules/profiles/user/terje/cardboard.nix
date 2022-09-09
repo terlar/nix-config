@@ -1,10 +1,13 @@
-{ config, dotfiles, lib, pkgs, ... }:
-
-with lib;
-let
-  cfg = config.profiles.user.terje.cardboard;
-in
 {
+  config,
+  dotfiles,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.profiles.user.terje.cardboard;
+in {
   options.profiles.user.terje.cardboard = {
     enable = mkEnableOption "cardboard profile for terje";
   };

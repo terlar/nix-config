@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services.xserver.displayManager.lightdm = {
     background = "#d5d2c8";
     greeters.gtk = {

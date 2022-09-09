@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let cfg = config.custom.shell;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.custom.shell;
+in {
   options.custom.shell = {
     enable = mkEnableOption "shell customization";
 
@@ -38,9 +41,9 @@ in
       };
     }
 
-    (mkIf (cfg.package.pname == "fish") { programs.fish.enable = true; })
-    (mkIf (cfg.package.pname == "zsh") { programs.zsh.enable = true; })
+    (mkIf (cfg.package.pname == "fish") {programs.fish.enable = true;})
+    (mkIf (cfg.package.pname == "zsh") {programs.zsh.enable = true;})
 
-    (mkIf cfg.defaultUserShell { users.defaultUserShell = cfg.package; })
+    (mkIf cfg.defaultUserShell {users.defaultUserShell = cfg.package;})
   ]);
 }

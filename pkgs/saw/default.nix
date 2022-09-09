@@ -1,5 +1,8 @@
-{ lib, buildGoPackage, fetchFromGitHub }:
-
+{
+  lib,
+  buildGoPackage,
+  fetchFromGitHub,
+}:
 buildGoPackage rec {
   pname = "saw";
   version = "0.2.2";
@@ -18,6 +21,6 @@ buildGoPackage rec {
     description = "Fast, multi-purpose tool for AWS CloudWatch Logs.";
     homepage = "https://github.com/TylerBrock/saw";
     license = licenses.mit;
-    maintainers = with maintainers; [ terlar ];
+    maintainers = with maintainers; [terlar];
   };
 }

@@ -1,17 +1,19 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let cfg = config.custom.keyboard;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.custom.keyboard;
+in {
   options.custom.keyboard = {
     enable = mkEnableOption "keyboard customization";
 
     layout = mkOption {
       type = types.str;
       default = "us";
-      description =
-        "Keyboard layout, or multiple keyboard layouts separated by commas.";
+      description = "Keyboard layout, or multiple keyboard layouts separated by commas.";
     };
 
     xkbOptions = mkOption {

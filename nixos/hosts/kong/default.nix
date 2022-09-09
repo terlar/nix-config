@@ -1,11 +1,12 @@
-{ lib, pkgs, ... }:
-
-with builtins;
-let
+{
+  lib,
+  pkgs,
+  ...
+}:
+with builtins; let
   name = "Terje Larsen";
   username = "terje";
-in
-{
+in {
   system.stateVersion = "19.09";
   networking.hostName = "kong";
 
@@ -29,7 +30,7 @@ in
     loader.systemd-boot.configurationLimit = 25;
     loader.efi.canTouchEfiVariables = true;
 
-    kernelModules = [ "fuse" ];
+    kernelModules = ["fuse"];
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
@@ -47,7 +48,7 @@ in
 
     printing = {
       enable = true;
-      drivers = [ pkgs.cups-bjnp pkgs.gutenprint pkgs.gutenprintBin ];
+      drivers = [pkgs.cups-bjnp pkgs.gutenprint pkgs.gutenprintBin];
     };
 
     # Enable network name resolution.
@@ -64,7 +65,7 @@ in
     description = name;
     isNormalUser = true;
     group = "users";
-    extraGroups = [ "audio" "disk" "docker" "networkmanager" "video" "wheel" ];
+    extraGroups = ["audio" "disk" "docker" "networkmanager" "video" "wheel"];
     createHome = true;
     home = "/home/${username}";
   };
@@ -72,7 +73,7 @@ in
   # Managed home.
   home-manager.users.${username} = import ./home-manager;
 
-  nix.settings.trusted-users = [ "root" username ];
+  nix.settings.trusted-users = ["root" username];
 
   nix.gc = {
     automatic = true;

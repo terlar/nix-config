@@ -1,12 +1,16 @@
-{ config, dotfiles, lib, pkgs, ... }:
-
-with lib;
-let
+{
+  config,
+  dotfiles,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.profiles.user.terje.i3Sway;
 
   modifier = "Mod4";
   fonts = {
-    names = [ "sans-serif" ];
+    names = ["sans-serif"];
     size = 9.0;
   };
   bgMode = "tile";
@@ -50,51 +54,53 @@ let
     };
 
     # Status bar
-    bars = [{
-      inherit fonts;
-      statusCommand = "${pkgs.i3status}/bin/i3status";
-      colors = {
-        background = "#faf7ee";
-        statusline = "#292617";
-        separator = "#d5d2c8";
-        focusedWorkspace = {
-          border = "#d5d2c8";
-          background = "#d5d2c8";
-          text = "#292617";
-        };
-        activeWorkspace = {
-          border = "#faf7ee";
+    bars = [
+      {
+        inherit fonts;
+        statusCommand = "${pkgs.i3status}/bin/i3status";
+        colors = {
           background = "#faf7ee";
-          text = "#292617";
+          statusline = "#292617";
+          separator = "#d5d2c8";
+          focusedWorkspace = {
+            border = "#d5d2c8";
+            background = "#d5d2c8";
+            text = "#292617";
+          };
+          activeWorkspace = {
+            border = "#faf7ee";
+            background = "#faf7ee";
+            text = "#292617";
+          };
+          inactiveWorkspace = {
+            border = "#faf7ee";
+            background = "#faf7ee";
+            text = "#292617";
+          };
+          urgentWorkspace = {
+            border = "#ef5350";
+            background = "#ef5350";
+            text = "#992222";
+          };
         };
-        inactiveWorkspace = {
-          border = "#faf7ee";
-          background = "#faf7ee";
-          text = "#292617";
-        };
-        urgentWorkspace = {
-          border = "#ef5350";
-          background = "#ef5350";
-          text = "#992222";
-        };
-      };
-    }];
+      }
+    ];
 
-    focus = { followMouse = false; };
+    focus = {followMouse = false;};
 
     # Desktops
     assigns = {
-      "2" = [{ class = "^Firefox$"; } { class = "^qutebrowser$"; }];
-      "7" = [{ class = "^krita$"; }];
-      "9" = [{ class = "^Slack$"; }];
+      "2" = [{class = "^Firefox$";} {class = "^qutebrowser$";}];
+      "7" = [{class = "^krita$";}];
+      "9" = [{class = "^Slack$";}];
     };
 
     # Floats
     floating.criteria = [
-      { "class" = "Ibus-ui-gtk3"; }
-      { "class" = "Nm-connection-editor"; }
-      { "class" = "Pavucontrol"; }
-      { "class" = "Pinentry"; }
+      {"class" = "Ibus-ui-gtk3";}
+      {"class" = "Nm-connection-editor";}
+      {"class" = "Pavucontrol";}
+      {"class" = "Pinentry";}
     ];
 
     # Keybindings
@@ -115,8 +121,7 @@ let
         "j" = "resize grow height 10px or 10ppt";
         "k" = "resize shrink height 10px or 10ppt";
         "l" = "resize grow width 10px or 10ppt";
-        space =
-          "resize shrink width 10000px; resize grow width 1280px; resize shrink height 10000px; resize grow height 800px; move position center; mode default";
+        space = "resize shrink width 10000px; resize grow width 1280px; resize shrink height 10000px; resize grow height 800px; move position center; mode default";
 
         Escape = "mode default";
         Return = "mode default";
@@ -124,20 +129,13 @@ let
       };
 
       screenshot = {
-        "d" =
-          "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-        "Shift+d" =
-          "exec ${pkgs.maim}/bin/maim -ul ~/screen-$(date +%s).png; mode default";
-        "w" =
-          "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-        "Shift+w" =
-          "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
-        space =
-          "exec ${pkgs.maim}/bin/maim -us | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-        "Shift+space" =
-          "exec ${pkgs.maim}/bin/maim -us ~/screen-$(date +%s).png; mode default";
-        "z" =
-          "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.feh}/bin/feh - -Fx; mode default";
+        "d" = "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+        "Shift+d" = "exec ${pkgs.maim}/bin/maim -ul ~/screen-$(date +%s).png; mode default";
+        "w" = "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+        "Shift+w" = "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
+        space = "exec ${pkgs.maim}/bin/maim -us | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+        "Shift+space" = "exec ${pkgs.maim}/bin/maim -us ~/screen-$(date +%s).png; mode default";
+        "z" = "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.feh}/bin/feh - -Fx; mode default";
 
         Escape = "mode default";
         Return = "mode default";
@@ -154,12 +152,9 @@ let
       "${modifier}+w" = "mode move";
 
       # Pulse Audio controls
-      "XF86AudioRaiseVolume" =
-        "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 +5%";
-      "XF86AudioLowerVolume" =
-        "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 -5%";
-      "XF86AudioMute" =
-        "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute 1 toggle";
+      "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 +5%";
+      "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 1 -5%";
+      "XF86AudioMute" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute 1 toggle";
 
       # Media player controls
       "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
@@ -192,8 +187,7 @@ let
 
       # Scratchpad
       "${modifier}+grave" = "scratchpad show";
-      "${modifier}+Shift+grave" =
-        "floating enable, border pixel, move scratchpad";
+      "${modifier}+Shift+grave" = "floating enable, border pixel, move scratchpad";
 
       # Border
       "${modifier}+b" = "border toggle";
@@ -201,8 +195,7 @@ let
       "${modifier}+z" = "sticky toggle";
 
       # PIP
-      "${modifier}+Shift+z" =
-        "mark pip,[con_mark=pip] move scratchpad,[con_mark=pip] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
+      "${modifier}+Shift+z" = "mark pip,[con_mark=pip] move scratchpad,[con_mark=pip] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
 
       # Change focus between tiling / floating windows
       "${modifier}+space" = "focus mode_toggle";
@@ -247,10 +240,8 @@ let
       "${modifier}+0" = "workspace 10";
 
       # Move focused container to workspace
-      "${modifier}+Shift+bracketleft" =
-        "move container to workspace prev; workspace prev";
-      "${modifier}+Shift+bracketright" =
-        "move container to workspace next; workspace next";
+      "${modifier}+Shift+bracketleft" = "move container to workspace prev; workspace prev";
+      "${modifier}+Shift+bracketright" = "move container to workspace next; workspace next";
       "${modifier}+Shift+1" = "move container to workspace 1";
       "${modifier}+Shift+2" = "move container to workspace 2";
       "${modifier}+Shift+3" = "move container to workspace 3";
@@ -275,12 +266,11 @@ let
       '';
     };
   };
-in
-{
+in {
   options.profiles.user.terje.i3Sway = {
     enable = mkEnableOption "i3/Sway profile for terje";
     wm = mkOption {
-      type = types.enum [ "i3" "sway" ];
+      type = types.enum ["i3" "sway"];
       default = "sway";
       example = "i3";
       description = "The WM to use.";
@@ -299,16 +289,14 @@ in
       services = {
         screen-locker = {
           enable = true;
-          lockCmd =
-            "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
+          lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
           inactiveInterval = 10;
         };
 
         pasystray.enable = true;
       };
 
-      xdg.configFile."i3status/config".source =
-        "${dotfiles}/i3/.config/i3status/config";
+      xdg.configFile."i3status/config".source = "${dotfiles}/i3/.config/i3status/config";
     })
 
     (mkIf (cfg.wm == "sway") {

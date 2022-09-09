@@ -1,11 +1,12 @@
-{ lib, pkgs, ... }:
-
-with builtins;
-let
+{
+  lib,
+  pkgs,
+  ...
+}:
+with builtins; let
   name = "Terje Larsen";
   username = "terje.larsen";
-in
-{
+in {
   system.stateVersion = "19.09";
   networking.hostName = "beetle";
 
@@ -22,7 +23,7 @@ in
   ];
 
   # Temporary fix for tmpfs.
-  systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
+  systemd.additionalUpstreamSystemUnits = ["tmp.mount"];
 
   boot = {
     # Use the systemd-boot EFI boot loader.
@@ -35,7 +36,7 @@ in
     tmpOnTmpfs = true;
 
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "fuse" ];
+    kernelModules = ["fuse"];
   };
 
   hardware = {
@@ -55,7 +56,7 @@ in
 
     printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint ];
+      drivers = [pkgs.gutenprint];
     };
   };
 
@@ -64,8 +65,7 @@ in
     description = name;
     isNormalUser = true;
     group = "users";
-    extraGroups =
-      [ "adbusers" "audio" "disk" "docker" "networkmanager" "video" "wheel" ];
+    extraGroups = ["adbusers" "audio" "disk" "docker" "networkmanager" "video" "wheel"];
     createHome = true;
     home = "/home/${username}";
   };
@@ -73,7 +73,7 @@ in
   # Managed home.
   home-manager.users.${username} = import ./home-manager;
 
-  nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.settings.trusted-users = ["root" "@wheel"];
 
   # Free up to 1GiB whenever there is less than 100MiB left.
   nix.extraOptions = ''

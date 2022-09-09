@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.light.enable = true;
-  environment.systemPackages = [ pkgs.light ];
+  environment.systemPackages = [pkgs.light];
 }

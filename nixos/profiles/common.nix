@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  imports = [ ./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix ];
+{pkgs, ...}: {
+  imports = [./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix];
 
   nix = {
     package = pkgs.nixVersions.stable;
@@ -29,7 +27,7 @@
   custom = {
     dictionaries = {
       enable = true;
-      languages = [ "en-us" "sv-se" ];
+      languages = ["en-us" "sv-se"];
     };
 
     keyboard = {
@@ -41,7 +39,7 @@
 
     i18n = {
       enable = true;
-      languages = [ "chinese" ];
+      languages = ["chinese"];
     };
 
     shell = {

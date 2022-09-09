@@ -1,5 +1,9 @@
-{ lib, bundlerEnv, ruby, bundlerUpdateScript }:
-
+{
+  lib,
+  bundlerEnv,
+  ruby,
+  bundlerUpdateScript,
+}:
 bundlerEnv {
   pname = "rufo";
 
@@ -13,7 +17,7 @@ bundlerEnv {
     description = "An opinionated ruby formatter";
     homepage = "https://docs.rubocop.org/";
     license = licenses.mit;
-    maintainers = with maintainers; [ terlar ];
+    maintainers = with maintainers; [terlar];
     platforms = platforms.unix;
   };
 }

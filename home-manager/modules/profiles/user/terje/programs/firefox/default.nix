@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-with builtins;
-let cfg = config.profiles.user.terje.programs.firefox;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with builtins; let
+  cfg = config.profiles.user.terje.programs.firefox;
+in {
   options.profiles.user.terje.programs.firefox = {
     enable = mkEnableOption "Firefox config for terje";
   };

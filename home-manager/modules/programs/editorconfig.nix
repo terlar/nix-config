@@ -1,16 +1,18 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-let
-  cfg = config.programs.editorConfig;
-  toINI = generators.toINI { };
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.programs.editorConfig;
+  toINI = generators.toINI {};
+in {
   options.programs.editorConfig = {
     enable = mkEnableOption "EditorConfig";
     settings = mkOption {
-      type = with types; attrsOf (attrsOf (oneOf [ bool float int str ]));
-      default = { };
+      type = with types; attrsOf (attrsOf (oneOf [bool float int str]));
+      default = {};
       description = ''
         Options to add to <filename>.editorconfig</filename> file.
         See
@@ -38,7 +40,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.editorconfig-core-c ];
+    home.packages = [pkgs.editorconfig-core-c];
     home.file.".editorconfig".text = ''
       root = true
 
