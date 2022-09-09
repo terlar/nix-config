@@ -6,16 +6,12 @@ let
   cfg = config.profiles.user.terje.base;
 
   sourceDirFiles = attrRoot: destination: target: {
-    ${attrRoot} = foldl'
-      (attrs: file:
-        attrs // {
-          "${destination}/${file}".source = "${toString target}/${file}";
-        })
-      { }
-      (attrNames (readDir target));
+    ${attrRoot} = foldl' (attrs: file:
+      attrs // {
+        "${destination}/${file}".source = "${toString target}/${file}";
+      }) { } (attrNames (readDir target));
   };
-in
-{
+in {
   options.profiles.user.terje.base = {
     enable = mkEnableOption "Base profile for terje";
   };
@@ -47,7 +43,7 @@ in
       custom = {
         keyboard = {
           enable = true;
-          layouts = [{ layout = "us"; } { layout = "se"; }];
+          layouts = [ { layout = "us"; } { layout = "se"; } ];
           xkbOptions = [ "ctrl:nocaps" ];
           repeatDelay = 500;
           repeatInterval = 33; # 30Hz
@@ -178,6 +174,19 @@ in
     {
       programs.gpg = {
         enable = true;
+        package = pkgs.gnupg.overrideAttrs (old:
+          if old.version == "2.3.7" then {
+            patches = old.patches ++ [
+              (pkgs.fetchpatch {
+                name = "fix-yubikey.patch";
+                url =
+                  "https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=patch;h=f34b9147eb3070bce80d53febaa564164cd6c977;hp=95651d1a4fec9bc5e36f623b2cdcc6a35e0c30bb";
+                sha256 = "sha256-KD8H6N9oGx+85SetHx1OJku28J2dmsj/JkJudknCueU=";
+              })
+            ];
+          } else
+            { });
+
         settings = { keyserver = "hkps://keys.openpgp.org"; };
       };
 
