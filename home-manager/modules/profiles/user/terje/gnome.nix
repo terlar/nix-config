@@ -20,9 +20,9 @@ in {
 
       programs.gnome-shell = {
         enable = true;
-        extensions = with pkgs.gnomeExtensions; [
-          {package = true-color-invert;}
-          {package = miniview;}
+        extensions = [
+          {package = pkgs.gnomeExtensions.true-color-invert;}
+          {package = pkgs.gnomeExtensions.miniview;}
         ];
       };
 
@@ -49,19 +49,19 @@ in {
 
     (mkIf cfg.materialShell.enable {
       programs.gnome-shell = {
-        extensions = with pkgs.gnomeExtensions; [
-          {package = material-shell;}
+        extensions = [
+          {package = pkgs.gnomeExtensions.material-shell;}
         ];
       };
     })
 
     (mkIf cfg.paperwm.enable {
       programs.gnome-shell = {
-        extensions = with pkgs.gnomeExtensions; [
-          {package = paperwm;}
-          {package = unite;}
-          {package = cleaner-overview;}
-          {package = vertical-overview;}
+        extensions = [
+          {package = pkgs.gnome42Extensions.paperwm;}
+          {package = pkgs.gnomeExtensions.unite;}
+          {package = pkgs.gnomeExtensions.cleaner-overview;}
+          {package = pkgs.gnomeExtensions.vertical-overview;}
         ];
       };
 

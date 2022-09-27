@@ -331,7 +331,8 @@
         (pkgs:
           {
             inherit (pkgs) project-init rufo saw iosevka-slab;
-            inherit (pkgs.gnomeExtensions) paperwm;
+            paperwm40 = pkgs.gnome40Extensions.paperwm;
+            paperwm42 = pkgs.gnome42Extensions.paperwm;
           }
           // lib.pipe homePackages [
             (lib.filterAttrs (_: p: pkgs.system == p.system))
