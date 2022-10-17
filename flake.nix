@@ -38,7 +38,7 @@
     dotfiles.flake = false;
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     home-manager,
@@ -52,7 +52,7 @@
       homeManagerExtraModules =
         [
           emacs-config.homeManagerModules.emacsConfig
-          "${inputs.vsliveshare}/modules/vsliveshare/home.nix"
+          "${self.inputs.vsliveshare}/modules/vsliveshare/home.nix"
         ]
         ++ (attrValues self.homeManagerModules);
     in {
@@ -85,7 +85,7 @@
           homeManagerOverlay = final: prev: {inherit (home-manager.packages.${system}) home-manager;};
 
           nixGLOverlay = final: prev: let
-            nixGL = import inputs.nixGL {pkgs = final;};
+            nixGL = import self.inputs.nixGL {pkgs = final;};
             wrapWithNixGL = wrapper: package: let
               getBinFiles = pkg:
                 lib.pipe "${lib.getBin pkg}/bin" [
@@ -133,7 +133,7 @@
             nixGLOverlay
             homeManagerOverlay
             emacs-config.overlay
-            inputs.kmonad.overlays.default
+            self.inputs.kmonad.overlays.default
           ];
           selfOverlays = attrValues self.overlays;
         in
@@ -223,7 +223,7 @@
 
               extraSpecialArgs =
                 {
-                  inherit (inputs) dotfiles;
+                  inherit (self.inputs) dotfiles;
                 }
                 // extraSpecialArgs;
 
@@ -250,7 +250,7 @@
               nixos-hardware.nixosModules.common-pc-laptop
               nixos-hardware.nixosModules.common-pc-ssd
             ];
-            specialArgs = {inherit (inputs) dotfiles;};
+            specialArgs = {inherit (self.inputs) dotfiles;};
           };
 
           kong = {
@@ -260,7 +260,7 @@
               nixos-hardware.nixosModules.common-pc-laptop
               nixos-hardware.nixosModules.common-pc-ssd
             ];
-            specialArgs = {inherit (inputs) dotfiles;};
+            specialArgs = {inherit (self.inputs) dotfiles;};
           };
 
           snail = {
