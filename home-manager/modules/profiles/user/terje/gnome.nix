@@ -99,22 +99,26 @@ in {
           switch-first = ["<Super>Home"];
           switch-last = ["<Super>End"];
 
-          switch-left = ["<Super>Left" "<Super>h"];
-          move-left = ["<Shift><Super>Left" "<Shift><Super>comma" "<Shift><Super>h"];
+          switch-left = ["<Super>h"];
+          move-left = ["<Shift><Super>comma" "<Shift><Super>h"];
 
-          switch-right = ["<Super>Right" "<Super>l"];
-          move-right = ["<Shift><Super>Right" "<Shift><Super>period" "<Shift><Super>l"];
+          switch-right = ["<Super>l"];
+          move-right = ["<Shift><Super>period" "<Shift><Super>l"];
 
-          switch-previous = ["<Super>Up" "<Super>comma" "<Super>k"];
-          move-up = ["<Shift><Super>Up" "<Shift><Super>k"];
+          switch-previous = ["<Super>comma" "<Super>k"];
+          move-up = ["<Shift><Super>k"];
 
-          switch-next = ["<Super>Down" "<Super>period" "<Super>j"];
-          move-down = ["<Shift><Super>Down" "<Shift><Super>j"];
+          switch-next = ["<Super>period" "<Super>j"];
+          move-down = ["<Shift><Super>j"];
 
-          switch-monitor-left = [];
-          move-monitor-left = [];
-          switch-monitor-right = [];
-          move-monitor-right = [];
+          switch-monitor-up = ["<Super>Up"];
+          move-monitor-up = ["<Shift><Super>Up"];
+          switch-monitor-down = ["<Super>Down"];
+          move-monitor-down = ["<Shift><Super>Down"];
+          switch-monitor-left = ["<Super>Left"];
+          move-monitor-left = ["<Shift><Super>Left"];
+          switch-monitor-right = ["<Super>Right"];
+          move-monitor-right = ["<Shift><Super>Right"];
 
           switch-up = [];
           switch-down = [];
