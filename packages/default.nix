@@ -6,7 +6,7 @@ final: prev: {
     themepark = prev.callPackage ./scripts/themepark {};
   };
 
+  iosevka-slab = prev.callPackage ./iosevka-slab {};
   project-init = prev.callPackage ./project-init {};
-  rufo = prev.callPackage ./rufo {};
   saw = prev.callPackage ./saw {};
 }
