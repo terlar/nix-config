@@ -46,7 +46,6 @@ includes the following components:
   - default :: package overlay including the mentioned packages.
   - iosevka :: iosevka configured with the slab set.
 - packages :: packages not in the default nixpkgs.
-  - [[https://github.com/ruby-formatter/rufo][rufo]]
   - [[https://github.com/TylerBrock/saw][saw]]
 
 * Usage
@@ -94,7 +93,7 @@ Used to create a safe environment for YubiKey operations having all the necessar
 
 Build the ISO:
 #+begin_src sh
-nix build -L .#nixosConfigurations.yubikey-installer.config.system.build.isoImage
+nix build -L .#yubikeyInstallerImage
 #+end_src
 
 Copy the ISO to a USB-key/storage device:
@@ -111,3 +110,4 @@ sync
 - [[https://github.com/dejanr/dotfiles/blob/ef9c27cf93a17e0af4bdf5cc378d2808b5326afa/nix/config/nixpkgs/roles/multimedia.nix#L35][Sample]]
 ** TODO Nest/group modules
 ** TODO Script to regenerate hardware-config for current host
+** TODO Make YubiKey steps into an flake app

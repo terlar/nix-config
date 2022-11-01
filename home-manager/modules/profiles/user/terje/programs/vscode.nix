@@ -12,11 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.vsliveshare = {
-      enable = true;
-      extensionsDir = "$HOME/.vscode/extensions";
-    };
-
     xdg.configFile."Code/User/keybindings.json".text = builtins.toJSON [
       {
         key = "ctrl+k";
