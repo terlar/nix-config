@@ -75,11 +75,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1667285861,
-        "narHash": "sha256-lXNdedJENGlcTKIl94230XyFf7Mz8elnP4Yg8Qis8C0=",
+        "lastModified": 1667379767,
+        "narHash": "sha256-Qm70udtYfKbZGnu5tV4VyR47lPE8ZYFf+rbHLll3pds=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "55f6b29820d7f0be208ab47b9ff67d4604cf6d4f",
+        "rev": "0d013be9ebd2bffff72b5d57b7a36f5e30a8f44d",
         "type": "github"
       },
       "original": {
