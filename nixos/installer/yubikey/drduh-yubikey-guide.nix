@@ -26,7 +26,7 @@
 
     meta = with lib; {
       description = "Guide to using YubiKey for GPG and SSH";
-      homepage = https://github.com/drduh/YubiKey-Guide;
+      homepage = "https://github.com/drduh/YubiKey-Guide";
       license = licenses.mit;
     };
   };

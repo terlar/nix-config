@@ -1,4 +1,4 @@
-final: prev: {
+_final: prev: {
   scripts = {
     insomnia = prev.callPackage ./scripts/insomnia {};
     lock = prev.callPackage ./scripts/lock {};

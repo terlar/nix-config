@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
+{pkgs, ...}:
 with builtins; let
   name = "Terje Larsen";
   username = "terje.larsen";

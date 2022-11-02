@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   services.autorandr.enable = true;
 
   # Permission escalation.

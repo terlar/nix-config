@@ -46,7 +46,7 @@
   in {
     packages = lib.pipe activationPackages [
       (lib.filterAttrs (_: drv: pkgs.system == drv.system))
-      (lib.mapAttrs' (username: drv: lib.nameValuePair "home-${username}" drv))
+      (lib.mapAttrs' (username: lib.nameValuePair "home-${username}"))
     ];
   };
 }

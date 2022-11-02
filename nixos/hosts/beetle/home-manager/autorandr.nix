@@ -1,4 +1,4 @@
-{...}: {
+{
   programs.autorandr.enable = true;
   programs.autorandr.profiles = {
     solo = {

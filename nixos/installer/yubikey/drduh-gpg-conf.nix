@@ -23,7 +23,7 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = "drduh's gpg.conf";
-    homepage = https://github.com/drduh/config;
+    homepage = "https://github.com/drduh/config";
     license = licenses.mit;
   };
 }

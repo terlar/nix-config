@@ -59,7 +59,7 @@ in {
   # merge over cfg.keyboards, it seems, as that results in an infinite
   # recursion.
   config = let
-    enabledKeyboards = filterAttrs (name: kb: kb.enable) cfg.keyboards;
+    enabledKeyboards = filterAttrs (_name: kb: kb.enable) cfg.keyboards;
   in
     mkIf (cfg.keyboards != {}) {
       xdg.configFile =
@@ -70,7 +70,7 @@ in {
 
       systemd.user.services =
         mapAttrs'
-        (name: kb:
+        (name: _kb:
           nameValuePair "kmonad-${name}" {
             Unit = {Description = "KMonad for ${name}";};
             Install = {WantedBy = ["default.target"];};

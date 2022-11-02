@@ -11,7 +11,7 @@
         inputs.emacs-config.overlays.default
         inputs.kmonad.overlays.default
         inputs.nixgl.overlays.default
-        (final: prev: {
+        (_final: prev: {
           inherit (inputs.home-manager.packages.${prev.stdenv.hostPlatform.system}) home-manager;
         })
       ];

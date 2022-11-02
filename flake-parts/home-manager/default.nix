@@ -2,8 +2,6 @@
   lib,
   flake-parts-lib,
   self,
-  inputs,
-  withSystem,
   ...
 }: let
   inherit

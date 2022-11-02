@@ -1,8 +1,4 @@
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [./fonts.nix];
 
   # Graphical boot process.

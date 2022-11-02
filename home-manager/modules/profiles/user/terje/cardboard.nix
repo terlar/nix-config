@@ -1,6 +1,5 @@
 {
   config,
-  dotfiles,
   lib,
   pkgs,
   ...
