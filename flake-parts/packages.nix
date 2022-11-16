@@ -15,7 +15,7 @@
     pkgs' = pkgs.extend (lib.composeManyExtensions overlays);
   in {
     packages = {
-      inherit (pkgs') project-init saw iosevka-slab;
+      inherit (pkgs') project-init saw iosevka-slab jfrog-cli;
       paperwm40 = pkgs'.gnome40Extensions.paperwm;
       paperwm42 = pkgs'.gnome42Extensions.paperwm;
     };
