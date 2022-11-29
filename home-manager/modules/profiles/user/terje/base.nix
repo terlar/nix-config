@@ -193,9 +193,19 @@ in {
 
     # Nix
     {
-      home.packages = [pkgs.nix];
+      nix = {
+        package = lib.mkDefault pkgs.nixVersions.stable;
+        settings = {
+          # Build
+          max-jobs = "auto";
+          http-connections = 50;
 
-      xdg.configFile."nix/nix.conf".source = ../../../../../nix.conf;
+          # Store
+          auto-optimise-store = true;
+          min-free = 1024;
+        };
+        extraOptions = builtins.readFile ../../../../../nix.conf;
+      };
     }
 
     # Packages

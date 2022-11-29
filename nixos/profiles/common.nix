@@ -2,7 +2,6 @@
   imports = [./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix];
 
   nix = {
-    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
