@@ -65,9 +65,9 @@ in {
           };
 
           colors = {
-            foreground = "596e76";
+            foreground = "002b37";
             background = "fffce9";
-            regular0 = "596e76"; # black
+            regular0 = "002b37"; # black
             regular1 = "bb3e06"; # red
             regular2 = "596e76"; # green
             regular3 = "98a6a6"; # yellow
@@ -75,7 +75,7 @@ in {
             regular5 = "596e76"; # magenta
             regular6 = "596e76"; # cyan
             regular7 = "98a6a6"; # white
-            bright0 = "002b37"; # bright black
+            bright0 = "596e76"; # bright black
             bright1 = "cc1f24"; # bright red
             bright2 = "002b37"; # bright green
             bright3 = "596e76"; # bright yellow
