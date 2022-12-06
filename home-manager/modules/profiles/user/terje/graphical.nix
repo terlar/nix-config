@@ -60,6 +60,10 @@ in {
             hide-when-typing = "yes";
           };
 
+          search-bindings = {
+            delete-next = "Control+d Delete";
+          };
+
           colors = {
             foreground = "596e76";
             background = "fffce9";
