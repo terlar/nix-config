@@ -33,6 +33,8 @@
     kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nixgl.url = "github:guibou/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
+    devenv.url = "github:cachix/devenv/v0.5";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
 
     # Sources
     dotfiles.url = "github:terlar/dotfiles";

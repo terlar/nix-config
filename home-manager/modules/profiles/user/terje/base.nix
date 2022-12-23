@@ -193,6 +193,7 @@ in {
     {
       home.packages = [
         pkgs.any-nix-shell
+        pkgs.devenv
       ];
 
       nix = {
