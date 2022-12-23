@@ -121,8 +121,6 @@ in {
              set -U __fish_universal_config_done 1
           end
 
-          any-nix-shell fish | source
-
           set -x DIRENV_LOG_FORMAT ""
 
           if set -q IN_NIX_SHELL
@@ -193,6 +191,10 @@ in {
 
     # Nix
     {
+      home.packages = [
+        pkgs.any-nix-shell
+      ];
+
       nix = {
         package = lib.mkDefault pkgs.nixVersions.stable;
         settings = {
@@ -206,6 +208,10 @@ in {
         };
         extraOptions = builtins.readFile ../../../../../nix.conf;
       };
+
+      programs.fish.interactiveShellInit = ''
+        any-nix-shell fish | source
+      '';
     }
 
     # Packages
@@ -213,9 +219,6 @@ in {
       home.packages = with pkgs; [
         scripts.insomnia
         scripts.themepark
-
-        # nix
-        any-nix-shell
 
         # media
         playerctl
