@@ -32,4 +32,21 @@ final: prev: {
         };
       });
     });
+
+  gnome43Extensions =
+    prev.gnome43Extensions
+    // (with final.gnome; {
+      paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: let
+        version = "43.0";
+      in {
+        inherit version;
+        name = "${old.pname}-${version}";
+        src = prev.fetchFromGitHub {
+          owner = "paperwm";
+          repo = "paperwm";
+          rev = "f3b486010b9798aa0edce7506403fd6a405ea1f9";
+          hash = "sha256-WL4iHkuXgeM8wg7snFaCJh0dYa73iv4itF8d7Mq+ChU=";
+        };
+      });
+    });
 }

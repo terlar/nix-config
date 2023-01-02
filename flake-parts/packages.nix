@@ -18,6 +18,7 @@
       inherit (pkgs') project-init saw iosevka-slab jfrog-cli;
       paperwm40 = pkgs'.gnome40Extensions.paperwm;
       paperwm42 = pkgs'.gnome42Extensions.paperwm;
+      paperwm43 = pkgs'.gnome43Extensions.paperwm;
     };
 
     legacyPackages = {
@@ -40,7 +41,8 @@
       wrapPackages = pkgsWrapperFn: pkgNames: final: prev: let
         wrapper = pkgsWrapperFn final;
       in
-        builtins.listToAttrs (map (name: {
+        builtins.listToAttrs (map
+          (name: {
             inherit name;
             value = config.legacyPackages.wrapPackage {
               inherit wrapper;

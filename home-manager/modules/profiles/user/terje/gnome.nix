@@ -11,7 +11,17 @@ in {
     enable = mkEnableOption "GNOME profile for terje";
 
     materialShell = {enable = mkEnableOption "Use Material Shell";};
-    paperwm = {enable = mkEnableOption "Use PaperWM";};
+    paperwm = {
+      enable = mkEnableOption "Use PaperWM";
+      package = mkOption {
+        type = types.package;
+        default = pkgs.gnome42Extensions.paperwm;
+        example = literalExpression "pkgs.gnome42Extensions.paperwm";
+        description = ''
+          Package providing PaperWM extension.
+        '';
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -58,7 +68,7 @@ in {
     (mkIf cfg.paperwm.enable {
       programs.gnome-shell = {
         extensions = [
-          {package = pkgs.gnome42Extensions.paperwm;}
+          {package = cfg.paperwm.package;}
           {package = pkgs.gnomeExtensions.unite;}
           {package = pkgs.gnomeExtensions.cleaner-overview;}
           {package = pkgs.gnomeExtensions.vertical-overview;}
