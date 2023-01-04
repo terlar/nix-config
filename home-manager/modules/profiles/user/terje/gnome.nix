@@ -68,7 +68,7 @@ in {
     (mkIf cfg.paperwm.enable {
       programs.gnome-shell = {
         extensions = [
-          {package = cfg.paperwm.package;}
+          {inherit (cfg.paperwm) package;}
           {package = pkgs.gnomeExtensions.unite;}
           {package = pkgs.gnomeExtensions.cleaner-overview;}
           {package = pkgs.gnomeExtensions.vertical-overview;}

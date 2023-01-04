@@ -6,8 +6,6 @@
 }:
 with lib; let
   cfg = config.profiles.user.terje.cardboard;
-  lockAfterIdle = 300;
-  lockCmd = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
 in {
   options.profiles.user.terje.cardboard = {
     enable = mkEnableOption "cardboard profile for terje";
