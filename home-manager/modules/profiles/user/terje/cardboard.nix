@@ -6,12 +6,46 @@
 }:
 with lib; let
   cfg = config.profiles.user.terje.cardboard;
+  lockAfterIdle = 300;
+  lockCmd = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
 in {
   options.profiles.user.terje.cardboard = {
     enable = mkEnableOption "cardboard profile for terje";
   };
 
   config = mkIf cfg.enable {
+    services.kanshi = {
+      enable = true;
+      profiles = {
+        standalone = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              scale = 1.0;
+            }
+          ];
+        };
+      };
+    };
+
+    wayland.windowManager.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      config = {
+        bars = [];
+        keybindings = {};
+        window.border = 0;
+
+        startup = [
+          {
+            always = true;
+            command = "${pkgs.cardboard}/bin/cardboard";
+          }
+        ];
+      };
+    };
+
     xdg.configFile."cardboard/cardboardrc".source = pkgs.writeShellScript "cardboardrc" ''
       alias cutter=${pkgs.cardboard}/bin/cutter
 
@@ -20,7 +54,7 @@ in {
       cutter config mouse_mod $mod
 
       cutter bind $mod+backspace quit
-      cutter bind $mod+return exec foot
+      cutter bind $mod+return exec ${pkgs.fuzzel}/bin/fuzzel
 
       cutter bind $mod+left focus left
       cutter bind $mod+right focus right
@@ -51,6 +85,7 @@ in {
       cutter bind $mod+shift+i insert_into_column
       cutter bind $mod+shift+o pop_from_column
 
+      cutter bind $mod+f resize 1200 0
       cutter bind $mod+r cycle_width
       cutter bind $mod+w close
 
@@ -62,7 +97,7 @@ in {
       cutter bind $mod+shift+f toggle_floating
       cutter bind $mod+tab focus cycle
 
-      cutter config gap 10
+      cutter config gap 5
       cutter config focus_color 210 98 115 125
     '';
   };
