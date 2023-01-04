@@ -47,9 +47,7 @@ in {
         server.enable = true;
         settings = {
           main = {
-            # term = "xterm-256color";
             font = "Iosevka Slab Light:size=10";
-            dpi-aware = "yes";
           };
 
           scrollback = {
