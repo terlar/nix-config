@@ -11,6 +11,9 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 

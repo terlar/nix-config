@@ -1,10 +1,13 @@
 {
+  config,
   pkgs,
   inputs',
   ...
 }: {
   devShells.default = inputs'.devshell.legacyPackages.mkShell {
     name = "terlar/nix-config";
+
+    devshell.startup.pre-commit-install.text = config.pre-commit.installationScript;
 
     packages = [
       pkgs.git
