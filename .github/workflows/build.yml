@@ -92,4 +92,4 @@ jobs:
 
       - name: Build ISO
         run: |
-          nix build --print-build-logs .#nixosConfigurations.${{ matrix.name }}.config.system.build.isoImage
+          GC_DONT_GC=1 nix build --print-build-logs .#nixosConfigurations.${{ matrix.name }}.config.system.build.isoImage
