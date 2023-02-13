@@ -54,6 +54,10 @@ in {
         "org/gnome/shell/extensions/true-color-invert" = {
           invert-window-shortcut = ["<Super>exclam"];
         };
+
+        "org/freedesktop/ibus/panel/emoji" = {
+          unicode-hotkey = [];
+        };
       };
     }
 
