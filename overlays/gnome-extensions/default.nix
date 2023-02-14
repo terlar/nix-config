@@ -44,8 +44,8 @@ final: prev: {
         src = prev.fetchFromGitHub {
           owner = "paperwm";
           repo = "paperwm";
-          rev = "f3b486010b9798aa0edce7506403fd6a405ea1f9";
-          hash = "sha256-WL4iHkuXgeM8wg7snFaCJh0dYa73iv4itF8d7Mq+ChU=";
+          rev = "f590f8b30f0c1962e2bc18f1a39355b0a72636cb";
+          hash = "sha256-ngyTsls0RYQyepfwvNJDPdlGMRC2+woFCW4RVjsaPRU=";
         };
       });
     });
