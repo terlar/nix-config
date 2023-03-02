@@ -7,29 +7,42 @@
   };
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
+    flake-parts.url = "flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    # Flake parts
+    pre-commit-hooks = {
+      url = "github:terlar/pre-commit-hooks.nix/add-treefmt";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
+    treefmt = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    devshell = {
+      url = "github:numtide/devshell/feat/flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    flake-compat.url = "github:edolstra/flake-compat";
-    flake-compat.flake = false;
-
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    emacs-config.url = "github:terlar/emacs-config";
-    emacs-config.inputs.flake-compat.follows = "flake-compat";
-    emacs-config.inputs.home-manager.follows = "home-manager";
-    emacs-config.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-config = {
+      url = "github:terlar/emacs-config";
+      inputs.devshell.follows = "devshell";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    };
 
     # Modules
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "nixos-hardware";
 
     # Packages
     kmonad.url = "github:kmonad/kmonad?dir=nix";
@@ -42,6 +55,10 @@
     # Sources
     dotfiles.url = "github:terlar/dotfiles";
     dotfiles.flake = false;
+
+    # Compatibility
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
   };
 
   outputs = inputs:
