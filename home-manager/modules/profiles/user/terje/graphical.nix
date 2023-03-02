@@ -23,7 +23,7 @@ in {
 
       custom.defaultBrowser = {
         enable = true;
-        package = pkgs.qutebrowser;
+        package = config.programs.firefox;
       };
     }
 
@@ -134,7 +134,7 @@ in {
     # Qutebrowser
     {
       programs.qutebrowser = {
-        enable = true;
+        enable = false;
 
         aliases = {
           mpv = "spawn --userscript view_in_mpv";
