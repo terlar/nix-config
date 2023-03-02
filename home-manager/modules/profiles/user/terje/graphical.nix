@@ -23,7 +23,7 @@ in {
 
       custom.defaultBrowser = {
         enable = true;
-        package = config.programs.firefox;
+        inherit (config.programs.firefox) package;
       };
     }
 
