@@ -313,16 +313,16 @@ in {
 
     (mkIf cfg.nix.enable {
       home.packages = with pkgs; [
+        alejandra
         cachix
         manix
+        nil
         nix-diff
         nix-du
         nix-index
         nix-prefetch-scripts
         nix-tree
         nixfmt
-        nixpkgs-fmt
-        rnix-lsp
       ];
     })
 
