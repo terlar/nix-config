@@ -1,10 +1,13 @@
 {
   writeShellApplication,
-  qutebrowser,
+  # qutebrowser,
 }:
 writeShellApplication {
   name = "install-qutebrowser-dicts";
   text = ''
-    ${qutebrowser}/share/qutebrowser/scripts/dictcli.py install "$@"
+    true
   '';
+  # text = ''
+  #   ${qutebrowser}/share/qutebrowser/scripts/dictcli.py install "$@"
+  # '';
 }
