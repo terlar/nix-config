@@ -32,16 +32,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1677780119,
-        "narHash": "sha256-ZIQ21ABUHNTH8evu0koIc1/MyE0Nc3Laz0bGTH717iU=",
+        "lastModified": 1677856503,
+        "narHash": "sha256-TW8my47VpavO/PXA5hIumUcX80cj0AufojjUTdUonLw=",
         "owner": "numtide",
         "repo": "devshell",
-        "rev": "472789faa3e452ca465001cf18cfa1b0ed2fc218",
+        "rev": "643d1857fea4e71e7f251cb574f59b1d63778085",
         "type": "github"
       },
       "original": {
         "owner": "numtide",
-        "ref": "feat/flake-parts",
         "repo": "devshell",
         "type": "github"
       }

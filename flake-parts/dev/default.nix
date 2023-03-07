@@ -27,7 +27,7 @@
       };
     };
 
-    devshell.shells.default = {
+    devshells.default = {
       name = "terlar/nix-config";
       devshell.startup.pre-commit-install.text = config.pre-commit.installationScript;
 
