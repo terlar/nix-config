@@ -192,8 +192,8 @@ in {
     # Nix
     {
       home.packages = [
-        pkgs.any-nix-shell
         pkgs.devenv
+        pkgs.nix-your-shell
       ];
 
       nix = {
@@ -211,7 +211,7 @@ in {
       };
 
       programs.fish.interactiveShellInit = ''
-        any-nix-shell fish | source
+        nix-your-shell fish | source
       '';
     }
 
