@@ -123,9 +123,9 @@ in {
 
           set -x DIRENV_LOG_FORMAT ""
 
-          if set -q IN_NIX_SHELL
-            function __direnv_export_eval
-              # Don't trigger within nix-shell
+          function __direnv_disable_in_nix_shell --on-event fish_prompt
+            if set -q IN_NIX_SHELL
+              functions --erase __direnv_export_eval
             end
           end
         '';
