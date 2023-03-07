@@ -153,7 +153,7 @@ in {
           };
 
           delta = {
-            features = "side-by-side line-numbers decorations";
+            features = "decorations";
 
             syntax-theme = "none";
             minus-emph-style = "strike bold";
