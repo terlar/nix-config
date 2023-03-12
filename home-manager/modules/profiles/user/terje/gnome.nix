@@ -15,8 +15,8 @@ in {
       enable = mkEnableOption "Use PaperWM";
       package = mkOption {
         type = types.package;
-        default = pkgs.gnome42Extensions.paperwm;
-        example = literalExpression "pkgs.gnome42Extensions.paperwm";
+        default = pkgs.gnomeExtensions.paperwm;
+        example = literalExpression "pkgs.gnomeExtensions.paperwm";
         description = ''
           Package providing PaperWM extension.
         '';

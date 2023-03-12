@@ -1,52 +1,18 @@
-final: prev: {
-  gnome40Extensions =
-    prev.gnome40Extensions
+_final: prev: {
+  gnomeExtensions =
+    prev.gnomeExtensions
     // {
       paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: let
-        version = "40.0";
+        version = "unstable-2023-03-11";
       in {
         inherit version;
         name = "${old.pname}-${version}";
         src = prev.fetchFromGitHub {
           owner = "paperwm";
           repo = "paperwm";
-          rev = "2f5281940d5b7e8e6c80299784f70b1a7f74ecc6";
-          hash = "sha256-zZbJpTQbPqxDnVpytdQepz5rYYLALNmXKDypLODx2m8=";
+          rev = "7fa25a6072a8ccd51ecbf154d030f23d2ed98d4e";
+          hash = "sha256-BkP88+5QGFEbkiPfnE0Eu9IUkZtB4QyepWB7m/t5TFE=";
         };
       });
     };
-
-  gnome42Extensions =
-    prev.gnome42Extensions
-    // (with final.gnome; {
-      paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: let
-        version = "42.0";
-      in {
-        inherit version;
-        name = "${old.pname}-${version}";
-        src = prev.fetchFromGitHub {
-          owner = "paperwm";
-          repo = "paperwm";
-          rev = "3b7a4b6c07512d3ba5e1967cda0fbe63c6bb0ae1";
-          hash = "sha256-HuqSp6NM9Ye9SyQT+il5Cn4FsSxnT6CAlA/NjwBkajo=";
-        };
-      });
-    });
-
-  gnome43Extensions =
-    prev.gnome43Extensions
-    // (with final.gnome; {
-      paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: let
-        version = "43.0";
-      in {
-        inherit version;
-        name = "${old.pname}-${version}";
-        src = prev.fetchFromGitHub {
-          owner = "paperwm";
-          repo = "paperwm";
-          rev = "f590f8b30f0c1962e2bc18f1a39355b0a72636cb";
-          hash = "sha256-ngyTsls0RYQyepfwvNJDPdlGMRC2+woFCW4RVjsaPRU=";
-        };
-      });
-    });
 }

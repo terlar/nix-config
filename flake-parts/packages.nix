@@ -16,9 +16,7 @@
   in {
     packages = {
       inherit (pkgs') project-init saw iosevka-slab jfrog-cli;
-      paperwm40 = pkgs'.gnome40Extensions.paperwm;
-      paperwm42 = pkgs'.gnome42Extensions.paperwm;
-      paperwm43 = pkgs'.gnome43Extensions.paperwm;
+      inherit (pkgs'.gnomeExtensions) paperwm;
     };
 
     legacyPackages = {
