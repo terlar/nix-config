@@ -93,7 +93,7 @@ in {
 
         "org/gnome/shell/extensions/paperwm" = {
           animation-time = 0.1;
-          minimap-scale = 0;
+          minimap-scale = 0.0;
           show-window-position-bar = false;
           use-default-background = false;
 
