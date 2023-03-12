@@ -93,10 +93,13 @@ in {
 
         "org/gnome/shell/extensions/paperwm" = {
           animation-time = 0.1;
-          horizontal-margin = 8;
+          minimap-scale = 0;
+          show-window-position-bar = false;
           use-default-background = false;
+
+          horizontal-margin = 0;
           vertical-margin = 0;
-          vertical-margin-bottom = 8;
+          vertical-margin-bottom = 4;
           window-gap = 8;
         };
 
