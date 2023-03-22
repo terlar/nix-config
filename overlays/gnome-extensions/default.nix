@@ -10,8 +10,8 @@ _final: prev: {
         src = prev.fetchFromGitHub {
           owner = "paperwm";
           repo = "paperwm";
-          rev = "d5e45a3f557a0321fbd45d85c73d668b29fa9035";
-          hash = "sha256-gDsVRrysvl8MfG0dNynpd3plXDdzi2/CCYEjN4Vlwa0=";
+          rev = "435fb826de8c79dee20de73425642111d0622b20";
+          hash = "sha256-qpGcBsFPWPhMubKi4wh7rJ7OBZ33zN16zDJgCF6rde8=";
         };
       });
     };
