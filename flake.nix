@@ -12,7 +12,7 @@
 
     # Flake parts
     pre-commit-hooks = {
-      url = "github:terlar/pre-commit-hooks.nix/add-treefmt";
+      url = "github:cachix/pre-commit-hooks.nix";
       inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";

@@ -12,7 +12,7 @@ in {
     enable = mkEnableOption "internationalization customization";
 
     inputMethod = mkOption {
-      type = types.nullOr (types.enum ["ibus" "fcitx"]);
+      type = types.nullOr (types.enum ["ibus" "fcitx5"]);
       default = "ibus";
       description = "Input method to use.";
     };
@@ -30,7 +30,7 @@ in {
     })
     (mkIf (elem "chinese" cfg.languages) {
       i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [libpinyin];
-      i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [libpinyin];
+      i18n.inputMethod.fcitx5.addons = [pkgs.fcitx5-chinese-addons];
     })
   ]);
 }

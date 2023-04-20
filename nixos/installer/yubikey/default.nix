@@ -42,7 +42,7 @@ in {
   networking.wireless.enable = false;
 
   # Secure defaults.
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   boot.kernel.sysctl = {
     "kernel.unprivileged_bpf_disabled" = 1;
   };
