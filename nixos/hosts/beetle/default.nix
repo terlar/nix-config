@@ -29,7 +29,7 @@ in {
     loader.efi.canTouchEfiVariables = true;
 
     # Mount tmpfs on /tmp.
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
 
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = ["fuse"];
