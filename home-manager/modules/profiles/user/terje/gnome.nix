@@ -44,6 +44,8 @@ in {
       dconf.settings = with lib.hm.gvariant; {
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = [];
+          hide-window = [];
+          restore-window = [];
           switch-applications = [];
           switch-applications-backward = [];
         };
