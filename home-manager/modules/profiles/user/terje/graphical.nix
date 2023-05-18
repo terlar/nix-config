@@ -109,6 +109,7 @@ in {
         slack
         spotify
         sxiv
+        zoom-us
 
         # utility
         feh
