@@ -192,7 +192,6 @@ in {
     # Nix
     {
       home.packages = [
-        pkgs.devenv
         pkgs.nix-your-shell
       ];
 
