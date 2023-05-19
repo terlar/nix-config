@@ -43,6 +43,11 @@
 
     # Modules
     nixos-hardware.url = "nixos-hardware";
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
 
     # Packages
     kmonad.url = "github:kmonad/kmonad?dir=nix";
