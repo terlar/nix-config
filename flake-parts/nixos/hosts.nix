@@ -4,33 +4,6 @@
   ...
 }: {
   flake = {
-    nixosModules.host-beetle = {config, ...}: {
-      imports = [
-        self.nixosModules.default
-        self.nixosModules.nixpkgs-useFlakeNixpkgs
-        self.nixosModules.home-manager-integration
-
-        inputs.nixpkgs.nixosModules.notDetected
-        inputs.nixos-hardware.nixosModules.common-cpu-intel
-        inputs.nixos-hardware.nixosModules.common-pc-laptop
-        inputs.nixos-hardware.nixosModules.common-pc-ssd
-        inputs.home-manager.nixosModules.home-manager
-
-        ../../nixos/hosts/beetle
-      ];
-
-      nixpkgs.overlays = builtins.attrValues self.overlays;
-      nixpkgs.config.allowUnfree = true;
-
-      home-manager = {
-        sharedModules = [self.homeManagerModules.user-terje];
-      };
-    };
-    nixosConfigurations.beetle = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [self.nixosModules.host-beetle];
-    };
-
     nixosModules.host-chameleon = {config, ...}: {
       imports = [
         self.nixosModules.default
