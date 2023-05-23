@@ -55,7 +55,7 @@ jobs:
     strategy:
       matrix:
         host:
-          - beetle
+          - chameleon
           - kong
     runs-on: ubuntu-latest
     steps:

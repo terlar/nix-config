@@ -41,7 +41,7 @@ in {
         ];
       };
 
-      dconf.settings = with lib.hm.gvariant; {
+      dconf.settings = {
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = [];
           hide-window = [];

@@ -43,14 +43,17 @@
 
     # Modules
     nixos-hardware.url = "nixos-hardware";
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
 
     # Packages
     kmonad.url = "github:kmonad/kmonad?dir=nix";
     kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nixgl.url = "github:guibou/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
-    devenv.url = "github:cachix/devenv/v0.5";
-    devenv.inputs.nixpkgs.follows = "nixpkgs";
 
     # Sources
     dotfiles.url = "github:terlar/dotfiles";
