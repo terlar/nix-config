@@ -233,6 +233,9 @@ in {
         tldr
         units
         xsv
+
+        # debug
+        usbutils
       ];
     }
   ]);
