@@ -1,5 +1,4 @@
-{pkgs, ...}:
-with builtins; let
+{pkgs, ...}: let
   name = "Terje Larsen";
   username = "terje";
 in {

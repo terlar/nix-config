@@ -1,4 +1,4 @@
-let
+{pkgs, ...}: let
   name = "Terje Larsen";
   username = "terje";
 in {
@@ -17,10 +17,27 @@ in {
   # WSL
   wsl = {
     enable = true;
-    wslConf.automount.root = "/mnt";
     defaultUser = username;
     startMenuLaunchers = true;
   };
+
+  systemd.services.wsl-vpnkit = {
+    enable = true;
+    description = "wsl-vpnkit";
+    after = ["network.target"];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.wsl-vpnkit}/bin/wsl-vpnkit";
+      Restart = "always";
+      KillMode = "mixed";
+    };
+
+    wantedBy = ["multi-user.target"];
+  };
+
+  environment.systemPackages = [
+    pkgs.linuxPackages.usbip
+  ];
 
   # Temporary fix for tmpfs.
   systemd.additionalUpstreamSystemUnits = ["tmp.mount"];
@@ -30,7 +47,7 @@ in {
     description = name;
     isNormalUser = true;
     group = "users";
-    extraGroups = ["adbusers" "audio" "disk" "docker" "networkmanager" "video" "wheel"];
+    extraGroups = ["audio" "disk" "docker" "networkmanager" "video" "wheel"];
     createHome = true;
     home = "/home/${username}";
   };
