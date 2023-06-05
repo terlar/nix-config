@@ -112,6 +112,16 @@ in {
               # date = 2021-01-21T11:57:06-06:00;
             };
           }
+          {
+            name = "google-cloud-sdk-completions";
+            src = pkgs.fetchFromGitHub {
+              owner = "lgathy";
+              repo = "google-cloud-sdk-fish-completion";
+              rev = "bc24b0bf7da2addca377d89feece4487ca0b1e9c";
+              sha256 = "03zzggi64fhk0yx705h8nbg3a02zch9y49cdvzgnmpi321vz71h4";
+              # date = "2016-11-05T11:35:26+01:00";
+            };
+          }
         ];
 
         interactiveShellInit = ''
@@ -233,9 +243,6 @@ in {
         tldr
         units
         xsv
-
-        # debug
-        usbutils
       ];
     }
   ]);
