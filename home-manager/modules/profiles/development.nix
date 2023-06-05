@@ -158,14 +158,13 @@ in {
 
       programs.ripgrep = {
         enable = true;
-        extraConfig = ''
-          --max-columns=150
-          --max-columns-preview
-
-          --glob=!.git/*
-
-          --smart-case
-        '';
+        enableRipgrepAll = true;
+        arguments = [
+          "--max-columns=150"
+          "--max-columns-preview"
+          "--glob=!.git/*"
+          "--smart-case"
+        ];
       };
     }
 
