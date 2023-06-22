@@ -127,7 +127,6 @@ in {
         interactiveShellInit = ''
           if not set -Uq __fish_universal_config_done
              fish_load_colors
-             fish_user_abbreviations
              set -U __fish_universal_config_done 1
           end
 
