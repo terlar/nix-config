@@ -3,84 +3,161 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.services.kmonad;
 
-  keyboardOpts = {name, ...}: {
+  # Per-keyboard options:
+  keyboard = {name, ...}: {
     options = {
-      name = mkOption {
-        type = types.str;
-        readOnly = true;
-        description = ''
-          Unique name of the keyboard. This is set to the attribute name of the
-          keyboard configuration.
-        '';
+      name = lib.mkOption {
+        type = lib.types.str;
+        example = "laptop-internal";
+        description = "Keyboard name.";
       };
 
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Whether to enable the kmonad service for this keyboard.
-        '';
+      device = lib.mkOption {
+        type = lib.types.path;
+        example = "/dev/input/by-id/some-dev";
+        description = "Path to the keyboard's device file.";
       };
 
-      config = mkOption {
-        type = types.lines;
-        default = "";
-        description = ''
-          The kmonad configuration for this keyboard.
+      defcfg = {
+        enable = lib.mkEnableOption ''
+          Automatically generate the defcfg block.
+
+          When this is option is set to true the config option for
+          this keyboard should not include a defcfg block.
         '';
+
+        compose = {
+          key = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = "ralt";
+            description = "The (optional) compose key to use.";
+          };
+
+          delay = lib.mkOption {
+            type = lib.types.int;
+            default = 5;
+            description = "The delay (in milliseconds) between compose key sequences.";
+          };
+        };
+
+        fallthrough = lib.mkEnableOption "Reemit unhandled key events.";
+
+        allowCommands = lib.mkEnableOption "Allow keys to run shell commands.";
+      };
+
+      config = lib.mkOption {
+        type = lib.types.lines;
+        description = "Keyboard configuration.";
       };
     };
 
-    config = {name = mkDefault name;};
+    config = {
+      name = lib.mkDefault name;
+    };
+  };
+
+  # Create a complete KMonad configuration file:
+  mkCfg = keyboard: let
+    defcfg =
+      ''
+        (defcfg
+          input  (device-file "${keyboard.device}")
+          output (uinput-sink "kmonad-${keyboard.name}")
+      ''
+      + lib.optionalString (keyboard.defcfg.compose.key != null) ''
+        cmp-seq ${keyboard.defcfg.compose.key}
+        cmp-seq-delay ${toString keyboard.defcfg.compose.delay}
+      ''
+      + ''
+          fallthrough ${lib.boolToString keyboard.defcfg.fallthrough}
+          allow-cmd ${lib.boolToString keyboard.defcfg.allowCommands}
+        )
+      '';
+  in
+    pkgs.writeTextFile {
+      name = "kmonad-${keyboard.name}.cfg";
+      text = lib.optionalString keyboard.defcfg.enable (defcfg + "\n") + keyboard.config;
+      checkPhase = "${cfg.package}/bin/kmonad -d $out";
+    };
+
+  # Build a systemd path config that starts the service below when a
+  # keyboard device appears:
+  mkPath = keyboard: rec {
+    name = "kmonad-${keyboard.name}";
+    value = {
+      description = "KMonad trigger for ${keyboard.device}";
+      wantedBy = ["default.target"];
+      pathConfig.Unit = "${name}.service";
+      pathConfig.PathExists = keyboard.device;
+    };
+  };
+
+  # Build a systemd service that starts KMonad:
+  mkService = keyboard: let
+    cmd =
+      [
+        "${cfg.package}/bin/kmonad"
+        "--input"
+        ''device-file "${keyboard.device}"''
+      ]
+      ++ cfg.extraArgs
+      ++ [
+        "${mkCfg keyboard}"
+      ];
+
+    groups = [
+      "input"
+      "uinput"
+    ];
+  in {
+    name = "kmonad-${keyboard.name}";
+    value = {
+      description = "KMonad for ${keyboard.device}";
+      script = lib.escapeShellArgs cmd;
+      serviceConfig.Restart = "no";
+      serviceConfig.SupplementaryGroups = groups;
+      serviceConfig.Nice = -20;
+    };
   };
 in {
   options.services.kmonad = {
-    keyboards = mkOption {
-      type = types.attrsOf (types.submodule keyboardOpts);
-      default = {};
-      description = "List of keyboard configurations.";
+    enable = lib.mkEnableOption "KMonad: An advanced keyboard manager.";
+
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.kmonad;
+      example = "pkgs.haskellPackages.kmonad";
+      description = "The KMonad package to use.";
     };
 
-    package = mkOption {
-      type = types.package;
-      example = "pkgs.kmonad";
-      description = ''
-        The kmonad package.
-      '';
+    keyboards = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.submodule keyboard);
+      default = {};
+      description = "Keyboard configuration.";
+    };
+
+    extraArgs = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      example = ["--log-level" "debug"];
+      description = "Extra arguments to pass to KMonad.";
     };
   };
 
-  # NOTE: the top-level attrs assigned to config cannot be created by a fold or
-  # merge over cfg.keyboards, it seems, as that results in an infinite
-  # recursion.
-  config = let
-    enabledKeyboards = filterAttrs (_name: kb: kb.enable) cfg.keyboards;
-  in
-    mkIf (cfg.keyboards != {}) {
-      xdg.configFile =
-        mapAttrs'
-        (name: kb:
-          nameValuePair "kmonad/kmonad-${name}.kbd" {text = kb.config;})
-        enabledKeyboards;
+  config = lib.mkIf cfg.enable {
+    home.packages = [cfg.package];
 
-      systemd.user.services =
-        mapAttrs'
-        (name: _kb:
-          nameValuePair "kmonad-${name}" {
-            Unit = {Description = "KMonad for ${name}";};
-            Install = {WantedBy = ["default.target"];};
-            Service = {
-              Type = "simple";
-              ExecStart = "${cfg.package}/bin/kmonad ${
-                config.xdg.configFile."kmonad/kmonad-${name}.kbd".source
-              }";
-            };
-          })
-        enabledKeyboards;
-    };
+    systemd.user.paths =
+      builtins.listToAttrs
+      (map mkPath (builtins.attrValues cfg.keyboards));
+
+    systemd.user.services =
+      builtins.listToAttrs
+      (map mkService (builtins.attrValues cfg.keyboards));
+  };
 }
