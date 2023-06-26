@@ -4,24 +4,22 @@
   lib,
   pkgs,
   ...
-}:
-with builtins;
-with lib; let
+}: let
   cfg = config.profiles.user.terje.base;
 
   sourceDirFiles = attrRoot: destination: target: {
-    ${attrRoot} = foldl' (attrs: file:
+    ${attrRoot} = builtins.foldl' (attrs: file:
       attrs
       // {
         "${destination}/${file}".source = "${toString target}/${file}";
-      }) {} (attrNames (readDir target));
+      }) {} (builtins.attrNames (builtins.readDir target));
   };
 in {
   options.profiles.user.terje.base = {
-    enable = mkEnableOption "Base profile for terje";
+    enable = lib.mkEnableOption "Base profile for terje";
   };
 
-  config = mkIf cfg.enable (mkMerge [
+  config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       home.stateVersion = "20.09";
 
@@ -33,15 +31,15 @@ in {
       xdg.mimeApps.enable = true;
 
       profiles = {
-        user.terje.keyboards.enable = true;
+        user.terje.keyboards.enable = lib.mkDefault true;
 
         development = {
-          enable = true;
-          aws.enable = true;
-          javascript.enable = true;
-          python.enable = true;
-          nix.enable = true;
-          shell.enable = true;
+          enable = lib.mkDefault true;
+          aws.enable = lib.mkDefault true;
+          javascript.enable = lib.mkDefault true;
+          python.enable = lib.mkDefault true;
+          nix.enable = lib.mkDefault true;
+          shell.enable = lib.mkDefault true;
         };
       };
 
@@ -140,7 +138,7 @@ in {
         '';
       };
 
-      xdg = mkMerge [
+      xdg = lib.mkMerge [
         (sourceDirFiles "configFile" "fish/completions"
           "${dotfiles}/fish/.config/fish/completions")
         (sourceDirFiles "configFile" "fish/conf.d"
