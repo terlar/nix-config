@@ -319,9 +319,10 @@ in {
         nix-diff
         nix-du
         nix-index
-        nix-prefetch-scripts
+        nix-init
         nix-tree
         nixfmt
+        nurl
       ];
     })
 
