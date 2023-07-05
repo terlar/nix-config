@@ -163,6 +163,7 @@ in {
             features = "decorations";
 
             syntax-theme = "none";
+            zero-style = "grey";
             minus-emph-style = "strike bold";
             minus-style = "strike";
             plus-emph-style = "bold italic";
