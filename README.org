@@ -3,8 +3,6 @@ Configuration for NixOS and user home (dot files). It is provided via Nix flakes
 includes the following components:
 
 - apps :: commands to run to utilize the flake or for development.
-  - ~home-switch~ :: run the =home-manager= switch command for this flake.
-  - ~nixos-switch~ :: run the =nixos-rebuild= switch command for this flake.
   - ~use-caches~ :: add caches to project =nix.conf=. Only needed when modifying the caches.
   - ~install-qutebrowser-dicts~ :: install dictionaries to be used within qutebrowser.
   - ~backup~ :: backup fish history and GnuPG sshcontrol.
@@ -56,12 +54,12 @@ nix flake show
 
 Switch both system (NixOS) and home:
 #+BEGIN_SRC sh
-nix run .#nixos-switch
+nix run nixpkgs#nixos-rebuild -- switch --flake .
 #+end_src
 
 Switch home only:
 #+BEGIN_SRC sh
-nix run .#home-switch
+nix run home-manager -- switch --flake .
 #+end_src
 
 Update all inputs:
