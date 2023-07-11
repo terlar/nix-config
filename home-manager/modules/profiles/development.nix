@@ -131,6 +131,7 @@ in {
         nodePackages.json-diff
         plantuml
         tree
+        xh
       ];
 
       programs.bat.enable = true;
