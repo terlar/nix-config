@@ -225,8 +225,7 @@ in {
     # Packages
     {
       home.packages = with pkgs; [
-        scripts.insomnia
-        scripts.themepark
+        themepark
 
         # media
         playerctl
