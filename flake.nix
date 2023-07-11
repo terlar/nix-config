@@ -18,7 +18,6 @@
     emacs-config = {
       url = "github:terlar/emacs-config";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
