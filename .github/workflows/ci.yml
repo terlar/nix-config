@@ -1,5 +1,5 @@
 ---
-name: Build
+name: CI
 
 on:
   push:
@@ -8,14 +8,15 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, reopened]
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
+      - uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v12
         with:
@@ -25,8 +26,27 @@ jobs:
       - name: Enable incremental cache upload
         run: cachix watch-store terlar &
 
-      - name: Check flake
+      - name: Check
         run: nix flake check
+
+  dev-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ''
+
+      - uses: cachix/cachix-action@v12
+        with:
+          name: terlar
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+      - name: Enable incremental cache upload
+        run: cachix watch-store terlar &
+
+      - name: Check
+        run: nix flake check ./dev
 
   build-home-configuration:
     strategy:
@@ -37,7 +57,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
+      - uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v12
         with:
@@ -60,7 +82,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
+      - uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v12
         with:
@@ -82,7 +106,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
+      - uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v12
         with:

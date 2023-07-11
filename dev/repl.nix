@@ -1,5 +1,5 @@
 {system ? builtins.currentSystem}: let
-  self = builtins.getFlake (toString ./.);
+  self = builtins.getFlake (toString ../.);
   flakeModule = self.inputs.flake-parts.lib.evalFlakeModule {inherit (self) inputs;} {};
   inputs' = builtins.mapAttrs (_: flakeModule.config.perInput system) self.inputs;
   config = flakeModule.config.perInput system self;
