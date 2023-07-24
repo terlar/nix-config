@@ -27,11 +27,11 @@
         "treefmt": "treefmt"
       },
       "locked": {
-        "lastModified": 1689238450,
-        "narHash": "sha256-e52GzdA6LQC4H4FhoPxLI+viub4/DYZIHofPk8Cs6yY=",
+        "lastModified": 1689869952,
+        "narHash": "sha256-DXZtsl0IqCVZCOpCQSi2fhUuQDTXPOWuHSZADPlixdw=",
         "owner": "terlar",
         "repo": "dev-flake",
-        "rev": "ee17cdfea507868a64cd06e969cd6a639a1086ba",
+        "rev": "99c6ac1d8663dbd22be5d7f374c56f5cf77471d2",
         "type": "github"
       },
       "original": {
@@ -177,11 +177,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1689444953,
-        "narHash": "sha256-0o56bfb2LC38wrinPdCGLDScd77LVcr7CrH1zK7qvDg=",
+        "lastModified": 1690031011,
+        "narHash": "sha256-kzK0P4Smt7CL53YCdZCBbt9uBFFhE0iNvCki20etAf4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8acef304efe70152463a6399f73e636bcc363813",
+        "rev": "12303c652b881435065a98729eb7278313041e49",
         "type": "github"
       },
       "original": {
