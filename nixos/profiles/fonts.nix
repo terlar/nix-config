@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       iosevka-slab
       noto-fonts
       noto-fonts-cjk

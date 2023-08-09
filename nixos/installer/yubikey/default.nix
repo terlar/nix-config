@@ -58,7 +58,7 @@ in {
   '';
 
   # Console.
-  fonts.fonts = [pkgs.roboto-mono];
+  fonts.packages = [pkgs.roboto-mono];
   services.kmscon = {
     enable = true;
     autologinUser = "nixos";
