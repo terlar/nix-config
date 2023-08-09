@@ -1,18 +1,35 @@
-_final: prev: {
+final: prev: {
   gnomeExtensions =
     prev.gnomeExtensions
     // {
-      paperwm = prev.gnomeExtensions.paperwm.overrideDerivation (old: let
-        version = "unstable-2023-05-17";
-      in {
-        inherit version;
-        name = "${old.pname}-${version}";
-        src = prev.fetchFromGitHub {
+      paperwm = final.stdenv.mkDerivation rec {
+        pname = "gnome-shell-extension-paperwm";
+        version = "44.7.1";
+
+        src = final.fetchFromGitHub {
           owner = "paperwm";
-          repo = "paperwm";
-          rev = "477e87a4f04a01ad05245852c0cf645fd19bec0c";
-          hash = "sha256-0IWPuKwkjEnogJSwFaJgbA6hFq6lIAJwi7OkfIq2mwg=";
+          repo = "PaperWM";
+          rev = "v${version}";
+          sha256 = "sha256-EY3NbKG7V8kWOkD/FspYYFm5Qfi02vgPE3wtDUDqswQ=";
         };
-      });
+
+        passthru.extensionUuid = "paperwm@paperwm.github.com";
+
+        dontBuild = true;
+
+        installPhase = ''
+          runHook preInstall
+          mkdir -p "$out/share/gnome-shell/extensions/${passthru.extensionUuid}"
+          cp -r . "$out/share/gnome-shell/extensions/${passthru.extensionUuid}"
+          runHook postInstall
+        '';
+
+        meta = with prev.lib; {
+          description = "Tiled scrollable window management for Gnome Shell";
+          homepage = "https://github.com/paperwm/PaperWM";
+          license = licenses.gpl3;
+          maintainers = with maintainers; [terlar];
+        };
+      };
     };
 }
