@@ -4,13 +4,13 @@ final: prev: {
     // {
       paperwm = final.stdenv.mkDerivation rec {
         pname = "gnome-shell-extension-paperwm";
-        version = "44.7.1";
+        version = "44.7.2";
 
         src = final.fetchFromGitHub {
           owner = "paperwm";
           repo = "PaperWM";
           rev = "v${version}";
-          sha256 = "sha256-EY3NbKG7V8kWOkD/FspYYFm5Qfi02vgPE3wtDUDqswQ=";
+          sha256 = "sha256-8GUxUnF8uHTcpryN0pTs/ZvqSXWq24h3iOzxGq6aZD0=";
         };
 
         passthru.extensionUuid = "paperwm@paperwm.github.com";
