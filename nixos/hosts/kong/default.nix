@@ -76,4 +76,7 @@ in {
 
   # Earlier font size setup.
   console.earlySetup = true;
+
+  # Hi-DPI
+  environment.sessionVariables.GDK_SCALE = "1";
 }
