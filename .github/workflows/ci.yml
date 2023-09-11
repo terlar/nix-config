@@ -13,7 +13,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
@@ -32,7 +32,7 @@ jobs:
   dev-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
@@ -56,7 +56,7 @@ jobs:
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
@@ -81,7 +81,7 @@ jobs:
           - kong
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
@@ -105,7 +105,7 @@ jobs:
           - installer-yubikey
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
