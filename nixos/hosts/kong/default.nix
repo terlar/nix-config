@@ -18,11 +18,15 @@ in {
   ];
 
   boot = {
-    # Use the systemd-boot EFI boot loader.
-    loader.systemd-boot.enable = true;
-    # Prevent small EFI partition filling up.
-    loader.systemd-boot.configurationLimit = 25;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot = {
+        # Use the systemd-boot EFI boot loader.
+        enable = true;
+        # Prevent small EFI partition filling up.
+        configurationLimit = 25;
+      };
+      efi.canTouchEfiVariables = true;
+    };
 
     kernelModules = ["fuse"];
     kernelPackages = pkgs.linuxPackages_latest;

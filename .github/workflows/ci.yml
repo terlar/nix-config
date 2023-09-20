@@ -17,6 +17,9 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
+          extra-conf: |
+            http-connections = 50
+            max-jobs = auto
 
       - uses: cachix/cachix-action@v12
         with:
@@ -36,6 +39,9 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
+          extra-conf: |
+            http-connections = 50
+            max-jobs = auto
 
       - uses: cachix/cachix-action@v12
         with:
@@ -60,6 +66,9 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
+          extra-conf: |
+            http-connections = 50
+            max-jobs = auto
 
       - uses: cachix/cachix-action@v12
         with:
@@ -85,6 +94,9 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
+          extra-conf: |
+            http-connections = 50
+            max-jobs = auto
 
       - uses: cachix/cachix-action@v12
         with:
@@ -109,6 +121,9 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ''
+          extra-conf: |
+            http-connections = 50
+            max-jobs = auto
 
       - uses: cachix/cachix-action@v12
         with:
