@@ -63,17 +63,21 @@ in {
           defaultPdfApplication = true;
         };
       };
+    }
 
-      programs.bat.config = {
-        theme = "GitHub";
-        pager = "less -FR";
-      };
+    {
+      programs = {
+        bat.config = {
+          theme = "GitHub";
+          pager = "less -FR";
+        };
 
-      programs.readline.enable = true;
+        readline.enable = true;
 
-      programs.ssh = {
-        enable = true;
-        compression = true;
+        ssh = {
+          enable = true;
+          compression = true;
+        };
       };
     }
 

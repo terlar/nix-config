@@ -14,10 +14,16 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      profiles.user.terje.base.enable = true;
-      profiles.user.terje.gnome.enable = lib.mkDefault true;
-      profiles.user.terje.gnome.paperwm.enable = lib.mkDefault true;
-      profiles.highContrast.enable = true;
+      profiles = {
+        highContrast.enable = true;
+        user.terje = {
+          base.enable = true;
+          gnome = {
+            enable = lib.mkDefault true;
+            paperwm.enable = lib.mkDefault true;
+          };
+        };
+      };
 
       gtk.enable = true;
 
@@ -93,10 +99,12 @@ in {
       home.sessionVariables.TERMINAL = "kitty";
 
       xdg = {
-        configFile."kitty/kitty.conf".source = "${dotfiles}/kitty/.config/kitty/kitty.conf";
-        configFile."kitty/diff.conf".source = "${dotfiles}/kitty/.config/kitty/diff.conf";
-        configFile."kitty/colors-dark.conf".source = "${dotfiles}/kitty/.config/kitty/colors-dark.conf";
-        configFile."kitty/colors-light.conf".source = "${dotfiles}/kitty/.config/kitty/colors-light.conf";
+        configFile = {
+          "kitty/kitty.conf".source = "${dotfiles}/kitty/.config/kitty/kitty.conf";
+          "kitty/diff.conf".source = "${dotfiles}/kitty/.config/kitty/diff.conf";
+          "kitty/colors-dark.conf".source = "${dotfiles}/kitty/.config/kitty/colors-dark.conf";
+          "kitty/colors-light.conf".source = "${dotfiles}/kitty/.config/kitty/colors-light.conf";
+        };
       };
     }
 

@@ -1,13 +1,16 @@
 {pkgs, ...}: {
-  services.xserver.enable = true;
+  services = {
+    dbus.packages = [pkgs.dconf];
+    xserver = {
+      enable = true;
+      # Display manager
+      displayManager.gdm.enable = true;
 
-  # Display manager
-  services.xserver.displayManager.gdm.enable = true;
+      # Desktop manager
+      desktopManager.gnome.enable = true;
+    };
 
-  # Desktop manager
-  services.xserver.desktopManager.gnome.enable = true;
-  services.dbus.packages = [pkgs.dconf];
-
-  # Gnome 3 enables power-profiles-daemon which conflicts with TLP.
-  services.tlp.enable = false;
+    # Gnome 3 enables power-profiles-daemon which conflicts with TLP.
+    tlp.enable = false;
+  };
 }

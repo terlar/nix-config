@@ -134,38 +134,40 @@ in {
         xh
       ];
 
-      programs.bat.enable = true;
+      programs = {
+        bat.enable = true;
 
-      programs.direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-      };
+        direnv = {
+          enable = true;
+          nix-direnv.enable = true;
+        };
 
-      programs.editorConfig = {
-        enable = true;
-        settings = {
-          "*" = {
-            end_of_line = "lf";
-            charset = "utf-8";
-            trim_trailing_whitespace = true;
-            insert_final_newline = true;
-          };
-          "*.plantuml" = {
-            indent_style = cfg.plantuml.indentStyle;
-            indent_size = cfg.plantuml.indentSize;
+        editorConfig = {
+          enable = true;
+          settings = {
+            "*" = {
+              end_of_line = "lf";
+              charset = "utf-8";
+              trim_trailing_whitespace = true;
+              insert_final_newline = true;
+            };
+            "*.plantuml" = {
+              indent_style = cfg.plantuml.indentStyle;
+              indent_size = cfg.plantuml.indentSize;
+            };
           };
         };
-      };
 
-      programs.ripgrep = {
-        enable = true;
-        enableRipgrepAll = true;
-        arguments = [
-          "--max-columns=150"
-          "--max-columns-preview"
-          "--glob=!.git/*"
-          "--smart-case"
-        ];
+        ripgrep = {
+          enable = true;
+          enableRipgrepAll = true;
+          arguments = [
+            "--max-columns=150"
+            "--max-columns-preview"
+            "--glob=!.git/*"
+            "--smart-case"
+          ];
+        };
       };
     }
 
@@ -275,23 +277,26 @@ in {
     ]))
 
     (mkIf cfg.javascript.enable {
-      home.packages = with pkgs; [
-        nodePackages.jsonlint
-        nodePackages.prettier
-      ];
+      home = {
+        packages = with pkgs; [
+          nodePackages.jsonlint
+          nodePackages.prettier
+        ];
 
-      home.file.".npmrc".text = ''
-        ${optionalString cfg.javascript.ignoreScripts ''
-          ignore-scripts=true
-        ''}
-      '';
-
-      home.file.".yarnrc".text = ''
-        disable-self-update-check true
-        ${optionalString cfg.javascript.ignoreScripts ''
-          ignore-scripts true
-        ''}
-      '';
+        file = {
+          ".npmrc".text = ''
+            ${optionalString cfg.javascript.ignoreScripts ''
+              ignore-scripts=true
+            ''}
+          '';
+          ".yarnrc".text = ''
+            disable-self-update-check true
+            ${optionalString cfg.javascript.ignoreScripts ''
+              ignore-scripts true
+            ''}
+          '';
+        };
+      };
 
       programs.editorConfig.settings."*.{js,jsx,json,ts,tsx}" = {
         indent_style = cfg.javascript.indentStyle;
