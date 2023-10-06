@@ -196,7 +196,7 @@ in {
         enableSshSupport = true;
         extraConfig = ''
           allow-emacs-pinentry
-          allow-loopback-entry
+          allow-loopback-pinentry
         '';
       };
 
