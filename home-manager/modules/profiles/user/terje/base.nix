@@ -43,6 +43,8 @@ in {
         };
       };
 
+      home.sessionVariables.LS_COLORS = "1";
+
       custom = {
         keyboard = {
           enable = true;
