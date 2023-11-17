@@ -43,7 +43,7 @@ in {
         };
       };
 
-      home.sessionVariables.LS_COLORS = "1";
+      home.sessionVariables.LS_COLORS = "";
 
       custom = {
         keyboard = {
