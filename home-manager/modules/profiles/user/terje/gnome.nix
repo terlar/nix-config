@@ -36,7 +36,7 @@ in {
       programs.gnome-shell = {
         enable = true;
         extensions = [
-          {package = pkgs.gnomeExtensions.true-color-invert;}
+          {package = pkgs.gnomeExtensions.true-color-window-invert;}
           {package = pkgs.gnomeExtensions.miniview;}
         ];
       };
@@ -58,7 +58,7 @@ in {
           showme = false;
         };
 
-        "org/gnome/shell/extensions/true-color-invert" = {
+        "org/gnome/shell/extensions/true-color-window-invert" = {
           invert-window-shortcut = ["<Super>exclam"];
         };
 
