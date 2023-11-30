@@ -246,6 +246,7 @@ in {
           };
 
           block_quote = {
+            color = "0";
             indent = 1;
             indent_token = "┃ ";
           };
