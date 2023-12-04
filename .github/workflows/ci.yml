@@ -21,7 +21,7 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -43,7 +43,7 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -70,7 +70,7 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -98,7 +98,7 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -125,7 +125,7 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
