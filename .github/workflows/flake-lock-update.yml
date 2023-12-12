@@ -26,6 +26,8 @@ jobs:
         with:
           token: ${{ steps.generate-app-token.outputs.token }}
           branch: update-flake-lock
+          commit-msg: "chore(flake): update flake.lock"
+          pr-title: "chore(flake): update flake.lock"
           pr-labels: |
             chore
             flake
@@ -51,7 +53,8 @@ jobs:
           path-to-flake-dir: dev/
           token: ${{ steps.generate-app-token.outputs.token }}
           branch: update-dev-flake-lock
-          pr-title: "Update dev/flake.lock"
+          commit-msg: "chore(flake): update dev/flake.lock"
+          pr-title: "chore(flake): update dev/flake.lock"
           pr-labels: |
             chore
             flake

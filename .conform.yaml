@@ -1,0 +1,28 @@
+policies:
+  - type: commit
+    spec:
+      header:
+        length: 89
+        imperative: true
+        case: lower
+        invalidLastCharacters: .
+      gpg:
+        required: true
+      spellcheck:
+        locale: US
+      conventional:
+        types:
+          - feat
+          - fix
+          - build
+          - chore
+          - ci
+          - docs
+          - pref
+          - refactor
+          - style
+          - test
+        scopes:
+          - flake
+          - github
+        descriptionLength: 72
