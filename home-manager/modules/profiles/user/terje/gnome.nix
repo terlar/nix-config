@@ -113,24 +113,24 @@ in {
           slurp-in = ["<Super>i"];
           barf-out = ["<Super>o"];
 
-          previous-workspace = ["<Super>Tab"];
-          move-previous-workspace = ["<Control><Super>Tab"];
-          previous-workspace-backward = ["<Shift><Super>Tab"];
-          move-previous-workspace-backward = ["<Control><Shift><Super>Tab"];
+          switch-up-workspace = ["<Super>bracketleft"];
+          move-up-workspace = ["<Shift><Super>bracketleft"];
+          switch-down-workspace = ["<Super>bracketright"];
+          move-down-workspace = ["<Shift><Super>bracketright"];
 
           switch-first = ["<Super>Home"];
           switch-last = ["<Super>End"];
 
           switch-left = ["<Super>h"];
-          move-left = ["<Shift><Super>comma" "<Shift><Super>h"];
+          move-left = ["<Shift><Super>h"];
 
           switch-right = ["<Super>l"];
-          move-right = ["<Shift><Super>period" "<Shift><Super>l"];
+          move-right = ["<Shift><Super>l"];
 
-          switch-previous = ["<Super>comma" "<Super>k"];
+          switch-previous = ["<Shift><Super>Tab" "<Super>k"];
           move-up = ["<Shift><Super>k"];
 
-          switch-next = ["<Super>period" "<Super>j"];
+          switch-next = ["<Super>Tab" "<Super>j"];
           move-down = ["<Shift><Super>j"];
 
           switch-monitor-up = ["<Super>Up"];
@@ -144,10 +144,10 @@ in {
 
           switch-up = [];
           switch-down = [];
-          switch-up-workspace = [];
-          move-up-workspace = [];
-          switch-down-workspace = [];
-          move-down-workspace = [];
+          previous-workspace = [];
+          move-previous-workspace = [];
+          previous-workspace-backward = [];
+          move-previous-workspace-backward = [];
           live-alt-tab = [];
           live-alt-tab-backward = [];
         };
