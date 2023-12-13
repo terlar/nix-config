@@ -8,15 +8,11 @@
     pkgs,
     ...
   }: let
-    overlays = [
-      self.overlays.default
-      self.overlays.gnomeExtensions
-    ];
+    overlays = [self.overlays.default];
     pkgs' = pkgs.extend (lib.composeManyExtensions overlays);
   in {
     packages = {
       inherit (pkgs') project-init saw iosevka-slab;
-      inherit (pkgs'.gnomeExtensions) paperwm;
     };
 
     legacyPackages = {
