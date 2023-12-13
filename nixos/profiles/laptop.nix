@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [./hardware/backlight.nix];
 
   networking.networkmanager.enable = true;
@@ -23,7 +27,7 @@
     };
 
     # Monitor and control temperature.
-    thermald.enable = true;
+    thermald.enable = lib.mkDefault true;
   };
 
   environment.systemPackages = with pkgs; [powertop];

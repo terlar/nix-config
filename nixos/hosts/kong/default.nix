@@ -56,6 +56,8 @@ in {
         DNS=1.1.1.1
       '';
     };
+
+    thermald.enable = false;
   };
 
   # System user.
