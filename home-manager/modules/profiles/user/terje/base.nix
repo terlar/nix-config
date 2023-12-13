@@ -204,6 +204,11 @@ in {
           allow-loopback-pinentry
         '';
       };
+
+      # Ensure Gnome Keyring does not steal the SSH_AUTH_SOCK.
+      programs.fish.interactiveShellInit = ''
+        set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      '';
     }
 
     # Nix

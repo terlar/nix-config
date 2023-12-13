@@ -25,4 +25,7 @@ policies:
         scopes:
           - flake
           - github
+          - home
+          - nixos
+          - package
         descriptionLength: 72
