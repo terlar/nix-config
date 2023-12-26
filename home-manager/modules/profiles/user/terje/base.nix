@@ -38,7 +38,6 @@ in {
 
         development = {
           enable = lib.mkDefault true;
-          aws.enable = lib.mkDefault true;
           javascript.enable = lib.mkDefault true;
           python.enable = lib.mkDefault true;
           nix.enable = lib.mkDefault true;

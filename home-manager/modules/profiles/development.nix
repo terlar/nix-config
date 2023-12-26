@@ -3,9 +3,17 @@
   lib,
   pkgs,
   ...
-}:
-with builtins;
-with lib; let
+}: let
+  inherit
+    (lib)
+    mkDefault
+    mkEnableOption
+    mkIf
+    mkMerge
+    mkOption
+    types
+    ;
+
   cfg = config.profiles.development;
 
   mkIndentStyleOption = lang: default:
@@ -25,10 +33,8 @@ in {
   options.profiles.development = {
     enable = mkEnableOption "Development profile";
 
-    aws = {enable = mkEnableOption "AWS Development profile";};
-
     sourceDirectory = mkOption {
-      type = with types; either path str;
+      type = types.either types.path types.str;
       default = "${config.home.homeDirectory}/src";
       defaultText = "$HOME/src";
       apply = toString; # Prevent copies to Nix store.
@@ -44,10 +50,10 @@ in {
 
       enableDelta = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
         description = ''
-          Whether to use <command>delta</command> for diff outputs.
-          See <link xlink:href="https://github.com/dandavison/delta"/>.
+          Whether to use `delta` for diff outputs.
+          See <https://github.com/dandavison/delta>.
         '';
       };
 
@@ -55,8 +61,8 @@ in {
         type = types.bool;
         default = true;
         description = ''
-          Whether to use <command>ghq</command> for remote repository management.
-          See <link xlink:href="https://github.com/x-motemen/ghq"/>.
+          Whether to use `ghq` for remote repository management.
+          See <https://github.com/x-motemen/ghq>.
         '';
       };
 
@@ -121,46 +127,49 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = with pkgs; [
-        curlie
-        fd
-        glow
-        gron
-        hey
-        jq
-        nodePackages.json-diff
-        plantuml
-        tree
-        xh
+      editorconfig = {
+        enable = mkDefault true;
+        settings = {
+          "*" = {
+            charset = "utf-8";
+            end_of_line = "lf";
+            trim_trailing_whitespace = true;
+            insert_final_newline = true;
+          };
+          "*.plantuml" = {
+            indent_style = cfg.plantuml.indentStyle;
+            indent_size = cfg.plantuml.indentSize;
+          };
+        };
+      };
+
+      home.packages = [
+        pkgs.fd
+        pkgs.tree
+
+        pkgs.hey
+        pkgs.xh
+
+        pkgs.gron
+        pkgs.jq
+        pkgs.nodePackages.json-diff
+
+        pkgs.glow
+        pkgs.graphviz
+        pkgs.plantuml
       ];
 
       programs = {
-        bat.enable = true;
+        bat.enable = mkDefault true;
 
         direnv = {
-          enable = true;
-          nix-direnv.enable = true;
-        };
-
-        editorConfig = {
-          enable = true;
-          settings = {
-            "*" = {
-              end_of_line = "lf";
-              charset = "utf-8";
-              trim_trailing_whitespace = true;
-              insert_final_newline = true;
-            };
-            "*.plantuml" = {
-              indent_style = cfg.plantuml.indentStyle;
-              indent_size = cfg.plantuml.indentSize;
-            };
-          };
+          enable = mkDefault true;
+          nix-direnv.enable = mkDefault true;
         };
 
         ripgrep = {
-          enable = true;
-          enableRipgrepAll = false;
+          enable = mkDefault true;
+          enableRipgrepAll = mkDefault true;
           arguments = [
             "--max-columns=150"
             "--max-columns-preview"
@@ -171,21 +180,15 @@ in {
       };
     }
 
-    (mkIf cfg.aws.enable {home.packages = with pkgs; [awscli saw];})
-
     (mkIf cfg.git.enable (mkMerge [
       {
-        home.packages = with pkgs; [git-imerge];
+        home.packages = [pkgs.git-imerge];
 
         programs.git = {
-          enable = true;
-          package = pkgs.gitFull;
+          enable = mkDefault true;
+          package = mkDefault pkgs.gitFull;
 
           aliases = {
-            unstage = "reset HEAD";
-            uncommit = "reset --soft HEAD^";
-            unpush = "push --force-with-lease origin HEAD^:master";
-            recommit = "commit --amend";
             ignore = "update-index --assume-unchanged";
             unignore = "update-index --no-assume-unchanged";
             ignored = "!git ls-files -v | grep '^[[:lower:]]'";
@@ -194,12 +197,12 @@ in {
             fup = "!git log --stat --since '1 day ago' --author $(git config user.email)";
             tags = "tag -l";
             remotes = "remote -v";
-            branches = concatStringsSep " " [
+            branches = builtins.concatStringsSep " " [
               "!git"
               "for-each-ref"
               "--sort=-committerdate"
               "--format='${
-                concatStringsSep "|" [
+                builtins.concatStringsSep "|" [
                   "%(color:blue)%(authordate:relative)"
                   "%(color:red)%(authorname)"
                   "%(color:black)%(color:bold)%(refname:short)"
@@ -278,27 +281,27 @@ in {
 
     (mkIf cfg.javascript.enable {
       home = {
-        packages = with pkgs; [
-          nodePackages.jsonlint
-          nodePackages.prettier
+        packages = [
+          pkgs.nodePackages.jsonlint
+          pkgs.nodePackages.prettier
         ];
 
         file = {
           ".npmrc".text = ''
-            ${optionalString cfg.javascript.ignoreScripts ''
+            ${lib.optionalString cfg.javascript.ignoreScripts ''
               ignore-scripts=true
             ''}
           '';
           ".yarnrc".text = ''
             disable-self-update-check true
-            ${optionalString cfg.javascript.ignoreScripts ''
+            ${lib.optionalString cfg.javascript.ignoreScripts ''
               ignore-scripts true
             ''}
           '';
         };
       };
 
-      programs.editorConfig.settings."*.{js,jsx,json,ts,tsx}" = {
+      editorconfig.settings."*.{js,jsx,json,ts,tsx}" = {
         indent_style = cfg.javascript.indentStyle;
         indent_size = cfg.javascript.indentSize;
       };
@@ -310,32 +313,33 @@ in {
         c.InteractiveShellApp.exec_lines = ['%autoreload 2']
       '';
 
-      programs.editorConfig.settings."*.py" = {
+      editorconfig.settings."*.py" = {
         indent_style = cfg.python.indentStyle;
         indent_size = cfg.python.indentSize;
       };
     })
 
     (mkIf cfg.nix.enable {
-      home.packages = with pkgs; [
-        alejandra
-        cachix
-        manix
-        nil
-        nix-diff
-        nix-du
-        nix-index
-        nix-init
-        nix-tree
-        nixfmt
-        nurl
+      home.packages = [
+        pkgs.cachix
+        pkgs.manix
+        pkgs.nil
+        pkgs.nix-diff
+        pkgs.nix-du
+        pkgs.nix-index
+        pkgs.nix-init
+        pkgs.nix-tree
+        pkgs.nurl
       ];
     })
 
     (mkIf cfg.shell.enable {
-      home.packages = with pkgs; [shellcheck shfmt termtosvg];
+      home.packages = [
+        pkgs.shellcheck
+        pkgs.shfmt
+      ];
 
-      programs.editorConfig.settings."*.{bash,sh}" = {
+      editorconfig.settings."*.{bash,sh}" = {
         indent_style = cfg.shell.indentStyle;
         indent_size = cfg.shell.indentSize;
       };
