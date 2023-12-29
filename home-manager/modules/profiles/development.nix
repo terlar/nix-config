@@ -328,6 +328,7 @@ in {
         pkgs.nix-du
         pkgs.nix-index
         pkgs.nix-init
+        pkgs.nix-output-monitor
         pkgs.nix-tree
         pkgs.nurl
       ];
