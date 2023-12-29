@@ -321,17 +321,27 @@ in {
 
     (mkIf cfg.nix.enable {
       home.packages = [
+        # Use
         pkgs.cachix
+        pkgs.nix-index
+        pkgs.nix-output-monitor
+        pkgs.nix-your-shell
+
+        # Develop
         pkgs.manix
         pkgs.nil
+        pkgs.nix-init
+        pkgs.nurl
+
+        # Debug
         pkgs.nix-diff
         pkgs.nix-du
-        pkgs.nix-index
-        pkgs.nix-init
-        pkgs.nix-output-monitor
         pkgs.nix-tree
-        pkgs.nurl
       ];
+
+      programs.fish.interactiveShellInit = ''
+        nix-your-shell fish | source
+      '';
     })
 
     (mkIf cfg.shell.enable {
