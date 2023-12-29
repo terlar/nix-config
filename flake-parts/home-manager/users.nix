@@ -11,6 +11,7 @@
         self.homeManagerModules.default
         self.homeManagerModules.nixpkgs-useFlakeNixpkgs
         inputs.emacs-config.homeManagerModules.emacsConfig
+        inputs.nur.hmModules.nur
       ];
 
       _module.args = {inherit (inputs) dotfiles;};

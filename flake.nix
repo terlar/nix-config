@@ -27,6 +27,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur.url = "github:nix-community/NUR";
 
     # Packages
     kmonad.url = "github:kmonad/kmonad?dir=nix";
