@@ -36,6 +36,7 @@ in {
       profiles = {
         user.terje.keyboards.enable = lib.mkDefault true;
 
+        gnupg.enable = lib.mkDefault true;
         development = {
           enable = lib.mkDefault true;
           javascript.enable = lib.mkDefault true;
@@ -186,28 +187,6 @@ in {
           };
         };
       };
-    }
-
-    # GPG
-    {
-      programs.gpg = {
-        enable = true;
-        settings = {keyserver = "hkps://keys.openpgp.org";};
-      };
-
-      services.gpg-agent = {
-        enable = true;
-        enableSshSupport = true;
-        extraConfig = ''
-          allow-emacs-pinentry
-          allow-loopback-pinentry
-        '';
-      };
-
-      # Ensure Gnome Keyring does not steal the SSH_AUTH_SOCK.
-      programs.fish.interactiveShellInit = ''
-        set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-      '';
     }
 
     # Nix
