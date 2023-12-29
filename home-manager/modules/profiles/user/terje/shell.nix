@@ -8,11 +8,13 @@
   cfg = config.profiles.user.terje.shell;
 
   sourceDirFiles = attrRoot: destination: target: {
-    ${attrRoot} = builtins.foldl' (attrs: file:
-      attrs
-      // {
-        "${destination}/${file}".source = "${toString target}/${file}";
-      }) {} (builtins.attrNames (builtins.readDir target));
+    ${attrRoot} = lib.pipe target [
+      builtins.readDir
+      builtins.attrNames
+      (builtins.foldl'
+        (attrs: file: attrs // {"${destination}/${file}".source = "${toString target}/${file}";})
+        {})
+    ];
   };
 
   packageWithMainProgram = mainProgram: pkg:
