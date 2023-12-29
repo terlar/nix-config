@@ -23,6 +23,10 @@
 
     # Modules
     nixos-hardware.url = "nixos-hardware";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Packages
     kmonad.url = "github:kmonad/kmonad?dir=nix";
