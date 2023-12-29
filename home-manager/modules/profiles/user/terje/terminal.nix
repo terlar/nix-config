@@ -60,7 +60,7 @@ in {
           bright0 = "596e76"; # bright black
           bright1 = "cc1f24"; # bright red
           bright2 = "002b37"; # bright green
-          bright3 = "596e76"; # bright yellow
+          bright3 = "f4eedb"; # bright yellow
           bright4 = "002b37"; # bright blue
           bright5 = "002b37"; # bright magenta
           bright6 = "002b37"; # bright cyan
