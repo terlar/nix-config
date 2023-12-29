@@ -1,32 +1,60 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}:
-with lib;
-with builtins; let
+}: let
   cfg = config.profiles.user.terje.programs.firefox;
 in {
   options.profiles.user.terje.programs.firefox = {
-    enable = mkEnableOption "Firefox config for terje";
+    enable = lib.mkEnableOption "Firefox config for terje";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.firefox = {
       enable = true;
+
+      package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+        extraPolicies = {
+          CaptivePortal = false;
+          DisableFirefoxStudies = true;
+          DisablePocket = true;
+          DisableTelemetry = true;
+          DisableFirefoxAccounts = true;
+          FirefoxHome = {
+            Pocket = false;
+            Snippets = false;
+          };
+          UserMessaging = {
+            ExtensionRecommendations = false;
+            SkipOnboarding = true;
+          };
+        };
+      };
 
       profiles.default = {
         isDefault = true;
 
         settings = {
+          "browser.startup.homepage" = "https://github.com/terlar";
+
+          "permissions.default.shortcuts" = 2;
+
+          "privacy.donottrackheader.enabled" = true;
+          "privacy.donottrackheader.value" = 1;
+
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
 
-        userChrome = ''
-          ${readFile ./hide-nav-bar.css}
-          ${readFile ./hide-tab-bar.css}
-          ${readFile ./sidebery.css}
-        '';
+        userChrome =
+          lib.pipe [
+            ./hide-nav-bar.css
+            ./hide-tab-bar.css
+            ./sidebery.css
+          ] [
+            (map builtins.readFile)
+            (builtins.concatStringsSep "\n")
+          ];
       };
     };
   };

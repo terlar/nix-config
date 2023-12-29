@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+{
   services = {
-    dbus.packages = [pkgs.dconf];
     xserver = {
       enable = true;
+
       # Display manager
       displayManager.gdm.enable = true;
 

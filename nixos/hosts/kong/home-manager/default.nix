@@ -1,6 +1,9 @@
 {
   imports = [./autorandr.nix];
   profiles.user.terje = {
-    graphical.enable = true;
+    graphical = {
+      enable = true;
+      desktop = true;
+    };
   };
 }

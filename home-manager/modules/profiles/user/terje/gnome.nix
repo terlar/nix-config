@@ -26,13 +26,6 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      profiles.gnome.enable = true;
-
-      services.gnome-keyring = {
-        enable = true;
-        components = ["pkcs11" "secrets"];
-      };
-
       programs.gnome-shell = {
         enable = true;
         extensions = [
@@ -40,6 +33,8 @@ in {
           {package = pkgs.gnomeExtensions.miniview;}
         ];
       };
+
+      services.gpg-agent.pinentryFlavor = "gnome3";
 
       dconf.settings = {
         "org/gnome/desktop/wm/keybindings" = {

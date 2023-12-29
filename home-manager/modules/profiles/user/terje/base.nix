@@ -1,165 +1,83 @@
 {
   config,
-  dotfiles,
   lib,
   pkgs,
   ...
 }: let
   cfg = config.profiles.user.terje.base;
-
-  jsonFormat = pkgs.formats.json {};
-  yamlFormat = pkgs.formats.yaml {};
-
-  sourceDirFiles = attrRoot: destination: target: {
-    ${attrRoot} = builtins.foldl' (attrs: file:
-      attrs
-      // {
-        "${destination}/${file}".source = "${toString target}/${file}";
-      }) {} (builtins.attrNames (builtins.readDir target));
-  };
 in {
   options.profiles.user.terje.base = {
     enable = lib.mkEnableOption "Base profile for terje";
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      home.stateVersion = "20.09";
+  config = lib.mkIf cfg.enable {
+    home.stateVersion = "20.09";
 
-      programs.home-manager.enable = true;
-      systemd.user.startServices = "sd-switch";
-      manual.html.enable = true;
+    programs.home-manager.enable = true;
+    systemd.user.startServices = "sd-switch";
+    manual.html.enable = true;
 
-      xdg.enable = true;
-      xdg.mimeApps.enable = true;
+    xdg.enable = true;
+    xdg.mimeApps.enable = true;
 
-      profiles = {
-        user.terje.keyboards.enable = lib.mkDefault true;
-
-        development = {
-          enable = lib.mkDefault true;
-          aws.enable = lib.mkDefault true;
-          javascript.enable = lib.mkDefault true;
-          python.enable = lib.mkDefault true;
-          nix.enable = lib.mkDefault true;
-          shell.enable = lib.mkDefault true;
-        };
+    profiles = {
+      user.terje = {
+        keyboards.enable = lib.mkDefault true;
+        shell.enable = lib.mkDefault true;
       };
 
-      home.sessionVariables.LS_COLORS = "";
-
-      custom = {
-        keyboard = {
-          enable = true;
-          layouts = [{layout = "us";} {layout = "se";}];
-          xkbOptions = ["ctrl:nocaps"];
-          repeatDelay = 500;
-          repeatInterval = 33; # 30Hz
-        };
-
-        keybindings = {
-          enable = true;
-          mode = "emacs";
-        };
-
-        emacsConfig = {
-          enable = true;
-          defaultEmailApplication = true;
-          defaultPdfApplication = true;
-        };
+      gnupg.enable = lib.mkDefault true;
+      development = {
+        enable = lib.mkDefault true;
+        javascript.enable = lib.mkDefault true;
+        python.enable = lib.mkDefault true;
+        nix.enable = lib.mkDefault true;
+        shell.enable = lib.mkDefault true;
       };
-    }
+    };
 
-    {
-      programs = {
-        bat.config = {
-          theme = "GitHub";
-          pager = "less -FR";
-        };
-
-        readline.enable = true;
-
-        ssh = {
-          enable = true;
-          compression = true;
-        };
-      };
-    }
-
-    # Bash
-    {
-      programs.bash.enable = true;
-      home.packages = [
-        pkgs.bashInteractive
-      ];
-    }
-
-    # Fish
-    {
-      programs.fish = {
+    custom = {
+      keyboard = {
         enable = true;
-        plugins = [
-          {
-            name = "aws";
-            src = pkgs.fetchFromGitHub {
-              owner = "terlar";
-              repo = "plugin-aws";
-              rev = "142c68b2828de93730d00b2b0421242df128e8fc";
-              sha256 = "1cgyhjdh29jfly875ly31cjsymi45b3qipydsd9mvb1ws0r6337c";
-              # date = 2020-04-22T09:47:07+02:00;
-            };
-          }
-          {
-            name = "kubectl-completions";
-            src = pkgs.fetchFromGitHub {
-              owner = "evanlucas";
-              repo = "fish-kubectl-completions";
-              rev = "bbe3b831bcf8c0511fceb0607e4e7511c73e8c71";
-              sha256 = "1r6wqvvvb755jkmlng1i085s7cj1psxmddqghm80x5573rkklfps";
-              # date = 2021-01-21T11:57:06-06:00;
-            };
-          }
-          {
-            name = "google-cloud-sdk-completions";
-            src = pkgs.fetchFromGitHub {
-              owner = "lgathy";
-              repo = "google-cloud-sdk-fish-completion";
-              rev = "bc24b0bf7da2addca377d89feece4487ca0b1e9c";
-              sha256 = "03zzggi64fhk0yx705h8nbg3a02zch9y49cdvzgnmpi321vz71h4";
-              # date = "2016-11-05T11:35:26+01:00";
-            };
-          }
-        ];
-
-        interactiveShellInit = ''
-          if not set -Uq __fish_universal_config_done
-             fish_load_colors
-             set -U __fish_universal_config_done 1
-          end
-
-          set -x DIRENV_LOG_FORMAT ""
-
-          function __direnv_disable_in_nix_shell --on-event fish_prompt
-            if set -q IN_NIX_SHELL
-              functions --erase __direnv_export_eval
-            end
-          end
-        '';
+        layouts = [{layout = "us";} {layout = "se";}];
+        xkbOptions = ["ctrl:nocaps"];
+        repeatDelay = 500;
+        repeatInterval = 33; # 30Hz
       };
 
-      xdg = lib.mkMerge [
-        (sourceDirFiles "configFile" "fish/completions"
-          "${dotfiles}/fish/.config/fish/completions")
-        (sourceDirFiles "configFile" "fish/conf.d"
-          "${dotfiles}/fish/.config/fish/conf.d")
-        (sourceDirFiles "configFile" "fish/functions"
-          "${dotfiles}/fish/.config/fish/functions")
-      ];
-    }
+      keybindings = {
+        enable = true;
+        mode = "emacs";
+      };
 
-    # Git
-    {
-      programs.git = {
+      emacsConfig = {
+        enable = true;
+        defaultEmailApplication = true;
+        defaultPdfApplication = true;
+      };
+    };
+
+    nix = {
+      package = lib.mkDefault pkgs.nixVersions.stable;
+      settings = {
+        # Build
+        max-jobs = "auto";
+        http-connections = 50;
+
+        # Store
+        auto-optimise-store = true;
+        min-free = 1024;
+      };
+      extraOptions = builtins.readFile ../../../../../nix.conf;
+    };
+
+    programs = {
+      bat.config = {
+        theme = "GitHub";
+        pager = "less -FR";
+      };
+
+      git = {
         ignores = [".dir-locals.el" ".direnv/" ".envrc"];
 
         extraConfig = {
@@ -187,167 +105,29 @@ in {
           };
         };
       };
-    }
 
-    # GPG
-    {
-      programs.gpg = {
+      readline.enable = true;
+
+      ssh = {
         enable = true;
-        settings = {keyserver = "hkps://keys.openpgp.org";};
+        compression = true;
       };
+    };
 
-      services.gpg-agent = {
-        enable = true;
-        enableSshSupport = true;
-        extraConfig = ''
-          allow-emacs-pinentry
-          allow-loopback-pinentry
-        '';
-      };
+    home.packages = [
+      # media
+      pkgs.playerctl
+      pkgs.surfraw
+      pkgs.youtube-dl
 
-      # Ensure Gnome Keyring does not steal the SSH_AUTH_SOCK.
-      programs.fish.interactiveShellInit = ''
-        set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-      '';
-    }
-
-    # Nix
-    {
-      home.packages = [
-        pkgs.nix-your-shell
-      ];
-
-      nix = {
-        package = lib.mkDefault pkgs.nixVersions.stable;
-        settings = {
-          # Build
-          max-jobs = "auto";
-          http-connections = 50;
-
-          # Store
-          auto-optimise-store = true;
-          min-free = 1024;
-        };
-        extraOptions = builtins.readFile ../../../../../nix.conf;
-      };
-
-      programs.fish.interactiveShellInit = ''
-        nix-your-shell fish | source
-      '';
-    }
-
-    # Glow
-    {
-      xdg.configFile."glow/glow.yml".source = let
-        styleFile = jsonFormat.generate "custom.json" {
-          document = {
-            block_prefix = "\n";
-            block_suffix = "\n";
-            margin = 2;
-          };
-
-          block_quote = {
-            color = "0";
-            indent = 1;
-            indent_token = "┃ ";
-          };
-          list = {
-            color = "0";
-            level_indent = 2;
-          };
-          heading = {
-            block_suffix = "\n";
-            bold = true;
-          };
-          h1.prefix = "# ";
-          h2.prefix = "## ";
-          h3.prefix = "### ";
-          h4.prefix = "#### ";
-          h5.prefix = "##### ";
-          h6 = {
-            prefix = "###### ";
-            bold = false;
-          };
-          strikethrough.crossed_out = true;
-          emph.italic = true;
-          strong.bold = true;
-          hr.format = "\n────────\n";
-          item.block_prefix = "• ";
-          enumeration.block_prefix = ". ";
-          task = {
-            ticked = "☑ ";
-            unticked = "□ ";
-          };
-          link = {
-            color = "#007ec4";
-            underline = true;
-          };
-          link_text = {
-            color = "#007ec4";
-            bold = true;
-          };
-          image = {
-            color = "#007ec4";
-            underline = true;
-          };
-          image_text = {
-            format = "Image: {{.text}} ?";
-          };
-          code = {
-            prefix = " ";
-            suffix = " ";
-            background_color = "11";
-          };
-          code_block = {
-            margin = 2;
-            chroma = {
-              text.background_color = "#f4eedb";
-              keyword.bold = true;
-              name_builtin.bold = true;
-              name_class = {
-                underline = true;
-                bold = true;
-              };
-              generic_emph.italic = true;
-              generic_strong.bold = true;
-            };
-          };
-          table = {
-            color = "0";
-            center_separator = "╂";
-            column_separator = "┃";
-            row_separator = "─";
-          };
-          definition_description = {
-            block_prefix = "\n► ";
-          };
-        };
-      in
-        yamlFormat.generate "glow.yml" {
-          style = styleFile;
-          pager = true;
-        };
-    }
-
-    # Packages
-    {
-      home.packages = with pkgs; [
-        themepark
-
-        # media
-        playerctl
-        surfraw
-        youtube-dl
-
-        # utility
-        browsh
-        fzy
-        pdfgrep
-        pywal
-        tldr
-        units
-        xsv
-      ];
-    }
-  ]);
+      # utility
+      pkgs.browsh
+      pkgs.fzy
+      pkgs.pdfgrep
+      pkgs.pywal
+      pkgs.tldr
+      pkgs.units
+      pkgs.xsv
+    ];
+  };
 }

@@ -2,13 +2,13 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) types;
   cfg = config.custom.keybindings;
 in {
   options.custom.keybindings = {
-    enable = mkEnableOption "keybinding configuration";
-    mode = mkOption {
+    enable = lib.mkEnableOption "keybinding configuration";
+    mode = lib.mkOption {
       type = types.nullOr (types.enum ["emacs" "vi"]);
       default = null;
       example = "emacs";
@@ -16,8 +16,8 @@ in {
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    (mkIf (cfg.mode == "emacs") {
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf (cfg.mode == "emacs") {
       programs.readline.variables = {editing-mode = "emacs";};
 
       dconf.settings."org/gnome/desktop/interface" = {
@@ -31,7 +31,7 @@ in {
         gtk3.extraConfig = {gtk-key-theme-name = "Emacs";};
       };
     })
-    (mkIf (cfg.mode == "vi") {
+    (lib.mkIf (cfg.mode == "vi") {
       programs.readline.variables = {editing-mode = "vi";};
 
       # Add GTK support, see:
