@@ -6,8 +6,9 @@
 }: {
   flake = lib.mkMerge [
     {
-      nixosModules.host-chameleon = {config, ...}: {
-        imports = [
+      nixosConfigurations.chameleon = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
           self.nixosModules.default
           self.nixosModules.nixpkgs-useFlakeNixpkgs
           self.nixosModules.home-manager-integration
@@ -20,24 +21,23 @@
           inputs.nixos-wsl.nixosModules.wsl
 
           ../../nixos/hosts/chameleon
+
+          {
+            nixpkgs.overlays = builtins.attrValues self.overlays;
+            nixpkgs.config.allowUnfree = true;
+
+            home-manager = {
+              sharedModules = [self.homeManagerModules.user-terje];
+            };
+          }
         ];
-
-        nixpkgs.overlays = builtins.attrValues self.overlays;
-        nixpkgs.config.allowUnfree = true;
-
-        home-manager = {
-          sharedModules = [self.homeManagerModules.user-terje];
-        };
-      };
-      nixosConfigurations.chameleon = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [self.nixosModules.host-chameleon];
       };
     }
 
     {
-      nixosModules.host-kong = {config, ...}: {
-        imports = [
+      nixosConfigurations.kong = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
           self.nixosModules.default
           self.nixosModules.nixpkgs-useFlakeNixpkgs
           self.nixosModules.home-manager-integration
@@ -49,18 +49,16 @@
           inputs.home-manager.nixosModules.home-manager
 
           ../../nixos/hosts/kong
+
+          {
+            nixpkgs.overlays = builtins.attrValues self.overlays;
+            nixpkgs.config.allowUnfree = true;
+
+            home-manager = {
+              sharedModules = [self.homeManagerModules.user-terje];
+            };
+          }
         ];
-
-        nixpkgs.overlays = builtins.attrValues self.overlays;
-        nixpkgs.config.allowUnfree = true;
-
-        home-manager = {
-          sharedModules = [self.homeManagerModules.user-terje];
-        };
-      };
-      nixosConfigurations.kong = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [self.nixosModules.host-kong];
       };
     }
 
