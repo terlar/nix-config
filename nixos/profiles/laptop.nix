@@ -12,8 +12,8 @@
   services = {
     # Enable zero-configuration networking and service discorvery.
     avahi = {
-      enable = true;
-      nssmdns = true;
+      enable = lib.mkDefault true;
+      nssmdns4 = lib.mkDefault true;
     };
 
     # Improve touch-pad behavior.
