@@ -7,7 +7,7 @@
   inherit (lib) types;
   cfg = config.profiles.user.terje.terminal;
 
-  packageMainProgram = cfg.package.mainProgram or "";
+  packageMainProgram = cfg.package.mainProgram or cfg.package.pname;
 in {
   options.profiles.user.terje.terminal = {
     enable = lib.mkEnableOption "Terminal profile for terje";
