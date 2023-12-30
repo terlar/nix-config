@@ -105,7 +105,14 @@ in {
       indentSize = mkIndentSizeOption "JavaScript" 2;
     };
 
-    nix = {enable = mkEnableOption "Nix Development profile";};
+    nix = {
+      enable = mkEnableOption "Nix Development profile";
+      retainShellInNixShell =
+        (mkEnableOption "Retain your shell within nix shell via nix-your-shell")
+        // {
+          default = true;
+        };
+    };
 
     plantuml = {
       indentStyle = mkIndentStyleOption "PlantUML" "space";
@@ -319,30 +326,33 @@ in {
       };
     })
 
-    (mkIf cfg.nix.enable {
-      home.packages = [
-        # Use
-        pkgs.cachix
-        pkgs.nix-index
-        pkgs.nix-output-monitor
-        pkgs.nix-your-shell
+    (mkIf cfg.nix.enable (lib.mkMerge [
+      {
+        home.packages = [
+          # Use
+          pkgs.cachix
+          pkgs.nix-index
+          pkgs.nix-output-monitor
 
-        # Develop
-        pkgs.manix
-        pkgs.nil
-        pkgs.nix-init
-        pkgs.nurl
+          # Develop
+          pkgs.manix
+          pkgs.nil
+          pkgs.nix-init
+          pkgs.nurl
 
-        # Debug
-        pkgs.nix-diff
-        pkgs.nix-du
-        pkgs.nix-tree
-      ];
-
-      programs.fish.interactiveShellInit = ''
-        nix-your-shell fish | source
-      '';
-    })
+          # Debug
+          pkgs.nix-diff
+          pkgs.nix-du
+          pkgs.nix-tree
+        ];
+      }
+      (mkIf cfg.nix.retainShellInNixShell {
+        home.packages = [pkgs.nix-your-shell];
+        programs.fish.interactiveShellInit = ''
+          nix-your-shell fish | source
+        '';
+      })
+    ]))
 
     (mkIf cfg.shell.enable {
       home.packages = [

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [./console.nix ./programs/gnupg.nix ./hardware/yubikey.nix];
 
   nix = {
@@ -7,7 +11,10 @@
     '';
   };
 
-  programs.command-not-found.enable = true;
+  programs = {
+    command-not-found.enable = lib.mkDefault false;
+    nix-index-database.comma.enable = lib.mkDefault true;
+  };
 
   # Enable super user handling.
   security.sudo.enable = true;

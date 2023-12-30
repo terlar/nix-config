@@ -208,6 +208,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1703387252,
+        "narHash": "sha256-XKJqGj0BaEn/zyctEnkgVIh6Ba1rgTRc+UBi9EU8Y54=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "f4340c1a42c38d79293ba69bfd839fbd6268a538",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -310,6 +330,21 @@
         "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1703879060,
+        "narHash": "sha256-U0dvm3qwldDDnR1jYE7gNNW7XChYCZ6JyUCcSFFDpBs=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "4a8f8f5355cb9d3334d311cb25fc6ab641b501dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "org-babel": {
       "locked": {
         "lastModified": 1669954182,
@@ -332,9 +367,11 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "kmonad": "kmonad",
+        "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nur": "nur"
       }
     },
     "systems": {

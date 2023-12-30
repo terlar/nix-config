@@ -35,6 +35,14 @@ in {
       profiles.default = {
         isDefault = true;
 
+        extensions = with config.nur.repos.rycee.firefox-addons; [
+          linkhints
+          noscript
+          onetab
+          tridactyl
+          ublock-origin
+        ];
+
         settings = {
           "browser.startup.homepage" = "https://github.com/terlar";
 

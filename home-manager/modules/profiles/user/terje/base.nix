@@ -21,10 +21,7 @@ in {
     xdg.mimeApps.enable = true;
 
     profiles = {
-      user.terje = {
-        keyboards.enable = lib.mkDefault true;
-        shell.enable = lib.mkDefault true;
-      };
+      user.terje.shell.enable = lib.mkDefault true;
 
       gnupg.enable = lib.mkDefault true;
       development = {
