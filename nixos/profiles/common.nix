@@ -78,12 +78,6 @@
     traceroute
     wget
 
-    # security
-    lastpass-cli
-    mkpasswd
-    pass
-    pwgen
-
     # utility
     coreutils
     file
