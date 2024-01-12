@@ -58,6 +58,7 @@ in {
         };
 
         "org/freedesktop/ibus/panel/emoji" = {
+          hotkey = [];
           unicode-hotkey = [];
         };
       };
