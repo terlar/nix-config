@@ -21,13 +21,12 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v13
+      - uses: cachix/cachix-action@v14
         with:
+          useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-      - name: Enable incremental cache upload
-        run: cachix watch-store terlar &
 
       - name: Check
         run: nix flake check
@@ -43,13 +42,12 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v13
+      - uses: cachix/cachix-action@v14
         with:
+          useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-      - name: Enable incremental cache upload
-        run: cachix watch-store terlar &
 
       - name: Check
         run: nix flake check ./dev
@@ -70,13 +68,12 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v13
+      - uses: cachix/cachix-action@v14
         with:
+          useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-      - name: Enable incremental cache upload
-        run: cachix watch-store terlar &
 
       - name: Build activation package
         run: |
@@ -97,13 +94,12 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v13
+      - uses: cachix/cachix-action@v14
         with:
+          useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-      - name: Enable incremental cache upload
-        run: cachix watch-store terlar &
 
       - name: Build system
         run: |
@@ -124,8 +120,9 @@ jobs:
             http-connections = 50
             max-jobs = auto
 
-      - uses: cachix/cachix-action@v13
+      - uses: cachix/cachix-action@v14
         with:
+          useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
