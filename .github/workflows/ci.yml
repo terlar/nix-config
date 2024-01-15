@@ -26,7 +26,6 @@ jobs:
           useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          skipPush: true
 
       - name: Check
         run: nix flake check
@@ -47,7 +46,6 @@ jobs:
           useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          skipPush: true
 
       - name: Check
         run: nix flake check ./dev
@@ -73,7 +71,6 @@ jobs:
           useDaemon: true
           name: terlar
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          skipPush: true
 
       - name: Build activation package
         run: |
