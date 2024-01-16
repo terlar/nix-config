@@ -51,6 +51,13 @@ in {
       services.gpg-agent.pinentryFlavor = "gnome3";
 
       dconf.settings = {
+        "org/gnome/shell" = {
+          disabled-extensions = [
+            "ding@rastersoft.com"
+            "ubuntu-dock@ubuntu.com"
+          ];
+        };
+
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = [];
           hide-window = [];
