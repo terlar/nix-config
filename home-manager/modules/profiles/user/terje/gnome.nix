@@ -3,34 +3,48 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) types;
+
   cfg = config.profiles.user.terje.gnome;
+
+  majorVersionFromPackage = pkg:
+    lib.pipe pkg [
+      lib.getVersion
+      (lib.splitString ".")
+      builtins.head
+      lib.toInt
+    ];
+
+  gnomeExtensions = pkgs."gnome${builtins.toString cfg.version}Extensions";
+  getExtensionPackage = fullName: let
+    name = lib.pipe fullName [(lib.splitString "@") builtins.head];
+  in
+    gnomeExtensions.${fullName} or pkgs.gnomeExtensions.${name};
 in {
   options.profiles.user.terje.gnome = {
-    enable = mkEnableOption "GNOME profile for terje";
+    enable = lib.mkEnableOption "GNOME profile for terje";
 
-    materialShell = {enable = mkEnableOption "Use Material Shell";};
+    version = lib.mkOption {
+      type = types.number;
+      default = majorVersionFromPackage pkgs.gnome.gnome-shell;
+      example = 45;
+      description = "GNOME version for compatibility.";
+    };
+
+    materialShell = {enable = lib.mkEnableOption "Use Material Shell";};
     paperwm = {
-      enable = mkEnableOption "Use PaperWM";
-      package = mkOption {
-        type = types.package;
-        default = pkgs.gnomeExtensions.paperwm;
-        example = literalExpression "pkgs.gnomeExtensions.paperwm";
-        description = ''
-          Package providing PaperWM extension.
-        '';
-      };
+      enable = lib.mkEnableOption "Use PaperWM";
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
+  config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       programs.gnome-shell = {
         enable = true;
         extensions = [
-          {package = pkgs.gnomeExtensions.true-color-window-invert;}
-          {package = pkgs.gnomeExtensions.miniview;}
+          {package = getExtensionPackage "true-color-window-invert@lynet101";}
+          {package = getExtensionPackage "miniview@thesecretaryofwar.com";}
         ];
       };
 
@@ -64,19 +78,19 @@ in {
       };
     }
 
-    (mkIf cfg.materialShell.enable {
+    (lib.mkIf cfg.materialShell.enable {
       programs.gnome-shell = {
         extensions = [
-          {package = pkgs.gnomeExtensions.material-shell;}
+          {package = gnomeExtensions."material-shell@papyelgringo";}
         ];
       };
     })
 
-    (mkIf cfg.paperwm.enable {
+    (lib.mkIf cfg.paperwm.enable {
       programs.gnome-shell = {
         extensions = [
-          {inherit (cfg.paperwm) package;}
-          {package = pkgs.gnomeExtensions.unite;}
+          {package = getExtensionPackage "paperwm@paperwm.github.com";}
+          {package = getExtensionPackage "unite@hardpixel.eu";}
         ];
       };
 
