@@ -21,7 +21,7 @@ in {
     };
 
     # Prevent GNOME Keyring from stealing SSH_AUTH_SOCK.
-    xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = ''
+    xdg.configFile."autostart/gnome-keyring-ssh.desktop".text = lib.mkIf config.services.gpg-agent.enableSshSupport ''
       [Desktop Entry]
       Type=Application
       Name=SSH Key Agent
