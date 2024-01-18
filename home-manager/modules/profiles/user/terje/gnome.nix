@@ -58,6 +58,11 @@ in {
           ];
         };
 
+        "desktop/ibus/panel/emoji" = {
+          hotkey = [];
+          unicode-hotkey = [];
+        };
+
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = [];
           hide-window = [];
@@ -76,11 +81,6 @@ in {
 
         "org/gnome/shell/extensions/true-color-window-invert" = {
           invert-window-shortcut = ["<Super>exclam"];
-        };
-
-        "org/freedesktop/ibus/panel/emoji" = {
-          hotkey = [];
-          unicode-hotkey = [];
         };
       };
     }
@@ -150,10 +150,10 @@ in {
           switch-next = ["<Super>Tab" "<Super>j"];
           move-down = ["<Shift><Super>j"];
 
-          switch-monitor-up = ["<Super>Up"];
-          move-monitor-up = ["<Shift><Super>Up"];
-          switch-monitor-down = ["<Super>Down"];
-          move-monitor-down = ["<Shift><Super>Down"];
+          switch-monitor-above = ["<Super>Up"];
+          move-monitor-above = ["<Shift><Super>Up"];
+          switch-monitor-below = ["<Super>Down"];
+          move-monitor-below = ["<Shift><Super>Down"];
           switch-monitor-left = ["<Super>Left"];
           move-monitor-left = ["<Shift><Super>Left"];
           switch-monitor-right = ["<Super>Right"];
