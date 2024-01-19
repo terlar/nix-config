@@ -3,11 +3,9 @@
   inputs,
   withSystem,
   ...
-}: let
-  system = "x86_64-linux";
-in {
+}: {
   flake = {
-    homeConfigurations.terje = withSystem system ({pkgs, ...}:
+    homeConfigurations.terje = withSystem "x86_64-linux" ({pkgs, ...}:
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
@@ -20,6 +18,6 @@ in {
         ];
       });
 
-    packages.${system}.home-terje = config.flake.homeConfigurations.terje.activationPackage;
+    packages.x86_64-linux.home-terje = config.flake.homeConfigurations.terje.activationPackage;
   };
 }
