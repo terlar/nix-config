@@ -1,50 +1,22 @@
 #+TITLE: nix-config
-Configuration for NixOS and user home (dot files). It is provided via Nix flakes and
-includes the following components:
+Configuration for NixOS and user home (dot files). It is provided via Nix flakes and includes the following components:
 
-- apps :: commands to run to utilize the flake or for development.
-  - ~use-caches~ :: add caches to project =nix.conf=. Only needed when modifying the caches.
-  - ~install-qutebrowser-dicts~ :: install dictionaries to be used within qutebrowser.
-  - ~backup~ :: backup fish history and GnuPG sshcontrol.
-- devShells :: developer shells
-  - default :: a shell with tools used for development and required setup for flakes.
 - lib :: library functions to be used with flakes or within Nix.
   - ~kebabCaseToCamelCase~ :: convert kebab case to camel case (hello-world -> helloWorld)
-  - ~importDirToAttrs~ :: given a directory import all files into a set corresponding to
-    each file name.
-  - ~pkgsForSystem~ :: import the input nixpkgs with overlays provided by this flake for a system.
-  - ~forAllSystem~ :: create an attrset by all the supported systems and runs a function
-    which receives the packages for that system.
-  - ~nixosSystem~ :: wrapper around the corresponding function in nixpkgs which integrates
-    packages, overlays, NixOS modules, Home Manager modules from this flake.
-  - ~nixosSystemFor~ :: helper function to build configuration for target host, this can
-    be an input for another flake where you can extend the host configuration (e.g. I use
-    it for my private configuration additions).
-  - ~homeManagerConfiguration~ :: wrapper around the corresponding function in Home Manager
-    that adds modules from this flake and enables generic Linux support in case it is a
-    Linux machine (assuming NixOS users would use the NixOS intergarion instead.)
+  - ~listNixFilesRecursiveToAttrs~ :: given a directory list all nix files recursively and create a flat attribute set with a key corresponding to each file path.
+  - ~modulesFromDir~ :: given a directory create an attribute set for each module and create a default module importing all those modules.
 - homeConfigurations :: user configuration for [[https://github.com/nix-community/home-manager][Home Manager]].
-- homeManagerModules :: modules that can be used together with [[https://github.com/nix-community/home-manager][Home Manager]].
-  - custom-defaultBrowser :: configure a default browser.
-  - custom-keybindings :: enable vi/emacs keybindings across the system.
-  - profiles-development :: development profile module.
-  - profiles-gnome :: configure gnome (e.g. disable gnome-keyring-ssh).
-  - profiles-highContrast :: enable high contrast where possible.
-  - programs-editorconfig :: configure [[https://editorconfig.org][editorconfig]].
-  - programs-gnomeShell :: gnome-shell configuration module.
-  - programs-ripgrep :: configure ripgrep.
-  - targets-genericLinux :: fixes for generic Linux module.
+- homeModules :: modules that can be used together with [[https://github.com/nix-community/home-manager][Home Manager]].
 - nixosConfigurations :: host configurations for [[https://github.com/NixOS/nixpkgs][NixOS]].
 - nixosModules :: modules that can be used together with [[https://github.com/NixOS/nixpkgs][NixOS]].
-  - custom-dictionaries :: configure dictionaries (both aspell and hunspell) via one setting.
-  - custom-i18n :: configure internationalization.
-  - custom-keyboard :: configure keyboard for console, kmscon and xserver via one setting.
-  - custom-shell :: configure shell environment.
 - overlays :: custom overlays.
-  - default :: package overlay including the mentioned packages.
-  - iosevka :: iosevka configured with the slab set.
+  - default :: package overlay including a subset of packages.
+  - fromInputs :: composed overlay from all input overlays.
 - packages :: packages not in the default nixpkgs.
-  - [[https://github.com/TylerBrock/saw][saw]]
+  - drduh-gpg-conf :: GPG config per drduh recommendation.
+  - drduh-yubikey-guide :: The drduh YubiKey guide readable via the terminal.
+  - iosevka-slab :: Personal tweaked version of Iosevka Slab.
+  - yubikeyInstallerImage :: YubiKey Installer ISO.
 
 * Usage
 Show what is provided:
@@ -64,12 +36,12 @@ nix run home-manager -- switch --flake .
 
 Update all inputs:
 #+BEGIN_SRC sh
-nix flake update --commit-lock-file
+nix flake update
 #+end_src
 
 Update a single input:
 #+BEGIN_SRC sh
-nix flake lock --update-input nixpkgs --commit-lock-file
+nix flake lock --update-input nixpkgs
 #+end_src
 
 * Development
@@ -106,6 +78,5 @@ sync
 ** TODO Home manager config for qutebrowser + dicts
 ** TODO Look into if more PA config is needed:
 - [[https://github.com/dejanr/dotfiles/blob/ef9c27cf93a17e0af4bdf5cc378d2808b5326afa/nix/config/nixpkgs/roles/multimedia.nix#L35][Sample]]
-** TODO Nest/group modules
 ** TODO Script to regenerate hardware-config for current host
 ** TODO Make YubiKey steps into an flake app
