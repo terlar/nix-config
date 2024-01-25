@@ -12,7 +12,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     time.timeZone = lib.mkDefault "Europe/Stockholm";
-    i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
     # Enable super user handling.
     security.sudo.enable = lib.mkDefault true;
