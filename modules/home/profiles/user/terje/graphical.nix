@@ -11,34 +11,43 @@ in {
     desktop = lib.mkEnableOption "Desktop mode";
   };
 
-  config = lib.mkIf cfg.enable {
-    profiles = {
-      highContrast.enable = lib.mkDefault true;
-      user.terje = {
-        base.enable = true;
-        browser.enable = lib.mkDefault true;
-        fonts.enable = lib.mkDefault true;
-        terminal.enable = lib.mkDefault true;
-        gnome = {
-          enable = lib.mkDefault true;
-          paperwm.enable = lib.mkDefault true;
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    {
+      profiles = {
+        highContrast.enable = lib.mkDefault true;
+        user.terje = {
+          base.enable = true;
+          fonts.enable = lib.mkDefault true;
         };
       };
-    };
 
-    gtk.enable = true;
+      gtk.enable = true;
 
-    home.packages =
-      [
+      home.packages = [
         pkgs.mpv
         pkgs.sxiv
-      ]
-      ++ lib.optionals cfg.desktop [
+      ];
+    }
+
+    (lib.mkIf cfg.desktop {
+      profiles = {
+        user.terje = {
+          browser.enable = lib.mkDefault true;
+          terminal.enable = lib.mkDefault cfg.desktop;
+          gnome = {
+            enable = lib.mkDefault true;
+            paperwm.enable = lib.mkDefault true;
+          };
+        };
+      };
+
+      home.packages = [
         pkgs.krita
         pkgs.slack
         pkgs.spotify
         pkgs.tdesktop
         pkgs.zoom-us
       ];
-  };
+    })
+  ]);
 }
