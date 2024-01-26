@@ -25,5 +25,11 @@ in {
         package = pkgs.paper-icon-theme;
       };
     };
+
+    dconf.settings = {
+      "org/gnome/desktop/a11y/interface" = {
+        high-contrast = true;
+      };
+    };
   };
 }
