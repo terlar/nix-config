@@ -33,6 +33,7 @@
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ollama.url = "github:abysssol/ollama-flake";
 
     # Sources
     dotfiles = {
@@ -106,6 +107,9 @@
           fromInputs = nixpkgs.lib.composeManyExtensions [
             inputs.emacs-config.overlays.default
             inputs.kmonad.overlays.default
+            (_final: prev: {
+              ollama = inputs.ollama.packages.${prev.stdenv.hostPlatform.system}.default;
+            })
           ];
         };
       };

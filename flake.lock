@@ -277,6 +277,43 @@
         "type": "github"
       }
     },
+    "nixpkgs-unfree": {
+      "inputs": {
+        "nixpkgs": [
+          "ollama",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1701957584,
+        "narHash": "sha256-xEpFaRdrneHl3Xdyzp3emd4QVxML7AR3GC91wuWi0Ok=",
+        "owner": "numtide",
+        "repo": "nixpkgs-unfree",
+        "rev": "127b9b18583de04c6207c2a0e674abf64fc4a3b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nixpkgs-unfree",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1707932507,
+        "narHash": "sha256-YtwQaVX7Gpgzk4GadGwNjcDUVKha++Yn7Xw/gMAmjWI=",
+        "owner": "abysssol",
+        "repo": "nixpkgs",
+        "rev": "1becaad224e7e5997471ec15185b208d4fa4a22c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abysssol",
+        "ref": "update-ollama-0.1.24",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nongnu-elpa": {
       "flake": false,
       "locked": {
@@ -309,6 +346,25 @@
         "type": "github"
       }
     },
+    "ollama": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-unfree": "nixpkgs-unfree"
+      },
+      "locked": {
+        "lastModified": 1707952210,
+        "narHash": "sha256-7YluJJi8RXEyvmEnSqesuJyu8ewCSe1fv+kOTBE4gso=",
+        "owner": "abysssol",
+        "repo": "ollama-flake",
+        "rev": "252113a553b16e369cee365dc718d9d180ab2e64",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abysssol",
+        "repo": "ollama-flake",
+        "type": "github"
+      }
+    },
     "org-babel": {
       "locked": {
         "lastModified": 1669954182,
@@ -334,7 +390,8 @@
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "nur": "nur",
+        "ollama": "ollama"
       }
     },
     "systems": {
