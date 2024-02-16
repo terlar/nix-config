@@ -36,9 +36,11 @@ in {
   hardware = {
     enableRedistributableFirmware = true;
     opengl.enable = true;
-
-    # Disable the disable, as this enables the broken bbswitch.
-    nvidiaOptimus.disable = false;
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaPersistenced = true;
+      nvidiaSettings = false;
+    };
   };
 
   services = {

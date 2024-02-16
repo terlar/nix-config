@@ -11,7 +11,7 @@
       config.flake.nixosModules.homeManagerIntegration
 
       inputs.nixpkgs.nixosModules.notDetected
-      inputs.nixos-hardware.nixosModules.dell-xps-15-9560-intel
+      inputs.nixos-hardware.nixosModules.dell-xps-15-9560-nvidia
       inputs.nixos-hardware.nixosModules.common-pc-laptop
       inputs.nixos-hardware.nixosModules.common-pc-ssd
       inputs.nix-index-database.nixosModules.nix-index
