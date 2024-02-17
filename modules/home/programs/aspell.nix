@@ -37,7 +37,7 @@ in {
         file.".aspell.conf" = {
           enable = !config.xdg.enable;
           text = ''
-            dict-dir = ${cfg.package}/lib/aspell
+            dict-dir ${cfg.package}/lib/aspell
           '';
         };
       };
@@ -53,7 +53,7 @@ in {
       };
 
       xdg.configFile."aspell/aspell.conf".text = ''
-        dict-dir = ${cfg.package}/lib/aspell
+        dict-dir ${cfg.package}/lib/aspell
       '';
     })
   ]);
