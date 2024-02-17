@@ -24,11 +24,6 @@ in {
     };
 
     custom = {
-      dictionaries = {
-        enable = lib.mkDefault true;
-        languages = lib.mkDefault ["en-us" "sv-se"];
-      };
-
       keyboard = {
         enable = lib.mkDefault true;
         xkbOptions = lib.mkDefault "ctrl:nocaps";

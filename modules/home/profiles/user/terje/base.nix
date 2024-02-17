@@ -13,12 +13,13 @@ in {
   config = lib.mkIf cfg.enable {
     home.stateVersion = "20.09";
 
-    programs.home-manager.enable = true;
     systemd.user.startServices = "sd-switch";
     manual.html.enable = true;
 
-    xdg.enable = true;
-    xdg.mimeApps.enable = true;
+    xdg = {
+      enable = true;
+      mimeApps.enable = true;
+    };
 
     profiles = {
       user.terje.shell.enable = lib.mkDefault true;
@@ -69,6 +70,13 @@ in {
     };
 
     programs = {
+      home-manager.enable = true;
+
+      aspell = {
+        enable = true;
+        dictionaries = ps: [ps.en ps.sv];
+      };
+
       bat.config = {
         theme = "GitHub";
         pager = "less -FR";
