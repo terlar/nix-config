@@ -25,6 +25,7 @@ jobs:
         with:
           useDaemon: true
           name: terlar
+          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       - name: Check
@@ -45,6 +46,7 @@ jobs:
         with:
           useDaemon: true
           name: terlar
+          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       - name: Check
@@ -70,6 +72,7 @@ jobs:
         with:
           useDaemon: true
           name: terlar
+          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       - name: Build activation package
@@ -95,6 +98,7 @@ jobs:
         with:
           useDaemon: true
           name: terlar
+          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
 
@@ -121,6 +125,7 @@ jobs:
         with:
           useDaemon: true
           name: terlar
+          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
 

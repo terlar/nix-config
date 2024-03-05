@@ -2,8 +2,8 @@
   description = "Nix Config of Terje";
 
   nixConfig = {
-    extra-substituters = "https://terlar.cachix.org";
-    extra-trusted-public-keys = "terlar.cachix.org-1:M8CXTOaJib7CP/jEfpNJAyrgW4qECnOUI02q7cnmh8U=";
+    extra-substituters = "https://terlar.cachix.org https://cuda-maintainers.cachix.org";
+    extra-trusted-public-keys = "terlar.cachix.org-1:M8CXTOaJib7CP/jEfpNJAyrgW4qECnOUI02q7cnmh8U= cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E=";
   };
 
   inputs = {
