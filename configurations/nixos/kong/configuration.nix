@@ -83,6 +83,11 @@ in {
         desktop = true;
       };
     };
+
+    services.ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
   };
 
   # Hi-DPI
