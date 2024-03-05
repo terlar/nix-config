@@ -43,10 +43,6 @@ in {
     };
   };
 
-  environment.systemPackages = [
-    pkgs.nvtop
-  ];
-
   services = {
     # Update support for firmware.
     fwupd.enable = true;
