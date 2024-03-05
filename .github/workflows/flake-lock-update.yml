@@ -22,7 +22,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v20
+        uses: DeterminateSystems/update-flake-lock@v21
         with:
           token: ${{ steps.generate-app-token.outputs.token }}
           branch: update-flake-lock
@@ -48,7 +48,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Update dev/flake.lock
-        uses: DeterminateSystems/update-flake-lock@v20
+        uses: DeterminateSystems/update-flake-lock@v21
         with:
           path-to-flake-dir: dev/
           token: ${{ steps.generate-app-token.outputs.token }}
