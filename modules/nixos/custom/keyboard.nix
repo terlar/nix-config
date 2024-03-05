@@ -55,7 +55,12 @@ in {
     };
 
     services.xserver = {
-      inherit (cfg) layout xkbOptions xkbVariant;
+      xkb = {
+        inherit (cfg) layout;
+        variant = cfg.xkbVariant;
+        options = cfg.xkbOptions;
+      };
+
       autoRepeatDelay = cfg.xkbRepeatDelay;
       autoRepeatInterval = cfg.xkbRepeatInterval;
     };
