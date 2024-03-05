@@ -87,11 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          tool-cache: true
-
       - uses: DeterminateSystems/nix-installer-action@v9
         with:
           diagnostic-endpoint: ''
@@ -105,7 +101,6 @@ jobs:
           name: terlar
           extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          skipPush: true
 
       - name: Build system
         run: |
