@@ -20,7 +20,7 @@ in
         pkgs.paperkey
         pkgs.wget
 
-        pkgs.haskellPackages.hopenpgp-tools
+        # pkgs.haskellPackages.hopenpgp-tools
         pkgs.yubikey-manager
 
         pkgs.drduh-yubikey-guide

@@ -8,7 +8,7 @@
 
   inputs = {
     flake-parts.url = "flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     home-manager = {
       url = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
