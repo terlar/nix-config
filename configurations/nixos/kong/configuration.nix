@@ -38,7 +38,6 @@ in {
     opengl.enable = true;
     nvidia = {
       modesetting.enable = true;
-      nvidiaPersistenced = true;
       nvidiaSettings = false;
     };
   };
