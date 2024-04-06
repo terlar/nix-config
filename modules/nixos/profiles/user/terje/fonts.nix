@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.fonts;
-in {
+in
+{
   options.profiles.user.terje.fonts = {
     enable = lib.mkEnableOption "Fonts profile for terje";
   };
@@ -13,7 +15,9 @@ in {
   config = lib.mkIf cfg.enable {
     fonts = {
       packages = [
-        pkgs.iosevka-slab
+        (pkgs.iosevka-bin.override { variant = "Aile"; })
+        (pkgs.iosevka-bin.override { variant = "Etoile"; })
+        (pkgs.iosevka-bin.override { variant = "CurlySlab"; })
         pkgs.noto-fonts
         pkgs.noto-fonts-cjk
         pkgs.noto-fonts-emoji
@@ -23,9 +27,23 @@ in {
       fontconfig = {
         enable = lib.mkDefault true;
         defaultFonts = {
-          monospace = ["Iosevka Slab" "Noto Sans Mono CJK SC" "Noto Sans Symbols"];
-          sansSerif = ["Noto Sans" "Noto Sans CJK SC" "Noto Sans Symbols"];
-          serif = ["Noto Serif" "Noto Sans CJK SC" "Noto Sans Symbols"];
+          monospace = [
+            "Iosevka Curly Slab"
+            "Noto Sans Mono CJK SC"
+            "Noto Sans Symbols"
+          ];
+          sansSerif = [
+            "Iosevka Aile"
+            "Noto Sans"
+            "Noto Sans CJK SC"
+            "Noto Sans Symbols"
+          ];
+          serif = [
+            "Iosevka Etoile"
+            "Noto Serif"
+            "Noto Sans CJK SC"
+            "Noto Sans Symbols"
+          ];
         };
       };
     };

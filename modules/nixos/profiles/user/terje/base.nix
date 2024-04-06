@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.base;
-in {
+in
+{
   options.profiles.user.terje.base = {
     enable = lib.mkEnableOption "Base profile for terje";
   };
@@ -33,14 +35,20 @@ in {
 
       i18n = {
         enable = lib.mkDefault true;
-        languages = lib.mkDefault ["chinese"];
+        languages = lib.mkDefault [ "chinese" ];
       };
     };
 
     nix = {
       settings = {
-        trusted-users = ["root" "@wheel"];
-        experimental-features = ["nix-command" "flakes"];
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
       };
 
       gc = {

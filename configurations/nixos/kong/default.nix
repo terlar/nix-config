@@ -1,8 +1,5 @@
+{ config, inputs, ... }:
 {
-  config,
-  inputs,
-  ...
-}: {
   flake.nixosConfigurations.kong = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
@@ -22,7 +19,7 @@
         nixpkgs.config.allowUnfree = true;
 
         home-manager = {
-          sharedModules = [config.flake.homeModules.user-terje];
+          sharedModules = [ config.flake.homeModules.user-terje ];
         };
       }
 

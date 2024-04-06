@@ -1,15 +1,11 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.user.terje.ai;
-in {
+in
+{
   options.profiles.user.terje.ai = {
     enable = lib.mkEnableOption "AI profile for terje";
   };
 
-  config = lib.mkIf cfg.enable {
-    services.ollama.enable = true;
-  };
+  config = lib.mkIf cfg.enable { services.ollama.enable = true; };
 }

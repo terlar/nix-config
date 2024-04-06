@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.user.terje.programs.qutebrowser;
-in {
+in
+{
   options.profiles.user.terje.programs.qutebrowser = {
     enable = lib.mkEnableOption "Qutebrowser config for terje";
   };
@@ -53,9 +51,12 @@ in {
           remove_finished = 100;
         };
 
-        fonts.default_family = "Iosevka Slab Light";
+        fonts.default_family = "Iosevka Curly Slab Light";
 
-        spellcheck.languages = ["en-US" "sv-SE"];
+        spellcheck.languages = [
+          "en-US"
+          "sv-SE"
+        ];
 
         statusbar.show = "in-mode";
 

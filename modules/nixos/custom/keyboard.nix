@@ -1,11 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) types;
   cfg = config.custom.keyboard;
-in {
+in
+{
   options.custom.keyboard = {
     enable = lib.mkEnableOption "keyboard customization";
 

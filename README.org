@@ -15,7 +15,6 @@ Configuration for NixOS and user home (dot files). It is provided via Nix flakes
 - packages :: packages not in the default nixpkgs.
   - drduh-gpg-conf :: GPG config per drduh recommendation.
   - drduh-yubikey-guide :: The drduh YubiKey guide readable via the terminal.
-  - iosevka-slab :: Personal tweaked version of Iosevka Slab.
   - yubikeyInstallerImage :: YubiKey Installer ISO.
 
 * Usage

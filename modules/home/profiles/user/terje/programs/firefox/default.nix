@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.programs.firefox;
-in {
+in
+{
   options.profiles.user.terje.programs.firefox = {
     enable = lib.mkEnableOption "Firefox config for terje";
   };
@@ -55,14 +57,16 @@ in {
         };
 
         userChrome =
-          lib.pipe [
-            ./hide-nav-bar.css
-            ./hide-tab-bar.css
-            ./sidebery.css
-          ] [
-            (map builtins.readFile)
-            (builtins.concatStringsSep "\n")
-          ];
+          lib.pipe
+            [
+              ./hide-nav-bar.css
+              ./hide-tab-bar.css
+              ./sidebery.css
+            ]
+            [
+              (map builtins.readFile)
+              (builtins.concatStringsSep "\n")
+            ];
       };
     };
   };

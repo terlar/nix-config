@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) types;
   cfg = config.custom.defaultBrowser;
-  desktopFile = builtins.head (builtins.attrNames (builtins.readDir "${cfg.package}/share/applications"));
-in {
+  desktopFile = builtins.head (
+    builtins.attrNames (builtins.readDir "${cfg.package}/share/applications")
+  );
+in
+{
   options.custom.defaultBrowser = {
     enable = lib.mkEnableOption "default browser configuration";
 

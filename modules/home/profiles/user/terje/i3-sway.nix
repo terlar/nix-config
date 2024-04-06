@@ -4,14 +4,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types;
 
   cfg = config.profiles.user.terje.i3Sway;
 
   modifier = "Mod4";
   fonts = {
-    names = ["sans-serif"];
+    names = [ "sans-serif" ];
     size = 9.0;
   };
   bgMode = "tile";
@@ -90,30 +91,37 @@
         }
       ];
 
-      focus = {followMouse = false;};
+      focus = {
+        followMouse = false;
+      };
 
       # Desktops
       assigns = {
-        "2" = [{class = "^Firefox$";} {class = "^qutebrowser$";}];
-        "7" = [{class = "^krita$";}];
-        "9" = [{class = "^Slack$";}];
+        "2" = [
+          { class = "^Firefox$"; }
+          { class = "^qutebrowser$"; }
+        ];
+        "7" = [ { class = "^krita$"; } ];
+        "9" = [ { class = "^Slack$"; } ];
       };
     }
 
     # Floats
     {
       floating.criteria = [
-        {"class" = "Ibus-ui-gtk3";}
-        {"class" = "Nm-connection-editor";}
-        {"class" = "Pavucontrol";}
-        {"class" = "Pinentry";}
+        { "class" = "Ibus-ui-gtk3"; }
+        { "class" = "Nm-connection-editor"; }
+        { "class" = "Pavucontrol"; }
+        { "class" = "Pinentry"; }
       ];
     }
 
     # Keybindings
     {
       inherit modifier;
-      floating = {inherit modifier;};
+      floating = {
+        inherit modifier;
+      };
 
       modes = {
         move = {
@@ -275,45 +283,51 @@
       };
     }
   ];
-in {
+in
+{
   options.profiles.user.terje.i3Sway = {
     enable = lib.mkEnableOption "i3/Sway profile for terje";
     wm = lib.mkOption {
-      type = types.enum ["i3" "sway"];
+      type = types.enum [
+        "i3"
+        "sway"
+      ];
       default = "sway";
       example = "i3";
       description = "The WM to use.";
     };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf (cfg.wm == "i3") {
-      xsession.enable = true;
-      xsession.windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-        config = wmConfig;
-      };
-
-      services = {
-        screen-locker = {
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      (lib.mkIf (cfg.wm == "i3") {
+        xsession.enable = true;
+        xsession.windowManager.i3 = {
           enable = true;
-          lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
-          inactiveInterval = 10;
+          package = pkgs.i3-gaps;
+          config = wmConfig;
         };
 
-        pasystray.enable = true;
-      };
+        services = {
+          screen-locker = {
+            enable = true;
+            lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
+            inactiveInterval = 10;
+          };
 
-      xdg.configFile."i3status/config".source = "${dotfiles}/i3/.config/i3status/config";
-    })
+          pasystray.enable = true;
+        };
 
-    (lib.mkIf (cfg.wm == "sway") {
-      wayland.windowManager.sway = {
-        enable = true;
-        systemdIntegration = true;
-        config = wmConfig;
-      };
-    })
-  ]);
+        xdg.configFile."i3status/config".source = "${dotfiles}/i3/.config/i3status/config";
+      })
+
+      (lib.mkIf (cfg.wm == "sway") {
+        wayland.windowManager.sway = {
+          enable = true;
+          systemdIntegration = true;
+          config = wmConfig;
+        };
+      })
+    ]
+  );
 }

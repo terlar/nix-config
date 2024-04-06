@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types;
   cfg = config.profiles.user.terje.terminal;
 
   packageMainProgram = cfg.package.mainProgram or cfg.package.pname;
-in {
+in
+{
   options.profiles.user.terje.terminal = {
     enable = lib.mkEnableOption "Terminal profile for terje";
 
@@ -31,7 +33,7 @@ in {
 
       settings = {
         main = {
-          font = "Iosevka Slab Light:size=10";
+          font = "Iosevka Curly Slab Light:size=10";
           pad = "10x10";
           line-height = 14;
         };

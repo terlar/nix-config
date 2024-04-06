@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.console;
-in {
+in
+{
   options.profiles.console = {
     enable = lib.mkEnableOption "Console/Virtual terminal";
   };
@@ -17,7 +15,7 @@ in {
       # Make theme/font configurable in single place.
       extraConfig = ''
         palette=solarized-white
-        font-name=Iosevka Slab
+        font-name=Iosevka Curly Slab
         font-size=16
       '';
     };

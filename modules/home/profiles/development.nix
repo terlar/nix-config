@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkDefault
     mkEnableOption
     mkIf
@@ -16,20 +16,26 @@
 
   cfg = config.profiles.development;
 
-  mkIndentStyleOption = lang: default:
+  mkIndentStyleOption =
+    lang: default:
     mkOption {
-      type = types.enum ["space" "tab"];
+      type = types.enum [
+        "space"
+        "tab"
+      ];
       inherit default;
       description = "Indentation style for ${lang}";
     };
 
-  mkIndentSizeOption = lang: default:
+  mkIndentSizeOption =
+    lang: default:
     mkOption {
       type = types.int;
       inherit default;
       description = "Indentation size for ${lang}";
     };
-in {
+in
+{
   options.profiles.development = {
     enable = mkEnableOption "Development profile";
 
@@ -189,7 +195,7 @@ in {
 
     (mkIf cfg.git.enable (mkMerge [
       {
-        home.packages = [pkgs.git-imerge];
+        home.packages = [ pkgs.git-imerge ];
 
         programs.git = {
           enable = mkDefault true;
@@ -229,9 +235,15 @@ in {
               autoSetupRebase = "always";
             };
 
-            fetch = {prune = "true";};
-            pull = {rebase = "true";};
-            push = {default = "current";};
+            fetch = {
+              prune = "true";
+            };
+            pull = {
+              rebase = "true";
+            };
+            push = {
+              default = "current";
+            };
 
             rebase = {
               # Support fixup and squash commits.
@@ -255,18 +267,22 @@ in {
         };
       }
       (mkIf cfg.git.enableDelta {
-        home.packages = [pkgs.delta];
+        home.packages = [ pkgs.delta ];
         programs.git.extraConfig = {
           core.pager = "delta";
           interactive.diffFilter = "delta --color-only";
         };
       })
       (mkIf cfg.git.enableGhq {
-        home.packages = [pkgs.ghq];
-        programs.git.extraConfig = {ghq = {root = cfg.sourceDirectory;};};
+        home.packages = [ pkgs.ghq ];
+        programs.git.extraConfig = {
+          ghq = {
+            root = cfg.sourceDirectory;
+          };
+        };
       })
       (mkIf cfg.git.gitHub.enable (mkMerge [
-        {home.packages = [pkgs.gh];}
+        { home.packages = [ pkgs.gh ]; }
         (mkIf cfg.git.gitHub.reuseSshConnection {
           programs.ssh = {
             enable = true;
@@ -326,33 +342,35 @@ in {
       };
     })
 
-    (mkIf cfg.nix.enable (lib.mkMerge [
-      {
-        home.packages = [
-          # Use
-          pkgs.cachix
-          pkgs.nix-index
-          pkgs.nix-output-monitor
+    (mkIf cfg.nix.enable (
+      lib.mkMerge [
+        {
+          home.packages = [
+            # Use
+            pkgs.cachix
+            pkgs.nix-index
+            pkgs.nix-output-monitor
 
-          # Develop
-          pkgs.manix
-          pkgs.nil
-          pkgs.nix-init
-          pkgs.nurl
+            # Develop
+            pkgs.manix
+            pkgs.nil
+            pkgs.nix-init
+            pkgs.nurl
 
-          # Debug
-          pkgs.nix-diff
-          pkgs.nix-du
-          pkgs.nix-tree
-        ];
-      }
-      (mkIf cfg.nix.retainShellInNixShell {
-        home.packages = [pkgs.nix-your-shell];
-        programs.fish.interactiveShellInit = ''
-          nix-your-shell fish | source
-        '';
-      })
-    ]))
+            # Debug
+            pkgs.nix-diff
+            pkgs.nix-du
+            pkgs.nix-tree
+          ];
+        }
+        (mkIf cfg.nix.retainShellInNixShell {
+          home.packages = [ pkgs.nix-your-shell ];
+          programs.fish.interactiveShellInit = ''
+            nix-your-shell fish | source
+          '';
+        })
+      ]
+    ))
 
     (mkIf cfg.shell.enable {
       home.packages = [
