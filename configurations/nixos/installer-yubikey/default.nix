@@ -1,8 +1,5 @@
+{ config, inputs, ... }:
 {
-  config,
-  inputs,
-  ...
-}: {
   flake = {
     nixosConfigurations.installer-yubikey = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -13,8 +10,7 @@
         {
           nixpkgs.overlays = [
             (_final: prev: {
-              inherit
-                (config.flake.packages.${prev.stdenv.hostPlatform.system})
+              inherit (config.flake.packages.${prev.stdenv.hostPlatform.system})
                 drduh-gpg-conf
                 drduh-yubikey-guide
                 ;

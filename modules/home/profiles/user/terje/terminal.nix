@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types;
   cfg = config.profiles.user.terje.terminal;
 
   packageMainProgram = cfg.package.mainProgram or cfg.package.pname;
-in {
+in
+{
   options.profiles.user.terje.terminal = {
     enable = lib.mkEnableOption "Terminal profile for terje";
 

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.fonts;
-in {
+in
+{
   options.profiles.user.terje.fonts = {
     enable = lib.mkEnableOption "Fonts profile for terje";
   };

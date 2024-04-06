@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.console;
-in {
+in
+{
   options.profiles.console = {
     enable = lib.mkEnableOption "Console/Virtual terminal";
   };

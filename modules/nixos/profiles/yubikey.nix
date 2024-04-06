@@ -3,20 +3,22 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.yubikey;
-in {
+in
+{
   options.profiles.yubikey = {
     enable = lib.mkEnableOption "YubiKey";
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [pkgs.yubikey-personalization];
+    environment.systemPackages = [ pkgs.yubikey-personalization ];
 
     services = {
       udev = {
         enable = lib.mkDefault true;
-        packages = [pkgs.yubikey-personalization];
+        packages = [ pkgs.yubikey-personalization ];
       };
     };
 

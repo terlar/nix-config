@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.user.terje.graphical;
-in {
+in
+{
   options.profiles.user.terje.graphical = {
     enable = lib.mkEnableOption "Graphical profile for terje";
     desktop = lib.mkEnableOption "Desktop mode";

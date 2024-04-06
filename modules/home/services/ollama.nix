@@ -3,19 +3,17 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types;
 
   cfg = config.services.ollama;
-  ollamaPackage = cfg.package.override {
-    inherit (cfg) acceleration;
-  };
-in {
+  ollamaPackage = cfg.package.override { inherit (cfg) acceleration; };
+in
+{
   options = {
     services.ollama = {
-      enable = lib.mkEnableOption (
-        lib.mdDoc "Server for local large language models"
-      );
+      enable = lib.mkEnableOption (lib.mdDoc "Server for local large language models");
       listenAddress = lib.mkOption {
         type = types.str;
         default = "127.0.0.1:11434";
@@ -24,7 +22,12 @@ in {
         '';
       };
       acceleration = lib.mkOption {
-        type = types.nullOr (types.enum ["rocm" "cuda"]);
+        type = types.nullOr (
+          types.enum [
+            "rocm"
+            "cuda"
+          ]
+        );
         default = null;
         example = "rocm";
         description = lib.mdDoc ''
@@ -34,7 +37,7 @@ in {
           - `cuda`: supported by modern NVIDIA GPUs
         '';
       };
-      package = lib.mkPackageOption pkgs "ollama" {};
+      package = lib.mkPackageOption pkgs "ollama" { };
     };
   };
 
@@ -42,19 +45,21 @@ in {
     systemd.user.services.ollama = {
       Unit = {
         Description = "Server for local large language models";
-        After = ["network.target"];
+        After = [ "network.target" ];
       };
 
       Service = {
         ExecStart = "${lib.getExe ollamaPackage} serve";
-        Environment = ["OLLAMA_HOST=${cfg.listenAddress}"];
+        Environment = [ "OLLAMA_HOST=${cfg.listenAddress}" ];
       };
 
-      Install = {WantedBy = ["default.target"];};
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
     };
 
-    home.packages = [ollamaPackage];
+    home.packages = [ ollamaPackage ];
   };
 
-  meta.maintainers = with lib.maintainers; [terlar];
+  meta.maintainers = with lib.maintainers; [ terlar ];
 }

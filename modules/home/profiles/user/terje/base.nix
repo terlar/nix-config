@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.base;
-in {
+in
+{
   options.profiles.user.terje.base = {
     enable = lib.mkEnableOption "Base profile for terje";
   };
@@ -37,8 +39,11 @@ in {
     custom = {
       keyboard = {
         enable = true;
-        layouts = [{layout = "us";} {layout = "se";}];
-        xkbOptions = ["ctrl:nocaps"];
+        layouts = [
+          { layout = "us"; }
+          { layout = "se"; }
+        ];
+        xkbOptions = [ "ctrl:nocaps" ];
         repeatDelay = 500;
         repeatInterval = 33; # 30Hz
       };
@@ -74,7 +79,10 @@ in {
 
       aspell = {
         enable = true;
-        dictionaries = ps: [ps.en ps.sv];
+        dictionaries = ps: [
+          ps.en
+          ps.sv
+        ];
       };
 
       bat.config = {
@@ -83,12 +91,20 @@ in {
       };
 
       git = {
-        ignores = [".dir-locals.el" ".direnv/" ".envrc"];
+        ignores = [
+          ".dir-locals.el"
+          ".direnv/"
+          ".envrc"
+        ];
 
         extraConfig = {
           ghq = {
-            "git@code.orgmode.org:" = {vcs = "git";};
-            "https://git.savannah.gnu.org/git/" = {vcs = "git";};
+            "git@code.orgmode.org:" = {
+              vcs = "git";
+            };
+            "https://git.savannah.gnu.org/git/" = {
+              vcs = "git";
+            };
           };
 
           delta = {
@@ -105,8 +121,12 @@ in {
           };
 
           url = {
-            "ssh://git@github.com/terlar" = {insteadOf = "gh:terlar";};
-            "https://github.com/" = {insteadOf = "gh:";};
+            "ssh://git@github.com/terlar" = {
+              insteadOf = "gh:terlar";
+            };
+            "https://github.com/" = {
+              insteadOf = "gh:";
+            };
           };
         };
       };

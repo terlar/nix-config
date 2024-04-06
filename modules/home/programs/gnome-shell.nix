@@ -6,34 +6,39 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.programs.gnome-shell;
 
-  extensionOpts = {config, ...}: {
-    options = {
-      id = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        example = "user-theme@gnome-shell-extensions.gcampax.github.com";
-        description = ''
-          ID of the gnome-shell extension. If not provided, it
-          will be obtained from <varname>package.uuid</varname> or
-          <varname>package.extensionUuid</varname>.
-        '';
+  extensionOpts =
+    { config, ... }:
+    {
+      options = {
+        id = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+          example = "user-theme@gnome-shell-extensions.gcampax.github.com";
+          description = ''
+            ID of the gnome-shell extension. If not provided, it
+            will be obtained from <varname>package.uuid</varname> or
+            <varname>package.extensionUuid</varname>.
+          '';
+        };
+
+        package = mkOption {
+          type = types.nullOr types.package;
+          default = null;
+          example = "pkgs.gnome3.gnome-shell-extensions";
+          description = ''
+            Package providing a gnome-shell extension with id <varname>id</varname>.
+          '';
+        };
       };
 
-      package = mkOption {
-        type = types.nullOr types.package;
-        default = null;
-        example = "pkgs.gnome3.gnome-shell-extensions";
-        description = ''
-          Package providing a gnome-shell extension with id <varname>id</varname>.
-        '';
+      config = {
+        id = mkDefault config.package.uuid or config.package.extensionUuid or null;
       };
     };
-
-    config = {id = mkDefault config.package.uuid or config.package.extensionUuid or null;};
-  };
 
   themeOpts = {
     options = {
@@ -54,13 +59,14 @@ with lib; let
       };
     };
   };
-in {
+in
+{
   options.programs.gnome-shell = {
     enable = mkEnableOption "gnome-shell";
 
     extensions = mkOption {
       type = types.listOf (types.submodule extensionOpts);
-      default = [];
+      default = [ ];
       example = literalExpression ''
         [
           { package = pkgs.gnomeExtensions.dash-to-panel; }
@@ -91,7 +97,7 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
-    (mkIf (cfg.extensions != {}) {
+    (mkIf (cfg.extensions != { }) {
       dconf.settings."org/gnome/shell" = {
         disable-user-extensions = false;
         enabled-extensions = catAttrs "id" cfg.extensions;
@@ -100,8 +106,7 @@ in {
     })
 
     (mkIf (cfg.theme != null) {
-      dconf.settings."org/gnome/shell/extensions/user-theme".name =
-        cfg.theme.name;
+      dconf.settings."org/gnome/shell/extensions/user-theme".name = cfg.theme.name;
       home.packages = optional (cfg.theme.package != null) cfg.theme.package;
       programs.gnome-shell.extensions = [
         {

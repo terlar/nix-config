@@ -4,24 +4,24 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.shell;
 
   sourceDirFiles = attrRoot: destination: target: {
     ${attrRoot} = lib.pipe target [
       builtins.readDir
       builtins.attrNames
-      (builtins.foldl'
-        (attrs: file: attrs // {"${destination}/${file}".source = "${toString target}/${file}";})
-        {})
+      (builtins.foldl' (
+        attrs: file: attrs // { "${destination}/${file}".source = "${toString target}/${file}"; }
+      ) { })
     ];
   };
 
-  packageWithMainProgram = mainProgram: pkg:
-    (pkg.meta.mainProgram or "") == mainProgram;
+  packageWithMainProgram = mainProgram: pkg: (pkg.meta.mainProgram or "") == mainProgram;
 
-  anyPackageWithMainProgram = mainProgram:
-    builtins.any (packageWithMainProgram mainProgram) config.home.packages;
+  anyPackageWithMainProgram =
+    mainProgram: builtins.any (packageWithMainProgram mainProgram) config.home.packages;
 
   plugins =
     lib.optional (anyPackageWithMainProgram "aws") {
@@ -54,14 +54,15 @@
         # date = "2016-11-05T11:35:26+01:00";
       };
     };
-in {
+in
+{
   options.profiles.user.terje.shell = {
     enable = lib.mkEnableOption "Shell profile for terje";
   };
 
   config = lib.mkIf cfg.enable {
     home = {
-      packages = [pkgs.bashInteractive];
+      packages = [ pkgs.bashInteractive ];
 
       sessionVariables.LS_COLORS = "";
     };
@@ -163,12 +164,9 @@ in {
     };
 
     xdg = lib.mkMerge [
-      (sourceDirFiles "configFile" "fish/completions"
-        "${dotfiles}/fish/.config/fish/completions")
-      (sourceDirFiles "configFile" "fish/conf.d"
-        "${dotfiles}/fish/.config/fish/conf.d")
-      (sourceDirFiles "configFile" "fish/functions"
-        "${dotfiles}/fish/.config/fish/functions")
+      (sourceDirFiles "configFile" "fish/completions" "${dotfiles}/fish/.config/fish/completions")
+      (sourceDirFiles "configFile" "fish/conf.d" "${dotfiles}/fish/.config/fish/conf.d")
+      (sourceDirFiles "configFile" "fish/functions" "${dotfiles}/fish/.config/fish/functions")
     ];
   };
 }

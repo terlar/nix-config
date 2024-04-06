@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.user.terje.programs.brave;
-in {
+in
+{
   options.profiles.user.terje.programs.brave = {
     enable = lib.mkEnableOption "Brave config for terje";
   };

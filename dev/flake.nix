@@ -22,39 +22,44 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
-      imports = [inputs.dev-flake.flakeModule];
+      imports = [ inputs.dev-flake.flakeModule ];
 
       dev = {
         name = "terlar/nix-config";
         rootSrc = ../.;
       };
 
-      perSystem = {rootFlake', ...}: {
-        inherit (rootFlake') formatter;
-        treefmt.programs.alejandra.enable = true;
+      perSystem =
+        { pkgs, ... }:
+        {
+          treefmt.programs.nixfmt = {
+            enable = true;
+            package = pkgs.nixfmt-rfc-style;
+          };
 
-        devshells.default = {
-          commands = [
-            {
-              name = "repl";
-              command = ''
-                exec nix repl --file "$PRJ_ROOT/dev/repl.nix" "$@"
-              '';
-              help = "Development REPL";
-            }
-          ];
+          devshells.default = {
+            commands = [
+              {
+                name = "repl";
+                command = ''
+                  exec nix repl --file "$PRJ_ROOT/dev/repl.nix" "$@"
+                '';
+                help = "Development REPL";
+              }
+            ];
 
-          env = [
-            {
-              name = "NIX_USER_CONF_FILES";
-              value = toString ../nix.conf;
-            }
-          ];
+            env = [
+              {
+                name = "NIX_USER_CONF_FILES";
+                value = toString ../nix.conf;
+              }
+            ];
+          };
         };
-      };
     };
 }

@@ -41,14 +41,15 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    flake-parts,
-    nixpkgs,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+  outputs =
+    inputs@{
+      self,
+      flake-parts,
+      nixpkgs,
+      ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
       imports = [
         ./modules/flake/home-manager.nix
@@ -58,7 +59,7 @@
       ];
 
       flake = {
-        lib = import ./lib.nix {inherit (nixpkgs) lib;};
+        lib = import ./lib.nix { inherit (nixpkgs) lib; };
 
         homeModules = nixpkgs.lib.mkMerge [
           (self.lib.modulesFromDir ./modules/home)
@@ -77,11 +78,13 @@
                 inputs.nur.hmModules.nur
               ];
 
-              _module.args = {inherit (inputs) dotfiles;};
+              _module.args = {
+                inherit (inputs) dotfiles;
+              };
             };
 
             user-terje-linux = {
-              imports = [self.homeModules.user-terje];
+              imports = [ self.homeModules.user-terje ];
 
               targets.genericLinux.enable = true;
 
@@ -95,7 +98,7 @@
           (self.lib.modulesFromDir ./modules/nixos)
           {
             nixpkgs-useFlakeNixpkgs = {
-              nix.nixPath = ["nixpkgs=${nixpkgs}"];
+              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
               nix.registry.nixpkgs.flake = nixpkgs;
             };
           }
@@ -110,14 +113,14 @@
         };
       };
 
-      perSystem = {pkgs, ...}: {
-        formatter = pkgs.alejandra;
-
-        packages = {
-          iosevka-slab = pkgs.callPackage ./packages/iosevka-slab {};
-          drduh-gpg-conf = pkgs.callPackage ./packages/drduh-gpg-conf {};
-          drduh-yubikey-guide = pkgs.callPackage ./packages/drduh-yubikey-guide {};
+      perSystem =
+        { pkgs, ... }:
+        {
+          packages = {
+            iosevka-slab = pkgs.callPackage ./packages/iosevka-slab { };
+            drduh-gpg-conf = pkgs.callPackage ./packages/drduh-gpg-conf { };
+            drduh-yubikey-guide = pkgs.callPackage ./packages/drduh-yubikey-guide { };
+          };
         };
-      };
     };
 }

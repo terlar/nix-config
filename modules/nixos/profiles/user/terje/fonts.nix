@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.fonts;
-in {
+in
+{
   options.profiles.user.terje.fonts = {
     enable = lib.mkEnableOption "Fonts profile for terje";
   };
@@ -23,9 +25,21 @@ in {
       fontconfig = {
         enable = lib.mkDefault true;
         defaultFonts = {
-          monospace = ["Iosevka Slab" "Noto Sans Mono CJK SC" "Noto Sans Symbols"];
-          sansSerif = ["Noto Sans" "Noto Sans CJK SC" "Noto Sans Symbols"];
-          serif = ["Noto Serif" "Noto Sans CJK SC" "Noto Sans Symbols"];
+          monospace = [
+            "Iosevka Slab"
+            "Noto Sans Mono CJK SC"
+            "Noto Sans Symbols"
+          ];
+          sansSerif = [
+            "Noto Sans"
+            "Noto Sans CJK SC"
+            "Noto Sans Symbols"
+          ];
+          serif = [
+            "Noto Serif"
+            "Noto Sans CJK SC"
+            "Noto Sans Symbols"
+          ];
         };
       };
     };

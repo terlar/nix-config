@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.profiles.user.terje.cardboard;
-in {
+in
+{
   options.profiles.user.terje.cardboard = {
     enable = mkEnableOption "cardboard profile for terje";
   };
@@ -31,8 +33,8 @@ in {
       enable = true;
       wrapperFeatures.gtk = true;
       config = {
-        bars = [];
-        keybindings = {};
+        bars = [ ];
+        keybindings = { };
         window.border = 0;
 
         startup = [

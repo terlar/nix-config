@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.profiles.user.terje.programs.vscode;
-in {
+in
+{
   options.profiles.user.terje.programs.vscode = {
     enable = mkEnableOption "Visual Studio Code config for terje";
   };
@@ -60,9 +62,13 @@ in {
         "python.formatting.provider" = "black";
         "python.disableInstallationCheck" = true;
       };
-      extensions = with pkgs;
-      with vscode-extensions;
-        [bbenoist.Nix ms-python.python]
+      extensions =
+        with pkgs;
+        with vscode-extensions;
+        [
+          bbenoist.Nix
+          ms-python.python
+        ]
         ++ vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "activefileinstatusbar";

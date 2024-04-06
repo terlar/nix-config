@@ -3,23 +3,23 @@
   flake-parts-lib,
   self,
   ...
-}: let
-  inherit
-    (lib)
-    mkOption
-    types
-    ;
+}:
+let
+  inherit (lib) mkOption types;
   inherit (flake-parts-lib) mkSubmoduleOptions;
-in {
+in
+{
   options = {
     flake = mkSubmoduleOptions {
       homeModules = mkOption {
         type = types.lazyAttrsOf types.unspecified;
-        default = {};
-        apply = lib.mapAttrs (k: v: {
-          _file = "${toString self.outPath}/flake.nix#homeModules.${k}";
-          imports = [v];
-        });
+        default = { };
+        apply = lib.mapAttrs (
+          k: v: {
+            _file = "${toString self.outPath}/flake.nix#homeModules.${k}";
+            imports = [ v ];
+          }
+        );
         description = ''
           Home Manager modules.
 
@@ -29,7 +29,7 @@ in {
 
       homeConfigurations = mkOption {
         type = types.lazyAttrsOf types.raw;
-        default = {};
+        default = { };
         description = ''
           Instantiated Home Manager configurations. Used by `home-manager`.
 

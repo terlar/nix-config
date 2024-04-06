@@ -1,7 +1,9 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   name = "Terje Larsen";
   username = "terje";
-in {
+in
+{
   system.stateVersion = "19.09";
   networking.hostName = "kong";
 
@@ -29,7 +31,7 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
-    kernelModules = ["fuse"];
+    kernelModules = [ "fuse" ];
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
@@ -51,7 +53,10 @@ in {
 
     printing = {
       enable = true;
-      drivers = [pkgs.cups-bjnp pkgs.gutenprintBin];
+      drivers = [
+        pkgs.cups-bjnp
+        pkgs.gutenprintBin
+      ];
     };
 
     # Enable network name resolution.
@@ -68,7 +73,10 @@ in {
     description = name;
     isNormalUser = true;
     group = "users";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     createHome = true;
     home = "/home/${username}";
   };

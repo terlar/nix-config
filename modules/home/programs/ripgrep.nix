@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.programs.ripgrep;
-in {
+in
+{
   options.programs.ripgrep = {
     enableRipgrepAll = mkOption {
       default = false;
@@ -18,7 +20,5 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    home.packages = optional cfg.enableRipgrepAll pkgs.ripgrep-all;
-  };
+  config = mkIf cfg.enable { home.packages = optional cfg.enableRipgrepAll pkgs.ripgrep-all; };
 }

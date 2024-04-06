@@ -1,3 +1,1 @@
-_final: prev: {
-  iosevka-slab = prev.callPackage ./iosevka-slab {};
-}
+_final: prev: { iosevka-slab = prev.callPackage ./iosevka-slab { }; }

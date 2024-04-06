@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   hardware.enableRedistributableFirmware = true;
 
   networking = {
@@ -7,9 +8,7 @@
   };
 
   boot = {
-    kernelParams = [
-      "console=ttyS1,115200n8"
-    ];
+    kernelParams = [ "console=ttyS1,115200n8" ];
 
     loader.raspberryPi = {
       enable = true;
@@ -29,20 +28,16 @@
     unifiPackage = pkgs.unifi;
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "your public key here"
-  ];
+  users.users.root.openssh.authorizedKeys.keys = [ "your public key here" ];
 
   systemd.services.btattach = {
-    before = ["bluetooth.service"];
-    after = ["dev-ttyAMA0.device"];
-    wantedBy = ["multi-user.target"];
+    before = [ "bluetooth.service" ];
+    after = [ "dev-ttyAMA0.device" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
     };
   };
 
-  environment.systemPackages = [
-    pkgs.emacs
-  ];
+  environment.systemPackages = [ pkgs.emacs ];
 }

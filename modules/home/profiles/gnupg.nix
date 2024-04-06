@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.profiles.gnupg;
-in {
+in
+{
   options.profiles.gnupg = {
     enable = lib.mkEnableOption "GnuPG Profile";
   };

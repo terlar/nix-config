@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.user.terje.laptop;
-in {
+in
+{
   options.profiles.user.terje.laptop = {
     enable = lib.mkEnableOption "Laptop profile for terje";
   };
@@ -23,6 +25,6 @@ in {
       };
     };
 
-    environment.systemPackages = [pkgs.powertop];
+    environment.systemPackages = [ pkgs.powertop ];
   };
 }
