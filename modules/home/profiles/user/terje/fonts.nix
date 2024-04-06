@@ -16,7 +16,9 @@ in
     fonts.fontconfig.enable = true;
 
     home.packages = [
-      pkgs.iosevka-slab
+      (pkgs.iosevka-bin.override { variant = "Aile"; })
+      (pkgs.iosevka-bin.override { variant = "Etoile"; })
+      (pkgs.iosevka-bin.override { variant = "CurlySlab"; })
       pkgs.noto-fonts
       pkgs.noto-fonts-cjk
       pkgs.noto-fonts-emoji

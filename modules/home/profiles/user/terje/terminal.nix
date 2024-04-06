@@ -33,7 +33,7 @@ in
 
       settings = {
         main = {
-          font = "Iosevka Slab Light:size=10";
+          font = "Iosevka Curly Slab Light:size=10";
           pad = "10x10";
           line-height = 14;
         };

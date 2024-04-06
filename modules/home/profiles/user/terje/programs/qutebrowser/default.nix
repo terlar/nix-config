@@ -51,7 +51,7 @@ in
           remove_finished = 100;
         };
 
-        fonts.default_family = "Iosevka Slab Light";
+        fonts.default_family = "Iosevka Curly Slab Light";
 
         spellcheck.languages = [
           "en-US"

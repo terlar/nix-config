@@ -117,7 +117,6 @@
         { pkgs, ... }:
         {
           packages = {
-            iosevka-slab = pkgs.callPackage ./packages/iosevka-slab { };
             drduh-gpg-conf = pkgs.callPackage ./packages/drduh-gpg-conf { };
             drduh-yubikey-guide = pkgs.callPackage ./packages/drduh-yubikey-guide { };
           };

@@ -15,7 +15,7 @@ in
       # Make theme/font configurable in single place.
       extraConfig = ''
         palette=solarized-white
-        font-name=Iosevka Slab
+        font-name=Iosevka Curly Slab
         font-size=16
       '';
     };
