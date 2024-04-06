@@ -56,7 +56,7 @@
             env = [
               {
                 name = "NIX_USER_CONF_FILES";
-                value = toString ../nix.conf;
+                value = toString ./nix.conf;
               }
             ];
           };

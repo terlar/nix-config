@@ -71,7 +71,7 @@ in
         auto-optimise-store = true;
         min-free = 1024;
       };
-      extraOptions = builtins.readFile ../../../../../nix.conf;
+      extraOptions = builtins.readFile ../../../../../dev/nix.conf;
     };
 
     programs = {
