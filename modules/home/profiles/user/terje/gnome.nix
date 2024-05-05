@@ -13,8 +13,7 @@ let
     pkg:
     lib.pipe pkg [
       lib.getVersion
-      (lib.splitString ".")
-      builtins.head
+      lib.versions.major
       lib.toInt
     ];
 
