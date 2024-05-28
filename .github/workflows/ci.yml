@@ -16,10 +16,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
-          diagnostic-endpoint: ''
+          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
           extra-conf: |
             http-connections = 50
             max-jobs = auto
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v14
         with:
@@ -37,10 +38,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
-          diagnostic-endpoint: ''
+          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
           extra-conf: |
             http-connections = 50
             max-jobs = auto
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v14
         with:
@@ -63,10 +65,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
-          diagnostic-endpoint: ''
+          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
           extra-conf: |
             http-connections = 50
             max-jobs = auto
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v14
         with:
@@ -90,10 +93,11 @@ jobs:
       - uses: jlumbroso/free-disk-space@v1.3.1
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
-          diagnostic-endpoint: ''
+          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
           extra-conf: |
             http-connections = 50
             max-jobs = auto
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v14
         with:
@@ -116,10 +120,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v11
         with:
-          diagnostic-endpoint: ''
+          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
           extra-conf: |
             http-connections = 50
             max-jobs = auto
+          diagnostic-endpoint: ''
 
       - uses: cachix/cachix-action@v14
         with:

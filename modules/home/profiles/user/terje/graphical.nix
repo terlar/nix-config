@@ -27,8 +27,8 @@ in
         gtk.enable = true;
 
         home.packages = [
+          pkgs.gnome.eog
           pkgs.mpv
-          pkgs.sxiv
         ];
       }
 
@@ -46,8 +46,10 @@ in
 
         home.packages = [
           pkgs.krita
-          pkgs.slack
           pkgs.spotify
+
+          pkgs.discord
+          pkgs.slack
           pkgs.tdesktop
           pkgs.zoom-us
         ];
