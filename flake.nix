@@ -26,7 +26,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
 
     # Packages
     kmonad = {
@@ -75,7 +74,6 @@
                 self.homeModules.default
                 self.homeModules.nixpkgs-useFlakeNixpkgs
                 inputs.emacs-config.homeManagerModules.emacsConfig
-                inputs.nur.hmModules.nur
               ];
 
               _module.args = {

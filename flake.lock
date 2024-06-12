@@ -288,21 +288,6 @@
         "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1718184302,
-        "narHash": "sha256-opRL7+wsIxy+r0zP4BkrKUEiljIXhXdboIylH04ggOg=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "4b71c3c633d0a1784960a2350012dbb809bb4dac",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "org-babel": {
       "locked": {
         "lastModified": 1669954182,
@@ -327,8 +312,7 @@
         "kmonad": "kmonad",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
