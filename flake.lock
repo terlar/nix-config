@@ -48,11 +48,11 @@
         "twist": "twist"
       },
       "locked": {
-        "lastModified": 1718187974,
-        "narHash": "sha256-W6YzixeubMdpQmNyeg3omsAK1e6rymcADFFFoBLgIOE=",
+        "lastModified": 1718363693,
+        "narHash": "sha256-UZVN+VdBE8AIanvwqoPzKTLYHXtrYe7ZmBGJjYrz7As=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "22e6625d284d1ce331f6ac7ee774b5c37e1bdef6",
+        "rev": "bd5d0b0334c53abd27a1c83a5950e45916fa0fea",
         "type": "github"
       },
       "original": {
