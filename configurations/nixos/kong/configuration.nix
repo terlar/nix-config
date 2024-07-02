@@ -26,7 +26,7 @@ in
         # Use the systemd-boot EFI boot loader.
         enable = true;
         # Prevent small EFI partition filling up.
-        configurationLimit = 25;
+        configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };
