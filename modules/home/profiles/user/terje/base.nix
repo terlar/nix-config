@@ -160,7 +160,6 @@ in
       pkgs.browsh
       pkgs.fzy
       pkgs.pdfgrep
-      pkgs.pywal
       pkgs.tldr
       pkgs.units
       pkgs.xsv
