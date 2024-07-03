@@ -162,6 +162,7 @@ in
       pkgs.pdfgrep
       pkgs.tldr
       pkgs.units
+      pkgs.unzip
       pkgs.xsv
     ];
   };
