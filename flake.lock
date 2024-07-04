@@ -48,11 +48,11 @@
         "twist": "twist"
       },
       "locked": {
-        "lastModified": 1719930480,
-        "narHash": "sha256-1eaUGyqd98/HQLNE7p9+YxgNU9UzVogAFY/zBOkeAS8=",
+        "lastModified": 1720077847,
+        "narHash": "sha256-8g3D2GWQ6l9vEEDTF6AEv6VAPIrG3pzruiixIE6G7kY=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "76b055f0b02bf8285bbf1019f5750446b925c33f",
+        "rev": "ea756384e247c0b6c5859a76b1025a6195b19ea8",
         "type": "github"
       },
       "original": {
@@ -335,11 +335,11 @@
         "elisp-helpers": "elisp-helpers"
       },
       "locked": {
-        "lastModified": 1717490225,
-        "narHash": "sha256-/l8SINd1Fv50CUj7VyKVAYzPpGZQVXpaZjkMuU1iOas=",
+        "lastModified": 1720009535,
+        "narHash": "sha256-gEMUkymnF6FEEzJuxk2M+J1PS2V8xYpvDxFe9xH30Hs=",
         "owner": "emacs-twist",
         "repo": "twist.nix",
-        "rev": "cdaba19db1af13fb8573db7f1f4fe8d3a69c92cb",
+        "rev": "0f28a2ad2f664432383f758f5ef806c4bb264676",
         "type": "github"
       },
       "original": {
