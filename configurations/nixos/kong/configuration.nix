@@ -49,7 +49,7 @@ in
     fwupd.enable = true;
 
     # Fingerprint reader
-    fprintd.enable = true;
+    fprintd.enable = false;
 
     printing = {
       enable = true;
