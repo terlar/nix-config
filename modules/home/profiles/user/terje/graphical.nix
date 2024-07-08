@@ -27,7 +27,7 @@ in
         gtk.enable = true;
 
         home.packages = [
-          pkgs.gnome.eog
+          pkgs.eog
           pkgs.mpv
         ];
       }
