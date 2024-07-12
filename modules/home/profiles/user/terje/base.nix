@@ -13,8 +13,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.stateVersion = "20.09";
-
     systemd.user.startServices = "sd-switch";
     manual.html.enable = true;
 
