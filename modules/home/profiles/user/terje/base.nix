@@ -59,15 +59,21 @@ in
     };
 
     nix = {
-      package = lib.mkDefault pkgs.nixVersions.stable;
+      package = lib.mkDefault pkgs.lix;
+
       settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+
         # Build
         max-jobs = "auto";
-        http-connections = 50;
+        http-connections = lib.mkDefault 50;
 
         # Store
         auto-optimise-store = true;
-        min-free = 1024;
+        min-free = lib.mkDefault 1024;
       };
       extraOptions = builtins.readFile ../../../../../dev/nix.conf;
     };
