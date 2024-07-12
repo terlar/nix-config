@@ -57,16 +57,9 @@
         homeModules = nixpkgs.lib.mkMerge [
           (self.lib.modulesFromDir ./modules/home)
           {
-            nixpkgs-useFlakeNixpkgs = {
-              home.sessionVariables.NIX_PATH = "nixpkgs=${nixpkgs}";
-              systemd.user.sessionVariables.NIX_PATH = nixpkgs.lib.mkForce "nixpkgs=${nixpkgs}";
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
-
             user-terje = {
               imports = [
                 self.homeModules.default
-                self.homeModules.nixpkgs-useFlakeNixpkgs
                 inputs.emacs-config.homeManagerModules.emacsConfig
               ];
 
@@ -86,15 +79,7 @@
           }
         ];
 
-        nixosModules = nixpkgs.lib.mkMerge [
-          (self.lib.modulesFromDir ./modules/nixos)
-          {
-            nixpkgs-useFlakeNixpkgs = {
-              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
-          }
-        ];
+        nixosModules = self.lib.modulesFromDir ./modules/nixos;
 
         overlays = {
           default = import ./packages;
