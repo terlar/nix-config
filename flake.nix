@@ -27,12 +27,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Packages
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Sources
     dotfiles = {
       url = "github:terlar/dotfiles";
@@ -106,7 +100,6 @@
           default = import ./packages;
           fromInputs = nixpkgs.lib.composeManyExtensions [
             inputs.emacs-config.overlays.default
-            inputs.kmonad.overlays.default
           ];
         };
       };
