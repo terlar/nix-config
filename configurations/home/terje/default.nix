@@ -13,8 +13,12 @@
         modules = [
           config.flake.homeModules.user-terje-linux
           {
-            home.username = "terje";
-            home.homeDirectory = "/home/terje";
+            home = {
+              username = "terje";
+              homeDirectory = "/home/terje";
+              stateVersion = "20.09";
+            };
+
             profiles.user.terje.graphical.enable = true;
           }
         ];

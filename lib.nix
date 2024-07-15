@@ -7,6 +7,7 @@ rec {
     lib.pipe dir [
       lib.filesystem.listFilesRecursive
       (builtins.filter (lib.hasSuffix ".nix"))
+      (builtins.filter (x: !lib.hasSuffix "interface.nix" x))
       (map (value: {
         name = lib.pipe value [
           toString

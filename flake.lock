@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1686902027,
-        "narHash": "sha256-umiHv01pAa0c4U2oY9VUZgIBKrDGu0p1Yc9iolQYIts=",
-        "owner": "terlar",
-        "repo": "dotfiles",
-        "rev": "7935d78ffa40ecf5f12e6589f1e77ad52dbb8a32",
-        "type": "github"
-      },
-      "original": {
-        "owner": "terlar",
-        "repo": "dotfiles",
-        "type": "github"
-      }
-    },
     "elisp-helpers": {
       "flake": false,
       "locked": {
@@ -155,28 +139,6 @@
         "type": "indirect"
       }
     },
-    "kmonad": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "nix",
-        "lastModified": 1720421296,
-        "narHash": "sha256-Pl8n7CkrurvRFGyWV6oi9jmxRHDcsrcM4AlUMYG0rwU=",
-        "owner": "kmonad",
-        "repo": "kmonad",
-        "rev": "97a3dea051a3565e97f2bdde60473a2d78182b07",
-        "type": "github"
-      },
-      "original": {
-        "dir": "nix",
-        "owner": "kmonad",
-        "repo": "kmonad",
-        "type": "github"
-      }
-    },
     "melpa": {
       "flake": false,
       "locked": {
@@ -305,11 +267,9 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "emacs-config": "emacs-config",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
-        "kmonad": "kmonad",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs"

@@ -83,6 +83,8 @@ in
 
   # Managed home.
   home-manager.users.${username} = {
+    home.stateVersion = "20.09";
+
     profiles.user.terje = {
       keyboards.enable = true;
       graphical = {

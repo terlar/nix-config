@@ -4,7 +4,6 @@
     system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.default
-      config.flake.nixosModules.nixpkgs-useFlakeNixpkgs
       config.flake.nixosModules.homeManagerIntegration
 
       inputs.nixpkgs.nixosModules.notDetected

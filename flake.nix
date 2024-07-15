@@ -26,18 +26,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Packages
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Sources
-    dotfiles = {
-      url = "github:terlar/dotfiles";
-      flake = false;
-    };
   };
 
   outputs =
@@ -63,22 +51,11 @@
         homeModules = nixpkgs.lib.mkMerge [
           (self.lib.modulesFromDir ./modules/home)
           {
-            nixpkgs-useFlakeNixpkgs = {
-              home.sessionVariables.NIX_PATH = "nixpkgs=${nixpkgs}";
-              systemd.user.sessionVariables.NIX_PATH = nixpkgs.lib.mkForce "nixpkgs=${nixpkgs}";
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
-
             user-terje = {
               imports = [
                 self.homeModules.default
-                self.homeModules.nixpkgs-useFlakeNixpkgs
                 inputs.emacs-config.homeManagerModules.emacsConfig
               ];
-
-              _module.args = {
-                inherit (inputs) dotfiles;
-              };
             };
 
             user-terje-linux = {
@@ -92,22 +69,11 @@
           }
         ];
 
-        nixosModules = nixpkgs.lib.mkMerge [
-          (self.lib.modulesFromDir ./modules/nixos)
-          {
-            nixpkgs-useFlakeNixpkgs = {
-              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
-          }
-        ];
+        nixosModules = self.lib.modulesFromDir ./modules/nixos;
 
         overlays = {
           default = import ./packages;
-          fromInputs = nixpkgs.lib.composeManyExtensions [
-            inputs.emacs-config.overlays.default
-            inputs.kmonad.overlays.default
-          ];
+          fromInputs = nixpkgs.lib.composeManyExtensions [ inputs.emacs-config.overlays.default ];
         };
       };
 
