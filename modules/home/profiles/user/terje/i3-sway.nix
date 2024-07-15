@@ -1,6 +1,5 @@
 {
   config,
-  dotfiles,
   lib,
   pkgs,
   ...
@@ -317,8 +316,6 @@ in
 
           pasystray.enable = true;
         };
-
-        xdg.configFile."i3status/config".source = "${dotfiles}/i3/.config/i3status/config";
       })
 
       (lib.mkIf (cfg.wm == "sway") {

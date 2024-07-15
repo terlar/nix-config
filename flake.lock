@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1686902027,
-        "narHash": "sha256-umiHv01pAa0c4U2oY9VUZgIBKrDGu0p1Yc9iolQYIts=",
-        "owner": "terlar",
-        "repo": "dotfiles",
-        "rev": "7935d78ffa40ecf5f12e6589f1e77ad52dbb8a32",
-        "type": "github"
-      },
-      "original": {
-        "owner": "terlar",
-        "repo": "dotfiles",
-        "type": "github"
-      }
-    },
     "elisp-helpers": {
       "flake": false,
       "locked": {
@@ -283,7 +267,6 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "emacs-config": "emacs-config",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",

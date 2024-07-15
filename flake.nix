@@ -26,12 +26,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Sources
-    dotfiles = {
-      url = "github:terlar/dotfiles";
-      flake = false;
-    };
   };
 
   outputs =
@@ -62,10 +56,6 @@
                 self.homeModules.default
                 inputs.emacs-config.homeManagerModules.emacsConfig
               ];
-
-              _module.args = {
-                inherit (inputs) dotfiles;
-              };
             };
 
             user-terje-linux = {
@@ -83,9 +73,7 @@
 
         overlays = {
           default = import ./packages;
-          fromInputs = nixpkgs.lib.composeManyExtensions [
-            inputs.emacs-config.overlays.default
-          ];
+          fromInputs = nixpkgs.lib.composeManyExtensions [ inputs.emacs-config.overlays.default ];
         };
       };
 

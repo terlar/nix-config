@@ -23,12 +23,9 @@ in
 
     profiles = {
       user.terje.shell.enable = lib.mkDefault true;
-
-      gnupg.enable = lib.mkDefault true;
+      monochrome.enable = lib.mkDefault true;
       development = {
         enable = lib.mkDefault true;
-        javascript.enable = lib.mkDefault true;
-        python.enable = lib.mkDefault true;
         nix.enable = lib.mkDefault true;
         shell.enable = lib.mkDefault true;
       };
@@ -51,11 +48,7 @@ in
         mode = "emacs";
       };
 
-      emacsConfig = {
-        enable = true;
-        defaultEmailApplication = true;
-        defaultPdfApplication = true;
-      };
+      emacsConfig.enable = true;
     };
 
     nix = {
@@ -75,6 +68,7 @@ in
         auto-optimise-store = true;
         min-free = lib.mkDefault 1024;
       };
+
       extraOptions = builtins.readFile ../../../../../dev/nix.conf;
     };
 
@@ -89,11 +83,6 @@ in
         ];
       };
 
-      bat.config = {
-        theme = "GitHub";
-        pager = "less -FR";
-      };
-
       git = {
         ignores = [
           ".dir-locals.el"
@@ -102,18 +91,8 @@ in
         ];
 
         extraConfig = {
-          ghq = {
-            "git@code.orgmode.org:" = {
-              vcs = "git";
-            };
-            "https://git.savannah.gnu.org/git/" = {
-              vcs = "git";
-            };
-          };
-
           delta = {
             features = "decorations";
-
             syntax-theme = "none";
             zero-style = "grey";
             minus-emph-style = "strike bold";
@@ -125,48 +104,11 @@ in
           };
 
           url = {
-            "ssh://git@github.com/terlar" = {
-              insteadOf = "gh:terlar";
-            };
-            "https://github.com/" = {
-              insteadOf = "gh:";
-            };
+            "ssh://git@github.com/terlar".insteadOf = "gh:terlar";
+            "https://github.com/".insteadOf = "gh:";
           };
         };
       };
-
-      password-store = {
-        enable = true;
-        package = pkgs.pass.withExtensions (ext: [
-          ext.pass-import
-          ext.pass-genphrase
-          ext.pass-update
-          ext.pass-otp
-        ]);
-      };
-
-      readline.enable = true;
-
-      ssh = {
-        enable = true;
-        compression = true;
-      };
     };
-
-    home.packages = [
-      # media
-      pkgs.playerctl
-      pkgs.surfraw
-      pkgs.youtube-dl
-
-      # utility
-      pkgs.browsh
-      pkgs.fzy
-      pkgs.pdfgrep
-      pkgs.tldr
-      pkgs.units
-      pkgs.unzip
-      pkgs.xsv
-    ];
   };
 }
