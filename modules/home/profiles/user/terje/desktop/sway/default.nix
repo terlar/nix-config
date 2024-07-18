@@ -21,7 +21,6 @@ let
     names = [ "sans-serif" ];
     size = 9.0;
   };
-  bgMode = "tile";
 
   wmConfig = mkMerge [
     # Borders
@@ -33,26 +32,10 @@ let
     {
       # Autostart
       startup = [
-        {
-          command = "${pkgs.feh}/bin/feh --bg-${bgMode} ~/.background-image";
-          always = true;
-          notification = false;
-        }
-        {
-          command = "${pkgs.dex}/bin/dex -ae i3";
-          always = true;
-          notification = false;
-        }
-        {
-          command = "${pkgs.xssproxy}/bin/xssproxy";
-          always = true;
-          notification = false;
-        }
-        {
-          command = "${pkgs.slack}/bin/slack";
-          always = true;
-          notification = false;
-        }
+        { command = "$TERMINAL"; }
+        # start polkit pinentry for priviledge escalation (virt-manager) also used
+        # by gnome utils like nm-connection-editor
+        { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
       ];
 
       # UI
@@ -65,37 +48,7 @@ let
       };
 
       # Status bar
-      bars = [
-        {
-          inherit fonts;
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-          colors = {
-            background = "#faf7ee";
-            statusline = "#292617";
-            separator = "#d5d2c8";
-            focusedWorkspace = {
-              border = "#d5d2c8";
-              background = "#d5d2c8";
-              text = "#292617";
-            };
-            activeWorkspace = {
-              border = "#faf7ee";
-              background = "#faf7ee";
-              text = "#292617";
-            };
-            inactiveWorkspace = {
-              border = "#faf7ee";
-              background = "#faf7ee";
-              text = "#292617";
-            };
-            urgentWorkspace = {
-              border = "#ef5350";
-              background = "#ef5350";
-              text = "#992222";
-            };
-          };
-        }
-      ];
+      bars = [ ];
 
       focus = {
         followMouse = false;
@@ -326,11 +279,31 @@ in
     })
 
     (mkIf (cfg.wm == "sway") {
-      wayland.windowManager.sway = {
-        enable = true;
-        systemdIntegration = true;
-        config = wmConfig;
-      };
+      wayland.windowManager.sway =
+        let
+          lockAfterIdle = 300;
+          lockCmd = "${pkgs.swaylock}/bin/swaylock -c 000000";
+        in
+        {
+          enable = true;
+          systemdIntegration = true;
+          wrapperFeatures.gtk = true;
+
+          config = mkMerge [
+            wmConfig
+            {
+              startup = [
+                {
+                  command = ''
+                    ${pkgs.swayidle}/bin/swayidle -w \
+                      timeout ${toString lockAfterIdle} '${lockCmd} -f ' \
+                      before-sleep '${lockCmd} -f'
+                  '';
+                }
+              ];
+            }
+          ];
+        };
     })
   ]);
 }

@@ -26,6 +26,16 @@ in
   options.profiles.development = {
     enable = mkEnableOption "development profile";
 
+    diagramming = {
+      d2.enable = mkEnableOption "D2 diagramming";
+      mermaid.enable = mkEnableOption "Mermaid diagramming";
+      plantuml = {
+        enable = mkEnableOption "PlantUML diagramming";
+        indentStyle = mkIndentStyleOption "PlantUML" "space";
+        indentSize = mkIndentSizeOption "PlantUML" 2;
+      };
+    };
+
     javascript = {
       enable = mkEnableOption "JavaScript development profile";
       indentStyle = mkIndentStyleOption "JavaScript" "space";
@@ -33,11 +43,6 @@ in
     };
 
     nix.enable = mkEnableOption "Nix development profile";
-
-    plantuml = {
-      indentStyle = mkIndentStyleOption "PlantUML" "space";
-      indentSize = mkIndentSizeOption "PlantUML" 2;
-    };
 
     python = {
       enable = mkEnableOption "Python development profile";
