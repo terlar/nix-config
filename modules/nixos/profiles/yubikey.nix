@@ -4,24 +4,27 @@
   pkgs,
   ...
 }:
+
 let
+  inherit (lib) mkDefault mkEnableOption mkIf;
+
   cfg = config.profiles.yubikey;
 in
 {
   options.profiles.yubikey = {
-    enable = lib.mkEnableOption "YubiKey";
+    enable = mkEnableOption "YubiKey";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.yubikey-personalization ];
 
     services = {
       udev = {
-        enable = lib.mkDefault true;
+        enable = mkDefault true;
         packages = [ pkgs.yubikey-personalization ];
       };
     };
 
-    programs.yubikey-touch-detector.enable = lib.mkDefault true;
+    programs.yubikey-touch-detector.enable = mkDefault true;
   };
 }
