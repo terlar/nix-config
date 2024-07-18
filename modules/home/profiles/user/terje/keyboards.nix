@@ -4,18 +4,17 @@
   pkgs,
   ...
 }:
-with lib;
+
 let
   cfg = config.profiles.user.terje.keyboards;
 in
 {
   options.profiles.user.terje.keyboards = {
-    enable = mkEnableOption "Keyboards profile for terje";
+    enable = lib.mkEnableOption "Keyboards profile for Terje";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.kmonad = {
-      package = pkgs.kmonad;
       keyboards = {
         te = {
           enable = true;

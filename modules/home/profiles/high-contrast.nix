@@ -4,16 +4,16 @@
   pkgs,
   ...
 }:
-with lib;
+
 let
   cfg = config.profiles.highContrast;
 in
 {
   options.profiles.highContrast = {
-    enable = mkEnableOption "High contrast profile";
+    enable = lib.mkEnableOption "high contrast profile";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     gtk = {
       theme = {
         name = "HighContrast";

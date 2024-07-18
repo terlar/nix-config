@@ -1,16 +1,19 @@
 { config, lib, ... }:
+
 let
   cfg = config.profiles.monochrome;
 in
 {
   options.profiles.monochrome = {
-    enable = lib.mkEnableOption "Monochrome Profile";
+    enable = lib.mkEnableOption "monochrome profile";
   };
 
   config = lib.mkIf cfg.enable {
     home.sessionVariables.LS_COLORS = "";
 
     programs = {
+      bat.config.theme = "GitHub";
+
       foot.settings.colors = {
         foreground = "002b37";
         background = "fffce9";
@@ -32,6 +35,17 @@ in
         bright7 = "f4eedb"; # bright white
       };
 
+      git.delta.options = {
+        syntax-theme = "none";
+        zero-style = "grey";
+        minus-emph-style = "strike bold";
+        minus-style = "strike";
+        plus-emph-style = "bold italic";
+        plus-style = "bold";
+        line-numbers-minus-style = "red";
+        line-numbers-plus-style = "bold";
+      };
+
       glow.style = {
         block_quote.color = "0";
         list.color = "0";
@@ -39,9 +53,7 @@ in
         link_text.color = "#007ec4";
         image.color = "#007ec4";
         code.background_color = "11";
-        code_block.chroma = {
-          text.background_color = "#f4eedb";
-        };
+        code_block.chroma.text.background_color = "#f4eedb";
         table.color = "0";
       };
     };

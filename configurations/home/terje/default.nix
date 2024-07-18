@@ -10,6 +10,7 @@
       { pkgs, ... }:
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+
         modules = [
           config.flake.homeModules.user-terje-linux
           {
@@ -18,8 +19,6 @@
               homeDirectory = "/home/terje";
               stateVersion = "20.09";
             };
-
-            profiles.user.terje.graphical.enable = true;
           }
         ];
       }

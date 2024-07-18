@@ -14,12 +14,7 @@ in
   options.programs.glow = {
     enable = lib.mkEnableOption "glow";
 
-    package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.glow;
-      defaultText = lib.literalExpression "pkgs.glow";
-      description = "Package providing {command}`glow`.";
-    };
+    package = lib.mkPackageOption pkgs "glow" { };
 
     settings = lib.mkOption {
       type = lib.types.submodule { freeformType = yamlFormat.type; };

@@ -1,8 +1,20 @@
-# Code copied with slight modifications from @splintah at:
-# https://github.com/splintah/configuration/blob/master/modules/home/kmonad.nix
-{ config, lib, ... }:
-with lib;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
 let
+  inherit (lib)
+    mkDefault
+    mkEnableOption
+    mkIf
+    mkOption
+    mkPackageOption
+    types
+    ;
+
   cfg = config.services.kmonad;
 
   keyboardOpts =
@@ -18,13 +30,7 @@ let
           '';
         };
 
-        enable = mkOption {
-          type = types.bool;
-          default = false;
-          description = ''
-            Whether to enable the kmonad service for this keyboard.
-          '';
-        };
+        enable = mkEnableOption "kmonad service for keyboard ${name}";
 
         config = mkOption {
           type = types.lines;
@@ -48,13 +54,7 @@ in
       description = "List of keyboard configurations.";
     };
 
-    package = mkOption {
-      type = types.package;
-      example = "pkgs.kmonad";
-      description = ''
-        The kmonad package.
-      '';
-    };
+    package = mkPackageOption pkgs "kmonad" { };
   };
 
   # NOTE: the top-level attrs assigned to config cannot be created by a fold or
@@ -62,16 +62,16 @@ in
   # recursion.
   config =
     let
-      enabledKeyboards = filterAttrs (_name: kb: kb.enable) cfg.keyboards;
+      enabledKeyboards = lib.filterAttrs (_name: kb: kb.enable) cfg.keyboards;
     in
     mkIf (cfg.keyboards != { }) {
-      xdg.configFile = mapAttrs' (
-        name: kb: nameValuePair "kmonad/kmonad-${name}.kbd" { text = kb.config; }
+      xdg.configFile = lib.mapAttrs' (
+        name: kb: lib.nameValuePair "kmonad/kmonad-${name}.kbd" { text = kb.config; }
       ) enabledKeyboards;
 
-      systemd.user.services = mapAttrs' (
+      systemd.user.services = lib.mapAttrs' (
         name: _kb:
-        nameValuePair "kmonad-${name}" {
+        lib.nameValuePair "kmonad-${name}" {
           Unit = {
             Description = "KMonad for ${name}";
           };

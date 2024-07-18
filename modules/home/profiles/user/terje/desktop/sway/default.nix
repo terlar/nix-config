@@ -4,10 +4,17 @@
   pkgs,
   ...
 }:
-let
-  inherit (lib) types;
 
-  cfg = config.profiles.user.terje.i3Sway;
+let
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    mkMerge
+    types
+    ;
+
+  cfg = config.profiles.user.terje.desktop.sway;
 
   modifier = "Mod4";
   fonts = {
@@ -16,7 +23,7 @@ let
   };
   bgMode = "tile";
 
-  wmConfig = lib.mkMerge [
+  wmConfig = mkMerge [
     # Borders
     {
       window.border = 0;
@@ -284,9 +291,10 @@ let
   ];
 in
 {
-  options.profiles.user.terje.i3Sway = {
-    enable = lib.mkEnableOption "i3/Sway profile for terje";
-    wm = lib.mkOption {
+  options.profiles.user.terje.desktop.sway = {
+    enable = mkEnableOption "sway profile for Terje";
+
+    wm = mkOption {
       type = types.enum [
         "i3"
         "sway"
@@ -297,34 +305,32 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable (
-    lib.mkMerge [
-      (lib.mkIf (cfg.wm == "i3") {
-        xsession.enable = true;
-        xsession.windowManager.i3 = {
+  config = mkIf cfg.enable (mkMerge [
+    (mkIf (cfg.wm == "i3") {
+      xsession.enable = true;
+      xsession.windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+        config = wmConfig;
+      };
+
+      services = {
+        screen-locker = {
           enable = true;
-          package = pkgs.i3-gaps;
-          config = wmConfig;
+          lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
+          inactiveInterval = 10;
         };
 
-        services = {
-          screen-locker = {
-            enable = true;
-            lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color --clock --color=d5d2c8";
-            inactiveInterval = 10;
-          };
+        pasystray.enable = true;
+      };
+    })
 
-          pasystray.enable = true;
-        };
-      })
-
-      (lib.mkIf (cfg.wm == "sway") {
-        wayland.windowManager.sway = {
-          enable = true;
-          systemdIntegration = true;
-          config = wmConfig;
-        };
-      })
-    ]
-  );
+    (mkIf (cfg.wm == "sway") {
+      wayland.windowManager.sway = {
+        enable = true;
+        systemdIntegration = true;
+        config = wmConfig;
+      };
+    })
+  ]);
 }

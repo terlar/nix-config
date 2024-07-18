@@ -56,15 +56,17 @@
                 self.homeModules.default
                 inputs.emacs-config.homeManagerModules.emacsConfig
               ];
+
+              nixpkgs.overlays = builtins.attrValues self.overlays;
+
+              profiles.user.terje.enable = true;
+              programs.home-manager.enable = true;
             };
 
             user-terje-linux = {
               imports = [ self.homeModules.user-terje ];
 
               targets.genericLinux.enable = true;
-
-              nixpkgs.config.allowUnfreePredicate = nixpkgs.lib.const true;
-              nixpkgs.overlays = builtins.attrValues self.overlays;
             };
           }
         ];

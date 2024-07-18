@@ -4,12 +4,13 @@
   pkgs,
   ...
 }:
+
 let
-  cfg = config.profiles.user.terje.fonts;
+  cfg = config.profiles.user.terje.graphical.fonts;
 in
 {
-  options.profiles.user.terje.fonts = {
-    enable = lib.mkEnableOption "Fonts profile for terje";
+  options.profiles.user.terje.graphical.fonts = {
+    enable = lib.mkEnableOption "fonts profile for Terje";
   };
 
   config = lib.mkIf cfg.enable {
@@ -19,6 +20,7 @@ in
       (pkgs.iosevka-bin.override { variant = "Aile"; })
       (pkgs.iosevka-bin.override { variant = "Etoile"; })
       (pkgs.iosevka-bin.override { variant = "CurlySlab"; })
+
       pkgs.noto-fonts
       pkgs.noto-fonts-cjk
       pkgs.noto-fonts-emoji
