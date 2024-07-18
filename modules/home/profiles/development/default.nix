@@ -30,10 +30,6 @@ in
             trim_trailing_whitespace = true;
             insert_final_newline = true;
           };
-          "*.plantuml" = {
-            indent_style = cfg.plantuml.indentStyle;
-            indent_size = cfg.plantuml.indentSize;
-          };
         };
       };
 
@@ -45,6 +41,19 @@ in
         pkgs.xh
       ];
     }
+
+    (mkIf cfg.diagramming.d2.enable { home.packages = [ pkgs.d2 ]; })
+
+    (mkIf cfg.diagramming.mermaid.enable { home.packages = [ pkgs.mermaid-cli ]; })
+
+    (mkIf cfg.diagramming.plantuml.enable {
+      home.packages = [ pkgs.plantuml ];
+
+      editorconfig.settings."*.plantuml" = {
+        indent_style = cfg.plantuml.indentStyle;
+        indent_size = cfg.plantuml.indentSize;
+      };
+    })
 
     (mkIf cfg.javascript.enable {
       editorconfig.settings."*.{js,jsx,json,ts,tsx}" = {

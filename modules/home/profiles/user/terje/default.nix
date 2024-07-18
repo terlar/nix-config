@@ -17,6 +17,9 @@ in
 
       development = {
         enable = mkDefault true;
+
+        diagramming.d2.enable = mkDefault true;
+
         nix.enable = mkDefault true;
         shell.enable = mkDefault true;
       };
