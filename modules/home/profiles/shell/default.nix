@@ -4,25 +4,49 @@
   pkgs,
   ...
 }:
+
 let
+  inherit (lib) mkDefault mkIf;
   cfg = config.profiles.shell;
 in
 {
   imports = [ ./interface.nix ];
 
-  config = lib.mkIf cfg.enable {
-    profiles.shell.fish.enable = lib.mkDefault true;
+  config = mkIf cfg.enable {
+    profiles.shell.fish.enable = mkDefault true;
 
     programs = {
       # In case you get dropped into a bash shell.
-      bash.enable = lib.mkDefault true;
+      bash.enable = mkDefault true;
 
-      readline.enable = lib.mkDefault true;
+      readline.enable = mkDefault true;
+
+      # Display source files.
+      bat.enable = mkDefault true;
 
       # Display markdown files.
-      glow.enable = lib.mkDefault true;
+      glow.enable = mkDefault true;
+
+      # Fast grep.
+      ripgrep = {
+        enable = mkDefault true;
+        enableRipgrepAll = mkDefault true;
+        arguments = [
+          "--max-columns=150"
+          "--max-columns-preview"
+          "--glob=!.git/*"
+          "--smart-case"
+        ];
+      };
     };
 
-    home.packages = [ pkgs.surfraw ];
+    home.packages = [
+      pkgs.fd
+      pkgs.fzy
+      pkgs.surfraw
+      pkgs.tldr
+      pkgs.tree
+      pkgs.units
+    ];
   };
 }

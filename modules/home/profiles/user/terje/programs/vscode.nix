@@ -4,13 +4,15 @@
   pkgs,
   ...
 }:
-with lib;
+
 let
+  inherit (lib) mkEnableOption mkIf;
+
   cfg = config.profiles.user.terje.programs.vscode;
 in
 {
   options.profiles.user.terje.programs.vscode = {
-    enable = mkEnableOption "Visual Studio Code config for terje";
+    enable = mkEnableOption "Visual Studio Code configuration for Terje";
   };
 
   config = mkIf cfg.enable {

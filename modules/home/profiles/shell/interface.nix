@@ -2,6 +2,6 @@
 
 {
   options.profiles.shell = {
-    enable = lib.mkEnableOption "Shell Profile";
+    enable = lib.mkEnableOption "shell profile";
   };
 }

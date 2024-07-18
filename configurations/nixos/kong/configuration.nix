@@ -86,11 +86,8 @@ in
     home.stateVersion = "20.09";
 
     profiles.user.terje = {
+      desktop.enable = true;
       keyboards.enable = true;
-      graphical = {
-        enable = true;
-        desktop = true;
-      };
     };
 
     services.ollama = {

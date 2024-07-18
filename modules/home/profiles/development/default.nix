@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+
 let
   inherit (lib) mkDefault mkIf mkMerge;
 
@@ -14,7 +15,11 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      profiles.gnupg.enable = mkDefault true;
+      profiles = {
+        direnv.enable = mkDefault true;
+        git.enable = mkDefault true;
+        gnupg.enable = mkDefault true;
+      };
 
       editorconfig = {
         enable = mkDefault true;
@@ -33,178 +38,15 @@ in
       };
 
       home.packages = [
-        pkgs.fd
-        pkgs.tree
-
-        pkgs.hey
-        pkgs.xh
-
         pkgs.gron
+        pkgs.hey
         pkgs.jaq
         pkgs.nodePackages.json-diff
+        pkgs.xh
       ];
-
-      programs = {
-        bat.enable = mkDefault true;
-
-        direnv = {
-          enable = mkDefault true;
-          nix-direnv.enable = mkDefault true;
-        };
-
-        ripgrep = {
-          enable = mkDefault true;
-          enableRipgrepAll = mkDefault true;
-          arguments = [
-            "--max-columns=150"
-            "--max-columns-preview"
-            "--glob=!.git/*"
-            "--smart-case"
-          ];
-        };
-      };
     }
 
-    (mkIf cfg.git.enable (mkMerge [
-      {
-        home.packages = [ pkgs.git-imerge ];
-
-        programs = {
-          git = {
-            enable = mkDefault true;
-
-            aliases = {
-              ignore = "update-index --assume-unchanged";
-              unignore = "update-index --no-assume-unchanged";
-              ignored = "!git ls-files -v | grep '^[[:lower:]]'";
-              wip = "!git add -Ap && git commit --amend --no-edit && git push --force-with-lease";
-
-              fup = "!git log --stat --since '1 day ago' --author $(git config user.email)";
-              tags = "tag -l";
-              remotes = "remote -v";
-              branches = builtins.concatStringsSep " " [
-                "!git"
-                "for-each-ref"
-                "--sort=-committerdate"
-                "--format='${
-                  builtins.concatStringsSep "|" [
-                    "%(color:blue)%(authordate:relative)"
-                    "%(color:red)%(authorname)"
-                    "%(color:black)%(color:bold)%(refname:short)"
-                  ]
-                }'"
-                "refs/remotes"
-                "|"
-                "column -ts'|'"
-              ];
-            };
-
-            extraConfig = {
-              branch = {
-                # Automatic remote tracking.
-                autoSetupMerge = "always";
-                # Automatically use rebase for new branches.
-                autoSetupRebase = "always";
-              };
-
-              fetch = {
-                prune = "true";
-              };
-              pull = {
-                rebase = "true";
-              };
-              push = {
-                default = "current";
-              };
-
-              rebase = {
-                # Support fixup and squash commits.
-                autoSquash = "true";
-                # Stash dirty worktree before rebase.
-                autoStash = "true";
-              };
-
-              merge = {
-                ff = "only";
-                log = "true";
-                conflictStyle = "diff3";
-              };
-
-              # Reuse recorded resolutions.
-              rerere = {
-                enabled = "true";
-                autoUpdate = "true";
-              };
-            };
-          };
-
-          ssh = {
-            enable = mkDefault true;
-            compression = mkDefault true;
-          };
-        };
-      }
-      (mkIf cfg.git.enableDelta {
-        home.packages = [ pkgs.delta ];
-        programs.git.extraConfig = {
-          core.pager = "delta";
-          interactive.diffFilter = "delta --color-only";
-        };
-      })
-      (mkIf cfg.git.enableGhq {
-        home.packages = [ pkgs.ghq ];
-        programs.git.extraConfig = {
-          ghq = {
-            root = cfg.sourceDirectory;
-            "https://git.savannah.gnu.org/git/" = {
-              vcs = "git";
-            };
-          };
-        };
-      })
-      (mkIf cfg.git.gitHub.enable (mkMerge [
-        { home.packages = [ pkgs.gh ]; }
-        (mkIf cfg.git.gitHub.reuseSshConnection {
-          programs.ssh = {
-            enable = true;
-            matchBlocks = {
-              "github.com" = {
-                hostname = "ssh.github.com";
-                port = 443;
-                serverAliveInterval = 60;
-                extraOptions = {
-                  ControlMaster = "auto";
-                  ControlPersist = "yes";
-                };
-              };
-            };
-          };
-        })
-      ]))
-    ]))
-
     (mkIf cfg.javascript.enable {
-      home = {
-        packages = [
-          pkgs.nodePackages.jsonlint
-          pkgs.nodePackages.prettier
-        ];
-
-        file = {
-          ".npmrc".text = ''
-            ${lib.optionalString cfg.javascript.ignoreScripts ''
-              ignore-scripts=true
-            ''}
-          '';
-          ".yarnrc".text = ''
-            disable-self-update-check true
-            ${lib.optionalString cfg.javascript.ignoreScripts ''
-              ignore-scripts true
-            ''}
-          '';
-        };
-      };
-
       editorconfig.settings."*.{js,jsx,json,ts,tsx}" = {
         indent_style = cfg.javascript.indentStyle;
         indent_size = cfg.javascript.indentSize;
@@ -243,12 +85,6 @@ in
           pkgs.nix-tree
         ];
       }
-      (mkIf cfg.nix.retainShellInNixShell {
-        home.packages = [ pkgs.nix-your-shell ];
-        programs.fish.interactiveShellInit = ''
-          nix-your-shell fish | source
-        '';
-      })
     ]))
 
     (mkIf cfg.shell.enable {
