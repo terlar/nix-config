@@ -87,7 +87,11 @@ in
     home.stateVersion = "20.09";
 
     profiles.user.terje = {
-      desktop.enable = true;
+      desktop = {
+        enable = true;
+        enableCommunicationPackages = true;
+        enableMediaPackages = true;
+      };
       keyboards.enable = true;
     };
 
