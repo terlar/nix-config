@@ -25,5 +25,8 @@ in
       pkgs.eog
       pkgs.mpv
     ];
+
+    # Fix GTK4 gtk.css complaining about being overwritten.
+    xdg.configFile."gtk-4.0/gtk.css".force = true;
   };
 }
