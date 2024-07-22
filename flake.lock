@@ -32,11 +32,11 @@
         "twist": "twist"
       },
       "locked": {
-        "lastModified": 1721662070,
-        "narHash": "sha256-3zxnDqM7FZFjxUwf862tjrBea7jdAsln0OxxHSkAmt4=",
+        "lastModified": 1721663805,
+        "narHash": "sha256-w0BnbH9eHj8H+aB1ZFDi1+U7qsyLL2k1Sjmieh9wIuI=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "64448c84d2ee2462d20fc0b95399eb1fbb60f7dc",
+        "rev": "e0051e3808d650b8e3e6bcd5ab8116bbd895c8f7",
         "type": "github"
       },
       "original": {
@@ -193,11 +193,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1721524691,
-        "narHash": "sha256-aE4vMfHfpX6KP9VWqVdXtoDUlvFR34wEIjqsqnKrVdY=",
+        "lastModified": 1721615467,
+        "narHash": "sha256-/foTRkSnMwwS3BeVlUNenyIPehCyDgovOPmz5tL6OkQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c9ed026def59fe978203a2b28eccdbaa7e5fadc9",
+        "rev": "176e4e9d36742841406578db792d3278ef6974c7",
         "type": "github"
       },
       "original": {
