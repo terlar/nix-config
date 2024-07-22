@@ -32,11 +32,11 @@
         "twist": "twist"
       },
       "locked": {
-        "lastModified": 1721485400,
-        "narHash": "sha256-6Xvs6v1mJ/Zg1cXS0QOTWRkCMYlUwLJ75RiuAfeevR0=",
+        "lastModified": 1721643978,
+        "narHash": "sha256-cS1NuQg2SyjR7bIkiBOaWhzYnV02kWJsm+QGt+WmcTM=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "5fa66759b625a2950fe3d0e653de0644c8625162",
+        "rev": "0d79c1c0cedc547f3dc6b8c635dfd1cf4da81a60",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,13 @@
         "ref": "main",
         "rev": "25b0d9e98775601eeef5f7742d731ab45c3f89a0",
         "revCount": 619,
+        "shallow": false,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/elpa.git"
       },
       "original": {
         "ref": "main",
+        "shallow": false,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/elpa.git"
       }
@@ -241,11 +243,13 @@
         "ref": "main",
         "rev": "f031337c6ee125455a98e2de899a563388e5de19",
         "revCount": 322,
+        "shallow": false,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
       },
       "original": {
         "ref": "main",
+        "shallow": false,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
       }
