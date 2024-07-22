@@ -37,24 +37,14 @@ if type -fq systemctl
     abbr scu 'systemctl --user'
     abbr scus 'systemctl --user status'
     abbr scul 'systemctl --user list-units'
-
-    abbr logout 'loginctl kill-user $USER'
-    abbr reboot 'systemctl reboot'
-    abbr poweroff 'systemctl poweroff'
-    abbr suspend 'systemctl suspend'
 end
 
 if type -fq git
     abbr g git
     abbr gb 'git branch'
-    abbr gba 'git bactive'
     abbr gs 'git status -sb'
-
     abbr gco 'git checkout'
     abbr gf 'git fetch'
-    abbr gfa 'git fetchall'
-    abbr gsmr git-submodule-reset
-    abbr gsmp 'git subpull'
 
     abbr gl 'git log --oneline'
     abbr gll 'git log'
@@ -73,21 +63,16 @@ if type -fq git
     abbr gc 'git commit'
     abbr gca 'git commit -a'
     abbr gcm 'git commit -m'
-    abbr gcw 'git commit -m WIP'
     abbr gcp 'git cherry-pick'
     abbr gr 'git rebase'
 
     abbr gm 'git merge'
-    abbr gpr git-pull-request
     abbr gpf 'git push --force-with-lease'
     abbr gpo 'git push --set-upstream origin'
 
     abbr gst 'git stash'
     abbr gsts 'git stash show -p'
     abbr gsta 'git stash apply'
-
-    abbr guns 'git reset HEAD'
-    abbr gunc 'git reset --soft HEAD^'
 end
 
 if type -fq kubectl
