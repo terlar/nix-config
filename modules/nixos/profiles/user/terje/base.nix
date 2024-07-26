@@ -40,6 +40,8 @@ in
     };
 
     nix = {
+      package = pkgs.lix;
+
       settings = {
         trusted-users = [
           "root"
