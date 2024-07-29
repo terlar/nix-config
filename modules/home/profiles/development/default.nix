@@ -80,7 +80,6 @@ in
           # Use
           pkgs.cachix
           pkgs.nix-index
-          pkgs.nix-output-monitor
 
           # Develop
           pkgs.manix

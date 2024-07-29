@@ -86,14 +86,3 @@ if type -fq ghq
     abbr f find-src
     abbr gg 'ghq get'
 end
-
-if type -q nix
-    abbr n nix
-    abbr nb 'nix build'
-    abbr ndrv 'nix derivation show'
-    abbr nf 'nix search nixpkgs'
-    abbr nl 'nix log'
-    abbr nd 'nix develop'
-    abbr nr 'nix run'
-    abbr ns 'nix shell'
-end

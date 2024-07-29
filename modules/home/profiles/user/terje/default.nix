@@ -14,6 +14,7 @@ in
       base.enable = true;
 
       monochrome.enable = mkDefault true;
+      nix.enableNixOutputMonitor = mkDefault true;
 
       development = {
         enable = mkDefault true;
