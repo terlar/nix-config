@@ -22,7 +22,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.fish.shellAbbrs = {
+      jq = "jaq";
+    };
+
     profiles.shell.fish.enablePackageCompletionPlugins = mkDefault true;
+
     xdg = mkIf cfg.enableBaseConfig (mkMerge [
       (sourceDirFiles "configFile" "fish/completions" ./completions)
       (sourceDirFiles "configFile" "fish/conf.d" ./conf.d)
