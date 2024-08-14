@@ -4,44 +4,109 @@
   pkgs,
   ...
 }:
+
+with lib;
+
 let
-  inherit (lib) types;
 
   cfg = config.services.ollama;
-  ollamaPackage = cfg.package.override { inherit (cfg) acceleration; };
+
+  ollamaPackage =
+    if cfg.acceleration == null then
+      cfg.package
+    else
+      cfg.package.override { inherit (cfg) acceleration; };
+
+  postStartScript = pkgs.writeShellScript "ollama-post-start" ''
+    set -x
+    export OLLAMA_HOST=${escapeShellArg cfg.host}:${builtins.toString cfg.port}
+    for model in ${escapeShellArgs cfg.loadModels}
+    do
+      ${escapeShellArg (getExe ollamaPackage)} pull "$model"
+    done
+  '';
+
 in
 {
+  meta.maintainers = [ maintainers.terlar ];
+
   options = {
     services.ollama = {
-      enable = lib.mkEnableOption (lib.mdDoc "Server for local large language models");
-      listenAddress = lib.mkOption {
+      enable = mkEnableOption "ollama server for local large language models";
+
+      package = mkPackageOption pkgs "ollama" { };
+
+      host = mkOption {
         type = types.str;
-        default = "127.0.0.1:11434";
-        description = lib.mdDoc ''
-          Specifies the bind address on which the ollama server HTTP interface listens.
+        default = "127.0.0.1";
+        example = "[::]";
+        description = ''
+          The host address which the ollama server HTTP interface listens to.
         '';
       };
-      acceleration = lib.mkOption {
+
+      port = mkOption {
+        type = types.port;
+        default = 11434;
+        example = 11111;
+        description = ''
+          Which port the ollama server listens to.
+        '';
+      };
+
+      acceleration = mkOption {
         type = types.nullOr (
           types.enum [
+            false
             "rocm"
             "cuda"
           ]
         );
         default = null;
         example = "rocm";
-        description = lib.mdDoc ''
-          Specifies the interface to use for hardware acceleration.
+        description = ''
+          What interface to use for hardware acceleration.
 
-          - `rocm`: supported by modern AMD GPUs
-          - `cuda`: supported by modern NVIDIA GPUs
+          - `null`: default behavior
+            - if `nixpkgs.config.rocmSupport` is enabled, uses `"rocm"`
+            - if `nixpkgs.config.cudaSupport` is enabled, uses `"cuda"`
+            - otherwise defaults to `false`
+          - `false`: disable GPU, only use CPU
+          - `"rocm"`: supported by most modern AMD GPUs
+            - may require overriding gpu type with `services.ollama.rocmOverrideGfx`
+              if rocm doesn't detect your AMD gpu
+          - `"cuda"`: supported by most modern NVIDIA GPUs
         '';
       };
-      package = lib.mkPackageOption pkgs "ollama" { };
+
+      environmentVariables = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
+        example = {
+          OLLAMA_LLM_LIBRARY = "cpu";
+          HIP_VISIBLE_DEVICES = "0,1";
+        };
+        description = ''
+          Set arbitrary environment variables for the ollama service.
+
+          Be aware that these are only seen by the ollama server (systemd service),
+          not normal invocations like `ollama run`.
+          Since `ollama run` is mostly a shell around the ollama server, this is usually sufficient.
+        '';
+      };
+
+      loadModels = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = ''
+          The models to download as soon as the service starts.
+          Search for models of your choice from: https://ollama.com/library
+        '';
+      };
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     systemd.user.services.ollama = {
       Unit = {
         Description = "Server for local large language models";
@@ -49,8 +114,11 @@ in
       };
 
       Service = {
-        ExecStart = "${lib.getExe ollamaPackage} serve";
-        Environment = [ "OLLAMA_HOST=${cfg.listenAddress}" ];
+        ExecStart = "${getExe ollamaPackage} serve";
+        ExecStartPost = mkIf (cfg.loadModels != [ ]) (toString postStartScript);
+        Environment = (mapAttrsToList (n: v: "${n}=${v}") cfg.environmentVariables) ++ [
+          "OLLAMA_HOST=${cfg.host}:${toString cfg.port}"
+        ];
       };
 
       Install = {
@@ -60,6 +128,4 @@ in
 
     home.packages = [ ollamaPackage ];
   };
-
-  meta.maintainers = with lib.maintainers; [ terlar ];
 }
