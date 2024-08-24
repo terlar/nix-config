@@ -22,6 +22,9 @@ in
       pkgs.ifuse
     ];
 
-    services.usbmuxd.enable = mkDefault true;
+    services.usbmuxd = {
+      enable = mkDefault true;
+      package = pkgs.usbmuxd2;
+    };
   };
 }
