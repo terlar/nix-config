@@ -98,6 +98,10 @@ in
     services.ollama = {
       enable = true;
       acceleration = "cuda";
+      loadModels = [
+        "gemma2"
+        "llama3.1"
+      ];
     };
   };
 
