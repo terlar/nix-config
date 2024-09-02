@@ -40,6 +40,7 @@ in
     enableRedistributableFirmware = true;
     graphics.enable = true;
     nvidia = {
+      open = false;
       modesetting.enable = true;
       nvidiaSettings = false;
     };
