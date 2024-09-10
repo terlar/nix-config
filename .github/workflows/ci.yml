@@ -32,28 +32,6 @@ jobs:
       - name: Check
         run: nix flake check
 
-  dev-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - uses: DeterminateSystems/nix-installer-action@da36cb69b1c3247ad7a1f931ebfd954a1105ef14 # v14
-        with:
-          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
-          extra-conf: |
-            http-connections = 50
-            max-jobs = auto
-          diagnostic-endpoint: ''
-
-      - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
-        with:
-          useDaemon: true
-          name: terlar
-          extraPullNames: cuda-maintainers
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      - name: Check
-        run: nix flake check ./dev
-
   build-home-configuration:
     strategy:
       matrix:

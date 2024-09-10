@@ -39,11 +39,25 @@
       systems = [ "x86_64-linux" ];
 
       imports = [
+        flake-parts.flakeModules.partitions
+
         ./modules/flake/home-manager.nix
         ./configurations/home/terje
         ./configurations/nixos/kong
         ./configurations/nixos/installer-yubikey
       ];
+
+      partitionedAttrs = {
+        checks = "dev";
+        devShells = "dev";
+      };
+
+      partitions.dev = {
+        extraInputsFlake = ./dev;
+        module = {
+          imports = [ ./dev/flake-module.nix ];
+        };
+      };
 
       flake = {
         lib = import ./lib.nix { inherit (nixpkgs) lib; };
