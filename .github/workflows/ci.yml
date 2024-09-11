@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - uses: DeterminateSystems/nix-installer-action@da36cb69b1c3247ad7a1f931ebfd954a1105ef14 # v14
         with:
-          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
+          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
           extra-conf: |
             http-connections = 50
             max-jobs = auto
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - uses: DeterminateSystems/nix-installer-action@da36cb69b1c3247ad7a1f931ebfd954a1105ef14 # v14
         with:
-          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
+          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
           extra-conf: |
             http-connections = 50
             max-jobs = auto
@@ -104,7 +104,7 @@ jobs:
       - uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
       - uses: DeterminateSystems/nix-installer-action@da36cb69b1c3247ad7a1f931ebfd954a1105ef14 # v14
         with:
-          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
+          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
           extra-conf: |
             http-connections = 50
             max-jobs = auto
@@ -133,7 +133,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - uses: DeterminateSystems/nix-installer-action@da36cb69b1c3247ad7a1f931ebfd954a1105ef14 # v14
         with:
-          nix-package-url: https://releases.nixos.org/nix/nix-2.18.2/nix-2.18.2-x86_64-linux.tar.xz
+          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
           extra-conf: |
             http-connections = 50
             max-jobs = auto
