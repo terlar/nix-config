@@ -32,7 +32,12 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
-      (lib.mkIf (cfg.inputMethod != null) { i18n.inputMethod.enabled = cfg.inputMethod; })
+      (lib.mkIf (cfg.inputMethod != null) {
+        i18n.inputMethod = {
+          enable = true;
+          type = cfg.inputMethod;
+        };
+      })
       (lib.mkIf (builtins.elem "chinese" cfg.languages) {
         i18n.inputMethod.ibus.engines = [ pkgs.ibus-engines.libpinyin ];
         i18n.inputMethod.fcitx5.addons = [ pkgs.fcitx5-chinese-addons ];

@@ -41,7 +41,7 @@ in
 
     version = mkOption {
       type = types.number;
-      default = majorVersionFromPackage pkgs.gnome.gnome-shell;
+      default = majorVersionFromPackage pkgs.gnome-shell;
       example = 45;
       description = "GNOME version for compatibility.";
     };
