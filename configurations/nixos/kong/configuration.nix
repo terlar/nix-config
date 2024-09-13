@@ -98,7 +98,7 @@ in
 
     services.ollama = {
       enable = true;
-      acceleration = "cuda";
+      package = pkgs.ollama-cuda;
       loadModels = [
         "gemma2"
         "llama3.1"
