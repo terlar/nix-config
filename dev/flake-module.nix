@@ -8,12 +8,14 @@
   perSystem =
     { pkgs, ... }:
     {
-      treefmt = {
-        programs.nixfmt = {
+      treefmt.programs = {
+        nixfmt = {
           enable = true;
           package = pkgs.nixfmt-rfc-style;
         };
-        programs.fish_indent.enable = true;
+
+        fish_indent.enable = true;
+        yamlfmt.enable = true;
       };
 
       devshells.default = {

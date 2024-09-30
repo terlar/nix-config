@@ -1,6 +1,4 @@
----
 name: CI
-
 on:
   push:
     branches:
@@ -8,7 +6,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -39,7 +36,6 @@ jobs:
               - 'configurations/nixos/installer-yubikey/**'
               - 'packages/drduh-gpg-conf/**'
               - 'packages/drduh-yubikey-guide/**'
-
   check:
     runs-on: ubuntu-latest
     steps:
@@ -51,17 +47,14 @@ jobs:
             http-connections = 50
             max-jobs = auto
           diagnostic-endpoint: ''
-
       - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
           useDaemon: true
           name: terlar
           extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       - name: Check
         run: nix flake check
-
   build-home-configuration:
     needs: changes
     if: ${{ needs.changes.outputs.home-configuration == 'true' }}
@@ -80,18 +73,15 @@ jobs:
             http-connections = 50
             max-jobs = auto
           diagnostic-endpoint: ''
-
       - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
           useDaemon: true
           name: terlar
           extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       - name: Build activation package
         run: |
           nix build --print-build-logs .#homeConfigurations.${{ matrix.username }}.activationPackage
-
   build-nixos-configuration:
     needs: changes
     if: ${{ needs.changes.outputs.nixos-configuration == 'true' }}
@@ -110,18 +100,15 @@ jobs:
             http-connections = 50
             max-jobs = auto
           diagnostic-endpoint: ''
-
       - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
           useDaemon: true
           name: terlar
           extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       - name: Build system
         run: |
           nix build --print-build-logs .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
-
   build-iso:
     needs: changes
     if: ${{ needs.changes.outputs.installer-yubikey == 'true' }}
@@ -139,7 +126,6 @@ jobs:
             http-connections = 50
             max-jobs = auto
           diagnostic-endpoint: ''
-
       - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
           useDaemon: true
@@ -147,7 +133,6 @@ jobs:
           extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-
       - name: Build ISO
         run: |
           GC_DONT_GC=1 nix build --print-build-logs .#nixosConfigurations.${{ matrix.name }}.config.system.build.isoImage
