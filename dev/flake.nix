@@ -2,14 +2,12 @@
   description = "Dependencies for development purposes";
 
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+
     dev-flake = {
       url = "github:terlar/dev-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        call-flake.url = "github:divnix/call-flake/a9bc85f5bd939734655327a824b4e7ceb4ccaba9";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     flake-compat = {
       url = "github:edolstra/flake-compat";

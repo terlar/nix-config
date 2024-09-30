@@ -3,10 +3,7 @@
 {
   imports = [ inputs.dev-flake.flakeModule ];
 
-  dev = {
-    name = "terlar/nix-config";
-    rootSrc = ../.;
-  };
+  dev.name = "terlar/nix-config";
 
   perSystem =
     { pkgs, ... }:
@@ -16,19 +13,7 @@
           enable = true;
           package = pkgs.nixfmt-rfc-style;
         };
-        settings.formatter.fish = {
-          command = pkgs.writeShellApplication {
-            name = "fish_indent-wrapper";
-            runtimeInputs = [
-              pkgs.fish
-              pkgs.findutils
-            ];
-            text = ''
-              fish_indent --check "$@" 2>&1 | xargs --no-run-if-empty fish_indent --write || true
-            '';
-          };
-          includes = [ "*.fish" ];
-        };
+        programs.fish_indent.enable = true;
       };
 
       devshells.default = {
