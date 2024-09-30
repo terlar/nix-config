@@ -6,8 +6,10 @@
   dev.name = "terlar/nix-config";
 
   perSystem =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
+      formatter = config.treefmt.programs.nixfmt.package;
+
       treefmt.programs = {
         nixfmt = {
           enable = true;
