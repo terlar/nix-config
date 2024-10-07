@@ -25,6 +25,8 @@ in
         shell.enable = mkDefault true;
       };
 
+      git.absorb.enable = mkDefault true;
+
       user.terje = {
         shell.enable = mkDefault true;
         editor.emacs.enable = mkDefault true;

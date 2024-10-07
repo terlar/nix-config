@@ -11,6 +11,7 @@ in
       default = true;
     };
 
+    absorb.enable = mkEnableOption "install git-absorb package";
     imerge.enable = mkEnableOption "install git-imerge package";
 
     github = {

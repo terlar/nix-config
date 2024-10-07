@@ -93,8 +93,6 @@ in
       };
     }
 
-    (mkIf cfg.imerge.enable { home.packages = [ pkgs.git-imerge ]; })
-
     (mkIf cfg.github.enable {
       programs = {
         gh.enable = true;
@@ -111,5 +109,12 @@ in
         };
       };
     })
+
+    {
+      home.packages = mkMerge [
+        (mkIf cfg.absorb.enable [ pkgs.git-absorb ])
+        (mkIf cfg.imerge.enable [ pkgs.git-imerge ])
+      ];
+    }
   ]);
 }
