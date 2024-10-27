@@ -99,10 +99,6 @@ in
     services.ollama = {
       enable = true;
       package = pkgs.ollama-cuda;
-      loadModels = [
-        "gemma2"
-        "llama3.1"
-      ];
     };
   };
 
