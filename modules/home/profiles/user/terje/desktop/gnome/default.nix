@@ -56,8 +56,9 @@ in
       programs.gnome-shell = {
         enable = true;
         extensions = [
-          { package = getExtensionPackage "true-color-window-invert@lynet101"; }
+          { package = getExtensionPackage "color-picker@tuberry"; }
           { package = getExtensionPackage "miniview@thesecretaryofwar.com"; }
+          { package = getExtensionPackage "true-color-window-invert@lynet101"; }
         ];
       };
 
