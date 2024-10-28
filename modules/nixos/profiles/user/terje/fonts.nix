@@ -19,7 +19,7 @@ in
         (pkgs.iosevka-bin.override { variant = "Etoile"; })
         (pkgs.iosevka-bin.override { variant = "CurlySlab"; })
         pkgs.noto-fonts
-        pkgs.noto-fonts-cjk
+        pkgs.noto-fonts-cjk-sans
         pkgs.noto-fonts-emoji
         pkgs.noto-fonts-extra
       ];
