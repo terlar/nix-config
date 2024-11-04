@@ -53,11 +53,11 @@ in
     # Fingerprint reader
     fprintd.enable = false;
 
+    # Printing
     printing = {
       enable = true;
       drivers = [
-        pkgs.cups-bjnp
-        pkgs.gutenprintBin
+        pkgs.gutenprint
       ];
     };
 
