@@ -58,7 +58,6 @@ in
         extensions = [
           { package = getExtensionPackage "color-picker@tuberry"; }
           { package = getExtensionPackage "miniview@thesecretaryofwar.com"; }
-          { package = getExtensionPackage "true-color-window-invert@lynet101"; }
         ];
       };
 
