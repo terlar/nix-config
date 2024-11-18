@@ -12,7 +12,6 @@ in
 
   config = lib.mkIf cfg.enable {
     systemd.user.startServices = mkDefault "sd-switch";
-    manual.html.enable = mkDefault true;
 
     xdg = {
       enable = mkDefault true;
