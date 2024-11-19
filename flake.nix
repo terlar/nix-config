@@ -63,17 +63,24 @@
         homeModules = nixpkgs.lib.mkMerge [
           (self.lib.modulesFromDir ./modules/home)
           {
-            user-terje = {
-              imports = [
-                self.homeModules.default
-                inputs.emacs-config.homeManagerModules.emacsConfig
-              ];
+            user-terje =
+              { pkgs, ... }:
+              {
+                imports = [
+                  self.homeModules.default
+                  inputs.emacs-config.homeManagerModules.emacsConfig
+                ];
 
-              nixpkgs.overlays = builtins.attrValues self.overlays;
+                nixpkgs.overlays = builtins.attrValues self.overlays;
 
-              profiles.user.terje.enable = true;
-              programs.home-manager.enable = true;
-            };
+                profiles.user.terje.enable = true;
+                programs.home-manager.enable = true;
+
+                custom.emacsConfig = {
+                  package = inputs.emacs-config.packages.${pkgs.stdenv.hostPlatform.system}.emacs-env;
+                  configPackage = inputs.emacs-config.packages.${pkgs.stdenv.hostPlatform.system}.emacs-config;
+                };
+              };
 
             user-terje-linux = {
               imports = [ self.homeModules.user-terje ];
@@ -87,7 +94,6 @@
 
         overlays = {
           default = import ./packages;
-          fromInputs = nixpkgs.lib.composeManyExtensions [ inputs.emacs-config.overlays.default ];
         };
       };
 
