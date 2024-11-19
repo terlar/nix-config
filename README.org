@@ -11,7 +11,6 @@ Configuration for NixOS and user home (dot files). It is provided via Nix flakes
 - nixosModules :: modules that can be used together with [[https://github.com/NixOS/nixpkgs][NixOS]].
 - overlays :: custom overlays.
   - default :: package overlay including a subset of packages.
-  - fromInputs :: composed overlay from all input overlays.
 - packages :: packages not in the default nixpkgs.
   - drduh-gpg-conf :: GPG config per drduh recommendation.
   - drduh-yubikey-guide :: The drduh YubiKey guide readable via the terminal.
