@@ -33,7 +33,9 @@ in
     };
 
     kernelModules = [ "fuse" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Pin Kernel to 6.11
+    # See https://github.com/NixOS/nixpkgs/issues/357643
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
   };
 
   hardware = {
