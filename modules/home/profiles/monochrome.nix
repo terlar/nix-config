@@ -15,24 +15,24 @@ in
       bat.config.theme = "GitHub";
 
       foot.settings.colors = {
-        foreground = "002b37";
-        background = "fffce9";
-        regular0 = "002b37"; # black
-        regular1 = "bb3e06"; # red
-        regular2 = "596e76"; # green
-        regular3 = "98a6a6"; # yellow
-        regular4 = "596e76"; # blue
-        regular5 = "596e76"; # magenta
-        regular6 = "596e76"; # cyan
-        regular7 = "98a6a6"; # white
-        bright0 = "596e76"; # bright black
-        bright1 = "cc1f24"; # bright red
-        bright2 = "002b37"; # bright green
-        bright3 = "f4eedb"; # bright yellow
-        bright4 = "002b37"; # bright blue
-        bright5 = "002b37"; # bright magenta
-        bright6 = "002b37"; # bright cyan
-        bright7 = "f4eedb"; # bright white
+        foreground = "000011";
+        background = "fbf7ef";
+        regular0 = "000011"; # black
+        regular1 = "d6000c"; # red
+        regular2 = "000011"; # green
+        regular3 = "474747"; # yellow
+        regular4 = "000011"; # blue
+        regular5 = "000011"; # magenta
+        regular6 = "000011"; # cyan
+        regular7 = "aaa69f"; # white
+        bright0 = "474747"; # bright black
+        bright1 = "d6000c"; # bright red
+        bright2 = "000011"; # bright green
+        bright3 = "f1e9d2"; # bright yellow
+        bright4 = "000011"; # bright blue
+        bright5 = "000011"; # bright magenta
+        bright6 = "000011"; # bright cyan
+        bright7 = "f1e9d2"; # bright white
       };
 
       git.delta.options = {
@@ -49,11 +49,11 @@ in
       glow.style = {
         block_quote.color = "0";
         list.color = "0";
-        link.color = "#007ec4";
-        link_text.color = "#007ec4";
-        image.color = "#007ec4";
+        link.color = "0";
+        link_text.color = "0";
+        image.color = "0";
         code.background_color = "11";
-        code_block.chroma.text.background_color = "#f4eedb";
+        code_block.chroma.text.background_color = "#f1e9d2";
         table.color = "0";
       };
     };
