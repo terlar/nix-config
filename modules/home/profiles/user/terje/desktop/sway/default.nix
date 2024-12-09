@@ -104,10 +104,13 @@ let
         };
 
         screenshot = {
-          "d" = "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+          "d" =
+            "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
           "Shift+d" = "exec ${pkgs.maim}/bin/maim -ul ~/screen-$(date +%s).png; mode default";
-          "w" = "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
-          "Shift+w" = "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
+          "w" =
+            "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
+          "Shift+w" =
+            "exec ${pkgs.maim}/bin/maim -uli $(${pkgs.xdotool}/bin/xdotool getactivewindow) ~/screen-$(date +%s).png; mode default";
           space = "exec ${pkgs.maim}/bin/maim -us | ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png; mode default";
           "Shift+space" = "exec ${pkgs.maim}/bin/maim -us ~/screen-$(date +%s).png; mode default";
           "z" = "exec ${pkgs.maim}/bin/maim -ul | ${pkgs.feh}/bin/feh - -Fx; mode default";
@@ -170,7 +173,8 @@ let
         "${modifier}+z" = "sticky toggle";
 
         # PIP
-        "${modifier}+Shift+z" = "mark pip,[con_mark=pip] move scratchpad,[con_mark=pip] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
+        "${modifier}+Shift+z" =
+          "mark pip,[con_mark=pip] move scratchpad,[con_mark=pip] sticky enable,resize shrink width 10000px,resize grow width 640px,resize shrink height 10000px,resize grow height 360px,move absolute position 10 px 10 px";
 
         # Change focus between tiling / floating windows
         "${modifier}+space" = "focus mode_toggle";
