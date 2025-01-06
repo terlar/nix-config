@@ -34,11 +34,11 @@
         "twist": "twist"
       },
       "locked": {
-        "lastModified": 1735900903,
-        "narHash": "sha256-7p8eB0t/wePe8fDAwHBIn9PDa2o9E2raMjBo59p+2xw=",
+        "lastModified": 1736150568,
+        "narHash": "sha256-j2t5manNSX0thadA57mpXKnwTIrZeswHgrvq3eHJi+M=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "d9454e661f77ef14213adde0b89756d6103c0e22",
+        "rev": "0fef9adfb688193a3f8116a329a452f49f4d9c5c",
         "type": "github"
       },
       "original": {
@@ -59,11 +59,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735492275,
-        "narHash": "sha256-4Vb5khmaPXR87SbtKvk32g/kSxh1N9TlWJ3ELXwnNnY=",
+        "lastModified": 1736126325,
+        "narHash": "sha256-6STJYb3pjkqSTiYW1knRWwNp9fb5QljDDyQ0L5p5dEI=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "0ee304f9c74150022a618ecc42bfe565ee5e254c",
+        "rev": "acdb132005b34dd45b5939f8112b192c8ad288ef",
         "type": "github"
       },
       "original": {
@@ -77,11 +77,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1735774679,
-        "narHash": "sha256-soePLBazJk0qQdDVhdbM98vYdssfs3WFedcq+raipRI=",
+        "lastModified": 1736143030,
+        "narHash": "sha256-+hu54pAoLDEZT9pjHlqL9DNzWz0NbUn8NEAHP7PQPzU=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f2f7418ce0ab4a5309a4596161d154cfc877af66",
+        "rev": "b905f6fc23a9051a6e1b741e1438dbfc0634c6de",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     "gnu-elpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1734803939,
-        "narHash": "sha256-W3eXL3QDcvpZywbuRIjoc2EikMnRwqqueN/JZQqbxWs=",
+        "lastModified": 1735990873,
+        "narHash": "sha256-AFvWaf9CeHC/WtntjpHGQThyqFXtO3CvU1oNHK4Df4g=",
         "ref": "main",
-        "rev": "9e3eebe4b2dc3f0ef8e21c7c6d6cb9810d3d267e",
-        "revCount": 643,
+        "rev": "5a54d3eadeea64fcdeafba8f20f7b97073cfa8b5",
+        "revCount": 645,
         "shallow": false,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/elpa.git"
@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735774425,
-        "narHash": "sha256-C73gLFnEh8ZI0uDijUgCDWCd21T6I6tsaWgIBHcfAXg=",
+        "lastModified": 1736089250,
+        "narHash": "sha256-/LPWMiiJGPHGd7ZYEgmbE2da4zvBW0acmshUjYC3WG4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5f6aa268e419d053c3d5025da740e390b12ac936",
+        "rev": "172b91bfb2b7f5c4a8c6ceac29fd53a01ef07196",
         "type": "github"
       },
       "original": {
@@ -146,11 +146,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1735514552,
-        "narHash": "sha256-h3mlYZEb77tdyopWRmhY/ZijUVaFgnAKLNy9K9/0uzw=",
+        "lastModified": 1736106166,
+        "narHash": "sha256-GJzEsQhIk8FTtxmhZGZYhVtmMRYS207OIIvI9oSyjag=",
         "owner": "melpa",
         "repo": "melpa",
-        "rev": "7c56ab6116df74ecb68f7d63c0bb7ecc87c03606",
+        "rev": "cda5d9be4ae6f7d07d0560694303952d61f8418c",
         "type": "github"
       },
       "original": {
@@ -166,11 +166,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735443188,
-        "narHash": "sha256-AydPpRBh8+NOkrLylG7vTsHrGO2b5L7XkMEL5HlzcA8=",
+        "lastModified": 1736047960,
+        "narHash": "sha256-hutd85FA1jUJhhqBRRJ+u7UHO9oFGD/RVm2x5w8WjVQ=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "55ab1e1df5daf2476e6b826b69a82862dcbd7544",
+        "rev": "816a6ae88774ba7e74314830546c29e134e0dffb",
         "type": "github"
       },
       "original": {
@@ -195,11 +195,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1735801820,
-        "narHash": "sha256-tOAdzu1ck58BA3hZItecyqrhe2fdoQgJiWm4iyUyhgc=",
+        "lastModified": 1736121777,
+        "narHash": "sha256-3DatW5d5NbArAdeRhUuRkGfKx6j6vUOxpWA4dVKno+8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3da6bd3e69891c1e20bbf083a1c8738d6c814060",
+        "rev": "1f3fe1d35baaa2e43531627834fa01c0add02b42",
         "type": "github"
       },
       "original": {
