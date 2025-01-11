@@ -33,19 +33,7 @@ in
     };
 
     kernelModules = [ "fuse" ];
-    # Pin Kernel to 6.11
-    # See https://github.com/NixOS/nixpkgs/issues/357643
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
-  };
-
-  hardware = {
-    enableRedistributableFirmware = true;
-    graphics.enable = true;
-    nvidia = {
-      open = false;
-      modesetting.enable = true;
-      nvidiaSettings = false;
-    };
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   services = {
