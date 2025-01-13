@@ -58,6 +58,7 @@ in
         extensions = [
           { package = getExtensionPackage "color-picker@tuberry"; }
           { package = getExtensionPackage "miniview@thesecretaryofwar.com"; }
+          { package = pkgs.gnomeExtensions.wtmb-window-thumbnails; }
         ];
       };
 
