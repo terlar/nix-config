@@ -21,8 +21,11 @@ in
 
     programs.fish.enable = lib.mkDefault true;
     users.defaultUserShell = pkgs.fish;
-    environment.sessionVariables = {
-      PAGER = lib.mkDefault "less";
+    environment = {
+      sessionVariables = {
+        PAGER = lib.mkDefault "less";
+      };
+      wordlist.enable = true;
     };
 
     custom = {
