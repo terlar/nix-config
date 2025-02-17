@@ -33,7 +33,6 @@ in
     home.packages = [
       pkgs.pdfgrep
       pkgs.unzip
-      pkgs.xsv
     ];
   };
 }
