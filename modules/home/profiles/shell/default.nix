@@ -30,7 +30,6 @@ in
       # Fast grep.
       ripgrep = {
         enable = mkDefault true;
-        enableRipgrepAll = mkDefault true;
         arguments = [
           "--max-columns=150"
           "--max-columns-preview"
@@ -38,6 +37,7 @@ in
           "--smart-case"
         ];
       };
+      ripgrep-all.enable = mkDefault true;
     };
 
     home.packages = [
