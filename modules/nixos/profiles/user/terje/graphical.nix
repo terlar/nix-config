@@ -1,4 +1,10 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
 let
   cfg = config.profiles.user.terje.graphical;
 in
@@ -26,5 +32,9 @@ in
       # Desktop manager
       desktopManager.gnome.enable = true;
     };
+
+    environment.gnome.excludePackages = [
+      pkgs.geary
+    ];
   };
 }
