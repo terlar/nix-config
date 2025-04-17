@@ -1,7 +1,6 @@
 { config, inputs, ... }:
 {
   flake.nixosConfigurations.kong = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.default
       config.flake.nixosModules.homeManagerIntegration
@@ -14,8 +13,11 @@
       inputs.home-manager.nixosModules.home-manager
 
       {
-        nixpkgs.overlays = builtins.attrValues config.flake.overlays;
-        nixpkgs.config.allowUnfree = true;
+        nixpkgs = {
+          hostPlatform = "x86_64-linux";
+          config.allowUnfree = true;
+          overlays = builtins.attrValues config.flake.overlays;
+        };
 
         home-manager = {
           sharedModules = [ config.flake.homeModules.user-terje ];
