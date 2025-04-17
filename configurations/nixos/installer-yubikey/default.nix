@@ -2,20 +2,22 @@
 {
   flake = {
     nixosConfigurations.installer-yubikey = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
       modules = [
         "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
         ./configuration.nix
 
         {
-          nixpkgs.overlays = [
-            (_final: prev: {
-              inherit (config.flake.packages.${prev.stdenv.hostPlatform.system})
-                drduh-gpg-conf
-                drduh-yubikey-guide
-                ;
-            })
-          ];
+          nixpkgs = {
+            hostPlatform = "x86_64-linux";
+            overlays = [
+              (_final: prev: {
+                inherit (config.flake.packages.${prev.stdenv.hostPlatform.system})
+                  drduh-gpg-conf
+                  drduh-yubikey-guide
+                  ;
+              })
+            ];
+          };
         }
       ];
     };
