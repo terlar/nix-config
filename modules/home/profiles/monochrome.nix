@@ -19,20 +19,20 @@ in
         background = "fbf7ef";
         regular0 = "000011"; # black
         regular1 = "d6000c"; # red
-        regular2 = "000011"; # green
-        regular3 = "474747"; # yellow
-        regular4 = "000011"; # blue
-        regular5 = "000011"; # magenta
-        regular6 = "000011"; # cyan
+        regular2 = "474747"; # green
+        regular3 = "aaa69f"; # yellow
+        regular4 = "474747"; # blue
+        regular5 = "474747"; # magenta
+        regular6 = "474747"; # cyan
         regular7 = "aaa69f"; # white
         bright0 = "474747"; # bright black
         bright1 = "d6000c"; # bright red
-        bright2 = "000011"; # bright green
-        bright3 = "f1e9d2"; # bright yellow
+        bright2 = "474747"; # bright green
+        bright3 = "474747"; # bright yellow
         bright4 = "000011"; # bright blue
         bright5 = "000011"; # bright magenta
         bright6 = "000011"; # bright cyan
-        bright7 = "f1e9d2"; # bright white
+        bright7 = "474747"; # bright white
       };
 
       git.delta.options = {
