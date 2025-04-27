@@ -77,8 +77,8 @@
                 programs.home-manager.enable = true;
 
                 custom.emacsConfig = {
-                  package = inputs.emacs-config.packages.${pkgs.stdenv.hostPlatform.system}.emacs-env;
-                  configPackage = inputs.emacs-config.packages.${pkgs.stdenv.hostPlatform.system}.emacs-config;
+                  package = inputs.emacs-config.packages.${pkgs.system}.emacs-env-pgtk;
+                  configPackage = inputs.emacs-config.packages.${pkgs.system}.emacs-config-pgtk;
                 };
               };
 
