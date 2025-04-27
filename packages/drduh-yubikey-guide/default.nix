@@ -15,8 +15,8 @@ let
     src = fetchFromGitHub {
       owner = "drduh";
       repo = "yubikey-guide";
-      rev = "dc29279197bbf866b63976395d2c69b1a95ad088";
-      hash = "sha256-MMcfiJ31SsrJdPCYn+5MuUxqLJzhY4VeqOS02T9AlL8=";
+      rev = "3912fc0f204cd0c4113bae38e19f68db8cbfa63c";
+      hash = "sha256-yOuXY6hEB7V1soqpyYawOL0HqnSHGKGMgNq9BGVqqus=";
     };
 
     dontBuild = true;

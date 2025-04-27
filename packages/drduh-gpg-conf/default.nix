@@ -10,8 +10,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "drduh";
     repo = "config";
-    rev = "2703f5992be264e993a46802169a76e7211d9ad0";
-    hash = "sha256-ui3VylKFd68sV/PligG+7S86Xi+TGYOoeekBDFvBwJY=";
+    rev = "6e294925af6c289e13cc5237ffe895331b4389ec";
+    hash = "sha256-gh/tvPiAA1iuvYUBTh6zji2cUKvvMeM5jL2oqV0Xzb8=";
   };
 
   dontBuild = true;
