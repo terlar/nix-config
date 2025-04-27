@@ -13,13 +13,13 @@ lib.mkMerge [
     };
     environment.systemPackages = [
       pkgs.gnupg
-      pkgs.pinentry-curses
       pkgs.paperkey
       pkgs.wget
 
       # pkgs.haskellPackages.hopenpgp-tools
       pkgs.yubikey-manager
 
+      pkgs.zellij
       pkgs.drduh-yubikey-guide
     ];
 
@@ -80,6 +80,7 @@ lib.mkMerge [
       autologinUser = "nixos";
       hwRender = true;
       extraConfig = ''
+        session-control
         palette=solarized
         font-name=Roboto Mono
         font-size=24
