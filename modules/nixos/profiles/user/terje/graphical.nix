@@ -33,8 +33,16 @@ in
       desktopManager.gnome.enable = true;
     };
 
-    environment.gnome.excludePackages = [
-      pkgs.geary
-    ];
+    # Scrollable-tiling Wayland compositor
+    programs.niri.enable = lib.mkDefault true;
+
+    environment = {
+      gnome.excludePackages = [
+        pkgs.geary
+      ];
+
+      # Wayland support for Electron and Chromium
+      sessionVariables.NIXOS_OZONE_WL = "1";
+    };
   };
 }

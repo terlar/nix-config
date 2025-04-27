@@ -26,6 +26,7 @@ in
 
     wayland.windowManager.niri = {
       enable = true;
+      xwayland.enable = lib.mkDefault false;
 
       settings = {
         input = {
