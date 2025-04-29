@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 
@@ -13,10 +14,229 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = [
+      pkgs.gnome-calendar
+      pkgs.gnome-power-manager
+      pkgs.overskride
+      pkgs.swww
+      pkgs.system-config-printer
+    ];
+
     programs = {
       fuzzel.enable = true;
       swaylock.enable = true;
-      waybar.enable = true;
+      waybar = {
+        enable = true;
+        settings.mainBar = {
+          margin-top = 4;
+          margin-left = 4;
+          margin-right = 4;
+          spacing = 0;
+
+          modules-left = [
+            "tray"
+            "wlr/taskbar"
+          ];
+          modules-center = [ "clock" ];
+          modules-right = [
+            "cpu"
+            "memory"
+            "battery"
+            "idle_inhibitor"
+          ];
+
+          idle_inhibitor = {
+            format = "{icon}";
+            format-icons = {
+              activated = "";
+              deactivated = "";
+            };
+          };
+
+          battery = {
+            states = {
+              warning = 25;
+              critical = 10;
+            };
+            format = "{icon} {capacity}%";
+            format-charging = " {icon} {capacity}%";
+            format-full = " {icon} {capacity}%";
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
+            format-time = "{H}h{M}m";
+            interval = 30;
+            on-click = "gnome-power-statistics";
+          };
+
+          cpu = {
+            interval = 5;
+            format = "▣ {usage}% ({load})";
+            states = {
+              warning = 70;
+              critical = 90;
+            };
+          };
+
+          memory = {
+            interval = 30;
+            format = " {used:0.1f}G/{total:0.1f}G";
+          };
+
+          clock = {
+            interval = 1;
+            format = "{:%e %B %H:%M}";
+            tooltip-format = ''
+              <big>{:%Y %B}</big>
+              <tt><big>{calendar}</big></tt>
+            '';
+            on-click = "gnome-calendar";
+          };
+
+          tray = {
+            icon-size = 20;
+          };
+
+          "wlr/taskbar" = {
+            format = "{icon}";
+            tooltip-format = "{title} | {app_id}";
+            on-click = "activate";
+            on-click-middle = "close";
+            on-click-right = "fullscreen";
+          };
+        };
+
+        style = ''
+          * {
+            font-size: 12px;
+          }
+
+          window#waybar {
+            background: transparent;
+            color: #ffffff;
+          }
+
+          #window,
+          #workspaces {
+            margin: 0 4px;
+          }
+
+          #workspaces button {
+            padding: 0 0.4em;
+            border-radius: 0;
+            background-color: transparent;
+            color: #ffffff;
+            box-shadow: inset 0 -3px transparent;
+          }
+
+          #workspaces button:hover {
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 2.5px solid;
+            box-shadow: inset 0 -3px #ffffff;
+          }
+
+          #workspaces button.focused {
+            background-color: #64727d;
+            box-shadow: inset 0 -3px #ffffff;
+          }
+
+          #workspaces button.urgent {
+            background-color: #eb4d4b;
+          }
+
+          window#waybar.hidden {
+            opacity: 0.2;
+          }
+
+          button {
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            transition-property: none;
+          }
+
+          button:hover {
+            background: none;
+            box-shadow: none;
+            text-shadow: none;
+            border: none;
+            -gtk-icon-effect: none;
+            -gtk-icon-shadow: none;
+          }
+
+          #clock,
+          #battery,
+          #cpu,
+          #memory,
+          #disk,
+          #temperature,
+          #backlight,
+          #network,
+          #pulseaudio,
+          #wireplumber,
+          #custom-media,
+          #tray,
+          #mode,
+          #idle_inhibitor,
+          #scratchpad,
+          #mpd {
+            padding: 0 10px;
+            color: #f0f0ff;
+            background-color: rgba(30, 30, 46, 0.6);
+            border-radius: 99px;
+          }
+
+          label:focus {
+            background-color: #000000;
+          }
+
+          #taskbar {
+            margin-left: 4px;
+          }
+
+          #taskbar button {
+            color: #f0f0ff;
+            background-color: rgba(30, 30, 46, 0.6);
+          }
+
+          #taskbar button:first-child {
+            border-radius: 99px 0 0 99px;
+          }
+
+          #taskbar button:last-child {
+            border-radius: 0 99px 99px 0;
+          }
+
+          #taskbar button:first-child:last-child {
+            border-radius: 99px;
+          }
+
+          #taskbar button:hover {
+            background-color: rgba(49, 50, 68, 0.6);
+          }
+
+          #taskbar button.active {
+            background-color: rgba(88, 91, 112, 0.6);
+          }
+
+          #taskbar button.active:hover {
+            background-color: rgba(108, 112, 134, 0.6);
+          }
+
+          #tray > .passive {
+            -gtk-icon-effect: dim;
+          }
+
+          #tray > .needs-attention {
+            -gtk-icon-effect: highlight;
+            background-color: #eb4d4b;
+          }
+        '';
+      };
     };
 
     services = {
@@ -210,6 +430,7 @@ in
       };
 
       extraConfig = ''
+        spawn-at-startup "swww-daemon"
         spawn-at-startup "waybar"
       '';
     };
