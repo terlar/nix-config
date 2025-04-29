@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 
@@ -14,14 +13,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      pkgs.wireplumber
-    ];
-
     programs = {
       fuzzel.enable = true;
       swaylock.enable = true;
       waybar.enable = true;
+    };
+
+    services = {
+      network-manager-applet.enable = true;
+      swayosd.enable = true;
     };
 
     wayland.windowManager.niri = {
@@ -132,40 +132,78 @@ in
           "Mod+Shift+V".switch-focus-between-floating-and-tiling = [ ];
           "Mod+W".toggle-column-tabbed-display = [ ];
 
+          XF86MonBrightnessUp = {
+            _props.allow-when-locked = true;
+            spawn = [
+              "swayosd-client"
+              "--brightness"
+              "raise"
+            ];
+          };
+          XF86MonBrightnessDown = {
+            _props.allow-when-locked = true;
+            spawn = [
+              "swayosd-client"
+              "--brightness"
+              "lower"
+            ];
+          };
+
           XF86AudioRaiseVolume = {
             _props.allow-when-locked = true;
             spawn = [
-              "wpctl"
-              "set-volume"
-              "@DEFAULT_AUDIO_SINK@"
-              "0.1+"
+              "swayosd-client"
+              "--output-volume"
+              "raise"
             ];
           };
           XF86AudioLowerVolume = {
             _props.allow-when-locked = true;
             spawn = [
-              "wpctl"
-              "set-volume"
-              "@DEFAULT_AUDIO_SINK@"
-              "0.1-"
+              "swayosd-client"
+              "--output-volume"
+              "lower"
             ];
           };
           XF86AudioMute = {
             _props.allow-when-locked = true;
             spawn = [
-              "wpctl"
-              "set-mute"
-              "@DEFAULT_AUDIO_SINK@"
-              "toggle"
+              "swayosd-client"
+              "--output-volume"
+              "mute-toggle"
             ];
           };
           XF86AudioMicMute = {
             _props.allow-when-locked = true;
             spawn = [
-              "wpctl"
-              "set-mute"
-              "@DEFAULT_AUDIO_SOURCE@"
-              "toggle"
+              "swayosd-client"
+              "--input-volume"
+              "mute-toggle"
+            ];
+          };
+
+          XF86AudioPlay = {
+            _props.allow-when-locked = true;
+            spawn = [
+              "swayosd-client"
+              "--playerctl"
+              "play-pause"
+            ];
+          };
+          XF86AudioNext = {
+            _props.allow-when-locked = true;
+            spawn = [
+              "swayosd-client"
+              "--playerctl"
+              "next"
+            ];
+          };
+          XF86AudioPrev = {
+            _props.allow-when-locked = true;
+            spawn = [
+              "swayosd-client"
+              "--playerctl"
+              "prev"
             ];
           };
         };
