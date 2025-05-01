@@ -97,6 +97,7 @@ in
           (listOf str)
         ]);
       default = [ ];
+      apply = lib.unique;
       example = lib.literalExpression ''
         [
           "waybar"
