@@ -1,0 +1,124 @@
+* {
+    font-size: 12px;
+}
+
+window#waybar {
+    background: transparent;
+    color: #ffffff;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 0.4em;
+    border-radius: 0;
+    background-color: transparent;
+    color: #ffffff;
+    box-shadow: inset 0 -3px transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 2.5px solid;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: #64727d;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    transition-property: none;
+}
+
+button:hover {
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+    -gtk-icon-effect: none;
+    -gtk-icon-shadow: none;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    padding: 0 10px;
+    color: #f0f0ff;
+    background-color: rgba(30, 30, 46, 0.6);
+    border-radius: 99px;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#taskbar {
+    margin-left: 4px;
+}
+
+#taskbar button {
+    color: #f0f0ff;
+    background-color: rgba(30, 30, 46, 0.6);
+}
+
+#taskbar button:first-child {
+    border-radius: 99px 0 0 99px;
+}
+
+#taskbar button:last-child {
+    border-radius: 0 99px 99px 0;
+}
+
+#taskbar button:first-child:last-child {
+    border-radius: 99px;
+}
+
+#taskbar button:hover {
+    background-color: rgba(49, 50, 68, 0.6);
+}
+
+#taskbar button.active {
+    background-color: rgba(88, 91, 112, 0.6);
+}
+
+#taskbar button.active:hover {
+    background-color: rgba(108, 112, 134, 0.6);
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
