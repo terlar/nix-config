@@ -42,7 +42,7 @@ in
             repeat-rate = 33;
           };
           touchpad = {
-            tap = [ ];
+            dwt = [ ];
             natural-scroll = [ ];
           };
         };
