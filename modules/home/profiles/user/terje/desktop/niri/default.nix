@@ -432,22 +432,26 @@ in
         };
       };
 
-      extraConfig = ''
-        spawn-at-startup "swww-daemon"
-        spawn-at-startup "waybar"
+      spawnAtStartup = [
+        "swww-daemon"
+        "waybar"
+      ];
 
-        window-rule {
-          match app-id="krita" title="^Krita"
-          open-fullscreen true
+      windowRules = [
+        {
+          match._props = {
+            app-id = "krita";
+            title = "^Krita";
+          };
+          open-fullscreen = true;
         }
-
-        window-rule {
-          match app-id="krita"
-          exclude title="^Krita"
-          open-floating true
-          open-focused true
+        {
+          match._props.app-id = "krita";
+          exclude._props.title = "^Krita";
+          open-floating = true;
+          open-focused = true;
         }
-      '';
+      ];
     };
   };
 }

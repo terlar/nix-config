@@ -5,11 +5,11 @@
   ...
 }:
 let
-
+  toKDL = lib.hm.generators.toKDL { };
   cfg = config.wayland.windowManager.niri;
   configFile = pkgs.writeText "niri-config.kdl" (
     lib.concatStringsSep "\n" (
-      (lib.optional (cfg.settings != { }) (lib.hm.generators.toKDL { } cfg.settings))
+      (lib.optional (cfg.settings != { }) (toKDL cfg.settings))
       ++ (lib.optional (cfg.extraConfig != "") cfg.extraConfig)
     )
   );
@@ -89,6 +89,42 @@ in
       '';
     };
 
+    spawnAtStartup = lib.mkOption {
+      type =
+        with lib.types;
+        listOf (oneOf [
+          str
+          (listOf str)
+        ]);
+      default = [ ];
+      example = lib.literalExpression ''
+        [
+          "waybar"
+          [ "fcitx5" "-d" ]
+        ]
+      '';
+      description = "Processes to spawn at niri startup.";
+    };
+
+    windowRules = lib.mkOption {
+      type = with lib.types; listOf (attrsOf anything);
+      default = [ ];
+      example = lib.literalExpression ''
+        [
+          {
+            match._props = {
+              app-id = "firefox$"
+              title = "^Picture-in-Picture$"
+            };
+            open-floating = true
+          }
+        ]
+      '';
+      description = ''
+        Window rules to adjust behavior for individual windows.
+      '';
+    };
+
     extraConfig = lib.mkOption {
       type = lib.types.lines;
       default = "";
@@ -127,11 +163,25 @@ in
       [ cfg.package ] ++ lib.optional cfg.xwayland.enable pkgs.xwayland-satellite
     );
 
-    wayland.windowManager.niri = lib.mkIf cfg.xwayland.enable {
-      extraConfig = ''
-        spawn-at-startup "xwayland-satellite"
-      '';
-    };
+    wayland.windowManager.niri = lib.mkMerge [
+      (lib.mkIf cfg.xwayland.enable {
+        spawnAtStartup = [ "xwayland-satellite" ];
+      })
+
+      (lib.mkIf (cfg.spawnAtStartup != [ ]) {
+        extraConfig = lib.pipe cfg.spawnAtStartup [
+          (map (spawn-at-startup: toKDL { inherit spawn-at-startup; }))
+          (builtins.concatStringsSep "\n")
+        ];
+      })
+
+      (lib.mkIf (cfg.windowRules != [ ]) {
+        extraConfig = lib.pipe cfg.windowRules [
+          (map (window-rule: toKDL { inherit window-rule; }))
+          (builtins.concatStringsSep "\n")
+        ];
+      })
+    ];
 
     xdg.configFile."niri/config.kdl" = lib.mkIf (cfg.settings != { } || cfg.extraConfig != "") {
       source = checkNiriConfig;
