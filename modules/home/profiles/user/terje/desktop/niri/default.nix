@@ -246,7 +246,6 @@ in
 
     wayland.windowManager.niri = {
       enable = true;
-      xwayland.enable = lib.mkDefault false;
 
       settings = {
         input = {
@@ -264,6 +263,10 @@ in
         layout = {
           gaps = 5;
           focus-ring.width = 2;
+        };
+
+        environment = {
+          DISPLAY = ":0";
         };
 
         binds = {
@@ -432,6 +435,18 @@ in
       extraConfig = ''
         spawn-at-startup "swww-daemon"
         spawn-at-startup "waybar"
+
+        window-rule {
+          match app-id="krita" title="^Krita"
+          open-fullscreen true
+        }
+
+        window-rule {
+          match app-id="krita"
+          exclude title="^Krita"
+          open-floating true
+          open-focused true
+        }
       '';
     };
   };
