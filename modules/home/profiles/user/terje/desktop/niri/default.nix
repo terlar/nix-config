@@ -219,10 +219,7 @@ in
         };
       };
 
-      spawnAtStartup = [
-        "swww-daemon"
-        "waybar"
-      ];
+      spawnAtStartup = [ "swww-daemon" ];
 
       windowRules = [
         {
