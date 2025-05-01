@@ -35,6 +35,10 @@ in
         bright7 = "474747"; # bright white
       };
 
+      nushell.extraEnv = ''
+        $env.LS_COLORS = ""
+      '';
+
       git.delta.options = {
         syntax-theme = "none";
         zero-style = "grey";
