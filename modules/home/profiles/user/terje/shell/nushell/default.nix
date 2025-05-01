@@ -16,14 +16,8 @@ in
       nushell = {
         enable = true;
 
-        shellAliases = {
+        shellAbbrs = {
           dc = "detect columns";
-          f = "find-src";
-          ga = "git add";
-          gap = "git add -Ap";
-          gco = "git checkout";
-          gd = "git diff";
-          gs = "git status -sb";
         };
 
         envFile.text = ''

@@ -29,4 +29,5 @@ policies:
           - nixos
           - package
           - niri
+          - shell
         descriptionLength: 72
