@@ -268,7 +268,7 @@ in
 
         binds = {
           "Mod+Return".spawn = "foot";
-          "Mod+Space".spawn = "fuzzel";
+          "Mod+Shift+Return".spawn = "fuzzel";
           "Super+Alt+L".spawn = "swaylock";
           "Ctrl+Alt+Delete".quit = [ ];
           "Mod+Shift+P".power-off-monitors = [ ];
