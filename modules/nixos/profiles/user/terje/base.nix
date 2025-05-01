@@ -20,7 +20,7 @@ in
     # security.doas.enable = true;
 
     programs.fish.enable = lib.mkDefault true;
-    users.defaultUserShell = pkgs.fish;
+    users.defaultUserShell = lib.mkOverride 999 pkgs.fish;
     environment = {
       sessionVariables = {
         PAGER = lib.mkDefault "less";
