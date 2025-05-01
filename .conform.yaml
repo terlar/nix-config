@@ -28,4 +28,5 @@ policies:
           - home
           - nixos
           - package
+          - niri
         descriptionLength: 72

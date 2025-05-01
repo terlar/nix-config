@@ -249,6 +249,8 @@ in
 
       settings = {
         input = {
+          workspace-auto-back-and-forth = [ ];
+
           keyboard = {
             xkb.options = "ctrl:nocaps";
             repeat-delay = 500;
