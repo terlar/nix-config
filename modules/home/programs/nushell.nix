@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
 let
-  inherit (lib.hm.nushell) toNushell;
   cfg = config.programs.nushell;
 in
 {
@@ -34,57 +33,77 @@ in
   };
 
   config = lib.mkIf (cfg.shellAbbrs != { }) {
-    programs.nushell.extraConfig = ''
-      let abbreviations = ${toNushell { } cfg.shellAbbrs}
-
-      $env.config.keybindings = [
+    programs.nushell = {
+      environmentVariables.ABBREVIATIONS = cfg.shellAbbrs;
+      settings = {
+        keybindings = [
           {
-              name: abbr_menu
-              modifier: none
-              keycode: enter
-              mode: [emacs vi_normal vi_insert]
-              event: [
-                  { send: menu name: abbr_menu }
-                  { send: enter }
-              ]
+            name = "abbr_menu";
+            modifier = "none";
+            keycode = "enter";
+            mode = [
+              "emacs"
+              "vi_normal"
+              "vi_insert"
+            ];
+            event = [
+              {
+                send = "menu";
+                name = "abbr_menu";
+              }
+              { send = "enter"; }
+            ];
           }
           {
-              name: abbr_menu
-              modifier: none
-              keycode: space
-              mode: [emacs vi_normal vi_insert]
-              event: [
-                  { send: menu name: abbr_menu }
-                  { edit: insertchar value: ' '}
-              ]
+            name = "abbr_menu";
+            modifier = "none";
+            keycode = "space";
+            mode = [
+              "emacs"
+              "vi_normal"
+              "vi_insert"
+            ];
+            event = [
+              {
+                send = "menu";
+                name = "abbr_menu";
+              }
+              {
+                edit = "insertchar";
+                value = " ";
+              }
+            ];
           }
-      ]
-      $env.config.menus = [
+        ];
+        menus = [
           {
-              name: abbr_menu
-              only_buffer_difference: false
-              marker: none
-              type: {
-                  layout: columnar
-                  columns: 1
-                  col_width: 20
-                  col_padding: 2
-              }
-              style: {
-                  text: green
-                  selected_text: green_reverse
-                  description_text: yellow
-              }
-              source: { |buffer, position|
-                  let match = $abbreviations | columns | where $it == $buffer
+            name = "abbr_menu";
+            only_buffer_difference = false;
+            marker = "none";
+            type = {
+              layout = "columnar";
+              columns = 1;
+              col_width = 20;
+              col_padding = 2;
+            };
+            style = {
+              text = "green";
+              selected_text = "green_reverse";
+              description_text = "yellow";
+            };
+            source = lib.hm.nushell.mkNushellInline ''
+              { |buffer, position|
+                  let match = $env.ABBREVIATIONS | columns | where $it == $buffer
                   if ($match | is-empty) {
                       { value: $buffer }
                   } else {
-                      { value: ($abbreviations | get $match.0) }
+                      { value: ($env.ABBREVIATIONS | get $match.0) }
                   }
               }
+            '';
           }
-      ]
-    '';
+        ];
+      };
+    };
   };
 }

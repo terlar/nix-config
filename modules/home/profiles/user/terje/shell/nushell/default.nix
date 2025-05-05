@@ -20,48 +20,63 @@ in
           dc = "detect columns";
         };
 
-        environmentVariables = config.home.sessionVariables;
+        environmentVariables = lib.mkMerge [
+          config.home.sessionVariables
+          {
+            PROMPT_INDICATOR = "〉";
+            PROMPT_COMMAND = lib.hm.nushell.mkNushellInline ''
+              {
+                mut parts = [
+                  (pwd | str replace $env.HOME "~"),
+                  "\n"
+                ]
+
+                if $env.LAST_EXIT_CODE != 0 {
+                  $parts = $parts | append (ansi red)
+                }
+                $parts | str join
+              }
+            '';
+            PROMPT_COMMAND_RIGHT = lib.hm.nushell.mkNushellInline ''
+              {
+                mut parts = []
+
+                let duration = $env.CMD_DURATION_MS | into int
+                if $duration > 1000 {
+                  $parts = $parts | append ($duration | into duration --unit ms)
+                }
+
+                if $env.LAST_EXIT_CODE != 0 {
+                  $parts = $parts | append $"(ansi red)[($env.LAST_EXIT_CODE)](ansi reset)"
+                }
+
+                $parts | str join " "
+              }
+            '';
+            TRANSIENT_PROMPT_COMMAND = "\n";
+          }
+        ];
+
+        settings = {
+          show_banner = false;
+          completions.algorithm = "fuzzy";
+          render_right_prompt_on_last_line = true;
+          highlight_resolved_externals = true;
+
+          keybindings = [
+            {
+              name = "undo";
+              modifier = "control";
+              keycode = "char_7";
+              mode = [ "emacs" ];
+              event = [ { edit = "undo"; } ];
+            }
+          ];
+        };
 
         extraConfig = ''
-          $env.config.show_banner = false
-          $env.config.completions.algorithm = "fuzzy"
-          $env.config.render_right_prompt_on_last_line = true
-          $env.config.highlight_resolved_externals = true
-
           def __complete_find-src_projects [] { ghq list | lines }
           def --env find-src [project: string@__complete_find-src_projects] { cd $'(ghq root)/($project)' }
-        '';
-
-        extraEnv = ''
-          $env.PROMPT_INDICATOR = "〉"
-          $env.PROMPT_COMMAND = {
-            mut parts = [
-              (pwd | str replace $env.HOME "~"),
-              "\n"
-            ]
-
-            if $env.LAST_EXIT_CODE != 0 {
-              $parts = $parts | append (ansi red)
-            }
-            $parts | str join
-          }
-
-          $env.PROMPT_COMMAND_RIGHT = {
-            mut parts = []
-
-            let duration = $env.CMD_DURATION_MS | into int
-            if $duration > 1000 {
-              $parts = $parts | append ($duration | into duration --unit ms)
-            }
-
-            if $env.LAST_EXIT_CODE != 0 {
-              $parts = $parts | append $"(ansi red)[($env.LAST_EXIT_CODE)](ansi reset)"
-            }
-
-            $parts | str join " "
-          }
-
-          $env.TRANSIENT_PROMPT_COMMAND = "\n"
         '';
       };
     };
