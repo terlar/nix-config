@@ -16,7 +16,6 @@
         nixpkgs = {
           hostPlatform = "x86_64-linux";
           config.allowUnfree = true;
-          overlays = builtins.attrValues config.flake.overlays;
         };
 
         home-manager = {

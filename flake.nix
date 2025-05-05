@@ -71,8 +71,6 @@
                   inputs.emacs-config.homeManagerModules.emacsConfig
                 ];
 
-                nixpkgs.overlays = builtins.attrValues self.overlays;
-
                 profiles.user.terje.enable = true;
                 programs.home-manager.enable = true;
 
