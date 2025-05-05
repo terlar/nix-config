@@ -35,9 +35,66 @@ in
         bright7 = "474747"; # bright white
       };
 
-      nushell.extraEnv = ''
-        $env.LS_COLORS = ""
-      '';
+      nushell = {
+        environmentVariables.LS_COLORS = "";
+        settings.color_config = {
+          binary = "default";
+          block = "default";
+          bool = "default";
+          cell-path = "default";
+          closure = "default";
+          datetime = "default";
+          duration = "default";
+          empty = "default";
+          filesize = "default";
+          float = "default";
+          glob = "default";
+          header = "default";
+          hints = "dark_gray";
+          int = "default";
+          list = "default";
+          nothing = "default";
+          range = "default";
+          record = "default";
+          row_index = "default";
+          # search_result = "default";
+          shape_binary = "default";
+          shape_block = "default";
+          shape_bool = "default";
+          shape_closure = "default";
+          shape_custom = "default";
+          shape_datetime = "default";
+          shape_directory = "default";
+          shape_external = "red";
+          shape_external_resolved = "default_bold";
+          shape_externalarg = "default";
+          shape_filepath = "default";
+          shape_flag = "default";
+          shape_float = "default";
+          shape_glob_interpolation = "default";
+          shape_globpattern = "default";
+          shape_int = "default";
+          shape_internalcall = "default_bold";
+          shape_keyword = "default";
+          shape_list = "default";
+          shape_literal = "default";
+          shape_match_pattern = "default";
+          shape_nothing = "default";
+          shape_operator = "default";
+          shape_pipe = "default";
+          shape_range = "default";
+          shape_raw_string = "default";
+          shape_record = "default";
+          shape_redirection = "default";
+          shape_signature = "default";
+          shape_string = "default";
+          shape_string_interpolation = "default";
+          shape_table = "default";
+          shape_vardecl = "default";
+          shape_variable = "default";
+          string = "default";
+        };
+      };
 
       git.delta.options = {
         syntax-theme = "none";
