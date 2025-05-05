@@ -24,6 +24,12 @@ in
   config = mkIf cfg.enable {
     profiles.shell.fish.enablePackageCompletionPlugins = mkDefault true;
 
+    programs.fish.shellAbbrs = {
+      day = "date '+%d (%A)'";
+      week = "date '+%V'";
+      month = "date '+%m (%B)'";
+    };
+
     xdg = mkIf cfg.enableBaseConfig (mkMerge [
       (sourceDirFiles "configFile" "fish/completions" ./completions)
       (sourceDirFiles "configFile" "fish/conf.d" ./conf.d)

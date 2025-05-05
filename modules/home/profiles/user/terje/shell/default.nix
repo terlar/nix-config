@@ -76,10 +76,6 @@ in
           kg = "kubectl get";
           kl = "kubectl logs";
 
-          day = "date '+%d (%A)'";
-          week = "date '+%V'";
-          month = "date '+%m (%B)'";
-
           jq = "jaq";
         }
 
