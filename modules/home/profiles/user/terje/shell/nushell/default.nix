@@ -20,7 +20,17 @@ in
           dc = "detect columns";
         };
 
-        envFile.text = ''
+        extraConfig = ''
+          $env.config.show_banner = false
+          $env.config.completions.algorithm = "fuzzy"
+          $env.config.render_right_prompt_on_last_line = true
+          $env.config.highlight_resolved_externals = true
+
+          def __complete_find-src_projects [] { ghq list | lines }
+          def --env find-src [project: string@__complete_find-src_projects] { cd $'(ghq root)/($project)' }
+        '';
+
+        extraEnv = ''
           $env.PROMPT_INDICATOR = "〉"
           $env.PROMPT_COMMAND = {
             mut parts = [
@@ -50,18 +60,6 @@ in
           }
 
           $env.TRANSIENT_PROMPT_COMMAND = "\n"
-        '';
-
-        configFile.text = ''
-          $env.config.show_banner = false
-          $env.config.completions.algorithm = "fuzzy"
-          $env.config.render_right_prompt_on_last_line = true
-          $env.config.highlight_resolved_externals = true
-        '';
-
-        extraConfig = ''
-          def __complete_find-src_projects [] { ghq list | lines }
-          def --env find-src [project: string@__complete_find-src_projects] { cd $'(ghq root)/($project)' }
         '';
       };
     };
