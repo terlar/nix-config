@@ -28,6 +28,7 @@ policies:
           - home
           - nixos
           - package
-          - niri
           - shell
+          - niri
+          - nushell
         descriptionLength: 72

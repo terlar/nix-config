@@ -20,6 +20,8 @@ in
           dc = "detect columns";
         };
 
+        environmentVariables = config.home.sessionVariables;
+
         extraConfig = ''
           $env.config.show_banner = false
           $env.config.completions.algorithm = "fuzzy"
