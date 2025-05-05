@@ -18,9 +18,9 @@ in
 
         shellAbbrs = {
           dc = "detect columns";
-          day = "run-external date '+%d (%A)'";
-          week = "run-external date '+%V'";
-          month = "run-external date '+%m (%B)'";
+          day = "date now | format date '%d (%A)'";
+          week = "date now | format date %V";
+          month = "date now | format date '%m (%B)'";
         };
 
         environmentVariables = lib.mkMerge [
