@@ -51,6 +51,8 @@ in
         layout = {
           gaps = 5;
           focus-ring.width = 2;
+          center-focused-column = "on-overflow";
+          always-center-single-column = [ ];
         };
 
         environment = {
