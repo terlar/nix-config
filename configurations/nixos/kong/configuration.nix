@@ -45,6 +45,7 @@ in
     echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
     echo 1 > /sys/module/snd_hda_intel/parameters/power_save
     echo med_power_with_dipm > /sys/class/scsi_host/host0/link_power_management_policy
+    echo auto > /sys/bus/usb/devices/1-2/power/control
     echo auto > /sys/bus/usb/devices/1-9/power/control
     echo auto > /sys/bus/pci/devices/0000:00:1f.2/power/control
     echo auto > /sys/bus/pci/devices/0000:00:17.0/ata1/power/control
