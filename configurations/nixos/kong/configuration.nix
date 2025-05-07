@@ -34,7 +34,31 @@ in
 
     kernelModules = [ "fuse" ];
     kernelPackages = pkgs.linuxPackages_latest;
+
+    kernelParams = [
+      "nowatchdog"
+      "nmi_watchdog=0"
+    ];
   };
+
+  powerManagement.powerUpCommands = ''
+    echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+    echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+    echo med_power_with_dipm > /sys/class/scsi_host/host0/link_power_management_policy
+    echo auto > /sys/bus/usb/devices/1-9/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:1f.2/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:17.0/ata1/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:17.0/ata2/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:17.0/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:1f.0/power/control
+    echo auto > /sys/bus/pci/devices/0000:02:00.0/power/control
+    echo auto > /sys/bus/pci/devices/0000:01:00.0/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:1d.6/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:00.0/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:1c.1/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:14.2/power/control
+    echo auto > /sys/bus/pci/devices/0000:00:14.0/power/control
+  '';
 
   services = {
     # Update support for firmware.
