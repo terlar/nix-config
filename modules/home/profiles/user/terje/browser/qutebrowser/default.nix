@@ -92,12 +92,12 @@ in
           normal = {
             "<Alt-9>" = "tab-focus 9";
             "<Alt-0>" = "tab-focus -1";
-            "<Space>" = "set-cmd-text -s :tab-select";
-            "O" = "set-cmd-text -s :open {url:pretty}";
-            "T" = "set-cmd-text :open -t -r {url:pretty}";
+            "<Space>" = "cmd-set-text -s :tab-select";
+            "O" = "cmd-set-text -s :open {url:pretty}";
+            "T" = "cmd-set-text :open -t -r {url:pretty}";
             "gt" = "tab-next";
             "gT" = "tab-prev";
-            "t" = "set-cmd-text -s :open -t";
+            "t" = "cmd-set-text -s :open -t";
             "xb" = "config-cycle statusbar.show always in-mode";
             "xt" = "config-cycle tabs.show multiple switching";
             "xv" = "spawn --userscript view_in_mpv";
