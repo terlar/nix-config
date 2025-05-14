@@ -80,6 +80,12 @@ in
         extraConfig = ''
           def __complete_find-src_projects [] { ghq list | lines }
           def --env find-src [project: string@__complete_find-src_projects] { cd $'(ghq root)/($project)' }
+
+          def __complete_kubectx [] { kubectx | lines }
+          export extern kubectx [context?: string@__complete_kubectx]
+
+          def __complete_kubens [] { kubens | lines }
+          export extern kubens [namespace?: string@__complete_kubens]
         '';
       };
     };
