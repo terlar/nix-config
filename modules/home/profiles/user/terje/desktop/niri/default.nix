@@ -53,6 +53,10 @@ in
           focus-ring.width = 2;
           center-focused-column = "on-overflow";
           always-center-single-column = [ ];
+          tab-indicator = {
+            position = "bottom";
+            hide-when-single-tab = [ ];
+          };
         };
 
         environment = {
@@ -103,6 +107,7 @@ in
           "Mod+Ctrl+I".move-column-to-workspace-up = [ ];
           "Mod+Shift+U".move-workspace-down = [ ];
           "Mod+Shift+I".move-workspace-up = [ ];
+          "Mod+O".toggle-overview = [ ];
 
           "Mod+1".focus-workspace = [ 1 ];
           "Mod+2".focus-workspace = [ 2 ];
@@ -133,6 +138,7 @@ in
           "Mod+Ctrl+R".reset-window-height = [ ];
           "Mod+F".maximize-column = [ ];
           "Mod+Shift+F".fullscreen-window = [ ];
+          "Mod+Ctrl+Shift+F".toggle-windowed-fullscreen = [ ];
           "Mod+Ctrl+F".expand-column-to-available-width = [ ];
           "Mod+C".center-column = [ ];
 
@@ -225,6 +231,10 @@ in
       spawnAtStartup = [ "swww-daemon" ];
 
       windowRules = [
+        {
+          match._props.app-id = "^foot$";
+          default-column-display = "tabbed";
+        }
         {
           match._props = {
             app-id = "krita";
