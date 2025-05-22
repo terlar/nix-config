@@ -232,7 +232,11 @@ in
 
       windowRules = [
         {
-          match._props.app-id = "^foot$";
+          match._props.app-id = "foot";
+          default-column-display = "tabbed";
+        }
+        {
+          match._props.app-id = "brave-browser";
           default-column-display = "tabbed";
         }
         {
