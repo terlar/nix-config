@@ -43,15 +43,15 @@ in
 
       programs = {
         direnv.nix-direnv.package = lib.mkDefault pkgs.lixPackageSets.latest.nix-direnv;
-        fish.shellAbbrs = {
-          n = "nix";
-          ndrv = "nix derivation show";
-          nf = "nix search nixpkgs";
-          nl = "nix log";
-          nr = "nix run";
-        };
-
         nix-your-shell.enable = mkDefault true;
+      };
+
+      home.shellAbbrs = {
+        n = "nix";
+        ndrv = "nix derivation show";
+        nf = "nix search nixpkgs";
+        nl = "nix log";
+        nr = "nix run";
       };
     }
 
