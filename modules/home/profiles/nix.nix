@@ -24,7 +24,7 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       nix = {
-        package = mkDefault pkgs.lix;
+        package = mkDefault pkgs.lixPackageSets.latest.lix;
         settings = {
           experimental-features = [
             "nix-command"
@@ -42,6 +42,7 @@ in
       };
 
       programs = {
+        direnv.nix-direnv.package = lib.mkDefault pkgs.lixPackageSets.latest.nix-direnv;
         fish.shellAbbrs = {
           n = "nix";
           ndrv = "nix derivation show";
