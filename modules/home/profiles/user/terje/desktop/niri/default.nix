@@ -51,7 +51,6 @@ in
         layout = {
           gaps = 5;
           focus-ring.width = 2;
-          center-focused-column = "on-overflow";
           always-center-single-column = [ ];
           tab-indicator = {
             position = "bottom";
@@ -141,6 +140,7 @@ in
           "Mod+Ctrl+Shift+F".toggle-windowed-fullscreen = [ ];
           "Mod+Ctrl+F".expand-column-to-available-width = [ ];
           "Mod+C".center-column = [ ];
+          "Mod+Shift+C".center-visible-columns = [ ];
 
           "Mod+Minus".set-column-width = [ "-10%" ];
           "Mod+Equal".set-column-width = [ "+10%" ];
