@@ -26,10 +26,7 @@ in
           margin-right = 4;
           spacing = 0;
 
-          modules-left = [
-            "tray"
-            "wlr/taskbar"
-          ];
+          modules-left = [ "tray" ];
           modules-center = [ "clock" ];
           modules-right = [
             "cpu"
