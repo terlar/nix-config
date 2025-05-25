@@ -37,7 +37,10 @@ in
           workspace-auto-back-and-forth = [ ];
 
           keyboard = {
-            xkb.options = "ctrl:nocaps";
+            xkb = {
+              layout = "us,se";
+              options = "ctrl:nocaps,grp:win_space_toggle";
+            };
             repeat-delay = 500;
             repeat-rate = 33;
           };
