@@ -35,11 +35,6 @@ in
         xkbRepeatDelay = lib.mkDefault 500;
         xkbRepeatInterval = lib.mkDefault 33; # 30Hz
       };
-
-      i18n = {
-        enable = lib.mkDefault true;
-        languages = lib.mkDefault [ "chinese" ];
-      };
     };
 
     nix = {
