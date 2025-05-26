@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.profiles.user.terje.programs.swaylock;
@@ -11,6 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.swaylock = {
       enable = true;
+      package = pkgs.swaylock-effects;
       settings = {
         clock = true;
         screenshots = true;
