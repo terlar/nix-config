@@ -20,14 +20,15 @@ in
       pkgs.system-config-printer
     ];
 
-    programs = {
-      fuzzel.enable = true;
-      swaylock.enable = true;
-    };
-
+    programs.fuzzel.enable = true;
     services.swayosd.enable = true;
 
-    profiles.user.terje.desktop.niri.waybar.enable = lib.mkDefault true;
+    profiles.user.terje.desktop.features = {
+      bar = lib.mkDefault true;
+      inputMethod = lib.mkDefault true;
+      notification = lib.mkDefault true;
+      screenLock = lib.mkDefault true;
+    };
 
     wayland.windowManager.niri = {
       enable = true;
@@ -39,6 +40,7 @@ in
           keyboard = {
             xkb = {
               layout = "us,se";
+              # man xkeyboard-config
               options = "ctrl:nocaps,grp:win_space_toggle";
             };
             repeat-delay = 500;

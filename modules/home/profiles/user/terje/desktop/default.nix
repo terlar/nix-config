@@ -15,6 +15,13 @@ in
     enable = lib.mkEnableOption "desktop profile for Terje";
     enableCommunicationPackages = lib.mkEnableOption "install communication packages";
     enableMediaPackages = lib.mkEnableOption "install media packages";
+
+    features = {
+      bar = lib.mkEnableOption "desktop feature bar";
+      inputMethod = lib.mkEnableOption "desktop feature Input Method Editor";
+      notification = lib.mkEnableOption "desktop feature notification";
+      screenLock = lib.mkEnableOption "desktop feature screen lock";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -34,6 +41,16 @@ in
         desktop.gnome = {
           enable = mkDefault true;
           paperwm.enable = mkDefault true;
+        };
+
+        inputMethods.fcitx5.enable = lib.mkDefault cfg.features.inputMethod;
+        programs = {
+          swaylock.enable = lib.mkDefault cfg.features.screenLock;
+          waybar.enable = lib.mkDefault cfg.features.bar;
+        };
+        services = {
+          fnott.enable = lib.mkDefault cfg.features.notification;
+          swayidle.enable = lib.mkDefault cfg.features.screenLock;
         };
       };
     };

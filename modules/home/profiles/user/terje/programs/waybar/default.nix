@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.profiles.user.terje.desktop.niri.waybar;
+  cfg = config.profiles.user.terje.programs.waybar;
 in
 {
-  options.profiles.user.terje.desktop.niri.waybar = {
-    enable = lib.mkEnableOption "Niri Waybar profile for Terje";
+  options.profiles.user.terje.programs.waybar = {
+    enable = lib.mkEnableOption "waybar configuration for Terje";
   };
 
   config = lib.mkIf cfg.enable {
