@@ -86,7 +86,7 @@ in
         };
 
         "org/gnome/settings-daemon/plugins/media-keys" = {
-          screensaver = [ "<Super><Alt>L" ];
+          screensaver = [ "<Super><Alt>l" ];
         };
 
         "org/gnome/shell/extensions/miniview" = {
@@ -103,7 +103,6 @@ in
       programs.gnome-shell = {
         extensions = [
           { package = getExtensionPackage "paperwm@paperwm.github.com"; }
-          { package = getExtensionPackage "unite@hardpixel.eu"; }
         ];
       };
 
@@ -118,7 +117,8 @@ in
           animation-time = 0.1;
           minimap-scale = 0.0;
           show-window-position-bar = false;
-          use-default-background = false;
+          show-workspace-indicator = false;
+          use-default-background = true;
 
           horizontal-margin = 0;
           vertical-margin = 0;
@@ -133,13 +133,13 @@ in
           toggle-scratch = [ "<Super><Shift>v" ];
           toggle-scratch-layer = [ "<Super>v" ];
 
-          slurp-in = [ "<Super>," ];
-          barf-out = [ "<Super>." ];
+          slurp-in = [ "<Super>Comma" ];
+          barf-out = [ "<Super>Period" ];
 
           switch-up-workspace = [ "<Super>i" ];
           move-up-workspace = [ "<Shift><Ctrl>i" ];
           switch-down-workspace = [ "<Super>u" ];
-          move-down-workspace = [ "<Super><Ctrl>i" ];
+          move-down-workspace = [ "<Super><Ctrl>u" ];
 
           switch-first = [ "<Super>Home" ];
           switch-last = [ "<Super>End" ];
@@ -165,11 +165,16 @@ in
           switch-monitor-above = [ "<Super><Shift>k" ];
           move-monitor-above = [ "<Super><Shift><Ctrl>k" ];
           switch-monitor-below = [ "<Super><Shift>j" ];
-          move-monitor-below = [ "<Super><Shift><Ctrl>k" ];
+          move-monitor-below = [ "<Super><Shift><Ctrl>j" ];
           switch-monitor-left = [ "<Super><Shift>h" ];
           move-monitor-left = [ "<Super><Shift><Ctrl>h" ];
           switch-monitor-right = [ "<Super><Shift>l" ];
           move-monitor-right = [ "<Super><Shift><Ctrl>l" ];
+
+          resize-h-dec = [ "<Super><Shift>Minus" ];
+          resize-h-inc = [ "<Super><Shift>Equal" ];
+          resize-w-dec = [ "<Super>Minus" ];
+          resize-w-inc = [ "<Super>Equal" ];
 
           switch-up = [ ];
           switch-down = [ ];
@@ -179,18 +184,6 @@ in
           move-previous-workspace-backward = [ ];
           live-alt-tab = [ ];
           live-alt-tab-backward = [ ];
-        };
-
-        "org/gnome/shell/extensions/unite" = {
-          enable-titlebar-actions = true;
-          extend-left-box = true;
-          greyscale-tray-icons = true;
-          hide-window-titlebars = "always";
-          restrict-to-primary-screen = false;
-          show-desktop-name = true;
-          show-legacy-tray = true;
-          show-window-buttons = "never";
-          show-window-title = "maximized";
         };
       };
 
