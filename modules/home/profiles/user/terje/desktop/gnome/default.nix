@@ -86,7 +86,7 @@ in
         };
 
         "org/gnome/settings-daemon/plugins/media-keys" = {
-          screensaver = [ "<Super>q" ];
+          screensaver = [ "<Super><Alt>L" ];
         };
 
         "org/gnome/shell/extensions/miniview" = {
@@ -128,60 +128,48 @@ in
 
         "org/gnome/shell/extensions/paperwm/keybindings" = {
           new-window = [ "<Super>Return" ];
-          close-window = [ "<Super>BackSpace" ];
+          close-window = [ "<Super>q" ];
 
-          toggle-scratch = [ "<Shift><Super>s" ];
-          toggle-scratch-layer = [ "<Super>s" ];
+          toggle-scratch = [ "<Super><Shift>v" ];
+          toggle-scratch-layer = [ "<Super>v" ];
 
-          slurp-in = [ "<Super>i" ];
-          barf-out = [ "<Super>o" ];
+          slurp-in = [ "<Super>," ];
+          barf-out = [ "<Super>." ];
 
-          switch-up-workspace = [ "<Super>bracketleft" ];
-          move-up-workspace = [ "<Shift><Super>bracketleft" ];
-          switch-down-workspace = [ "<Super>bracketright" ];
-          move-down-workspace = [ "<Shift><Super>bracketright" ];
+          switch-up-workspace = [ "<Super>i" ];
+          move-up-workspace = [ "<Shift><Ctrl>i" ];
+          switch-down-workspace = [ "<Super>u" ];
+          move-down-workspace = [ "<Super><Ctrl>i" ];
 
           switch-first = [ "<Super>Home" ];
           switch-last = [ "<Super>End" ];
 
           switch-left = [ "<Super>h" ];
-          move-left = [ "<Shift><Super>h" ];
+          move-left = [ "<Super><Ctrl>h" ];
 
           switch-right = [ "<Super>l" ];
-          move-right = [ "<Shift><Super>l" ];
+          move-right = [ "<Super><Ctrl>l" ];
 
           switch-previous = [
             "<Shift><Super>Tab"
             "<Super>k"
           ];
-          move-up = [ "<Shift><Super>k" ];
+          move-up = [ "<Super><Ctrl>k" ];
 
           switch-next = [
             "<Super>Tab"
             "<Super>j"
           ];
-          move-down = [ "<Shift><Super>j" ];
+          move-down = [ "<Super><Ctrl>j" ];
 
-          switch-monitor-above = [ "<Super>Up" ];
-          move-monitor-above = [ "<Shift><Super>Up" ];
-          switch-monitor-below = [ "<Super>Down" ];
-          move-monitor-below = [ "<Shift><Super>Down" ];
-          switch-monitor-left = [
-            "<Super>Left"
-            "<Alt><Super>bracketleft"
-          ];
-          move-monitor-left = [
-            "<Shift><Super>Left"
-            "<Shift><Alt><Super>bracketleft"
-          ];
-          switch-monitor-right = [
-            "<Super>Right"
-            "<Alt><Super>bracketright"
-          ];
-          move-monitor-right = [
-            "<Shift><Super>Right"
-            "<Shift><Alt><Super>bracketright"
-          ];
+          switch-monitor-above = [ "<Super><Shift>k" ];
+          move-monitor-above = [ "<Super><Shift><Ctrl>k" ];
+          switch-monitor-below = [ "<Super><Shift>j" ];
+          move-monitor-below = [ "<Super><Shift><Ctrl>k" ];
+          switch-monitor-left = [ "<Super><Shift>h" ];
+          move-monitor-left = [ "<Super><Shift><Ctrl>h" ];
+          switch-monitor-right = [ "<Super><Shift>l" ];
+          move-monitor-right = [ "<Super><Shift><Ctrl>l" ];
 
           switch-up = [ ];
           switch-down = [ ];
