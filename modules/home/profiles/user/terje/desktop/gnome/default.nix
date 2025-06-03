@@ -184,6 +184,9 @@ in
           resize-w-dec = [ "<Super>Minus" ];
           resize-w-inc = [ "<Super>Equal" ];
 
+          center-horizontally = [ "<Super>c" ];
+          center-vertically = [ "<Super><Shift>c" ];
+
           switch-up = [ ];
           switch-down = [ ];
           previous-workspace = [ ];
