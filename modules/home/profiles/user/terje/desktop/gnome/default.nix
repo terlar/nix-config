@@ -132,6 +132,17 @@ in
           horizontal-margin = 0;
           vertical-margin = 4;
           vertical-margin-bottom = 4;
+
+          winprops = map builtins.toJSON [
+            {
+              wm_class = "foot";
+              preferredWidth = "50%";
+            }
+            {
+              wm_class = "emacs";
+              preferredWidth = "50%";
+            }
+          ];
         };
 
         "org/gnome/shell/extensions/paperwm/keybindings" = {
