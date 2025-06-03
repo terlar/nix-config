@@ -103,6 +103,7 @@ in
       programs.gnome-shell = {
         extensions = [
           { package = getExtensionPackage "paperwm@paperwm.github.com"; }
+          { package = getExtensionPackage "user-theme@gnome-shell-extensions.gcampax.github.com"; }
         ];
       };
 
@@ -113,6 +114,10 @@ in
           workspaces-only-on-primary = false;
         };
 
+        "org/gnome/shell/extensions/user-theme" = {
+          name = "Default";
+        };
+
         "org/gnome/shell/extensions/paperwm" = {
           animation-time = 0.1;
           minimap-scale = 0.0;
@@ -120,10 +125,13 @@ in
           show-workspace-indicator = false;
           use-default-background = true;
 
+          selection-border-size = 4;
+          selection-border-radius-top = 0;
+          window-gap = 4;
+
           horizontal-margin = 0;
-          vertical-margin = 0;
+          vertical-margin = 4;
           vertical-margin-bottom = 4;
-          window-gap = 8;
         };
 
         "org/gnome/shell/extensions/paperwm/keybindings" = {
@@ -187,21 +195,30 @@ in
         };
       };
 
-      xdg.configFile."paperwm/user.js".text = ''
-        // -*- mode: gnome-shell -*-
-        const Extension = imports.misc.extensionUtils.getCurrentExtension();
-        const App = Extension.imports.app;
+      xdg = {
+        dataFile."themes/Default/gnome-shell/gnome-shell.css".text = ''
+          #panel {
+            font-size: 12px;
+            height: 24px;
+          }
+        '';
 
-        function enable() {
-            let App = Extension.imports.app;
-            App.customHandlers['emacs.desktop'] =
-                () => imports.misc.util.spawn(['emacsclient', '--eval', '(make-frame)']);
-        }
+        configFile."paperwm/user.js".text = ''
+          // -*- mode: gnome-shell -*-
+          const Extension = imports.misc.extensionUtils.getCurrentExtension();
+          const App = Extension.imports.app;
 
-        function disable() {
-            // Runs when extension is disabled
-        }
-      '';
+          function enable() {
+              let App = Extension.imports.app;
+              App.customHandlers['emacs.desktop'] =
+                  () => imports.misc.util.spawn(['emacsclient', '--eval', '(make-frame)']);
+          }
+
+          function disable() {
+              // Runs when extension is disabled
+          }
+        '';
+      };
     })
   ]);
 }
