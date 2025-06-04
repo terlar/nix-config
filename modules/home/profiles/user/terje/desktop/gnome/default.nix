@@ -85,8 +85,21 @@ in
           switch-applications-backward = [ ];
         };
 
+        "org/gnome/shell/keybindings" = {
+          toggle-overview = [ "<Super><Shift>Return" ];
+        };
+
         "org/gnome/settings-daemon/plugins/media-keys" = {
           screensaver = [ "<Super><Alt>l" ];
+          custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+          ];
+        };
+
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Super>Return";
+          command = "foot";
+          name = "Terminal";
         };
 
         "org/gnome/shell/extensions/miniview" = {
@@ -146,7 +159,7 @@ in
         };
 
         "org/gnome/shell/extensions/paperwm/keybindings" = {
-          new-window = [ "<Super>Return" ];
+          new-window = [ ];
           close-window = [ "<Super>q" ];
 
           toggle-scratch = [ "<Super><Shift>v" ];
