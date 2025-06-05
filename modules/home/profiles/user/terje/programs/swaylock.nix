@@ -1,9 +1,4 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}:
+{ lib, config, ... }:
 
 let
   cfg = config.profiles.user.terje.programs.swaylock;
@@ -16,19 +11,11 @@ in
   config = lib.mkIf cfg.enable {
     programs.swaylock = {
       enable = true;
-      package = pkgs.swaylock-effects;
       settings = {
-        clock = true;
-        screenshots = true;
+        image = "~/.config/swaylock/image.png";
         daemonize = true;
         ignore-empty-password = true;
-        indicator = true;
         indicator-radius = 150;
-        effect-scale = 0.4;
-        effect-vignette = "0.2:0.5";
-        effect-blur = "4x2";
-        datestr = "%A, %b %d";
-        timestr = "%k:%M";
         key-hl-color = "61768ff2";
         ring-color = "61768ff2";
         text-color = "ffffffe6";
