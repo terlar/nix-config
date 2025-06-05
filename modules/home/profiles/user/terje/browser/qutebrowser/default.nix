@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   inherit (lib)
@@ -47,6 +52,10 @@ in
           we = "https://en.wikipedia.org/w/index.php?search={}";
           ws = "https://sv.wikipedia.org/w/index.php?search={}";
         };
+
+        dictionaries = [
+          pkgs.hunspellDictsChromium.en-us
+        ];
 
         settings = {
           auto_save.session = true;
