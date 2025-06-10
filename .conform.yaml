@@ -29,6 +29,7 @@ policies:
           - nixos
           - package
           - shell
+          - gnome
           - niri
           - nushell
         descriptionLength: 72

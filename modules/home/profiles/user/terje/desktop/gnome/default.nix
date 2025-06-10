@@ -169,7 +169,7 @@ in
           barf-out = [ "<Super>Period" ];
 
           switch-up-workspace = [ "<Super>i" ];
-          move-up-workspace = [ "<Shift><Ctrl>i" ];
+          move-up-workspace = [ "<Super><Ctrl>i" ];
           switch-down-workspace = [ "<Super>u" ];
           move-down-workspace = [ "<Super><Ctrl>u" ];
 
