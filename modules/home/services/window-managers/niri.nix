@@ -5,6 +5,8 @@
   ...
 }:
 let
+  inherit (lib) types;
+
   toKDL = lib.hm.generators.toKDL { };
   cfg = config.wayland.windowManager.niri;
   configFile = pkgs.writeText "niri-config.kdl" (
@@ -13,6 +15,13 @@ let
       ++ (lib.optional (cfg.extraConfig != "") cfg.extraConfig)
     )
   );
+
+  # Systemd integration
+  variables = builtins.concatStringsSep " " cfg.systemd.variables;
+  extraCommands = builtins.concatStringsSep " " (map (f: "&& ${f}") cfg.systemd.extraCommands);
+  systemdActivation = ''
+    ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ${variables} ${extraCommands}
+  '';
 
   # Validates the Niri configuration
   checkNiriConfig = pkgs.runCommandLocal "niri-config" { buildInputs = [ cfg.package ]; } ''
@@ -26,7 +35,7 @@ in
 
   options.wayland.windowManager.niri = {
     enable = lib.mkOption {
-      type = lib.types.bool;
+      type = types.bool;
       default = false;
       description = ''
         Whether to enable configuration for Niri, a scrollable-tiling Wayland
@@ -54,8 +63,52 @@ in
       default = true;
     };
 
+    systemd = {
+      enable = lib.mkEnableOption null // {
+        default = true;
+        description = ''
+          Whether to enable {file}`niri-session.target` on
+          niri startup. This links to {file}`graphical-session.target`}.
+          Some important environment variables will be imported to systemd
+          and D-Bus user environment before reaching the target, including
+          - `DISPLAY`
+          - `WAYLAND_DISPLAY`
+          - `XDG_CURRENT_DESKTOP`
+          - `NIXOS_OZONE_WL`
+          - `XCURSOR_THEME`
+          - `XCURSOR_SIZE`
+        '';
+      };
+
+      variables = lib.mkOption {
+        type = types.listOf types.str;
+        default = [
+          "DISPLAY"
+          "WAYLAND_DISPLAY"
+          "XDG_CURRENT_DESKTOP"
+          "NIXOS_OZONE_WL"
+          "XCURSOR_THEME"
+          "XCURSOR_SIZE"
+        ];
+        example = [ "-all" ];
+        description = ''
+          Environment variables to be imported in the systemd & D-Bus user
+          environment.
+        '';
+      };
+
+      extraCommands = lib.mkOption {
+        type = types.listOf types.str;
+        default = [
+          "systemctl --user stop niri-session.target"
+          "systemctl --user start niri-session.target"
+        ];
+        description = "Extra commands to be run after D-Bus activation.";
+      };
+    };
+
     settings = lib.mkOption {
-      type = lib.types.attrsOf lib.types.anything;
+      type = types.attrsOf types.anything;
       default = { };
       example = lib.literalExpression ''
         {
@@ -91,7 +144,7 @@ in
 
     spawnAtStartup = lib.mkOption {
       type =
-        with lib.types;
+        with types;
         listOf (oneOf [
           str
           (listOf str)
@@ -108,7 +161,7 @@ in
     };
 
     windowRules = lib.mkOption {
-      type = with lib.types; listOf (attrsOf anything);
+      type = with types; listOf (attrsOf anything);
       default = [ ];
       example = lib.literalExpression ''
         [
@@ -127,7 +180,7 @@ in
     };
 
     extraConfig = lib.mkOption {
-      type = lib.types.lines;
+      type = types.lines;
       default = "";
       example = ''
         input {
@@ -165,6 +218,10 @@ in
     );
 
     wayland.windowManager.niri = lib.mkMerge [
+      (lib.mkIf cfg.systemd.enable {
+        spawnAtStartup = [ systemdActivation ];
+      })
+
       (lib.mkIf cfg.xwayland.enable {
         spawnAtStartup = [ "xwayland-satellite" ];
       })
@@ -192,6 +249,17 @@ in
       enable = cfg.portalPackage != null;
       extraPortals = lib.mkIf (cfg.portalPackage != null) [ cfg.portalPackage ];
       configPackages = lib.mkIf (cfg.package != null) (lib.mkDefault [ cfg.package ]);
+    };
+
+    # Systemd integration
+    systemd.user.targets.niri-session = lib.mkIf cfg.systemd.enable {
+      Unit = {
+        Description = "niri compositor session";
+        Documentation = [ "man:systemd.special(7)" ];
+        BindsTo = [ "graphical-session.target" ];
+        Wants = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session-pre.target" ];
+      };
     };
   };
 }
