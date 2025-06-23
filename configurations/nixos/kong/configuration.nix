@@ -9,7 +9,7 @@ in
 
   profiles = {
     console.enable = true;
-    iphone.enable = true;
+    # iphone.enable = true;
     yubikey.enable = true;
 
     user.terje = {
