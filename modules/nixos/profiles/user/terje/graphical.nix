@@ -14,35 +14,34 @@ in
     desktop = lib.mkEnableOption "Desktop mode";
   };
 
-  config = lib.mkIf cfg.enable {
-    profiles.user.terje = {
-      base.enable = true;
-      fonts.enable = lib.mkDefault true;
-    };
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        profiles.user.terje = {
+          base.enable = true;
+          fonts.enable = lib.mkDefault true;
+        };
 
-    # Graphical boot process.
-    boot.plymouth.enable = true;
+        # Graphical boot process.
+        boot.plymouth.enable = true;
+      }
 
-    services.xserver = lib.mkIf cfg.desktop {
-      enable = true;
+      (lib.mkIf cfg.desktop {
+        services.displayManager.gdm.enable = true;
+        services.desktopManager.gnome.enable = lib.mkDefault true;
 
-      # Display manager
-      displayManager.gdm.enable = true;
+        # Scrollable-tiling Wayland compositor
+        programs.niri.enable = lib.mkDefault true;
 
-      # Desktop manager
-      desktopManager.gnome.enable = true;
-    };
+        environment = {
+          gnome.excludePackages = [
+            pkgs.geary
+          ];
 
-    # Scrollable-tiling Wayland compositor
-    programs.niri.enable = lib.mkDefault true;
-
-    environment = {
-      gnome.excludePackages = [
-        pkgs.geary
-      ];
-
-      # Wayland support for Electron and Chromium
-      sessionVariables.NIXOS_OZONE_WL = "1";
-    };
-  };
+          # Wayland support for Electron and Chromium
+          sessionVariables.NIXOS_OZONE_WL = "1";
+        };
+      })
+    ]
+  );
 }
