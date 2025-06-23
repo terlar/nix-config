@@ -63,6 +63,8 @@ in
         SystemMaxUse=100M
         RuntimeMaxUse=100M
       '';
+      # Disable GCR SSH as it is incompatible with gpg-agent's SSH support.
+      gnome.gcr-ssh-agent.enable = false;
     };
 
     programs = {
