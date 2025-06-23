@@ -65,6 +65,7 @@ in
               Backend = "Baidu";
               MinimumPinyinLength = 4;
             };
+            clipboard.sections.TriggerKey = { };
           };
         };
       };
