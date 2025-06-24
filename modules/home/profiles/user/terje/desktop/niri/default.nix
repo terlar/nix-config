@@ -258,6 +258,15 @@ in
           open-focused = true;
         }
       ];
+
+      extraConfig = ''
+        output "eDP-1" {
+          position x=0 y=1440
+        }
+        output "DP-1" {
+          position x=0 y=0
+        }
+      '';
     };
   };
 }
