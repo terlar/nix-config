@@ -63,6 +63,10 @@ in
           };
         };
 
+        environment = {
+          DISPLAY = ":0";
+        };
+
         binds = {
           "Mod+Return".spawn = "foot";
           "Mod+Shift+Return".spawn = "fuzzel";
