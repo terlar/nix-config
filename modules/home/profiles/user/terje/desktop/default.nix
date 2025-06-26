@@ -56,6 +56,10 @@ in
     };
 
     home.packages = mkMerge [
+      [
+        pkgs.wl-clipboard
+      ]
+
       (mkIf cfg.enableCommunicationPackages [
         pkgs.discord
         pkgs.slack
