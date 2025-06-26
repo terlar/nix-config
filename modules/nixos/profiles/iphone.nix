@@ -17,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.idevicerestore
+      # pkgs.idevicerestore
       pkgs.libimobiledevice
       pkgs.ifuse
     ];
