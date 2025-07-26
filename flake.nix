@@ -40,8 +40,8 @@
 
       imports = [
         flake-parts.flakeModules.partitions
+        inputs.home-manager.flakeModules.default
 
-        ./modules/flake/home-manager.nix
         ./configurations/home/terje
         ./configurations/nixos/kong
         ./configurations/nixos/installer-yubikey
