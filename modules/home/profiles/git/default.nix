@@ -88,7 +88,8 @@ in
 
         ssh = {
           enable = mkDefault true;
-          compression = mkDefault true;
+          enableDefaultConfig = false;
+          matchBlocks."*".compression = mkDefault true;
         };
       };
     }
