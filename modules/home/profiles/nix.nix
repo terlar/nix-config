@@ -43,6 +43,7 @@ in
 
       programs = {
         direnv.nix-direnv.package = lib.mkDefault pkgs.lixPackageSets.latest.nix-direnv;
+        nh.enable = mkDefault true;
         nix-your-shell.enable = mkDefault true;
       };
 
