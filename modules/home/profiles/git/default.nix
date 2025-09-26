@@ -58,6 +58,8 @@ in
               autoSetupRebase = mkDefault "always";
             };
 
+            commit.verbose = mkDefault "true";
+
             fetch.prune = mkDefault "true";
             pull.rebase = mkDefault "true";
             push = {
