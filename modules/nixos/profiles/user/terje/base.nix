@@ -38,7 +38,7 @@ in
     };
 
     nix = {
-      package = lib.mkDefault pkgs.lixPackageSets.latest.lix;
+      package = lib.mkDefault pkgs.nixVersions.latest;
 
       settings = {
         trusted-users = [
