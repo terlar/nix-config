@@ -25,32 +25,31 @@ in
             };
           };
 
-          aliases = mkIf cfg.enableAliases {
-            ignore = "update-index --assume-unchanged";
-            unignore = "update-index --no-assume-unchanged";
-            ignored = "!git ls-files -v | grep '^[[:lower:]]'";
+          settings = {
+            alias = mkIf cfg.enableAliases {
+              ignore = "update-index --assume-unchanged";
+              unignore = "update-index --no-assume-unchanged";
+              ignored = "!git ls-files -v | grep '^[[:lower:]]'";
 
-            fup = "!git log --stat --since '1 day ago' --author $(git config user.email)";
-            tags = "tag -l";
-            remotes = "remote -v";
-            branches = builtins.concatStringsSep " " [
-              "!git"
-              "for-each-ref"
-              "--sort=-committerdate"
-              "--format='${
-                builtins.concatStringsSep "|" [
-                  "%(color:blue)%(authordate:relative)"
-                  "%(color:red)%(authorname)"
-                  "%(color:black)%(color:bold)%(refname:short)"
-                ]
-              }'"
-              "refs/remotes"
-              "|"
-              "column -ts'|'"
-            ];
-          };
-
-          extraConfig = {
+              fup = "!git log --stat --since '1 day ago' --author $(git config user.email)";
+              tags = "tag -l";
+              remotes = "remote -v";
+              branches = builtins.concatStringsSep " " [
+                "!git"
+                "for-each-ref"
+                "--sort=-committerdate"
+                "--format='${
+                  builtins.concatStringsSep "|" [
+                    "%(color:blue)%(authordate:relative)"
+                    "%(color:red)%(authorname)"
+                    "%(color:black)%(color:bold)%(refname:short)"
+                  ]
+                }'"
+                "refs/remotes"
+                "|"
+                "column -ts'|'"
+              ];
+            };
             branch = {
               # Automatic remote tracking.
               autoSetupMerge = mkDefault "simple";

@@ -63,7 +63,7 @@ in
       (mkIf cfg.enableCommunicationPackages [
         pkgs.discord
         pkgs.slack
-        pkgs.tdesktop
+        pkgs.telegram-desktop
         pkgs.zoom-us
       ])
 

@@ -96,7 +96,7 @@ in
         };
       };
 
-      git.delta.options = {
+      delta.options = {
         syntax-theme = "none";
         zero-style = "grey";
         minus-emph-style = "strike bold";
