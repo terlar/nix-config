@@ -23,8 +23,7 @@ in
 
       pkgs.noto-fonts
       pkgs.noto-fonts-cjk-sans
-      pkgs.noto-fonts-emoji
-      pkgs.noto-fonts-extra
+      pkgs.noto-fonts-color-emoji
     ];
   };
 }

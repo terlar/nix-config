@@ -68,15 +68,15 @@ in
           ".envrc"
         ];
 
-        delta.options = {
-          navigate = true;
-          features = "decorations";
-        };
-
-        extraConfig.url = {
+        settings.url = {
           "ssh://git@github.com/terlar".insteadOf = "gh:terlar";
           "https://github.com/".insteadOf = "gh:";
         };
+      };
+
+      delta.options = {
+        navigate = true;
+        features = "decorations";
       };
     };
   };

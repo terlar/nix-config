@@ -20,8 +20,7 @@ in
         (pkgs.iosevka-bin.override { variant = "CurlySlab"; })
         pkgs.noto-fonts
         pkgs.noto-fonts-cjk-sans
-        pkgs.noto-fonts-emoji
-        pkgs.noto-fonts-extra
+        pkgs.noto-fonts-color-emoji
       ];
 
       fontconfig = {
