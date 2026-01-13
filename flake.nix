@@ -76,8 +76,12 @@
                 programs.home-manager.enable = true;
 
                 custom.emacsConfig = {
-                  package = nixpkgs.lib.mkDefault inputs.emacs-config.packages.${pkgs.system}.emacs-env-pgtk;
-                  configPackage = nixpkgs.lib.mkDefault inputs.emacs-config.packages.${pkgs.system}.emacs-config-pgtk;
+                  package =
+                    nixpkgs.lib.mkDefault
+                      inputs.emacs-config.packages.${pkgs.stdenv.hostPlatform.system}.emacs-env-pgtk;
+                  configPackage =
+                    nixpkgs.lib.mkDefault
+                      inputs.emacs-config.packages.${pkgs.stdenv.hostPlatform.system}.emacs-config-pgtk;
                 };
               };
 
