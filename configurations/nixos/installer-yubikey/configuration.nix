@@ -14,9 +14,8 @@ lib.mkMerge [
     environment.systemPackages = [
       pkgs.gnupg
       pkgs.paperkey
-      pkgs.wget
 
-      # pkgs.haskellPackages.hopenpgp-tools
+      pkgs.haskellPackages.hopenpgp-tools
       pkgs.yubikey-manager
 
       pkgs.zellij
@@ -44,6 +43,7 @@ lib.mkMerge [
         allowInterfaces = [ ];
       };
       firewall.enable = true;
+      networkmanager.enable = lib.mkForce false;
       useDHCP = false;
       useNetworkd = false;
       wireless.enable = false;
