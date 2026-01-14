@@ -57,7 +57,6 @@ in
         enable = true;
         extensions = [
           { package = getExtensionPackage "color-picker@tuberry"; }
-          { package = getExtensionPackage "miniview@thesecretaryofwar.com"; }
           { package = pkgs.gnomeExtensions.wtmb-window-thumbnails; }
         ];
       };
@@ -100,10 +99,6 @@ in
           binding = "<Super>Return";
           command = "foot";
           name = "Terminal";
-        };
-
-        "org/gnome/shell/extensions/miniview" = {
-          showme = false;
         };
 
         "org/gnome/shell/extensions/true-color-window-invert" = {
