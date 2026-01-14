@@ -15,6 +15,7 @@ in
     enable = lib.mkEnableOption "desktop profile for Terje";
     enableCommunicationPackages = lib.mkEnableOption "install communication packages";
     enableMediaPackages = lib.mkEnableOption "install media packages";
+    enableShell = lib.mkEnableOption "desktop shell (Dank Material Shell)";
 
     features = {
       bar = lib.mkEnableOption "desktop feature bar";
@@ -26,33 +27,40 @@ in
 
   config = mkIf cfg.enable {
     profiles = {
-      user.terje = {
-        graphical.enable = true;
+      user.terje = lib.mkMerge [
+        {
+          graphical.enable = true;
 
-        browser.brave = {
-          enable = mkDefault true;
-          defaultBrowser = mkDefault true;
-        };
-        terminal.foot = {
-          enable = mkDefault true;
-          defaultTerminal = mkDefault true;
-        };
+          browser.brave = {
+            enable = mkDefault true;
+            defaultBrowser = mkDefault true;
+          };
+          terminal.foot = {
+            enable = mkDefault true;
+            defaultTerminal = mkDefault true;
+          };
 
-        desktop.gnome = {
-          enable = mkDefault true;
-          paperwm.enable = mkDefault true;
-        };
+          desktop = {
+            gnome = {
+              enable = mkDefault true;
+              paperwm.enable = mkDefault true;
+            };
+          };
 
-        inputMethods.fcitx5.enable = lib.mkDefault cfg.features.inputMethod;
-        programs = {
-          swaylock.enable = lib.mkDefault cfg.features.screenLock;
-          waybar.enable = lib.mkDefault cfg.features.bar;
-        };
-        services = {
-          fnott.enable = lib.mkDefault cfg.features.notification;
-          swayidle.enable = lib.mkDefault cfg.features.screenLock;
-        };
-      };
+          inputMethods.fcitx5.enable = lib.mkDefault cfg.features.inputMethod;
+        }
+
+        (lib.mkIf (!cfg.enableShell) {
+          programs = {
+            swaylock.enable = lib.mkDefault cfg.features.screenLock;
+            waybar.enable = lib.mkDefault cfg.features.bar;
+          };
+          services = {
+            fnott.enable = lib.mkDefault cfg.features.notification;
+            swayidle.enable = lib.mkDefault cfg.features.screenLock;
+          };
+        })
+      ];
     };
 
     home.packages = mkMerge [

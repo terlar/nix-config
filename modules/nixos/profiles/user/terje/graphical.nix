@@ -31,7 +31,10 @@ in
         services.desktopManager.gnome.enable = lib.mkDefault true;
 
         # Scrollable-tiling Wayland compositor
-        programs.niri.enable = lib.mkDefault true;
+        programs = {
+          niri.enable = lib.mkDefault true;
+          dms-shell.enable = lib.mkDefault true;
+        };
 
         environment = {
           gnome.excludePackages = [
