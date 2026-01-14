@@ -20,7 +20,7 @@ in
       enable = true;
       type = "fcitx5";
       fcitx5 = {
-        addons = [ pkgs.fcitx5-chinese-addons ];
+        addons = [ pkgs.qt6Packages.fcitx5-chinese-addons ];
 
         waylandFrontend = lib.mkDefault true;
         settings = {
