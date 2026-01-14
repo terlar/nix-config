@@ -50,6 +50,10 @@ in
           inputMethods.fcitx5.enable = lib.mkDefault cfg.features.inputMethod;
         }
 
+        (lib.mkIf cfg.enableShell {
+          programs.dms-shell.enable = true;
+        })
+
         (lib.mkIf (!cfg.enableShell) {
           programs = {
             swaylock.enable = lib.mkDefault cfg.features.screenLock;
