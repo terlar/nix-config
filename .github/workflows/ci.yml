@@ -46,11 +46,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        uses: cachix/install-nix-action@v31
         with:
-          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
-          extra-conf: |
-            max-jobs = auto
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
@@ -74,11 +72,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        uses: cachix/install-nix-action@v31
         with:
-          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
-          extra-conf: |
-            max-jobs = auto
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
@@ -104,11 +100,9 @@ jobs:
       - name: Free disk space
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        uses: cachix/install-nix-action@v31
         with:
-          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
-          extra-conf: |
-            max-jobs = auto
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
@@ -132,11 +126,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+        uses: cachix/install-nix-action@v31
         with:
-          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
-          extra-conf: |
-            max-jobs = auto
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc # v15
         with:
