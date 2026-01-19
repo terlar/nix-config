@@ -81,9 +81,7 @@ in
     # Enable network name resolution.
     resolved = {
       enable = true;
-      extraConfig = ''
-        DNS=1.1.1.1
-      '';
+      settings.Resolve.DNS = "1.1.1.1";
     };
   };
 
