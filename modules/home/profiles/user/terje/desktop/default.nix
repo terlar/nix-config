@@ -41,10 +41,8 @@ in
           };
 
           desktop = {
-            gnome = {
-              enable = mkDefault true;
-              paperwm.enable = mkDefault true;
-            };
+            niri.enable = mkDefault true;
+            gnome.paperwm.enable = mkDefault true;
           };
 
           inputMethods.fcitx5.enable = lib.mkDefault cfg.features.inputMethod;
