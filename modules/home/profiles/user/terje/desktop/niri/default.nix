@@ -241,6 +241,8 @@ in
           };
         };
 
+        services.gpg-agent.pinentry.package = lib.mkDefault pkgs.pinentry-gnome3;
+
         wayland.windowManager.niri = {
           enable = true;
 

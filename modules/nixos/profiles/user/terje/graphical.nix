@@ -27,8 +27,10 @@ in
       }
 
       (lib.mkIf cfg.desktop {
-        services.displayManager.gdm.enable = true;
-        services.desktopManager.gnome.enable = lib.mkDefault true;
+        services.displayManager.dms-greeter = {
+          enable = true;
+          compositor.name = "niri";
+        };
 
         # Scrollable-tiling Wayland compositor
         programs = {
