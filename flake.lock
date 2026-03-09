@@ -32,11 +32,11 @@
         "twist": "twist"
       },
       "locked": {
-        "lastModified": 1772440466,
-        "narHash": "sha256-Ip4XUOm2pdyNsp26SSDczsBMAQ9Yjdx743TtXYEmiXM=",
+        "lastModified": 1773046569,
+        "narHash": "sha256-+AkJcXIeLxSpjZPV8MtmOqsAWvMC+7ufwBt1a76u5/g=",
         "owner": "terlar",
         "repo": "emacs-config",
-        "rev": "646ae98f376174ba264c6d650075c0d88d6ec0ce",
+        "rev": "c582ca1c5a1ad59249375e70888c1348e763a7e2",
         "type": "github"
       },
       "original": {
@@ -57,11 +57,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772382566,
-        "narHash": "sha256-1kJZSoY8BgeCykRMqek7/60XzEBfejuKphNIdJB2hmc=",
+        "lastModified": 1772987389,
+        "narHash": "sha256-3+2d2bibrWC52r1LTqVZucwCEkrgPfDfgBEr5PZ4LhA=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "4ca2786402796a7b46e6c124cd971ca02e7368ae",
+        "rev": "ff1c7595a7ba4b969e998863d86d19c7db13f345",
         "type": "github"
       },
       "original": {
@@ -125,11 +125,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1772403259,
-        "narHash": "sha256-iL5c03FUr/3FJeeE5FJ3T12gJGCDxZvRWCsA2kYNdTU=",
+        "lastModified": 1772990880,
+        "narHash": "sha256-9SDsEyyq2syWEHbT94ksMyxkelwL3QZtKPenJKUH6tU=",
         "owner": "melpa",
         "repo": "melpa",
-        "rev": "97f662357b3c9ef5e0c38d93a0b9c101f536e23e",
+        "rev": "6c184db11d9fbc6b702269ff982011215eb4dcb1",
         "type": "github"
       },
       "original": {
