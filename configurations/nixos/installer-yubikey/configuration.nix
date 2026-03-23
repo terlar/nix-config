@@ -75,20 +75,22 @@ lib.mkMerge [
   # Console.
   {
     fonts.packages = [ pkgs.roboto-mono ];
-    services.kmscon = {
-      enable = true;
-      autologinUser = "nixos";
-      hwRender = true;
-      extraConfig = ''
-        session-control
-        palette=solarized
-        font-name=Roboto Mono
-        font-size=24
-        xkb-layout=us
-        xkb-options=ctrl:nocaps
-        xkb-repeat-delay=500
-        xkb-repeat-rate=33
-      '';
+    services = {
+      getty.autologinUser = "nixos";
+      kmscon = {
+        enable = true;
+        hwRender = true;
+        extraConfig = ''
+          session-control
+          palette=solarized
+          font-name=Roboto Mono
+          font-size=24
+          xkb-layout=us
+          xkb-options=ctrl:nocaps
+          xkb-repeat-delay=500
+          xkb-repeat-rate=33
+        '';
+      };
     };
   }
 ]
