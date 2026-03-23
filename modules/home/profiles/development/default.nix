@@ -79,7 +79,6 @@ in
         home.packages = [
           # Use
           pkgs.cachix
-          pkgs.nix-index
 
           # Develop
           pkgs.manix
