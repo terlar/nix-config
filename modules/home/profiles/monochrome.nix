@@ -14,25 +14,28 @@ in
     programs = {
       bat.config.theme = "GitHub";
 
-      foot.settings.colors = {
-        foreground = "000011";
-        background = "fbf7ef";
-        regular0 = "000011"; # black
-        regular1 = "d6000c"; # red
-        regular2 = "474747"; # green
-        regular3 = "aaa69f"; # yellow
-        regular4 = "474747"; # blue
-        regular5 = "474747"; # magenta
-        regular6 = "474747"; # cyan
-        regular7 = "aaa69f"; # white
-        bright0 = "474747"; # bright black
-        bright1 = "d6000c"; # bright red
-        bright2 = "474747"; # bright green
-        bright3 = "474747"; # bright yellow
-        bright4 = "000011"; # bright blue
-        bright5 = "000011"; # bright magenta
-        bright6 = "000011"; # bright cyan
-        bright7 = "474747"; # bright white
+      foot.settings = {
+        main.initial-color-theme = "light";
+        colors-light = {
+          foreground = "000011";
+          background = "fbf7ef";
+          regular0 = "000011"; # black
+          regular1 = "d6000c"; # red
+          regular2 = "474747"; # green
+          regular3 = "aaa69f"; # yellow
+          regular4 = "474747"; # blue
+          regular5 = "474747"; # magenta
+          regular6 = "474747"; # cyan
+          regular7 = "aaa69f"; # white
+          bright0 = "474747"; # bright black
+          bright1 = "d6000c"; # bright red
+          bright2 = "474747"; # bright green
+          bright3 = "474747"; # bright yellow
+          bright4 = "000011"; # bright blue
+          bright5 = "000011"; # bright magenta
+          bright6 = "000011"; # bright cyan
+          bright7 = "474747"; # bright white
+        };
       };
 
       nushell = {
