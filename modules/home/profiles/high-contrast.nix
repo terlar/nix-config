@@ -7,6 +7,10 @@
 
 let
   cfg = config.profiles.highContrast;
+  theme = {
+    name = "HighContrast";
+    package = pkgs.gnome-themes-extra;
+  };
 in
 {
   options.profiles.highContrast = {
@@ -15,10 +19,8 @@ in
 
   config = lib.mkIf cfg.enable {
     gtk = {
-      theme = {
-        name = "HighContrast";
-        package = pkgs.gnome-themes-extra;
-      };
+      inherit theme;
+      gtk4 = { inherit theme; };
 
       # When HighContrast theme is enabled it will automatically use those icons, so this
       # is a fall-back in case icons doesn't exist in the HighContrast theme.

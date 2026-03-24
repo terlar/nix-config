@@ -80,7 +80,7 @@ in
 
   # Managed home.
   home-manager.users.${username} = {
-    home.stateVersion = "20.09";
+    home.stateVersion = "25.11";
 
     profiles.user.terje = {
       desktop = {

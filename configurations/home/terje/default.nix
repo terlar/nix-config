@@ -17,7 +17,7 @@
             home = {
               username = "terje";
               homeDirectory = "/home/terje";
-              stateVersion = "20.09";
+              stateVersion = "25.11";
             };
           }
         ];
