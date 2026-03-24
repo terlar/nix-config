@@ -25,6 +25,7 @@ in
         shell.enable = mkDefault true;
       };
 
+      opencode.enable = mkDefault true;
       git.absorb.enable = mkDefault true;
 
       user.terje = {
