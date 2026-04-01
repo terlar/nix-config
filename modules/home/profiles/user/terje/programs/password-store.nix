@@ -16,6 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.password-store = {
       enable = true;
+      settings.PASSWORD_STORE_DIR = "$XDG_DATA_HOME/password-store";
       package = pkgs.pass.withExtensions (ext: [
         ext.pass-import
         ext.pass-genphrase
@@ -23,5 +24,7 @@ in
         ext.pass-otp
       ]);
     };
+
+    services.pass-secret-service.enable = true;
   };
 }
