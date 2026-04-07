@@ -37,7 +37,7 @@ in
         pkgs.gron
         pkgs.hey
         pkgs.jaq
-        pkgs.nodePackages.json-diff
+        pkgs.json-diff
         pkgs.xh
       ];
     }
