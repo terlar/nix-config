@@ -67,6 +67,7 @@ in
         ignores = [
           ".dir-locals.el"
           ".envrc"
+          ".worktrees"
         ];
 
         settings.url = {
