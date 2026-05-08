@@ -27,9 +27,13 @@ in
       }
 
       (lib.mkIf cfg.desktop {
-        services.displayManager.dms-greeter = {
-          enable = true;
-          compositor.name = "niri";
+        services = {
+          displayManager.dms-greeter = {
+            enable = true;
+            compositor.name = "niri";
+          };
+
+          udisks2.enable = true;
         };
 
         # Scrollable-tiling Wayland compositor
