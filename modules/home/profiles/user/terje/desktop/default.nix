@@ -65,8 +65,13 @@ in
       ];
     };
 
+    services = {
+      udiskie.enable = true;
+    };
+
     home.packages = mkMerge [
       [
+        pkgs.nautilus
         pkgs.wl-clipboard
       ]
 
