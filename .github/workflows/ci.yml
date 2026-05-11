@@ -46,11 +46,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Install Nix
-        uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f # v31
+        uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
-        uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
+        uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
           useDaemon: true
           name: terlar
@@ -72,11 +72,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Install Nix
-        uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f # v31
+        uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
-        uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
+        uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
           useDaemon: true
           name: terlar
@@ -100,11 +100,11 @@ jobs:
       - name: Free disk space
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
       - name: Install Nix
-        uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f # v31
+        uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
-        uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
+        uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
           useDaemon: true
           name: terlar
@@ -126,11 +126,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Install Nix
-        uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f # v31
+        uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
-        uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
+        uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
           useDaemon: true
           name: terlar
