@@ -90,7 +90,7 @@ in
         ssh = {
           enable = mkDefault true;
           enableDefaultConfig = false;
-          matchBlocks."*".compression = mkDefault true;
+          settings."*".compression = mkDefault true;
         };
       };
     }
@@ -98,15 +98,13 @@ in
     (mkIf cfg.github.enable {
       programs = {
         gh.enable = true;
-        ssh.matchBlocks = mkIf cfg.github.reuseSshConnection {
+        ssh.settings = mkIf cfg.github.reuseSshConnection {
           "github.com" = {
-            hostname = "ssh.github.com";
-            port = 443;
-            serverAliveInterval = 60;
-            extraOptions = {
-              ControlMaster = "auto";
-              ControlPersist = "yes";
-            };
+            HostName = "ssh.github.com";
+            Port = 443;
+            ServerAliveInterval = 60;
+            ControlMaster = "auto";
+            ControlPersist = "yes";
           };
         };
       };
