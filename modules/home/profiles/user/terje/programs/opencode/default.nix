@@ -7,7 +7,7 @@
 
 let
   inherit (lib) mkIf;
-  cfg = config.profiles.opencode;
+  cfg = config.profiles.user.terje.programs.opencode;
 
   superpowersSrc = pkgs.fetchFromGitHub {
     owner = "obra";
@@ -17,13 +17,15 @@ let
   };
 in
 {
-  options.profiles.opencode = {
-    enable = lib.mkEnableOption "OpenCode profile";
+  options.profiles.user.terje.programs.opencode = {
+    enable = lib.mkEnableOption "OpenCode configuration for Terje";
   };
 
   config = mkIf cfg.enable {
     programs.opencode = {
       enable = true;
+
+      enableMcpIntegration = true;
 
       settings = {
         autoshare = false;
@@ -32,19 +34,6 @@ in
           disable_paste_summary = true;
         };
         share = "disabled";
-
-        mcp = {
-          k8s = {
-            type = "local";
-            enabled = false;
-            command = [ "${pkgs.mcp-k8s-go}/bin/mcp-k8s-go" ];
-          };
-
-          nix = {
-            type = "local";
-            command = [ "${pkgs.mcp-nixos}/bin/mcp-nixos" ];
-          };
-        };
       };
 
       skills = {
