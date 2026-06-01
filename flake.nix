@@ -95,17 +95,20 @@
 
         nixosModules = self.lib.modulesFromDir ./modules/nixos;
 
-        overlays = {
-          default = import ./packages;
-        };
+        overlays.default =
+          _final: prev:
+          nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
+            inherit (prev) callPackage;
+            directory = ./packages;
+          };
       };
 
       perSystem =
         { pkgs, ... }:
         {
-          packages = {
-            drduh-gpg-conf = pkgs.callPackage ./packages/drduh-gpg-conf { };
-            drduh-yubikey-guide = pkgs.callPackage ./packages/drduh-yubikey-guide { };
+          packages = nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
+            inherit (pkgs) callPackage;
+            directory = ./packages;
           };
         };
     };

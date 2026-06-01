@@ -9,14 +9,7 @@
         {
           nixpkgs = {
             hostPlatform = "x86_64-linux";
-            overlays = [
-              (_final: prev: {
-                inherit (config.flake.packages.${prev.stdenv.hostPlatform.system})
-                  drduh-gpg-conf
-                  drduh-yubikey-guide
-                  ;
-              })
-            ];
+            overlays = [ config.flake.overlays.default ];
           };
         }
       ];
