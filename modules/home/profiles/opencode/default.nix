@@ -32,6 +32,19 @@ in
           disable_paste_summary = true;
         };
         share = "disabled";
+
+        mcp = {
+          k8s = {
+            type = "local";
+            enabled = false;
+            command = [ "${pkgs.mcp-k8s-go}/bin/mcp-k8s-go" ];
+          };
+
+          nix = {
+            type = "local";
+            command = [ "${pkgs.mcp-nixos}/bin/mcp-nixos" ];
+          };
+        };
       };
 
       skills = {
