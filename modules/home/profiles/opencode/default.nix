@@ -48,6 +48,8 @@ in
       };
 
       skills = {
+        ghq-lookup = ./skills/ghq-lookup;
+
         superpowers-brainstorming = "${superpowersSrc}/skills/brainstorming";
         superpowers-dispatching-parallel-agents = "${superpowersSrc}/skills/dispatching-parallel-agents";
         superpowers-executing-plans = "${superpowersSrc}/skills/executing-plans";
