@@ -37,6 +37,7 @@ in
       };
 
       skills = {
+        git-commit = ./skills/git-commit;
         ghq-lookup = ./skills/ghq-lookup;
 
         superpowers-brainstorming = "${superpowersSrc}/skills/brainstorming";

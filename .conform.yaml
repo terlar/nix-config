@@ -18,7 +18,7 @@ policies:
           - chore
           - ci
           - docs
-          - pref
+          - perf
           - refactor
           - style
           - test
