@@ -33,6 +33,12 @@ in
         experimental = {
           disable_paste_summary = true;
         };
+        reference = {
+          nixpkgs-lib = {
+            repository = "nix-community/nixpkgs.lib";
+            branch = "master";
+          };
+        };
         share = "disabled";
       };
 
@@ -41,6 +47,7 @@ in
       skills = {
         git-commit = ./skills/git-commit;
         ghq-lookup = ./skills/ghq-lookup;
+        nix-coding = ./skills/nix-coding;
 
         superpowers-brainstorming = "${superpowersSrc}/skills/brainstorming";
         superpowers-dispatching-parallel-agents = "${superpowersSrc}/skills/dispatching-parallel-agents";

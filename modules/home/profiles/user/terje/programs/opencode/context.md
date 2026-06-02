@@ -14,12 +14,6 @@
 - Do not open `.env` files or reveal secret contents.
 - You may note that secrets exist without exposing values.
 
-# Nix Coding Style
-
-- Prefer functional programming style: use eta reduction where it improves clarity.
-- Use `lib.pipe` to express sequential transformations instead of nested function calls.
-- Prefer `lib` functions over builtins when an equivalent exists.
-
 # Hacks
 
 - When you have to write a hack for a limitation in a library, keep it away from the main logic and clearly marked.
