@@ -45,6 +45,7 @@ in
       context = ./context.md;
 
       skills = {
+        flake-parts = ./skills/flake-parts;
         git-commit = ./skills/git-commit;
         ghq-lookup = ./skills/ghq-lookup;
         nix-coding = ./skills/nix-coding;
