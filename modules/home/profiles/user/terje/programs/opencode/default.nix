@@ -36,6 +36,8 @@ in
         share = "disabled";
       };
 
+      context = ./context.md;
+
       skills = {
         git-commit = ./skills/git-commit;
         ghq-lookup = ./skills/ghq-lookup;
