@@ -1,9 +1,10 @@
 ---
 name: flake-parts
 description: >
-  Use when working with flake-parts — structuring flakes, defining perSystem
-  outputs, writing reusable flake modules, using withSystem or moduleWithSystem,
-  exporting flakeModules, or debugging flake-parts evaluation.
+  Use when working with flake-parts or dev-flake — structuring flakes, defining
+  perSystem outputs, writing reusable flake modules, using withSystem or
+  moduleWithSystem, exporting flakeModules, setting up dev environments with
+  dev-flake, or debugging flake-parts evaluation.
 compatibility: opencode
 ---
 
@@ -162,4 +163,122 @@ Then inspect any output path:
 nix eval .#debug                                              # full debug attrset
 nix eval .#debug.allSystems                                   # per-system configs
 nix eval .#debug.allSystems.x86_64-linux.config.packages
+```
+
+## dev-flake
+
+`dev-flake` (`github:terlar/dev-flake`) is a flake-parts module that bundles
+devshell, git-hooks-nix (pre-commit), and treefmt-nix behind a thin `dev.*`
+option surface. All features default to enabled.
+
+### What it wires up automatically
+
+- `devShells.default` — named devshell with pre-commit installed on entry;
+  `treefmt` and `pre-commit` available as shell commands
+- `checks.pre-commit` — all configured pre-commit hooks as a flake check
+- `checks.treefmt` — treefmt check (only when pre-commit is disabled, to avoid
+  double-checking; otherwise treefmt runs through pre-commit)
+- Default hooks enabled: `deadnix`, `statix`
+
+### Top-level `dev.*` options
+
+| Option | Default | Description |
+|---|---|---|
+| `dev.name` | `"project"` | Project name, used as devshell prompt |
+| `dev.rootSrc` | `self.outPath` | Project root for pre-commit; set to parent `self` in sub-flakes |
+| `dev.devshell.enable` | `true` | Enable devshell |
+| `dev.devshell.addCommands` | `true` | Add treefmt and pre-commit to shell menu |
+| `dev.pre-commit.enable` | `true` | Enable pre-commit |
+| `dev.treefmt.enable` | `true` | Enable treefmt |
+
+### Root-flake usage
+
+```nix
+{
+  inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    dev-flake = {
+      url = "github:terlar/dev-flake";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  };
+
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux" ];
+      imports = [ inputs.dev-flake.flakeModule ];
+
+      dev.name = "my-project";
+
+      perSystem = { config, pkgs, ... }: {
+        # formatter is not set automatically — wire it up explicitly
+        formatter = config.treefmt.programs.nixfmt.package;
+        treefmt.programs.nixfmt = {
+          enable = true;
+          package = pkgs.nixfmt-rfc-style;
+        };
+      };
+    };
+}
+```
+
+### Sub-flake usage (recommended)
+
+Isolate dev dependencies in `./dev/` so they don't pollute the main flake's
+closure. Use flake-parts `partitions` in the root flake to wire it in.
+
+**`./dev/flake.nix`** — inputs only, no outputs:
+
+```nix
+{
+  description = "Dependencies for development purposes";
+  inputs.dev-flake.url = "github:terlar/dev-flake";
+  outputs = _: { };
+}
+```
+
+**`./dev/flake-module.nix`**:
+
+```nix
+{ inputs, ... }: {
+  imports = [ inputs.dev-flake.flakeModule ];
+
+  dev.name = "my-project";
+  # dev.rootSrc = inputs.self.outPath;  # set if self points to ./dev, not root
+
+  perSystem = { config, pkgs, ... }: {
+    formatter = config.treefmt.programs.nixfmt.package;
+    treefmt.programs.nixfmt = {
+      enable = true;
+      package = pkgs.nixfmt-rfc-style;
+    };
+  };
+}
+```
+
+**Root `flake.nix`** — wire in via partitions:
+
+```nix
+imports = [ inputs.flake-parts.flakeModules.partitions ];
+partitionedAttrs = {
+  checks = "dev";
+  devShells = "dev";
+};
+partitions.dev = {
+  extraInputsFlake = ./dev;
+  module.imports = [ ./dev/flake-module.nix ];
+};
+```
+
+### Extending defaults
+
+All underlying options from devshell, git-hooks-nix, and treefmt-nix remain
+fully accessible:
+
+```nix
+perSystem = { ... }: {
+  pre-commit.settings.hooks.conform.enable = true;
+  treefmt.programs.mdsh.enable = true;
+};
 ```
