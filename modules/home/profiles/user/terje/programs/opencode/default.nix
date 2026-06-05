@@ -7,7 +7,7 @@
 
 let
   inherit (lib) mkIf;
-  cfg = config.profiles.opencode;
+  cfg = config.profiles.user.terje.programs.opencode;
 
   superpowersSrc = pkgs.fetchFromGitHub {
     owner = "obra";
@@ -17,13 +17,15 @@ let
   };
 in
 {
-  options.profiles.opencode = {
-    enable = lib.mkEnableOption "OpenCode profile";
+  options.profiles.user.terje.programs.opencode = {
+    enable = lib.mkEnableOption "OpenCode configuration for Terje";
   };
 
   config = mkIf cfg.enable {
     programs.opencode = {
       enable = true;
+
+      enableMcpIntegration = true;
 
       settings = {
         autoshare = false;
@@ -31,10 +33,23 @@ in
         experimental = {
           disable_paste_summary = true;
         };
+        reference = {
+          nixpkgs-lib = {
+            repository = "nix-community/nixpkgs.lib";
+            branch = "master";
+          };
+        };
         share = "disabled";
       };
 
+      context = ./context.md;
+
       skills = {
+        flake-parts = ./skills/flake-parts;
+        git-commit = ./skills/git-commit;
+        ghq-lookup = ./skills/ghq-lookup;
+        nix-coding = ./skills/nix-coding;
+
         superpowers-brainstorming = "${superpowersSrc}/skills/brainstorming";
         superpowers-dispatching-parallel-agents = "${superpowersSrc}/skills/dispatching-parallel-agents";
         superpowers-executing-plans = "${superpowersSrc}/skills/executing-plans";

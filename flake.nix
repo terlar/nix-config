@@ -7,10 +7,10 @@
   };
 
   inputs = {
-    flake-parts.url = "flake-parts";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     home-manager = {
-      url = "home-manager";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,7 +21,10 @@
     };
 
     # Modules
-    nixos-hardware.url = "nixos-hardware";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -95,17 +98,20 @@
 
         nixosModules = self.lib.modulesFromDir ./modules/nixos;
 
-        overlays = {
-          default = import ./packages;
-        };
+        overlays.default =
+          _final: prev:
+          nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
+            inherit (prev) callPackage;
+            directory = ./packages;
+          };
       };
 
       perSystem =
         { pkgs, ... }:
         {
-          packages = {
-            drduh-gpg-conf = pkgs.callPackage ./packages/drduh-gpg-conf { };
-            drduh-yubikey-guide = pkgs.callPackage ./packages/drduh-yubikey-guide { };
+          packages = nixpkgs.lib.filesystem.packagesFromDirectoryRecursive {
+            inherit (pkgs) callPackage;
+            directory = ./packages;
           };
         };
     };

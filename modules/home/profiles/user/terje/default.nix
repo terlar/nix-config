@@ -25,10 +25,10 @@ in
         shell.enable = mkDefault true;
       };
 
-      opencode.enable = mkDefault true;
       git.absorb.enable = mkDefault true;
 
       user.terje = {
+        ai.enable = mkDefault true;
         shell.enable = mkDefault true;
         editor.emacs.enable = mkDefault true;
       };
