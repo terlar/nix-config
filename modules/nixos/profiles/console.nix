@@ -13,11 +13,11 @@ in
       enable = lib.mkDefault true;
       hwRender = lib.mkDefault true;
       # Make theme/font configurable in single place.
-      extraConfig = ''
-        palette=solarized-white
-        font-name=Iosevka Curly Slab
-        font-size=16
-      '';
+      config = {
+        palette = "solarized-white";
+        font-name = "Iosevka Curly Slab";
+        font-size = 16;
+      };
     };
   };
 }
