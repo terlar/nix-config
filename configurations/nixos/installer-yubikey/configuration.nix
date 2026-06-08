@@ -80,17 +80,18 @@ lib.mkMerge [
       kmscon = {
         enable = true;
         hwRender = true;
-        extraConfig = ''
-          session-control
-          palette=solarized
-          font-name=Roboto Mono
-          font-size=24
-          xkb-layout=us
-          xkb-options=ctrl:nocaps
-          xkb-repeat-delay=500
-          xkb-repeat-rate=33
-        '';
+        config = {
+          session-control = true;
+          palette = "solarized";
+          font-name = "Roboto Mono";
+          font-size = 24;
+          xkb-layout = "us";
+          xkb-options = "ctrl:nocaps";
+          xkb-repeat-delay = 500;
+          xkb-repeat-rate = 33;
+        };
       };
     };
+    hardware.graphics.enable = true;
   }
 ]

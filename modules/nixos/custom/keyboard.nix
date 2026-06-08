@@ -40,27 +40,32 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    console.useXkbConfig = true;
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        console.useXkbConfig = true;
 
-    services.kmscon = {
-      extraConfig = ''
-        xkb-variant=${cfg.xkbVariant}
-        xkb-options=${cfg.xkbOptions}
-        xkb-repeat-delay=${toString cfg.xkbRepeatDelay}
-        xkb-repeat-rate=${toString cfg.xkbRepeatInterval}
-      '';
-    };
+        services.kmscon.config = {
+          xkb-variant = cfg.xkbVariant;
+          xkb-options = cfg.xkbOptions;
+        };
 
-    services.xserver = {
-      xkb = {
-        inherit (cfg) layout;
-        variant = cfg.xkbVariant;
-        options = cfg.xkbOptions;
-      };
+        services.xserver.xkb = {
+          inherit (cfg) layout;
+          variant = cfg.xkbVariant;
+          options = cfg.xkbOptions;
+        };
+      }
 
-      autoRepeatDelay = cfg.xkbRepeatDelay;
-      autoRepeatInterval = cfg.xkbRepeatInterval;
-    };
-  };
+      (lib.mkIf (cfg.xkbRepeatDelay != null) {
+        services.kmscon.config.xkb-repeat-delay = cfg.xkbRepeatDelay;
+        services.xserver.autoRepeatDelay = cfg.xkbRepeatDelay;
+      })
+
+      (lib.mkIf (cfg.xkbRepeatInterval != null) {
+        services.kmscon.config.xkb-repeat-rate = cfg.xkbRepeatInterval;
+        services.xserver.autoRepeatInterval = cfg.xkbRepeatInterval;
+      })
+    ]
+  );
 }
