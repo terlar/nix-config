@@ -391,6 +391,17 @@ in
               open-floating = true;
               open-focused = true;
             }
+            {
+              match._props.app-id = "Zoom";
+              _children = [
+                { exclude._props.title = "^Zoom Workplace"; }
+                { exclude._props.title = "^Meeting$"; }
+              ];
+
+              open-floating = true;
+              border.off = [ ];
+              focus-ring.off = [ ];
+            }
           ];
 
           extraConfig = ''
