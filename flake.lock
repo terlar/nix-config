@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780894562,
+        "narHash": "sha256-c3430xwxwhHipl3jigUGMMBfpaMylDqytW/kdmB3ZGs=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "24fed06cac83bcc44ac8efbb57cab1a82fa0bedc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "elisp-helpers": {
       "inputs": {
         "fromElisp": "fromElisp"
@@ -228,6 +248,7 @@
     },
     "root": {
       "inputs": {
+        "disko": "disko",
         "emacs-config": "emacs-config",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",

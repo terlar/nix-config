@@ -16,40 +16,11 @@
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-
-    initrd.luks.devices = {
-      cryptkey = {
-        device = "/dev/disk/by-uuid/4f764803-26f6-423a-a368-79bc41982937";
-      };
-
-      cryptroot = {
-        device = "/dev/disk/by-uuid/9a72ebca-706c-4166-a11a-a77877a9aa60";
-        keyFile = "/dev/mapper/cryptkey";
-      };
-
-      cryptswap = {
-        device = "/dev/disk/by-uuid/42f747bb-0c85-494d-8904-1b6e2863ee71";
-        keyFile = "/dev/mapper/cryptkey";
-      };
-    };
   };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/12fe7f51-0695-4de6-9e5f-d55f22d7eaac";
-      fsType = "btrfs";
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-uuid/0E6A-4E5E";
-      fsType = "vfat";
-    };
-  };
-
-  swapDevices = [ { device = "/dev/disk/by-uuid/c164010e-34c8-4725-ac8f-95baa15839c6"; } ];
 
   nix.settings.max-jobs = lib.mkDefault 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
   # High-DPI console
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 }
