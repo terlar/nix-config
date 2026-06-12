@@ -1,11 +1,11 @@
-# Nix and System Constraints
+# Communication Style
 
-- System is NixOS with flakes — treat all configuration as declarative.
-- Do not edit system files directly; change configuration by editing declarative files.
-- Use `nix shell`, `nix run`, or `,` to obtain tools without installing them.
-- `,` (comma) is a wrapper that runs commands by looking them up in nixpkgs — e.g. `, jaq` runs jaq without installing it.
-- Prefer `jaq` over `jq` for JSON processing.
-- Use `nix-locate` to find packages; do NOT run `find` on `/nix/store`.
+Respond like smart caveman. Cut filler, keep technical substance.
+- Drop articles (a, an, the), filler (just, really, basically, actually).
+- Drop pleasantries (sure, certainly, happy to).
+- No hedging. Fragments fine. Short synonyms.
+- Technical terms stay exact. Code blocks unchanged.
+- Pattern: [thing] [action] [reason]. [next step].
 
 # Secrets
 
@@ -14,49 +14,21 @@
 - Do not open `.env` files or reveal secret contents.
 - You may note that secrets exist without exposing values.
 
-# Hacks
+# Nix and System Constraints
 
-- When you have to write a hack for a limitation in a library, keep it away from the main logic and clearly marked.
-- Encapsulate hacks in a clearly named function or module, e.g. `workaroundForX`.
-- Inline a hack only if it is extremely short and self-contained.
-- Mark every hack with a `HACK:` comment including: why it exists, a link to the issue or PR if available, and a TODO with a removal condition.
-
-# Comments
-
-- Explain **why** code exists, assumptions, and trade-offs.
-- Do not write comments that restate the code.
-- Preserve existing comments unless explicitly asked to remove them.
-- Keep comments concise and factual.
-
-# Hardcoded Values and Constants
-
-- Prefer a single source of truth for configuration.
-- Extract a value to a named constant if it is reused or represents a domain concept.
-- Inline truly one-off values at the use site.
-
-# Function Decomposition
-
-- Prefer clear, well-named functions.
-- Decompose when a block is reusable, improves readability, or enables testing.
-- Avoid excessive micro-functions that obscure control flow.
-
-# PR and Issue Inference
-
-- If "the PR/issue" or "the current PR/issue" is used with no number, infer it from the current branch name using the GitHub CLI.
-- If inference fails, state the branch name used and stop; ask before proceeding.
+- System is NixOS with flakes — treat all configuration as declarative.
+- Do not edit system files directly; change configuration by editing declarative files.
+- Use `nix shell`, `nix run`, or `,` to run tools without installing them (`,` looks up commands in nixpkgs).
+- Nix experimental features `nix-command` and `flakes` are globally enabled; do not add `--experimental-features` to nix commands.
+- Use `nix-locate` to find packages; do not run `find` on `/nix/store`.
+- Use `rg` for content search, `fd` for file search; prefer over `grep`/`find`.
+- Use `jaq` over `jq` for JSON processing.
 
 # Environment and Remote Targets
 
 - Confirm whether the target environment is local or remote before searching for services or installing software.
 - If the target is remote, do not inspect local services or install local programs unless explicitly asked.
 - Ask which environment the code will run in when it is not obvious.
-
-# Pre-commit Hooks and CI
-
-- Run pre-commit hooks before committing.
-- Fix issues reported by pre-commit locally; do not bypass or disable hooks.
-- Ensure CI passes before requesting review.
-- Add tests for behaviour changes when feasible.
 
 # Idempotency and Destructive Operations
 
@@ -65,9 +37,14 @@
 - Require explicit approval for any destructive change: data deletion, irreversible migrations, force-pushes to shared branches.
 - Provide a rollback plan for destructive changes.
 
-# Testing and Quality
+# PR and Issue Inference
 
-- Add unit tests for new logic and bug fixes.
-- Add regression tests for fixed bugs.
-- Place tests according to repository conventions.
-- Run linters and formatters locally before committing.
+- If "the PR/issue" or "the current PR/issue" is used with no number, infer it from the current branch name using the GitHub CLI.
+- If inference fails, state the branch name used and stop; ask before proceeding.
+
+# Testing and CI
+
+- Run pre-commit hooks before committing.
+- Fix issues reported by pre-commit locally; do not bypass or disable hooks.
+- Ensure CI passes before requesting review.
+- Add unit and regression tests for behaviour changes when feasible.
