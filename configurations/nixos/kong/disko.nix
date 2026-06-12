@@ -21,6 +21,11 @@
             type = "luks";
             name = "cryptkey";
             settings.allowDiscards = true;
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/keyfile";
+            };
           };
         };
         swap = {
@@ -30,7 +35,7 @@
             name = "cryptswap";
             settings = {
               allowDiscards = true;
-              keyFile = "/dev/mapper/cryptkey";
+              keyFile = "/keyfile:/dev/mapper/cryptkey";
             };
             content = {
               type = "swap";
@@ -45,20 +50,16 @@
             name = "cryptroot";
             settings = {
               allowDiscards = true;
-              keyFile = "/dev/mapper/cryptkey";
+              keyFile = "/keyfile:/dev/mapper/cryptkey";
             };
             content = {
               type = "btrfs";
               extraArgs = [ "-f" ];
-              subvolumes = {
-                "/root" = {
-                  mountpoint = "/";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                };
-              };
+              mountpoint = "/";
+              mountOptions = [
+                "compress=zstd"
+                "noatime"
+              ];
             };
           };
         };

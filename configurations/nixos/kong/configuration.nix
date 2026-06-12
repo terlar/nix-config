@@ -22,6 +22,11 @@ in
   };
 
   boot = {
+    initrd = {
+      supportedFilesystems = [ "ext4" ];
+      checkJournalingFS = true;
+    };
+
     loader = {
       systemd-boot = {
         # Use the systemd-boot EFI boot loader.
