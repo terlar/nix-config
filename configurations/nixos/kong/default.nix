@@ -11,6 +11,8 @@
       inputs.nixos-hardware.nixosModules.common-pc-ssd
       inputs.nix-index-database.nixosModules.nix-index
       inputs.home-manager.nixosModules.home-manager
+      inputs.disko.nixosModules.disko
+      ./disko.nix
 
       {
         nixpkgs = {
