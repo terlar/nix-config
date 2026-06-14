@@ -23,6 +23,8 @@ in
         enable = lib.mkDefault true;
         nssmdns4 = lib.mkDefault true;
       };
+      # Power management and battery status.
+      upower.enable = true;
     };
 
     environment.systemPackages = [ pkgs.powertop ];
