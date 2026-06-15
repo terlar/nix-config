@@ -9,6 +9,13 @@ let
   inherit (lib) mkIf;
   cfg = config.profiles.user.terje.programs.opencode;
 
+  ponytail = pkgs.fetchFromGitHub {
+    owner = "DietrichGebert";
+    repo = "ponytail";
+    rev = "v4.5.0";
+    hash = "sha256-kF+EJr5WxOaI/3k15Cl3WUFVUQPkI5RIY5swRL65XIA=";
+  };
+
   superpowersSrc = pkgs.fetchFromGitHub {
     owner = "obra";
     repo = "superpowers";
@@ -33,6 +40,7 @@ in
         experimental = {
           disable_paste_summary = true;
         };
+        plugin = [ "${ponytail}/.opencode/plugins/ponytail.mjs" ];
         reference = {
           nixpkgs-lib = {
             repository = "nix-community/nixpkgs.lib";
