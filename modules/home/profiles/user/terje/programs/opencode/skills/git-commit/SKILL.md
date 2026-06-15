@@ -103,6 +103,17 @@ Before writing the commit message:
 - Always pass `--committer-date-is-author-date` when rebasing — this preserves
   the original author date so history isn't rewritten with the rebase timestamp
 
+## GPG signing failures
+
+- If `git commit` fails with "Bad PIN" from the GPG agent, retry the commit
+  immediately. The "Bad PIN" error typically means a mistyped passphrase; a
+  retry will prompt for the passphrase again.
+- Do not change the commit message or staging between retries — reuse the
+  exact same commit command.
+- If retry fails again with "Bad PIN", ask the user to unlock their GPG key
+  first (e.g., `gpg --card-status` or `echo test | gpg --sign`) before
+  retrying the commit.
+
 ## Examples
 
 Good subject lines:
