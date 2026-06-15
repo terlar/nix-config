@@ -19,8 +19,8 @@ let
   superpowersSrc = pkgs.fetchFromGitHub {
     owner = "obra";
     repo = "superpowers";
-    rev = "v5.0.6";
-    hash = "sha256-r/Z+UxSFQIx99HnSPoU/toWMddXDcnLsbFXpQfLfj1k=";
+    rev = "v5.1.0";
+    hash = "sha256-3E3rO6hR87JUfS3XV1Eaoz6SDWOftleWvN9UPNFEMjw=";
   };
 in
 {
