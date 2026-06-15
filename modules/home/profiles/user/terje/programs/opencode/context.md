@@ -18,7 +18,7 @@ Respond like smart caveman. Cut filler, keep technical substance.
 
 - System is NixOS with flakes — treat all configuration as declarative.
 - Do not edit system files directly; change configuration by editing declarative files.
-- Use `nix shell`, `nix run`, or `,` to run tools without installing them (`,` looks up commands in nixpkgs).
+- Prefer `, <command>` to run tools from nixpkgs. Fall back to `nix shell` or `nix run` if `,` doesn't have the command.
 - Nix experimental features `nix-command` and `flakes` are globally enabled; do not add `--experimental-features` to nix commands.
 - Use `nix-locate` to find packages; do not run `find` on `/nix/store`.
 - Use `rg` for content search, `fd` for file search; prefer over `grep`/`find`.
