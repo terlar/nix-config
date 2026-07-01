@@ -57,6 +57,7 @@ in
         git-commit = ./skills/git-commit;
         ghq-lookup = ./skills/ghq-lookup;
         nix-coding = ./skills/nix-coding;
+        jira-cli-operations = ./skills/jira-cli-operations;
 
         superpowers-brainstorming = "${superpowersSrc}/skills/brainstorming";
         superpowers-dispatching-parallel-agents = "${superpowersSrc}/skills/dispatching-parallel-agents";
