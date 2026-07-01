@@ -12,8 +12,8 @@ let
   ponytail = pkgs.fetchFromGitHub {
     owner = "DietrichGebert";
     repo = "ponytail";
-    rev = "v4.5.0";
-    hash = "sha256-kF+EJr5WxOaI/3k15Cl3WUFVUQPkI5RIY5swRL65XIA=";
+    rev = "v4.8.4";
+    hash = "sha256-1A9GkjCuiqwd6Wxl18CZUGYekxrbeTLVDapNUua8ihg=";
   };
 
   superpowersSrc = pkgs.fetchFromGitHub {
