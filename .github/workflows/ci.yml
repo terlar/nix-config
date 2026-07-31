@@ -49,6 +49,8 @@ jobs:
         uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+          extra_nix_config: |
+            max-jobs = auto
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
@@ -75,6 +77,8 @@ jobs:
         uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+          extra_nix_config: |
+            max-jobs = auto
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
@@ -103,6 +107,8 @@ jobs:
         uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+          extra_nix_config: |
+            max-jobs = auto
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
@@ -129,6 +135,8 @@ jobs:
         uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+          extra_nix_config: |
+            max-jobs = auto
       - name: Nix cache (cachix)
         uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         with:
