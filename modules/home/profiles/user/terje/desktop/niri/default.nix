@@ -146,7 +146,9 @@ in
         services.swayosd.enable = true;
 
         wayland.windowManager.niri.settings = {
-          spawnAtStartup = [ "swww-daemon" ];
+          _children = [
+            { "spawn-at-startup" = [ "swww-daemon" ]; }
+          ];
 
           binds = {
             "Mod+Shift+Return".spawn = "fuzzel";
@@ -247,6 +249,54 @@ in
           enable = true;
 
           settings = {
+            _children = [
+              {
+                window-rule._children = [
+                  { match._props.app-id = "foot"; }
+                  { default-column-display = "tabbed"; }
+                ];
+              }
+              {
+                window-rule._children = [
+                  { match._props.app-id = "brave-browser"; }
+                  { default-column-display = "tabbed"; }
+                ];
+              }
+              {
+                window-rule._children = [
+                  {
+                    match._props = {
+                      app-id = "krita";
+                      title = "^Krita";
+                    };
+                  }
+                  { open-fullscreen = true; }
+                ];
+              }
+              {
+                window-rule._children = [
+                  { match._props.app-id = "krita"; }
+                  { exclude._props.title = "^Krita"; }
+                  { open-floating = true; }
+                  { open-focused = true; }
+                ];
+              }
+              {
+                window-rule._children = [
+                  { match._props.app-id = "Zoom"; }
+                  {
+                    _children = [
+                      { exclude._props.title = "^Zoom Workplace"; }
+                      { exclude._props.title = "^Meeting"; }
+                    ];
+                  }
+                  { open-floating = true; }
+                  { border.off = [ ]; }
+                  { focus-ring.off = [ ]; }
+                ];
+              }
+            ];
+
             input = {
               workspace-auto-back-and-forth = [ ];
 
@@ -368,41 +418,6 @@ in
               "Mod+W".toggle-column-tabbed-display = [ ];
             };
           };
-
-          windowRules = [
-            {
-              match._props.app-id = "foot";
-              default-column-display = "tabbed";
-            }
-            {
-              match._props.app-id = "brave-browser";
-              default-column-display = "tabbed";
-            }
-            {
-              match._props = {
-                app-id = "krita";
-                title = "^Krita";
-              };
-              open-fullscreen = true;
-            }
-            {
-              match._props.app-id = "krita";
-              exclude._props.title = "^Krita";
-              open-floating = true;
-              open-focused = true;
-            }
-            {
-              match._props.app-id = "Zoom";
-              _children = [
-                { exclude._props.title = "^Zoom Workplace"; }
-                { exclude._props.title = "^Meeting"; }
-              ];
-
-              open-floating = true;
-              border.off = [ ];
-              focus-ring.off = [ ];
-            }
-          ];
 
           extraConfig = ''
             output "eDP-1" {

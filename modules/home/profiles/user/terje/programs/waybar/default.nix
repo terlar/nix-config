@@ -15,7 +15,9 @@ in
 
   config = lib.mkIf cfg.enable {
     services.network-manager-applet.enable = true;
-    wayland.windowManager.niri.spawnAtStartup = [ "waybar" ];
+    wayland.windowManager.niri.settings._children = [
+      { "spawn-at-startup" = [ "waybar" ]; }
+    ];
 
     programs = {
       waybar = {
