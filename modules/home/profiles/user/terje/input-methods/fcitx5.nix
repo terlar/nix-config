@@ -14,7 +14,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.niri.spawnAtStartup = [ "fcitx5" ];
+    wayland.windowManager.niri.settings._children = [
+      { "spawn-at-startup" = [ "fcitx5" ]; }
+    ];
 
     i18n.inputMethod = {
       enable = true;
