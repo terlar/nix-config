@@ -21,6 +21,7 @@
         };
 
         home-manager = {
+          useGlobalPkgs = false;
           sharedModules = [ config.flake.homeModules.user-terje ];
         };
       }

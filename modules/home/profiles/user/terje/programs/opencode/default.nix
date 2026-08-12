@@ -34,25 +34,10 @@ in
 
       enableMcpIntegration = true;
 
-      settings = {
-        autoshare = false;
-        autoupdate = false;
-        experimental = {
-          disable_paste_summary = true;
-        };
-        plugin = [ "${ponytail}/.opencode/plugins/ponytail.mjs" ];
-        reference = {
-          nixpkgs-lib = {
-            repository = "nix-community/nixpkgs.lib";
-            branch = "master";
-          };
-        };
-        share = "disabled";
-      };
-
       context = ./context.md;
 
       skills = {
+        ast-grep = ./skills/ast-grep;
         flake-parts = ./skills/flake-parts;
         git-commit = ./skills/git-commit;
         ghq-lookup = ./skills/ghq-lookup;
@@ -73,6 +58,57 @@ in
         superpowers-verification-before-completion = "${superpowersSrc}/skills/verification-before-completion";
         superpowers-writing-plans = "${superpowersSrc}/skills/writing-plans";
         superpowers-writing-skills = "${superpowersSrc}/skills/writing-skills";
+      };
+
+      settings = {
+        autoshare = false;
+        autoupdate = false;
+        experimental = {
+          disable_paste_summary = true;
+        };
+        plugin = [ "${ponytail}/.opencode/plugins/ponytail.mjs" ];
+        reference = {
+          nixpkgs-lib = {
+            repository = "nix-community/nixpkgs.lib";
+            branch = "master";
+          };
+        };
+        share = "disabled";
+
+        mcp.ast-grep = {
+          command = [ "${pkgs.ast-grep-mcp}/bin/ast-grep-server" ];
+          type = "local";
+          env.AST_GREP_OUTPUT_FORMAT = "text";
+        };
+
+        lsp = {
+          nixd = {
+            command = [ (lib.getExe pkgs.nil) ];
+            extensions = [ ".nix" ];
+          };
+
+          jsonls = {
+            command = [
+              (lib.getExe' pkgs.vscode-langservers-extracted "vscode-json-language-server")
+              "--stdio"
+            ];
+            extensions = [
+              ".json"
+              ".jsonc"
+            ];
+          };
+
+          yamlls = {
+            command = [
+              (lib.getExe pkgs.yaml-language-server)
+              "--stdio"
+            ];
+            extensions = [
+              ".yaml"
+              ".yml"
+            ];
+          };
+        };
       };
     };
   };
