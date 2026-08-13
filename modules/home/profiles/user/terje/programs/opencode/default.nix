@@ -108,6 +108,39 @@ in
               ".yml"
             ];
           };
+
+          gopls = {
+            command = [ (lib.getExe pkgs.gopls) ];
+            extensions = [
+              ".go"
+              ".mod"
+              ".sum"
+            ];
+          };
+
+          bashls = {
+            command = [
+              (lib.getExe pkgs.bash-language-server)
+              "start"
+            ];
+            extensions = [
+              ".sh"
+              ".bash"
+            ];
+          };
+
+          biome = {
+            command = [
+              (lib.getExe pkgs.biome)
+              "lsp-proxy"
+            ];
+            extensions = [
+              ".js"
+              ".ts"
+              ".jsx"
+              ".tsx"
+            ];
+          };
         };
       };
     };
