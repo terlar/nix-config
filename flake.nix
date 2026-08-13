@@ -79,6 +79,9 @@
                   inputs.emacs-config.homeManagerModules.emacsConfig
                 ];
 
+                nixpkgs.overlays = [ self.overlays.default ];
+                nixpkgs.config.allowUnfree = true;
+
                 profiles.user.terje.enable = true;
                 programs.home-manager.enable = true;
 
