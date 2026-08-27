@@ -32,4 +32,5 @@ policies:
           - gnome
           - niri
           - nushell
+          - opencode
         descriptionLength: 72

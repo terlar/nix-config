@@ -66,7 +66,12 @@ in
         experimental = {
           disable_paste_summary = true;
         };
-        plugin = [ "${ponytail}/.opencode/plugins/ponytail.mjs" ];
+
+        plugin = [
+          "${ponytail}/.opencode/plugins/ponytail.mjs"
+          "${pkgs.opencode-github-copilot-auto-model}/lib/opencode-github-copilot-auto-model"
+        ];
+
         reference = {
           nixpkgs-lib = {
             repository = "nix-community/nixpkgs.lib";
