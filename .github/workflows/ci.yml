@@ -54,7 +54,6 @@ jobs:
         with:
           useDaemon: true
           name: terlar
-          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Run check
         run: nix flake check
@@ -80,7 +79,6 @@ jobs:
         with:
           useDaemon: true
           name: terlar
-          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build activation package
         run: |
@@ -108,7 +106,6 @@ jobs:
         with:
           useDaemon: true
           name: terlar
-          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build system
         run: |
@@ -134,7 +131,6 @@ jobs:
         with:
           useDaemon: true
           name: terlar
-          extraPullNames: cuda-maintainers
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
       - name: Build ISO
