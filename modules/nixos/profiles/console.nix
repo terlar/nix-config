@@ -11,9 +11,9 @@ in
     # Virtual terminal.
     services.kmscon = {
       enable = lib.mkDefault true;
-      hwRender = lib.mkDefault true;
       # Make theme/font configurable in single place.
       config = {
+        hwaccel = lib.mkDefault true;
         palette = "solarized-white";
         font-name = "Iosevka Curly Slab";
         font-size = 16;
