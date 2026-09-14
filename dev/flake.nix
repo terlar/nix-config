@@ -2,7 +2,7 @@
   description = "Dependencies for development purposes";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
 
     dev-flake = {
       url = "github:terlar/dev-flake";
