@@ -13,7 +13,7 @@ compatibility: opencode
 ```nix
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -201,7 +201,7 @@ option surface. All features default to enabled.
       url = "github:terlar/dev-flake";
       inputs.flake-parts.follows = "flake-parts";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
   };
 
   outputs = inputs:
