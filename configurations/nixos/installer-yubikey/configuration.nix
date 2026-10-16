@@ -79,8 +79,8 @@ lib.mkMerge [
       getty.autologinUser = "nixos";
       kmscon = {
         enable = true;
-        hwRender = true;
         config = {
+          hwaccell = true;
           session-control = true;
           palette = "solarized";
           font-name = "Roboto Mono";
