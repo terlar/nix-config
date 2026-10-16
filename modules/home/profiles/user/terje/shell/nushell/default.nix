@@ -16,13 +16,6 @@ in
       nushell = {
         enable = true;
 
-        shellAbbrs = {
-          dc = "detect columns";
-          day = "date now | format date '%d (%A)'";
-          week = "date now | format date %V";
-          month = "date now | format date '%m (%B)'";
-        };
-
         environmentVariables = lib.mkMerge [
           config.home.sessionVariables
           {
@@ -65,6 +58,13 @@ in
           completions.algorithm = "fuzzy";
           render_right_prompt_on_last_line = true;
           highlight_resolved_externals = true;
+
+          abbreviations = {
+            dc = "detect columns";
+            day = "date now | format date '%d (%A)'";
+            week = "date now | format date %V";
+            month = "date now | format date '%m (%B)'";
+          };
 
           keybindings = [
             {

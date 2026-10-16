@@ -26,6 +26,6 @@ in
 
   config = {
     programs.fish.shellAbbrs = cfg.shellAbbrs;
-    programs.nushell.shellAbbrs = cfg.shellAbbrs;
+    programs.nushell.settings.abbreviations = cfg.shellAbbrs;
   };
 }
