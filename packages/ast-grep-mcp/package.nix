@@ -29,7 +29,10 @@ python3Packages.buildPythonApplication {
   ];
 
   makeWrapperArgs = [
-    "--prefix PATH : ${lib.makeBinPath [ ast-grep ]}"
+    "--prefix"
+    "PATH"
+    ":"
+    (lib.makeBinPath [ ast-grep ])
   ];
 
   # Tests require ast-grep in PATH and test fixtures
