@@ -23,10 +23,15 @@ in
           command = "${pkgs.mcp-k8s-go}/bin/mcp-k8s-go";
         };
 
-        nix = {
-          type = "local";
-          command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
-        };
+        # nix (mcp-nixos) is currently uninstallable: it pulls in fastmcp,
+        # which pulls in fastmcp-slim, which is broken against mcp >= 2.x
+        # (upstream rename McpError -> MCPError) and whose own test suite
+        # additionally fails to build independent of that. Re-enable once
+        # nixpkgs catches up.
+        # nix = {
+        #   type = "local";
+        #   command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
+        # };
       };
     };
   };
