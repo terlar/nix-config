@@ -7,13 +7,13 @@
 
 python3Packages.buildPythonApplication {
   pname = "ast-grep-mcp";
-  version = "0.1.0-unstable-2025-01-15";
+  version = "0.1.0-unstable-2026-08-25";
 
   src = fetchFromGitHub {
     owner = "ast-grep";
     repo = "ast-grep-mcp";
-    rev = "732c339c3812a44e9111e6c3aefec64894acd58f";
-    hash = "sha256-jsKJRr68MsYUy+3siEag+6WAMXHgGug5xkG0Mq3voas=";
+    rev = "149e20d47bb7125fb0c1451feea2f48a98742034";
+    hash = "sha256-G2bnsfmzpirQmcllr+wmrvR6n5exe/5OrHnfXDXoyPg=";
   };
 
   pyproject = true;
@@ -37,6 +37,9 @@ python3Packages.buildPythonApplication {
 
   # Tests require ast-grep in PATH and test fixtures
   doCheck = false;
+
+  # Upstream pins mcp==2.1.0 exactly; nixpkgs tracks newer compatible releases
+  dontCheckRuntimeDeps = true;
 
   meta = {
     description = "MCP server for ast-grep structural code search";
