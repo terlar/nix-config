@@ -6,7 +6,7 @@
   glow,
 }:
 let
-  version = "20210410";
+  version = "20261022";
 
   guide = stdenv.mkDerivation {
     pname = "drduh-yubikey-guide";
@@ -15,8 +15,8 @@ let
     src = fetchFromGitHub {
       owner = "drduh";
       repo = "yubikey-guide";
-      rev = "3912fc0f204cd0c4113bae38e19f68db8cbfa63c";
-      hash = "sha256-yOuXY6hEB7V1soqpyYawOL0HqnSHGKGMgNq9BGVqqus=";
+      rev = "37486bb8cd44ad1c3265aba3a46394c5ff458c48";
+      hash = "sha256-Z3hrAJ9pN0/eMrclfJkVByM/jZdluY4dbNNHq/Aix+Y=";
     };
 
     dontBuild = true;

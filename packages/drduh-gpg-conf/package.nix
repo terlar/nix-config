@@ -5,13 +5,13 @@
 }:
 stdenv.mkDerivation {
   pname = "drduh-gpg-conf";
-  version = "20210215";
+  version = "20261001";
 
   src = fetchFromGitHub {
     owner = "drduh";
     repo = "config";
-    rev = "6e294925af6c289e13cc5237ffe895331b4389ec";
-    hash = "sha256-gh/tvPiAA1iuvYUBTh6zji2cUKvvMeM5jL2oqV0Xzb8=";
+    rev = "b0a2d8153a93bedf3c7e67f9109b3e5970ff1ecc";
+    hash = "sha256-18YT9nV5O1cQZbX+SCMw6tWZukjd35uK9yAHB+R1arg=";
   };
 
   dontBuild = true;
