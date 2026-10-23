@@ -68,8 +68,7 @@ in
         };
 
         plugin = [
-          "${ponytail}/.opencode/plugins/ponytail.mjs"
-          "${pkgs.opencode-github-copilot-auto-model}/lib/opencode-github-copilot-auto-model"
+          "${ponytail}"
         ];
 
         reference = {
