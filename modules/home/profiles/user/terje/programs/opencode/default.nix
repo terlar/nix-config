@@ -9,13 +9,6 @@ let
   inherit (lib) mkIf;
   cfg = config.profiles.user.terje.programs.opencode;
 
-  ponytail = pkgs.fetchFromGitHub {
-    owner = "DietrichGebert";
-    repo = "ponytail";
-    rev = "v5.3.2";
-    hash = "sha256-IJlhfkdXI6pMZZCZO7XBRg88LBiNfzc5Gnm4ofGybL8=";
-  };
-
   superpowersSrc = pkgs.fetchFromGitHub {
     owner = "obra";
     repo = "superpowers";
@@ -67,9 +60,8 @@ in
           disable_paste_summary = true;
         };
 
-        plugin = [
-          "${ponytail}/.opencode/plugins/ponytail.mjs"
-          "${pkgs.opencode-github-copilot-auto-model}/lib/opencode-github-copilot-auto-model"
+        plugins = [
+          "${pkgs.ponytail}/.opencode/plugins"
         ];
 
         reference = {
