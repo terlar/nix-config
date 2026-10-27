@@ -1,15 +1,15 @@
 { config, lib, ... }:
 
 let
-  cfg = config.profiles.user.terje.programs.dms-shell;
+  cfg = config.profiles.user.terje.programs.dux-shell;
 in
 {
-  options.profiles.user.terje.programs.dms-shell = {
+  options.profiles.user.terje.programs.dux-shell = {
     enable = lib.mkEnableOption "Dank Material Shell configuration for Terje";
   };
 
   config = lib.mkIf cfg.enable {
-    programs.dms-shell = {
+    programs.dux-shell = {
       enable = true;
       settings = {
         barConfigs = [

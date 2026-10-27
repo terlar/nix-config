@@ -49,7 +49,7 @@ in
         }
 
         (lib.mkIf cfg.enableShell {
-          programs.dms-shell.enable = true;
+          programs.dux-shell.enable = true;
         })
 
         (lib.mkIf (!cfg.enableShell) {

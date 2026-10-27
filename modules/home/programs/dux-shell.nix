@@ -5,15 +5,15 @@
   ...
 }:
 let
-  cfg = config.programs.dms-shell;
+  cfg = config.programs.dux-shell;
 
   jsonFormat = pkgs.formats.json { };
 in
 {
-  options.programs.dms-shell = {
-    enable = lib.mkEnableOption "dms-shell";
+  options.programs.dux-shell = {
+    enable = lib.mkEnableOption "dux-shell";
 
-    package = lib.mkPackageOption pkgs "dms-shell" { };
+    package = lib.mkPackageOption pkgs "dux-shell" { };
 
     settings = lib.mkOption {
       inherit (jsonFormat) type;
@@ -31,7 +31,7 @@ in
     home.packages = [ cfg.package ];
 
     xdg.configFile."DankMaterialShell/settings.json" = lib.mkIf (cfg.settings != { }) {
-      source = jsonFormat.generate "dms-config-${config.home.username}" cfg.settings;
+      source = jsonFormat.generate "dux-config-${config.home.username}" cfg.settings;
     };
   };
 }

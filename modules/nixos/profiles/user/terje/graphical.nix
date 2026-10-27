@@ -28,7 +28,7 @@ in
 
       (lib.mkIf cfg.desktop {
         services = {
-          displayManager.dms-greeter = {
+          displayManager.dux-greeter = {
             enable = true;
             compositor.name = "niri";
           };
@@ -39,7 +39,7 @@ in
         # Scrollable-tiling Wayland compositor
         programs = {
           niri.enable = lib.mkDefault true;
-          dms-shell.enable = lib.mkDefault true;
+          dux-shell.enable = lib.mkDefault true;
         };
 
         environment = {
