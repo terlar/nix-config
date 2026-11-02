@@ -56,9 +56,7 @@ in
       settings = {
         autoshare = false;
         autoupdate = false;
-        experimental = {
-          disable_paste_summary = true;
-        };
+        prompt.paste = "full";
 
         plugins = [
           "${pkgs.ponytail}/.opencode/plugins"
