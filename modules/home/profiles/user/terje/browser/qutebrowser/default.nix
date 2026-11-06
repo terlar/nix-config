@@ -92,7 +92,7 @@ in
             background = true;
             mousewheel_switching = false;
             position = "left";
-            show = "switching";
+            show = "never";
             width = "15%";
           };
         };

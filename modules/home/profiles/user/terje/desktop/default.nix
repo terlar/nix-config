@@ -31,7 +31,7 @@ in
         {
           graphical.enable = true;
 
-          browser.brave = {
+          browser.qutebrowser = {
             enable = mkDefault true;
             defaultBrowser = mkDefault true;
           };
