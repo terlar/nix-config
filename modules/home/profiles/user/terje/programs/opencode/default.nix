@@ -56,7 +56,6 @@ in
       settings = {
         autoshare = false;
         autoupdate = false;
-        prompt.paste = "full";
 
         plugins = [
           "${pkgs.ponytail}/.opencode/plugins"
@@ -137,6 +136,10 @@ in
             ];
           };
         };
+      };
+
+      cli = {
+        prompt.paste = "full";
       };
     };
   };
