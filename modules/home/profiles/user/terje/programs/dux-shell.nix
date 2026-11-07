@@ -65,6 +65,12 @@ in
             popupGapsAuto = true;
             popupGapsManual = 4;
             maximizeDetection = true;
+            island = true;
+            dot = false;
+            islandFloating = false;
+            islandPlacement = "edge";
+            islandNotch = true;
+            islandReserveThickness = 40;
           }
         ];
       };
