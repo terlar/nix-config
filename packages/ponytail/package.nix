@@ -61,6 +61,10 @@ stdenvNoCC.mkDerivation rec {
     export default { id: "ponytail", setup: async () => {} }
     EOF
         done
+        # 2.2.5 additionally probes `gui-experimental` and resolves it as .cjs.
+        cat > $out/.opencode/plugins/gui-experimental.cjs <<'EOF'
+    module.exports = { default: { id: "ponytail", setup: async () => {} } }
+    EOF
 
         runHook postInstall
   '';
