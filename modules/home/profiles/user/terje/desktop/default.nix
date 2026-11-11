@@ -31,7 +31,7 @@ in
         {
           graphical.enable = true;
 
-          browser.qutebrowser = {
+          browser.chromium = {
             enable = mkDefault true;
             defaultBrowser = mkDefault true;
           };
