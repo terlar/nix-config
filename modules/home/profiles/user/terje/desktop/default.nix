@@ -82,6 +82,7 @@ in
       ])
 
       (mkIf cfg.enableMediaPackages [
+        pkgs.evince
         pkgs.foliate
         pkgs.krita
         pkgs.spotify
