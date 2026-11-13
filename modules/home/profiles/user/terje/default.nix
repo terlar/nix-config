@@ -68,6 +68,7 @@ in
           ".dir-locals.el"
           ".envrc"
           ".worktrees"
+          "docs/superpowers"
         ];
 
         settings.url = {
