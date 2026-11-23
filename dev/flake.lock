@@ -11,11 +11,11 @@
         "treefmt": "treefmt"
       },
       "locked": {
-        "lastModified": 1794213472,
-        "narHash": "sha256-T0TsClH0ywt/luu0yB1RdiXhZoVR4B27OW2sUOqmX+A=",
+        "lastModified": 1795446280,
+        "narHash": "sha256-I0CoInaSIw2QQD0KyFkM2QrQkSxP3y4nUgKCde8SK7E=",
         "owner": "terlar",
         "repo": "dev-flake",
-        "rev": "7ccb4aea677ccfd905b2c45ea8ea868d4561b59b",
+        "rev": "7acda41043073b1bfaadd2b71740fe7c98f865fd",
         "type": "github"
       },
       "original": {
@@ -119,11 +119,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1794406962,
-        "narHash": "sha256-7aeBMTxorr9f9CeCEjmk9nfueyd/eLQkSlpZoWSrYHU=",
-        "rev": "39b15f146050cf402c45e0f0ea09170da0293fba",
+        "lastModified": 1795403596,
+        "narHash": "sha256-/VZvAW9akUIQ8SDmABtiR0YHdjfX34zxehCwQpUqKlc=",
+        "rev": "c40f3fa4eb374e1d5ee89ffe8a72ba531397d257",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1117830.39b15f146050/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1127043.c40f3fa4eb37/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -160,11 +160,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791885023,
-        "narHash": "sha256-C3alQ2MEt0zVrUSho5NUDo3jmhbff72++bfwoqT9Omo=",
+        "lastModified": 1795173499,
+        "narHash": "sha256-J8IYl3oEdctyvBgWr+/L01MY5Xm0TU4WXwZDccN5jjk=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "0d6d739a833ba9a9c93034862e4a7b061a062a1c",
+        "rev": "a0a97e31a897a3537eea5c49df4f8adaa83b3b37",
         "type": "github"
       },
       "original": {
