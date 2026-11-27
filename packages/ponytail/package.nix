@@ -7,12 +7,12 @@
 stdenvNoCC.mkDerivation rec {
   pname = "ponytail";
   # renovate: datasource=github-tags depName=ponytail packageName=DietrichGebert/ponytail
-  version = "5.3.2";
+  version = "5.3.3";
   src = fetchFromGitHub {
     owner = "DietrichGebert";
     repo = "ponytail";
     rev = "v${version}";
-    hash = "sha256-IJlhfkdXI6pMZZCZO7XBRg88LBiNfzc5Gnm4ofGybL8=";
+    hash = "sha256-CY0EifTY0UVc6/FPGVJjEfYEf/8QLsINQmoYYKZYh98=";
   };
 
   dontBuild = true;
