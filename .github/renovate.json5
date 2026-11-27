@@ -13,7 +13,36 @@
   vulnerabilityAlerts: {
     enabled: true,
   },
+  customManagers: [
+    {
+      description: "fetchFromGitHub packages annotated with a `# renovate:` comment",
+      customType: "regex",
+      managerFilePatterns: ["/^packages/[^/]+/package\\.nix$/"],
+      matchStrings: [
+        '#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s+packageName=(?<packageName>\\S+)\\s*\\n\\s*version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s+packageName=(?<packageName>\\S+)\\s+branch=(?<currentValue>\\S+)\\s*\\n\\s*rev\\s*=\\s*"(?<currentDigest>[0-9a-f]{40})"',
+      ],
+    },
+  ],
   packageRules: [
+    {
+      description: "Tags are v-prefixed, package versions are not",
+      matchManagers: ["custom.regex"],
+      matchDatasources: ["github-tags"],
+      extractVersion: "^v(?<version>.+)$",
+    },
+    {
+      description: "Refresh fetchFromGitHub hash (and unstable version for git-refs)",
+      matchManagers: ["custom.regex"],
+      matchFileNames: ["packages/*/package.nix"],
+      postUpgradeTasks: {
+        commands: [
+          "nix-update --version={{#if (equals datasource 'git-refs')}}branch{{else}}skip{{/if}} --flake {{{depName}}}",
+        ],
+        fileFilters: ["packages/*/package.nix"],
+        executionMode: "update",
+      },
+    },
     {
       groupName: "all dependencies",
       groupSlug: "all",
