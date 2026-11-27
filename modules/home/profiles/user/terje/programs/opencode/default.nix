@@ -9,12 +9,9 @@ let
   inherit (lib) mkIf;
   cfg = config.profiles.user.terje.programs.opencode;
 
-  superpowersSrc = pkgs.fetchFromGitHub {
-    owner = "obra";
-    repo = "superpowers";
-    rev = "v7.0.1";
-    hash = "sha256-9+69YEdjdaDu5sWTyAbufSVcZgGD7h6wAq4nUVY2syE=";
-  };
+  skillsFrom =
+    pkg: prefix: paths:
+    lib.mapAttrs' (name: path: lib.nameValuePair "${prefix}${name}" "${pkg}/${path}") paths;
 in
 {
   options.profiles.user.terje.programs.opencode = {
@@ -36,21 +33,41 @@ in
         ghq-lookup = ./skills/ghq-lookup;
         nix-coding = ./skills/nix-coding;
         jira-cli-operations = ./skills/jira-cli-operations;
-
-        superpowers-brainstorming = "${superpowersSrc}/skills/brainstorming";
-        superpowers-dispatching-parallel-agents = "${superpowersSrc}/skills/dispatching-parallel-agents";
-        superpowers-executing-plans = "${superpowersSrc}/skills/executing-plans";
-        superpowers-finishing-a-development-branch = "${superpowersSrc}/skills/finishing-a-development-branch";
-        superpowers-receiving-code-review = "${superpowersSrc}/skills/receiving-code-review";
-        superpowers-requesting-code-review = "${superpowersSrc}/skills/requesting-code-review";
-        superpowers-subagent-driven-development = "${superpowersSrc}/skills/subagent-driven-development";
-        superpowers-systematic-debugging = "${superpowersSrc}/skills/systematic-debugging";
-        superpowers-test-driven-development = "${superpowersSrc}/skills/test-driven-development";
-        superpowers-using-git-worktrees = "${superpowersSrc}/skills/using-git-worktrees";
-        superpowers-using-superpowers = "${superpowersSrc}/skills/using-superpowers";
-        superpowers-verification-before-completion = "${superpowersSrc}/skills/verification-before-completion";
-        superpowers-writing-plans = "${superpowersSrc}/skills/writing-plans";
-        superpowers-writing-skills = "${superpowersSrc}/skills/writing-skills";
+        diagram-design = "${pkgs.diagram-design}/diagram-design";
+      }
+      // skillsFrom pkgs.superpowers "superpowers-" (
+        lib.genAttrs [
+          "brainstorming"
+          "dispatching-parallel-agents"
+          "executing-plans"
+          "finishing-a-development-branch"
+          "receiving-code-review"
+          "requesting-code-review"
+          "subagent-driven-development"
+          "systematic-debugging"
+          "test-driven-development"
+          "using-git-worktrees"
+          "using-superpowers"
+          "verification-before-completion"
+          "writing-plans"
+          "writing-skills"
+        ] lib.id
+      )
+      // skillsFrom pkgs.mattpocock-skills "" {
+        codebase-design = "engineering/codebase-design";
+        domain-modeling = "engineering/domain-modeling";
+        grill-with-docs = "engineering/grill-with-docs";
+        improve-codebase-architecture = "engineering/improve-codebase-architecture";
+        pr = "engineering/pr";
+        prototype = "engineering/prototype";
+        research = "engineering/research";
+        retro = "engineering/retro";
+        wizard = "engineering/wizard";
+        grilling = "productivity/grilling";
+        handoff = "productivity/handoff";
+        teach = "productivity/teach";
+        to-questionnaire = "productivity/to-questionnaire";
+        writing-for-agents = "productivity/writing-for-agents";
       };
 
       settings = {
