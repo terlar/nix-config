@@ -7,6 +7,7 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "opencode-github-copilot-auto-model";
+  # renovate: datasource=github-tags depName=opencode-github-copilot-auto-model packageName=m0wer/opencode-github-copilot-auto-model
   version = "0.2.0";
   src = fetchFromGitHub {
     owner = "m0wer";
