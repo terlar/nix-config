@@ -24,8 +24,8 @@ jobs:
         uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3
         id: app-token
         with:
-          client-id: ${{ vars.AUTOMATION_APP_CLIENT_ID }}
-          private-key: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+          client-id: ${{ vars.RENOVATE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RENOVATE_APP_PRIVATE_KEY }}
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Install Nix
