@@ -51,6 +51,7 @@ in
     jobSets.nix = {
       jobs = [
         "check"
+        "pre-commit"
         "build-home-configuration"
         "build-nixos-configuration"
       ];
@@ -68,6 +69,12 @@ in
       check = {
         github-actions.name = "Check";
         commands = [ "nix flake check" ];
+      };
+
+      pre-commit = {
+        github-actions.name = "Pre-commit";
+        github-actions.env.GITHUB_EVENT_BEFORE = "\${{ github.event.before }}";
+        commands = [ "nix run .#pre-commit-ci" ];
       };
 
       build-home-configuration = {
