@@ -1,138 +1,229 @@
-name: CI
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 jobs:
+  build-home-configuration:
+    if: ${{ fromJSON(needs.changes.outputs.changes)['build-home-configuration'] == true }}
+    name: Build home configuration
+    needs:
+      - changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install Nix
+        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877
+        with:
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+      - name: Nix cache (cachix)
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: terlar
+          useDaemon: true
+      - run: nix build --print-build-logs .#homeConfigurations.terje.activationPackage
+  build-iso:
+    env:
+      GC_DONT_GC: "1"
+    if: ${{ fromJSON(needs.changes.outputs.changes)['build-iso'] == true }}
+    name: Build ISO
+    needs:
+      - changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install Nix
+        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877
+        with:
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+      - name: Nix cache (cachix)
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: terlar
+          skipPush: true
+          useDaemon: true
+      - run: nix build --print-build-logs .#nixosConfigurations.installer-yubikey.config.system.build.isoImage
+  build-nixos-configuration:
+    if: ${{ fromJSON(needs.changes.outputs.changes)['build-nixos-configuration'] == true }}
+    name: Build NixOS configuration
+    needs:
+      - changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6
+      - name: Install Nix
+        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877
+        with:
+          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
+      - name: Nix cache (cachix)
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: terlar
+          useDaemon: true
+      - run: nix build --print-build-logs .#nixosConfigurations.kong.config.system.build.toplevel
   changes:
     name: Changes
-    runs-on: ubuntu-latest
     outputs:
-      nixos-configuration: ${{ steps.changes.outputs.nixos-configuration }}
-      home-configuration: ${{ steps.changes.outputs.home-configuration }}
-      installer-yubikey: ${{ steps.changes.outputs.installer-yubikey }}
+      changes: ${{ steps.diff.outputs.changes }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Path filters
-        uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
-        id: changes
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          filters: |
-            nixos-configuration:
-              - flake.nix
-              - flake.lock
-              - 'configurations/nixos/**'
-              - 'modules/nixos/**'
-              - 'modules/home/**'
-            home-configuration:
-              - flake.nix
-              - flake.lock
-              - 'configurations/home/**'
-              - 'modules/home/**'
-            installer-yubikey:
-              - flake.nix
-              - flake.lock
-              - 'configurations/nixos/installer-yubikey/**'
-              - 'packages/drduh-gpg-conf/**'
-              - 'packages/drduh-yubikey-guide/**'
+          fetch-depth: 0
+      - env:
+          DIFF_PATHS: |-
+            build-home-configuration:flake.nix|flake.lock|configurations/home/**|modules/home/**
+            build-iso:flake.nix|flake.lock|configurations/nixos/installer-yubikey/**|packages/drduh-gpg-conf/**|packages/drduh-yubikey-guide/**
+            build-nixos-configuration:flake.nix|flake.lock|configurations/nixos/**|modules/nixos/**|modules/home/**
+          FORCE_RUN_ALL: ${{ inputs.force_run_all }}
+          GITHUB_EVENT_AFTER: ${{ github.event.after }}
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+        id: diff
+        run: |
+          case "$GITHUB_EVENT_NAME" in
+          push)
+          	first_commit="$GITHUB_EVENT_BEFORE"
+          	last_commit="$GITHUB_EVENT_AFTER"
+          	git fetch origin "$first_commit"
+          	;;
+          pull_request)
+          	first_commit="origin/$GITHUB_BASE_REF"
+          	last_commit="origin/$GITHUB_HEAD_REF"
+          	git fetch origin "$GITHUB_BASE_REF" "$GITHUB_HEAD_REF"
+          	;;
+          workflow_dispatch)
+          	if [[ "${FORCE_RUN_ALL:-}" == "true" ]]; then
+          		change_lines=()
+          		for p in $DIFF_PATHS; do
+          			group="${p%:*}"
+          			change_lines+=("\"$group\":true")
+          		done
+          		change_object_body="$(printf '%s\n' "${change_lines[@]}" | paste -sd,)"
+          		echo "changes={$change_object_body}" >>"$GITHUB_OUTPUT"
+          		echo "## All jobs affected (change detection skipped)" >>"$GITHUB_STEP_SUMMARY"
+          		exit 0
+          	fi
+          	if [[ -z "${ON_DEMAND_BASE_REF:-}" ]]; then
+          		echo "::error::workflow_dispatch without force_run_all requires triggers.onDemand configured on at least one job branch (ON_DEMAND_BASE_REF is unset)" >&2
+          		exit 1
+          	fi
+          	git fetch origin "$ON_DEMAND_BASE_REF"
+          	first_commit="origin/$ON_DEMAND_BASE_REF"
+          	last_commit="HEAD"
+          	;;
+          schedule)
+          	if [[ -z "${ON_DEMAND_BASE_REF:-}" ]]; then
+          		echo "::error::schedule events require triggers.onDemand configured on at least one job branch (ON_DEMAND_BASE_REF is unset)" >&2
+          		exit 1
+          	fi
+          	git fetch origin "$ON_DEMAND_BASE_REF"
+          	first_commit="origin/$ON_DEMAND_BASE_REF"
+          	last_commit="HEAD"
+          	;;
+          esac
+
+          files=$(git diff --name-only --diff-filter=d "${first_commit}...${last_commit}")
+          change_lines=()
+          for p in $DIFF_PATHS; do
+          	group="${p%:*}"
+          	pattern="${p##*:}"
+          	# Convert glob pattern to ERE for grep.
+          	# Use placeholders for ** patterns first, then convert *, then restore
+          	# placeholders — this prevents the * in ERE replacements (e.g. .*)
+          	# from being incorrectly re-converted by the s|\*|[^/]*| step.
+          	#   /**/   →  /(.*/)?   (zero or more intermediate directories)
+          	#   /**    →  (/.*)?    (optional slash + anything, at end)
+          	#   **/    →  (.*/)?    (zero or more leading directories)
+          	#   **     →  .*        (any characters including slashes)
+          	#   *      →  [^/]*     (any characters within a single path component)
+          	#   .      →  \.        (literal dot)
+          	regex=$(printf '%s' "$pattern" |
+          		sed \
+          			-e 's/\./\\./g' \
+          			-e 's|/\*\*/|__DIRANY__|g' \
+          			-e 's|/\*\*|__SLASHANY__|g' \
+          			-e 's|\*\*/|__ANYSLASH__|g' \
+          			-e 's|\*\*|__ANYANY__|g' \
+          			-e 's|\*|[^/]*|g' \
+          			-e 's|__DIRANY__|/(.*/)?|g' \
+          			-e 's|__SLASHANY__|(/.*)?|g' \
+          			-e 's|__ANYSLASH__|(.*/)?|g' \
+          			-e 's|__ANYANY__|.*|g')
+          	if echo "$files" | grep -qE "^(${regex})$"; then
+          		change_lines+=("\"$group\":true")
+          	else
+          		change_lines+=("\"$group\":false")
+          	fi
+          done
+
+          change_object_body="$(printf '%s\n' "${change_lines[@]}" | paste -sd,)"
+          echo "changes={$change_object_body}" >>"$GITHUB_OUTPUT"
+
+          affected_jobs=()
+          for line in "${change_lines[@]}"; do
+          	if [[ "$line" == *":true"* ]]; then
+          		affected_jobs+=("${line//\"/}")
+          		affected_jobs[-1]="${affected_jobs[-1]%:*}"
+          	fi
+          done
+
+          if [[ ${#affected_jobs[@]} -gt 0 ]]; then
+          	echo "Affected jobs (${#affected_jobs[@]}):"
+          	printf '  %s\n' "${affected_jobs[@]}"
+          	{
+          		echo "## Affected jobs (${#affected_jobs[@]})"
+          		printf -- '- %s\n' "${affected_jobs[@]}"
+          	} >>"$GITHUB_STEP_SUMMARY"
+          else
+          	echo "No affected jobs."
+          	echo "## No affected jobs" >>"$GITHUB_STEP_SUMMARY"
+          fi
+        shell: bash
   check:
     name: Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Install Nix
-        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877 # v32
+        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
-        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866
         with:
-          useDaemon: true
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: terlar
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Run check
-        run: nix flake check
-  build-home-configuration:
-    name: Build home configuration
-    needs: changes
-    if: ${{ needs.changes.outputs.home-configuration == 'true' }}
-    strategy:
-      matrix:
-        include:
-          - username: terje
-            os: ubuntu-latest
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Install Nix
-        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877 # v32
-        with:
-          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
-      - name: Nix cache (cachix)
-        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
-        with:
           useDaemon: true
-          name: terlar
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build activation package
-        run: |
-          nix build --print-build-logs .#homeConfigurations.${{ matrix.username }}.activationPackage
-  build-nixos-configuration:
-    name: Build NixOS configuration
-    needs: changes
-    if: ${{ needs.changes.outputs.nixos-configuration == 'true' }}
-    strategy:
-      matrix:
-        host:
-          - kong
+      - run: nix flake check
+  pre-commit:
+    env:
+      GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+    name: Pre-commit
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Free disk space
-        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Install Nix
-        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877 # v32
+        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877
         with:
           install_url: https://releases.nixos.org/nix/nix-2.33.0/install
       - name: Nix cache (cachix)
-        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866
         with:
-          useDaemon: true
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: terlar
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build system
-        run: |
-          nix build --print-build-logs .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
-  build-iso:
-    name: Build ISO
-    needs: changes
-    if: ${{ needs.changes.outputs.installer-yubikey == 'true' }}
-    strategy:
-      matrix:
-        name:
-          - installer-yubikey
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Install Nix
-        uses: cachix/install-nix-action@382a9ed9481c7c1f94f68b72ef105b3417c73877 # v32
-        with:
-          install_url: https://releases.nixos.org/nix/nix-2.33.0/install
-      - name: Nix cache (cachix)
-        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
-        with:
           useDaemon: true
-          name: terlar
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          skipPush: true
-      - name: Build ISO
-        run: |
-          GC_DONT_GC=1 nix build --print-build-logs .#nixosConfigurations.${{ matrix.name }}.config.system.build.isoImage
+      - run: nix run .#pre-commit-ci
+name: CI
+"on":
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      force_run_all:
+        default: false
+        description: Skip change detection and run all jobs
+        type: boolean

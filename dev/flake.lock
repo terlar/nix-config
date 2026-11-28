@@ -45,6 +45,27 @@
         "type": "github"
       }
     },
+    "first-ci-kit": {
+      "inputs": {
+        "flake-parts": [
+          "dev-flake",
+          "flake-parts"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795531973,
+        "narHash": "sha256-MPmdczpAMZPxd8pSpJoQm6NwcTd4R5QlLTi0eW65yLo=",
+        "owner": "terlar",
+        "repo": "first-ci-kit",
+        "rev": "d98d660d4715f7b235ec385847df9a78d779a87a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "terlar",
+        "repo": "first-ci-kit",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -148,6 +169,7 @@
     "root": {
       "inputs": {
         "dev-flake": "dev-flake",
+        "first-ci-kit": "first-ci-kit",
         "flake-compat": "flake-compat_2",
         "nixpkgs": "nixpkgs"
       }

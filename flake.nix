@@ -58,6 +58,8 @@
         checks = "dev";
         devShells = "dev";
         formatter = "dev";
+        legacyPackages = "dev";
+        packages = "dev";
       };
 
       partitions.dev = {

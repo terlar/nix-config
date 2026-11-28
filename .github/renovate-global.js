@@ -5,5 +5,8 @@ module.exports = {
   repositories: ["terlar/nix-config"],
   requireConfig: "required",
   // Validated after templating, so depName can only be a plain attribute name.
-  allowedCommands: ["^nix-update --version=(skip|branch) --flake [\\w-]+$"],
+  allowedCommands: [
+    "^nix-update --version=(skip|branch) --flake [\\w-]+$",
+    "^bash dev/ci/generate-workflow\\.sh$",
+  ],
 };
