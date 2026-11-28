@@ -15,7 +15,8 @@ lib.mkMerge [
       pkgs.gnupg
       pkgs.paperkey
 
-      pkgs.haskellPackages.hopenpgp-tools
+      # Broken...
+      # pkgs.haskellPackages.hopenpgp-tools
       pkgs.yubikey-manager
 
       pkgs.zellij
