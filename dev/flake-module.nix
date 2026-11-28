@@ -1,7 +1,12 @@
 { inputs, ... }:
 
 {
-  imports = [ inputs.dev-flake.flakeModule ];
+  imports = [
+    inputs.dev-flake.flakeModule
+    inputs.first-ci-kit.flakeModules.default
+    inputs.first-ci-kit.flakeModules.git-hooks
+    ./ci.nix
+  ];
 
   dev.name = "terlar/nix-config";
 
@@ -13,6 +18,10 @@
 
     pre-commit.settings.hooks = {
       conform.enable = true;
+      first-ci-kit-gen-github-actions = {
+        enable = true;
+        files = "^dev/ci\\.nix$";
+      };
     };
 
     devshells.default = {

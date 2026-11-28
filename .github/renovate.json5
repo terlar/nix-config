@@ -23,12 +23,49 @@
         '#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s+packageName=(?<packageName>\\S+)\\s+branch=(?<currentValue>\\S+)\\s*\\n\\s*rev\\s*=\\s*"(?<currentDigest>[0-9a-f]{40})"',
       ],
     },
+    {
+      description: "GitHub Actions pinned in dev/ci.nix",
+      customType: "regex",
+      managerFilePatterns: ["/^dev\\/ci\\.nix$/"],
+      matchStrings: [
+        '"(?<depName>[\\w.-]+/[\\w.-]+)@(?<currentDigest>[0-9a-f]{40})"; # (?<currentValue>v[0-9.]+)',
+      ],
+      datasourceTemplate: "github-tags",
+      depTypeTemplate: "action",
+    },
   ],
   packageRules: [
+    {
+      description: "Generated workflow; actions are managed in dev/ci.nix",
+      matchManagers: ["github-actions"],
+      matchFileNames: [".github/workflows/ci.yml"],
+      enabled: false,
+    },
+    {
+      description: "Regenerate generated workflow after action updates",
+      matchManagers: ["custom.regex"],
+      matchFileNames: ["dev/ci.nix"],
+      postUpgradeTasks: {
+        commands: ["bash dev/ci/generate-workflow.sh"],
+        fileFilters: [".github/workflows/ci.yml"],
+        executionMode: "update",
+      },
+    },
+    {
+      description: "Regenerate generated workflow after first-ci-kit updates",
+      matchManagers: ["nix"],
+      matchFileNames: ["dev/flake.lock"],
+      postUpgradeTasks: {
+        commands: ["bash dev/ci/generate-workflow.sh"],
+        fileFilters: [".github/workflows/ci.yml"],
+        executionMode: "update",
+      },
+    },
     {
       description: "Tags are v-prefixed, package versions are not",
       matchManagers: ["custom.regex"],
       matchDatasources: ["github-tags"],
+      matchFileNames: ["packages/*/package.nix"],
       extractVersion: "^v(?<version>.+)$",
     },
     {

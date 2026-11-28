@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    first-ci-kit = {
+      url = "github:terlar/first-ci-kit";
+      inputs.flake-parts.follows = "dev-flake/flake-parts";
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
