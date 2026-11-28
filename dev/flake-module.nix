@@ -16,6 +16,9 @@
       yamlfmt.enable = true;
     };
 
+    # Generator hook needs nix, unavailable in the flake check sandbox.
+    pre-commit.check.enable = false;
+
     pre-commit.settings.hooks = {
       conform.enable = true;
       first-ci-kit-gen-github-actions = {
